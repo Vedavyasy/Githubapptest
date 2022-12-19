@@ -11,5 +11,5 @@ function greet(name: string, repoUrl: string) {
   }
 
 function getrepourl({repo, serverUrl} : GithubContext): string {
-   return '${serverUrl}/${repo.owner}/${repo.repo}'
+   return `${serverUrl}/${repo.owner}/${repo.repo}`
 }
