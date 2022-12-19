@@ -1,4 +1,4 @@
-name: Testing
+name: Test
 on:
   push:
     branches:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   run-action:
-    name: testing js in actions
+    name: Run action
     runs-on: ubuntu-latest
 
     steps:
@@ -28,5 +28,5 @@ jobs:
       - name: Build
         run: npm run build
 
-      -name: Run my action
-       uses: ./
+      - name: Run my action
+        uses: ./
