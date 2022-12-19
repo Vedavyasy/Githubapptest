@@ -1,0 +1,15 @@
+name: 'Consonant vowel ratio'
+author: 'Chris Trzesniewski'
+description: 'Consonant to vowel ratio GitHub action'
+inputs:
+  name:
+    description: 'Name to greet'
+    required: false
+    default: 'JS Marathon viewers'
+  ghToken:
+    description: 'GitHub access token'
+    required: false
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
