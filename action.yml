@@ -5,7 +5,7 @@ inputs:
   name:
     description: 'Name to greet'
     required: false
-    default: 'JS Marathon viewers'
+    default: 'Vedavyas'
   ghToken:
     description: 'GitHub access token'
     required: false
