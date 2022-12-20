@@ -58,4 +58,3 @@ repo:"Githubactions",
 apiUrl:"https://Githubapptest/api/v3",
 })
 
-console.log(res);
