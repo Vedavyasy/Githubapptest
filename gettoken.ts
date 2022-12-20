@@ -1,5 +1,5 @@
 import { getInput } from "@actions/core";
-import { context, getOctokit } from "@actions/github";
+import { context, getOctokit} from "@actions/github";
 import { createAppAuth } from '@octokit/auth-app';
 import { request } from '@octokit/request';
 import { report } from "process";
@@ -35,8 +35,7 @@ export const fetchInstallationToken = async ({ appId,
             baseUrl: apiUrl,
         }),
     });
-    const authApp = await app({ type: "app" });
-    const octokit = getOctokit(authApp.token);
+    const octokit = getOctokit(myKey);
     console.log(await octokit.request('GET /installation/repositories{?per_page,page}', {}))
 //     const authApp = await app({ type: "app" });
 //      const octokit = getOctokit(authApp.token);
