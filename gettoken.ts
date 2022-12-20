@@ -53,7 +53,7 @@ export const fetchInstallationToken = async ({ appId,
 
     }
     const installation = await app({
-        installationId,
+        installationId:432630493,
         permissions,
         type: "installation",
     });
