@@ -48,13 +48,14 @@ export const fetchInstallationToken = async ({ appId,
         } catch (error) {
             throw new Error("Could not get the repo installation. is the app installed on this repo?");
         }
+
     }
     return "requested token";
 };
 var res= fetchInstallationToken({ appId: "272308",
 owner: context.repo.owner,
 privateKey: myKey,
-repo:"Githubactions",
+repo:"mini-Project",
 apiUrl:"https://Githubapptest/api/v3",
 })
 
