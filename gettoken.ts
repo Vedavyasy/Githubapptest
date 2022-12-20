@@ -59,6 +59,6 @@ console.log(fetchInstallationToken({ appId: "272308",
 installationId: 245,
 owner: context.repo.owner,
 privateKey: myKey,
-repo:"dummy",
+repo:"Githubactions",
 apiUrl:"https://Githubapptest/api/v3",
 }))
