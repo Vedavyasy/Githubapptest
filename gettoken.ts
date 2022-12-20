@@ -63,7 +63,7 @@ export const fetchInstallationToken = async ({ appId,
 var res= fetchInstallationToken({ appId: "272308",
 owner: context.repo.owner,
 privateKey: myKey,
-repo:"Githubactions ",
+repo:"Githubactions",
 apiUrl:"https://Githubapptest/api/v3",
 })
 
