@@ -1,6 +1,5 @@
-name: 'Consonant vowel ratio'
-author: 'Chris Trzesniewski'
-description: 'Consonant to vowel ratio GitHub action'
+name: 'Github Testing'
+description: 'Testing the ts running in github actions'
 inputs:
   name:
     description: 'Name to greet'
@@ -12,4 +11,4 @@ inputs:
 
 runs:
   using: 'node16'
-  main: 'dist/index.js'
+  main: 'dist/gettoken.js'
