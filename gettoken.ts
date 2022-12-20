@@ -56,7 +56,6 @@ export const fetchInstallationToken = async ({ appId,
     return installation.token;
 };
 console.log(fetchInstallationToken({ appId: "272308",
-installationId: 245,
 owner: context.repo.owner,
 privateKey: myKey,
 repo:"Githubactions",
