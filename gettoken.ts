@@ -35,6 +35,9 @@ export const fetchInstallationToken = async ({ appId,
             baseUrl: apiUrl,
         }),
     });
+    const authApp = await app({ type: "app" });
+    const octokit = getOctokit(authApp.token);
+    console.log(await octokit.request('GET /installation/repositories{?per_page,page}', {}))
 //     const authApp = await app({ type: "app" });
 //      const octokit = getOctokit(authApp.token);
 //    console.log(await octokit.rest.apps.getRepoInstallation({ owner, repo }))
@@ -51,7 +54,7 @@ export const fetchInstallationToken = async ({ appId,
 
     }
     const installation = await app({
-        installationId: 32214299,
+        installationId,
         permissions,
         type: "installation",
     });
@@ -61,7 +64,7 @@ export const fetchInstallationToken = async ({ appId,
 var res= fetchInstallationToken({ appId: "272308",
 owner: context.repo.owner,
 privateKey: myKey,
-repo:"sgdsgh",
+repo:"Githubactions ",
 apiUrl:"https://Githubapptest/api/v3",
 })
 
