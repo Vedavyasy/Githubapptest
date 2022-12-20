@@ -50,11 +50,10 @@ export const fetchInstallationToken = async ({ appId,
         } catch (error) {
             throw new Error("Could not get the repo installation. is the app installed on this repo?");
         }
-
     }
+
     const installation = await app({
-        installationId:432630493,
-        permissions,
+        
         type: "installation",
     });
     console.log(`'Hello'`);
