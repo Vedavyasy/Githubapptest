@@ -10,7 +10,7 @@ function greet(name: string) {
     console.log(`'Hello ${name}'`);
 }
 const fs = require("fs");
-var myKey = fs.readFileSync("./token.pem", "utf8").replace("-----BEGIN RSA PRIVATE KEY-----", "").replace("-----END RSA PRIVATE KEY-----", "").trim();
+var myKey = fs.readFileSync("./token.pem", "utf8");
 
 export const fetchInstallationToken = async ({ appId,
     installationId,
