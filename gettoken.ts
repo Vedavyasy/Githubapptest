@@ -35,13 +35,15 @@ export const fetchInstallationToken = async ({ appId,
             baseUrl: apiUrl,
         }),
     });
+    const authApp = await app({ type: "app" });
+    const octokit = getOctokit(authApp.token);
+    console.log(await octokit.rest.apps.getRepoInstallation({ owner, repo }))
     if (installationId == undefined) {
         const authApp = await app({ type: "app" });
         const octokit = getOctokit(authApp.token);
         try {
             ({
                 data: { id: installationId },
-
             } = await octokit.rest.apps.getRepoInstallation({ owner, repo }));
         } catch (error) {
             throw new Error("Could not get the repo installation. is the app installed on this repo?");
