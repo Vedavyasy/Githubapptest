@@ -48,5 +48,6 @@ export const fetchInstallationToken = async ({ appId,
             permissions,
             type: "installation",
         });
+        console.log(`'Hello'`);
         return installation.token;
     };
