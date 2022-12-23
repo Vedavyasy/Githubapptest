@@ -22,7 +22,7 @@ myKey.replace('-----END RSA PRIVATE KEY-----','');
     const res=fetch('https://api.github.com/app',{
         method: 'Get',
         headers:{
-            Authorization:myKey,
+            Authorization: 'Bearer'+ myKey,
             Accept: 'application/vnd.github+json'
         }
     })
