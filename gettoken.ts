@@ -71,5 +71,6 @@ owner: context.repo.owner,
 privateKey: myKey,
 repo:"Githubactions",
 apiUrl:"https://Githubapptest/api/v3",
+installationId:32214299
 })
 
