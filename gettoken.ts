@@ -4,6 +4,8 @@ import { createAppAuth } from '@octokit/auth-app';
 import { request } from '@octokit/request';
 import { report } from "process";
 import fetch from 'node-fetch';
+import JWT from 'JsonWebToken';
+import { time } from "console";
 
 const inputName = getInput("name");
 greet(inputName);
@@ -16,13 +18,19 @@ var myKey = fs.readFileSync("./token.pem", "utf8");
 
 function httprequest(){
     const fs = require("fs");
-var myKey = fs.readFileSync("./token.pem", "utf8");
-    myKey=myKey.replace('-----BEGIN RSA PRIVATE KEY-----','');
-myKey =myKey.replace('-----END RSA PRIVATE KEY-----','');
+var myKey = fs.readFileSync("./token.pem", "utf8",{algorithm:' RS256'});
+var date=new Date();
+var payload = {
+    
+    iat: date.getSeconds() - 60,
+    exp: date.getSeconds()+ (10 * 60),
+    iss: "YOUR_APP_ID"
+  }
+var jwt = JWT.sign(payload, myKey)
     const res=fetch('https://api.github.com/app',{
         method: 'Get',
         headers:{
-            Authorization: 'Bearer'+ myKey,
+            Authorization: jwt,
             Accept: 'application/vnd.github+json'
         }
     })
