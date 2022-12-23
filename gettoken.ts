@@ -4,7 +4,7 @@ import { createAppAuth } from '@octokit/auth-app';
 import { request } from '@octokit/request';
 import { report } from "process";
 import fetch from 'node-fetch';
-import JWT from 'JsonWebToken';
+import JWT from 'jsonwebtoken';
 import { time } from "console";
 
 const inputName = getInput("name");
