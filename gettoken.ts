@@ -18,7 +18,7 @@ var myKey = fs.readFileSync("./token.pem", "utf8");
 
 function httprequest(){
     const fs = require("fs");
-var myKey = fs.readFileSync("./token.pem", "utf8",{algorithm:' RS256'});
+var myKey = fs.readFileSync("./token.pem", "utf8");
 var date=new Date();
 var payload = {
     
@@ -26,7 +26,7 @@ var payload = {
     exp: date.getSeconds()+ (10 * 60),
     iss: "YOUR_APP_ID"
   }
-var jwt = JWT.sign(payload, myKey)
+var jwt = JWT.sign(payload, myKey,{algorithm:'RS256'})
     const res=fetch('https://api.github.com/app',{
         method: 'Get',
         headers:{
