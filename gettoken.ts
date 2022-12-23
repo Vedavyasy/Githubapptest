@@ -21,7 +21,6 @@ function httprequest(){
 var myKey = fs.readFileSync("./token.pem", "utf8");
 var date=new Date();
 var payload = {
-    
     iat: date.getSeconds() - 60,
     exp: date.getSeconds()+ (10 * 60),
     iss: "YOUR_APP_ID"
