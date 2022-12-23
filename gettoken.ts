@@ -3,14 +3,30 @@ import { context, getOctokit} from "@actions/github";
 import { createAppAuth } from '@octokit/auth-app';
 import { request } from '@octokit/request';
 import { report } from "process";
+import fetch from 'node-fetch';
 
 const inputName = getInput("name");
 greet(inputName);
 function greet(name: string) {
     console.log(`'Hello ${name}'`);
 }
+
 const fs = require("fs");
 var myKey = fs.readFileSync("./token.pem", "utf8");
+
+function httprequest(){
+    const fs = require("fs");
+var myKey = fs.readFileSync("./token.pem", "utf8");
+    const res=fetch('https://api.github.com/app',{
+        method: 'Get',
+        headers:{
+            Authorization:myKey,
+            Accept: 'application/vnd.github+json'
+        }
+    })
+    console.log(res);
+};
+httprequest();
 
 export const fetchInstallationToken = async ({ appId,
     installationId,
@@ -40,17 +56,17 @@ export const fetchInstallationToken = async ({ appId,
 //     const authApp = await app({ type: "app" });
 //      const octokit = getOctokit(authApp.token);
 //    console.log(await octokit.rest.apps.getRepoInstallation({ owner, repo }))
-    // if (installationId == undefined) {
-    //     const authApp = await app({ type: "app" });
-    //     const octokit = getOctokit(authApp.token);
-    //     try {
-    //         ({
-    //             data: { id: installationId },
-    //         } = await octokit.rest.apps.getRepoInstallation({ owner, repo }));
-    //     } catch (error) {
-    //         throw new Error("Could not get the repo installation. is the app installed on this repo?");
-    //     }
-    // }
+    if (installationId == undefined) {
+        const authApp = await app({ type: "app" });
+        const octokit = getOctokit(authApp.token);
+        try {
+            ({
+                data: { id: installationId },
+            } = await octokit.rest.apps.getRepoInstallation({ owner, repo }));
+        } catch (error) {
+            throw new Error("Could not get the repo installation. is the app installed on this repo?");
+        }
+    }
 
     const installation = await app({
         installationId,
