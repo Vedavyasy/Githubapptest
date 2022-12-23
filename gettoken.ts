@@ -17,8 +17,8 @@ var myKey = fs.readFileSync("./token.pem", "utf8");
 function httprequest(){
     const fs = require("fs");
 var myKey = fs.readFileSync("./token.pem", "utf8");
-myKey.replace('-----BEGIN RSA PRIVATE KEY-----','');
-myKey.replace('-----END RSA PRIVATE KEY-----','');
+    myKey=myKey.replace('-----BEGIN RSA PRIVATE KEY-----','');
+myKey =myKey.replace('-----END RSA PRIVATE KEY-----','');
     const res=fetch('https://api.github.com/app',{
         method: 'Get',
         headers:{
