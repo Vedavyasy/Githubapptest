@@ -27,13 +27,15 @@ var payload = {
   };
 var jwt = JWT.sign(payload, myKey,{algorithm:'RS256'});
 console.log(jwt);
-    const res=fetch('https://api.github.com/app',{
+    fetch('https://api.github.com/app',{
         method: 'Get',
         headers:{
             Authorization: "Bearer "+jwt,
             Accept: 'application/vnd.github+json'
         }
-    })
+    }).then(
+        (response) => response.json()
+      );
     
 };
 httprequest();
