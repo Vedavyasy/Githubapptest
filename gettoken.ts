@@ -33,7 +33,7 @@ var jwt = JWT.sign(payload, myKey,{algorithm:'RS256'})
             Accept: 'application/vnd.github+json'
         }
     })
-    console.log(res);
+    console.log(jwt);
 };
 httprequest();
 
