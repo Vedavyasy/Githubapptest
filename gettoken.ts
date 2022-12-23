@@ -3,7 +3,7 @@ import { context, getOctokit} from "@actions/github";
 import { createAppAuth } from '@octokit/auth-app';
 import { request } from '@octokit/request';
 import { report } from "process";
-import fetch from 'node-fetch';
+import fetch, { Response } from 'node-fetch';
 import JWT from 'jsonwebtoken';
 import { time } from "console";
 
@@ -27,7 +27,7 @@ var payload = {
   };
 var jwt = JWT.sign(payload, myKey,{algorithm:'RS256'});
 console.log(jwt);
-    fetch('https://api.github.com/app',{
+    return fetch('https://api.github.com/app',{
         method: 'Get',
         headers:{
             Authorization: "Bearer "+jwt,
@@ -38,7 +38,7 @@ console.log(jwt);
       );
     
 };
-httprequest();
+console.log(httprequest());
 
 export const fetchInstallationToken = async ({ appId,
     installationId,
