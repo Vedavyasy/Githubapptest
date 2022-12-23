@@ -2,10 +2,8 @@ import { getInput } from "@actions/core";
 import { context, getOctokit} from "@actions/github";
 import { createAppAuth } from '@octokit/auth-app';
 import { request } from '@octokit/request';
-import { report } from "process";
 import fetch, { Response } from 'node-fetch';
 import JWT from 'jsonwebtoken';
-import { time } from "console";
 
 const inputName = getInput("name");
 greet(inputName);
@@ -15,6 +13,13 @@ function greet(name: string) {
 
 const fs = require("fs");
 var myKey = fs.readFileSync("./token.pem", "utf8");
+var date=new Date();
+var payload = {
+    iat: date.getSeconds() - 60,
+    exp: date.getSeconds()+ (10 * 60),
+    iss: 272308
+  };
+var jwt = JWT.sign(payload, myKey,{algorithm:'RS256'});
 
 function httprequest(){
     const fs = require("fs");
