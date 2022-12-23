@@ -54,6 +54,7 @@ export const fetchInstallationToken = async ({ appId,
 
     const installation = await app({
         installationId,
+        accept: 'application/vnd.github+json',
         permissions:{
             issues: 'write',
             contents: 'read' 
