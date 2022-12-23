@@ -60,6 +60,8 @@ export const fetchInstallationToken = async ({ appId,
     console.log(`'Hello'`);
     return installation.token;
 };
+
+
 var res= fetchInstallationToken({ appId: "272308",
 owner: context.repo.owner,
 privateKey: myKey,
