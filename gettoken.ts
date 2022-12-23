@@ -54,7 +54,10 @@ export const fetchInstallationToken = async ({ appId,
 
     const installation = await app({
         installationId,
-        permissions,
+        permissions:{
+            issues: 'write',
+            contents: 'read' 
+        },
         type: "installation",
     });
     console.log(`'Hello'`);
