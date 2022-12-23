@@ -23,13 +23,13 @@ var date=new Date();
 var payload = {
     iat: date.getSeconds() - 60,
     exp: date.getSeconds()+ (10 * 60),
-    iss: "YOUR_APP_ID"
+    iss: 272308
   }
 var jwt = JWT.sign(payload, myKey,{algorithm:'RS256'})
     const res=fetch('https://api.github.com/app',{
         method: 'Get',
         headers:{
-            Authorization: jwt,
+            Authorization: "Bearer "+jwt,
             Accept: 'application/vnd.github+json'
         }
     })
