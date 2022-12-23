@@ -24,8 +24,9 @@ var payload = {
     iat: date.getSeconds() - 60,
     exp: date.getSeconds()+ (10 * 60),
     iss: 272308
-  }
-var jwt = JWT.sign(payload, myKey,{algorithm:'RS256'})
+  };
+var jwt = JWT.sign(payload, myKey,{algorithm:'RS256'});
+console.log(jwt);
     const res=fetch('https://api.github.com/app',{
         method: 'Get',
         headers:{
@@ -33,7 +34,7 @@ var jwt = JWT.sign(payload, myKey,{algorithm:'RS256'})
             Accept: 'application/vnd.github+json'
         }
     })
-    console.log(jwt);
+    
 };
 httprequest();
 
