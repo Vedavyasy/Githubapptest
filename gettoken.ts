@@ -104,7 +104,7 @@ var res= fetchInstallationToken({ appId: "272308",
 owner: context.repo.owner,
 privateKey: myKey,
 repo:"Githubactions",
-apiUrl:"https://https://api.github.com",
+apiUrl:"https://api.github.com",
 installationId:32214299
 })
 console.log(res);
