@@ -64,7 +64,9 @@ export const fetchInstallationToken = async ({ appId,
     const app = createAppAuth({
         appId,
         privateKey,
-        
+        request: request.defaults({
+            baseUrl: apiUrl,
+        }),
     });
     console.log("done step 1")
     // const octokit = getOctokit(myKey);
@@ -102,7 +104,7 @@ var res= fetchInstallationToken({ appId: "272308",
 owner: context.repo.owner,
 privateKey: myKey,
 repo:"Githubactions",
-apiUrl:"https://github.com/Githubapptest",
+apiUrl:"https://https://api.github.com",
 installationId:32214299
 })
 
