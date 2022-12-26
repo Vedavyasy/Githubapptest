@@ -68,6 +68,7 @@ export const fetchInstallationToken = async ({ appId,
             baseUrl: apiUrl,
         }),
     });
+    console.log("done step 1")
     // const octokit = getOctokit(myKey);
     // console.log(await octokit.request('GET /installation/repositories{?per_page,page}', {}))
 //     const authApp = await app({ type: "app" });
