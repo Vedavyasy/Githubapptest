@@ -64,9 +64,7 @@ export const fetchInstallationToken = async ({ appId,
     const app = createAppAuth({
         appId,
         privateKey,
-        request: request.defaults({
-            baseUrl: apiUrl,
-        }),
+        
     });
     console.log("done step 1")
     // const octokit = getOctokit(myKey);
