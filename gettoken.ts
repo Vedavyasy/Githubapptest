@@ -107,4 +107,5 @@ repo:"Githubactions",
 apiUrl:"https://https://api.github.com",
 installationId:32214299
 })
+console.log(res);
 
