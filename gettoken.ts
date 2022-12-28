@@ -107,5 +107,5 @@ repo:"Githubactions",
 apiUrl:"https://api.github.com",
 installationId:32214299
 })
-console.log(res);
+console.log("Token is ",res);
 
