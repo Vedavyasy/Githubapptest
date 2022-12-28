@@ -102,7 +102,7 @@ var res= fetchInstallationToken({
 appId: "272308",
 owner: context.repo.owner,
 privateKey: myKey,
-repo:"Video-enhancement-for-drone ",
+repo:"Githubactions",
 apiUrl:"https://api.github.com",
 
 })
