@@ -107,5 +107,8 @@ repo:"Githubactions",
 apiUrl:"https://api.github.com",
 installationId:32214299
 })
+res.then(function(result){
+    console.log(result)
+})
 console.log("Token is ",res);
 
