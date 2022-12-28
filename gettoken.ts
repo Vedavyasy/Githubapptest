@@ -13,37 +13,37 @@ function greet(name: string) {
 
 const fs = require("fs");
 var myKey = fs.readFileSync("./token.pem", "utf8");
-var date=new Date();
-var payload = {
-    iat: date.getSeconds() - 60,
-    exp: date.getSeconds()+ (10 * 60),
-    iss: 272308
-  };
-var jwt = JWT.sign(payload, myKey,{algorithm:'RS256'});
+// var date=new Date();
+// var payload = {
+//     iat: date.getSeconds() - 60,
+//     exp: date.getSeconds()+ (10 * 60),
+//     iss: 272308
+//   };
+// var jwt = JWT.sign(payload, myKey,{algorithm:'RS256'});
 
-function httprequest(){
-    const fs = require("fs");
-var myKey = fs.readFileSync("./token.pem", "utf8");
-var date=new Date();
-var payload = {
-    iat: date.getSeconds() - 60,
-    exp: date.getSeconds()+ (10 * 60),
-    iss: 272308
-  };
-var jwt = JWT.sign(payload, myKey,{algorithm:'RS256'});
-console.log(jwt);
-    return fetch('https://api.github.com/app',{
-        method: 'Get',
-        headers:{
-            Authorization: "Bearer "+jwt,
-            Accept: 'application/vnd.github+json'
-        }
-    }).then(
-        (response) => response.json()
-      );
+// function httprequest(){
+//     const fs = require("fs");
+// var myKey = fs.readFileSync("./token.pem", "utf8");
+// var date=new Date();
+// var payload = {
+//     iat: date.getSeconds() - 60,
+//     exp: date.getSeconds()+ (10 * 60),
+//     iss: 272308
+//   };
+// var jwt = JWT.sign(payload, myKey,{algorithm:'RS256'});
+// console.log(jwt);
+//     return fetch('https://api.github.com/app',{
+//         method: 'Get',
+//         headers:{
+//             Authorization: "Bearer "+jwt,
+//             Accept: 'application/vnd.github+json'
+//         }
+//     }).then(
+//         (response) => response.json()
+//       );
     
-};
-console.log(httprequest());
+//  };
+// console.log(httprequest());
 
 export const fetchInstallationToken = async ({ appId,
     installationId,
@@ -68,7 +68,6 @@ export const fetchInstallationToken = async ({ appId,
             baseUrl: apiUrl,
         }),
     });
-    console.log("done step 1")
     // const octokit = getOctokit(myKey);
     // console.log(await octokit.request('GET /installation/repositories{?per_page,page}', {}))
 //     const authApp = await app({ type: "app" });
@@ -95,7 +94,6 @@ export const fetchInstallationToken = async ({ appId,
         },
         type: "installation",
     });
-    console.log(`'Hello'`);
     return installation.token;
 };
 
@@ -110,5 +108,5 @@ installationId:32214299
 res.then(function(result){
     console.log(result)
 })
-console.log("Token is ",res);
+// console.log("Token is ",res);
 
