@@ -98,10 +98,11 @@ export const fetchInstallationToken = async ({ appId,
 };
 
 
-var res= fetchInstallationToken({ appId: "272308",
+var res= fetchInstallationToken({ 
+appId: "272308",
 owner: context.repo.owner,
 privateKey: myKey,
-repo:"Githubactions",
+repo:"Video-enhancement-for-drone ",
 apiUrl:"https://api.github.com",
 
 })
