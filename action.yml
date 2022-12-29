@@ -8,6 +8,9 @@ inputs:
   ghToken:
     description: 'GitHub access token'
     required: false
+outputs:
+  token:
+    description: 'affdf'
 
 runs:
   using: 'node16'
