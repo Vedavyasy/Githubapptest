@@ -15,5 +15,4 @@ outputs:
 runs:
   using: 'node16'
   main: 'dist/gettoken.js'
-  echo $name
-  echo $token
+  

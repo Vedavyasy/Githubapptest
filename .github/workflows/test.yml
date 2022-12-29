@@ -34,5 +34,6 @@ jobs:
           name: "Sample"
           ghtoken: ${{secrets.GITHUB_TOKEN}}
       - name: output values
-        run: echo ${{ steps.run-cdk.outputs.token }}
+        run: echo ${{ steps.run.outputs.token }}
             echo "Dummy  value"
+            echo ${action.token}
