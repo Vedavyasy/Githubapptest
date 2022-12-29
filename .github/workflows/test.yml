@@ -33,5 +33,6 @@ jobs:
         with:
           name: "Sample"
           ghtoken: ${{secrets.GITHUB_TOKEN}}
-      - name: Use variable value
+      - name: output values
         run: echo ${{ steps.run-cdk.outputs.token }}
+            echo "Dummy  value"
