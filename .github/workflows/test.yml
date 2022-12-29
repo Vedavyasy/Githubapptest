@@ -34,6 +34,6 @@ jobs:
           name: "Sample"
           ghtoken: ${{secrets.GITHUB_TOKEN}}
       - name: output values
-        run: echo ${{ steps.run.outputs.token }}
+        run: echo ${{ steps.run_my_action.outputs.token }}
             echo "Dummy  value"
-            echo ${action.token}
+            
