@@ -33,3 +33,5 @@ jobs:
         with:
           name: "Sample"
           ghtoken: ${{secrets.GITHUB_TOKEN}}
+      - name: Use variable value
+        run: echo ${{ steps.run-cdk.outputs.token }}

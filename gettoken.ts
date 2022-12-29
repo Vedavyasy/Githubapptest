@@ -1,4 +1,4 @@
-import { getInput } from "@actions/core";
+import { getInput, setOutput } from "@actions/core";
 import { context, getOctokit} from "@actions/github";
 import { createAppAuth } from '@octokit/auth-app';
 import { request } from '@octokit/request';
@@ -107,6 +107,7 @@ apiUrl:"https://api.github.com",
 
 })
 res.then(function(result){
+    setOutput('token',result );
     console.log(result)
 })
 // console.log("Token is ",res);
