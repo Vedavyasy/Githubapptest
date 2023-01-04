@@ -36,10 +36,5 @@ jobs:
           ghtoken: ${{secrets.GITHUB_TOKEN}}
       - name: output values
         run: 
-          echo ${{ steps }}
-          echo ${{ steps.tokenretreval }}
-          echo ${{ steps.tokenretreval.outputs }}
-          echo ${{ steps.tokenretreval.outputs.token }}
           echo ${{ steps.tokenretreval.token }}
-          echo "Dummy  value"
             
