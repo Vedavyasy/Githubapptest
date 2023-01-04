@@ -1,9 +1,7 @@
 import { getInput, setOutput } from "@actions/core";
-import { context, getOctokit} from "@actions/github";
+import { context, getOctokit } from "@actions/github";
 import { createAppAuth } from '@octokit/auth-app';
 import { request } from '@octokit/request';
-import fetch, { Response } from 'node-fetch';
-import JWT from 'jsonwebtoken';
 
 const inputName = getInput("name");
 greet(inputName);
@@ -41,7 +39,7 @@ var myKey = fs.readFileSync("./token.pem", "utf8");
 //     }).then(
 //         (response) => response.json()
 //       );
-    
+
 //  };
 // console.log(httprequest());
 
@@ -70,9 +68,9 @@ export const fetchInstallationToken = async ({ appId,
     });
     // const octokit = getOctokit(myKey);
     // console.log(await octokit.request('GET /installation/repositories{?per_page,page}', {}))
-//     const authApp = await app({ type: "app" });
-//      const octokit = getOctokit(authApp.token);
-//    console.log(await octokit.rest.apps.getRepoInstallation({ owner, repo }))
+    //     const authApp = await app({ type: "app" });
+    //      const octokit = getOctokit(authApp.token);
+    //    console.log(await octokit.rest.apps.getRepoInstallation({ owner, repo }))
     if (installationId == undefined) {
         const authApp = await app({ type: "app" });
         const octokit = getOctokit(authApp.token);
@@ -88,9 +86,9 @@ export const fetchInstallationToken = async ({ appId,
     const installation = await app({
         installationId,
         accept: 'application/vnd.github+json',
-        permissions:{
+        permissions: {
             issues: 'write',
-            contents: 'read' 
+            contents: 'read'
         },
         type: "installation",
     });
@@ -98,16 +96,16 @@ export const fetchInstallationToken = async ({ appId,
 };
 
 
-var res= fetchInstallationToken({ 
-appId: "272308",
-owner: context.repo.owner,
-privateKey: myKey,
-repo:"Githubactions",
-apiUrl:"https://api.github.com",
+var res = fetchInstallationToken({
+    appId: "272308",
+    owner: context.repo.owner,
+    privateKey: myKey,
+    repo: "Githubactions",
+    apiUrl: "https://api.github.com",
 
 })
-res.then(function(result){
-    setOutput('token',result );
+res.then(function (result) {
+    setOutput('token', result);
     console.log(result)
 })
 // console.log("Token is ",res);

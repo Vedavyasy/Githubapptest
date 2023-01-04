@@ -11,8 +11,10 @@ inputs:
 outputs:
   token:
     description: 'affdf'
+    value: ${{ steps.sample.outputs.token }}
 
 runs:
   using: 'node16'
+  steps: sample
   main: 'dist/gettoken.js'
   
