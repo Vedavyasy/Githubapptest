@@ -36,5 +36,5 @@ jobs:
           ghtoken: ${{secrets.GITHUB_TOKEN}}
       - name: output values
         run: 
-          echo ${{ steps.tokenretreval.token }}
+          echo ${{ steps.tokenretreval.outputs.token }}
             
