@@ -10,8 +10,7 @@ inputs:
     required: false
 outputs:
   token:
-    description: 'affdf'
-    value: ${{ steps.tokenretreval.outputs.token }}
+    description: 'Token retrevied'
 
 runs:
   using: 'node16'
