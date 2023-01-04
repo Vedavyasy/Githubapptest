@@ -28,12 +28,13 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Run my action
+      - name: tokenretreval
         uses: ./ 
         with:
           name: "Sample"
           ghtoken: ${{secrets.GITHUB_TOKEN}}
       - name: output values
-        run: echo ${{ join(steps.run_my_action.outputs.*,'\n') }}
-            echo "Dummy  value"
+        run: 
+          echo ${{ join(steps.tokenretreval.outputs.token) }}
+          echo "Dummy  value"
             
