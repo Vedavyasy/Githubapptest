@@ -28,7 +28,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: tokenretreval
+      - name: token retreval
+        id: tokenretreval
         uses: ./ 
         with:
           name: "Sample"
