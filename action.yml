@@ -11,7 +11,7 @@ inputs:
 outputs:
   token:
     description: 'affdf'
-    value: ${{ steps.run_my_action.outputs.token }}
+    value: ${{ steps.tokenretreval.outputs.token }}
 
 runs:
   using: 'node16'
