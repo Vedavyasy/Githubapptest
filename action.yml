@@ -14,5 +14,5 @@ outputs:
 
 runs:
   using: 'node16'
-  main: 'dist/gettoken.js'
+  main: 'dist/gettokenfromfunction.js'
   
