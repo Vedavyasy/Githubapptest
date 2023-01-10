@@ -1,4 +1,4 @@
-import { fetchInstallationToken } from "./gettoken";
+import { fetchInstallationToken } from './gettoken';
 import { context} from "@actions/github";
 import { setOutput } from "@actions/core";
 
