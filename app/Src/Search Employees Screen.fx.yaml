@@ -1,0 +1,283 @@
+"'Search Employees Screen' As screen":
+    OnVisible: =Set(nav,false)
+
+    imgLogo As image:
+        Image: ='Morgan Stanley'
+        Width: =190
+        X: =33
+        ZIndex: =2
+
+    Navigation_4 As Navigation:
+        Height: =689
+        Y: =79
+        ZIndex: =5
+
+    grpGalleries As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =5
+
+        "galSecurityRoles As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+            Height: =56
+            Items: =Filter(galUsers.Selected.'Security Roles (systemuserroles_association)',Name="HR Notes Admin")
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =39
+            Visible: =false
+            X: =463
+            ZIndex: =1
+
+            Title12 As label:
+                Height: =33.75
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: =ThisItem.Name
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Parent.TemplateWidth - 104
+                X: =32
+                Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                ZIndex: =1
+
+            NextArrow7 As icon.ChevronRight:
+                AccessibleLabel: =Self.Tooltip
+                Height: =60
+                Icon: =Icon.ChevronRight
+                OnSelect: =Select(Parent)
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                TabIndex: =0
+                Tooltip: ="View item details"
+                Width: =60
+                X: =Parent.TemplateWidth - Self.Width - 5
+                Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                ZIndex: =2
+
+            Separator10 As rectangle:
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =Parent.TemplateWidth
+                Y: =Parent.TemplateHeight - 1
+                ZIndex: =3
+
+        "galUsers As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+            Height: =69
+            Items: =Filter(Users,'Primary Email'="MeganB@Pine.VivaDemos.Net")
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =58
+            Visible: =false
+            Width: =237
+            X: =1129
+            ZIndex: =1
+
+            Title10 As label:
+                Height: =56
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: =ThisItem.'Full Name'
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =false
+                Width: =189
+                ZIndex: =1
+
+            NextArrow5 As icon.ChevronRight:
+                AccessibleLabel: =Self.Tooltip
+                Height: =60
+                Icon: =Icon.ChevronRight
+                OnSelect: =Select(Parent)
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                TabIndex: =0
+                Tooltip: ="View item details"
+                Width: =60
+                X: =Parent.TemplateWidth - Self.Width - 5
+                Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                ZIndex: =2
+
+            Separator8 As rectangle:
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =Parent.TemplateWidth
+                Y: =Parent.TemplateHeight - 1
+                ZIndex: =3
+
+        "galEmployees As gallery.'BrowseLayout_Vertical_OneImageThreeColumnVariant_ver4.0'":
+            Height: =632
+            Items: =Search(workerInfo,txtSearchEmployees.Text,"Worker")
+            Layout: =Layout.Vertical
+            OnSelect: |
+                =Set(
+                    selectedEmployee,
+                    ThisItem
+                );
+                Navigate('Profile Screen');
+                ClearCollect(
+                    compData,
+                    WorkdayGetCompHistory.Run(
+                        First(
+                            Filter(
+                                workerData,
+                                descriptor = ThisItem.Worker
+                            )
+                        ).id
+                    )
+                );
+                ClearCollect(
+                    feedbackData,
+                    WorkdayGetWorkerFeedback.Run(
+                        First(
+                            Filter(
+                                workerData,
+                                descriptor = ThisItem.Worker
+                            )
+                        ).id
+                    )
+                );
+                Set(
+                    ReviwHistory,
+                    First(
+                        WorkdayGetPaybyYear.Run(
+                            First(
+                                Filter(
+                                    workerData,
+                                    descriptor = ThisItem.Worker
+                                )
+                            ).id
+                        )
+                    )
+                );
+                ClearCollect(
+                    workerHistory,
+                    WorkdayGetWorkerHistory.Run(
+                        First(
+                            Filter(
+                                workerData,
+                                descriptor = ThisItem.Worker
+                            )
+                        ).id
+                    ).data
+                );
+                ClearCollect(
+                    jobDetails,
+                    First(
+                        WorkdayGetJobDetails.Run(
+                            First(
+                                Filter(
+                                    workerData,
+                                    descriptor = ThisItem.Worker
+                                )
+                            ).id
+                        ).Report_Entry
+                    )
+                );
+                Set(
+                    JobDev,
+                    First(
+                        WorkdayGetJobDevDetails.Run(
+                            First(
+                                Filter(
+                                    workerData,
+                                    descriptor = galEmployees.Selected.Worker
+                                )
+                            ).id
+                        ).Report_Entry
+                    )
+                );
+            ShowScrollbar: =false
+            TemplatePadding: =4
+            TemplateSize: =205
+            Width: =1268
+            WrapCount: =7
+            X: =40
+            Y: =136
+            ZIndex: =1
+
+            Image4 As image:
+                Height: =80
+                Image: =If(ThisItem.Worker="Ajay Mokashi",'Demo profile','default-contact-96x96-2')
+                ImagePosition: =ImagePosition.Fill
+                OnSelect: =Select(Parent)
+                Width: =80
+                X: =50
+                Y: =17
+                ZIndex: =1
+
+            Label1 As label:
+                Align: =Align.Center
+                Color: =RGBA(97, 97, 97, 1)
+                Font: =Font.'Segoe UI'
+                OnSelect: =Select(Parent)
+                Size: =11
+                Text: |-
+                    =First(ForAll(Split(ThisItem.Job," "), {Result: ThisRecord.Value})).Result & " " & Last(ForAll(Split(ThisItem.Job," "), {Result: ThisRecord.Value})).Result
+                Width: =172
+                X: =4
+                Y: =145
+                ZIndex: =2
+
+            Label3 As label:
+                Align: =Align.Center
+                Color: =RGBA(36, 36, 36, 1)
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =25
+                OnSelect: =Select(Parent)
+                Text: |-
+                    =First(ForAll(Split(ThisItem.Worker," "), {Result: ThisRecord.Value})).Result
+                Width: =172
+                X: =4
+                Y: =106
+                ZIndex: =3
+
+            Label4 As label:
+                Align: =Align.Center
+                Color: =RGBA(36, 36, 36, 1)
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =20
+                OnSelect: =Select(Parent)
+                Text: |-
+                    =Last(ForAll(Split(ThisItem.Worker," "), {Result: ThisRecord.Value})).Result
+                Width: =172
+                X: =4
+                Y: =131
+                ZIndex: =4
+
+    grpSearch As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =5
+
+        txtSearchEmployees As text:
+            BorderColor: =RGBA(230, 230, 230, 1)
+            Default: =""
+            HintText: ="Search Employees"
+            PaddingLeft: =38
+            X: =523
+            Y: =69
+            ZIndex: =3
+
+        icnSearch As icon.Search:
+            Color: =RGBA(0, 134, 208, 1)
+            Height: =20
+            Icon: =Icon.Search
+            Width: =20
+            X: =534
+            Y: =79
+            ZIndex: =4
+

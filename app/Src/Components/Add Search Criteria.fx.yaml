@@ -1,0 +1,165 @@
+"'Add Search Criteria' As CanvasComponent":
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =640
+    Width: =640
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Button53 As button:
+        OnSelect: |-
+            =ClearCollect(col_searchcriteriacolumns,Table({Name:"EmloyeeNumber",Selected:false,count:0},{Name:"FirstName",Selected:false},{Name:"MiddleName",Selected:false},{Name:"LastName",Selected:false},{Name:"FullName",Selected:false},{Name:"Mail",Selected:false},{Name:"ID",Selected:false},{Name:"PhoneNumber",Selected:false},{Name:"Landline",Selected:false},{Name:"Job",Selected:false},{Name:"Titile",Selected:false},{Name:"Location",Selected:false},{Name:"DoorNo",Selected:false},{Name:"Street",Selected:false},{Name:"Area",Selected:false},{Name:"State",Selected:false},{Name:"Country",Selected:false},{Name:"PinCode",Selected:false},{Name:"Tenure",Selected:false},{Name:"Period",Selected:false},{Name:"JoinDate",Selected:false},{Name:"Salery",Selected:false},{Name:"Skill",Selected:false},{Name:"Certifications",Selected:false},{Name:"Years",Selected:false}))
+        Text: ="Load Data"
+        X: =450
+        Y: =95
+        ZIndex: =1
+
+    Container1_2 As groupContainer.verticalAutoLayoutContainer:
+        Height: =615
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =400
+        X: =10
+        Y: =10
+        ZIndex: =3
+
+        Label19 As label:
+            Align: =Align.Center
+            AlignInContainer: =AlignInContainer.Stretch
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            Text: ="Add Search Criteria"
+            ZIndex: =1
+
+        Container3_2 As groupContainer.horizontalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.Center
+            BorderColor: =RGBA(50, 86, 160, 1)
+            BorderThickness: =2
+            FillPortions: =0
+            Height: =30
+            LayoutGap: =5
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingLeft: =5
+            Width: =Parent.Width-10
+            ZIndex: =2
+
+            Icon21_2 As icon.Search:
+                Height: =Parent.Height
+                Icon: =Icon.Search
+                PaddingBottom: =3
+                PaddingLeft: =3
+                PaddingRight: =3
+                PaddingTop: =3
+                Width: =30
+                ZIndex: =1
+
+            TextInput15_2 As text:
+                BorderColor: =RGBA(255, 255, 255, 1)
+                BorderThickness: =0
+                Default: =""
+                Height: =Parent.Height
+                HintText: ="Filter by column name"
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverFill: =RGBA(241, 244, 249, 1)
+                PaddingLeft: =10
+                Width: =Parent.Width-Icon21_2.Width-10
+                ZIndex: =2
+
+        Checkbox7 As checkbox:
+            Height: =40
+            OnCheck: |-
+                =UpdateIf(col_searchcriteriacolumns,true,{Name:Name,Selected:true})
+            OnUncheck: |-
+                =UpdateIf(col_searchcriteriacolumns,true,{Name:Name,Selected:false})
+            PaddingLeft: =10
+            Text: ="Select All"
+            Width: =Parent.Width
+            ZIndex: =3
+
+        Rectangle2_2 As rectangle:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            Fill: =RGBA(50, 86, 160, 1)
+            Height: =2
+            Width: =Parent.Width
+            ZIndex: =4
+
+        Gallery33_2 As gallery.galleryVertical:
+            AlignInContainer: =AlignInContainer.Center
+            Height: =Parent.Height-Label19.Height-Container3_2.Height-Rectangle2_2.Height-10
+            Items: =Search(col_searchcriteriacolumns,TextInput15_2.Text,"Name")
+            Layout: =Layout.Vertical
+            LayoutMinHeight: =287
+            LayoutMinWidth: =320
+            TemplateSize: |-
+                =//If(Self.Layout = Layout.Horizontal, Min(280, Self.Width - 60), Min(280, Self.Height - 60))
+                40
+            Width: =Parent.Width-10
+            X: =40
+            Y: =40
+            ZIndex: =5
+
+            Rectangle3_2 As rectangle:
+                BorderThickness: =1
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =380
+                Y: =39
+                ZIndex: =3
+
+            Container5_1 As groupContainer.horizontalAutoLayoutContainer:
+                Height: =40
+                LayoutMode: =LayoutMode.Auto
+                Width: =380
+                ZIndex: =5
+
+                Checkbox4 As checkbox:
+                    Default: =ThisItem.Selected
+                    Height: =40
+                    OnCheck: |-
+                        =Update(col_searchcriteriacolumns,ThisItem,{Name:ThisItem.Name,Selected:true})
+                    OnSelect: =
+                    OnUncheck: |-
+                        =Update(col_searchcriteriacolumns,ThisItem,{Name:ThisItem.Name,Selected:false});
+                        Reset(Checkbox7)
+                    Text: =ThisItem.Name
+                    Width: =Parent.Width
+                    ZIndex: =4
+
+        Rectangle2_3 As rectangle:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =5
+            Width: =Parent.Width
+            ZIndex: =6
+
+        Container4 As groupContainer.horizontalAutoLayoutContainer:
+            FillPortions: =0
+            Height: =45
+            LayoutGap: =10
+            LayoutJustifyContent: =LayoutJustifyContent.End
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingBottom: =5
+            PaddingTop: =5
+            ZIndex: =7
+
+            Button56 As button:
+                Height: =35
+                OnSelect: |-
+                    =UpdateIf(col_searchcriteriacolumns,true,{Name:Name,Selected:false});
+                    Reset(Checkbox7)
+                Text: ="Cancel"
+                Width: =130
+                ZIndex: =1
+
+            Button59 As button:
+                AlignInContainer: =AlignInContainer.End
+                Height: =35
+                Text: ="Apply"
+                Width: =130
+                ZIndex: =2
+

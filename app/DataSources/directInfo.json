@@ -1,0 +1,9 @@
+[
+  {
+    "IsComponentScoped": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "Name": "directInfo",
+    "Type": "CollectionDataSourceInfo"
+  }
+]

@@ -1,0 +1,100 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr02b_employee360appses",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr02b_employee360apps",
+    "MaxGetRowsCount": 500,
+    "Name": "Employee 360 Apps",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cr02b_appicon": "App Icon",
+      "cr02b_appiconid": "cr02b_AppIconId",
+      "cr02b_applink": "App Link",
+      "cr02b_employee360apps_AsyncOperations": "System Jobs",
+      "cr02b_employee360apps_BulkDeleteFailures": "Bulk Delete Failures",
+      "cr02b_employee360apps_DuplicateBaseRecord": "Duplicate Records (cr02b_employee360apps_DuplicateBaseRecord)",
+      "cr02b_employee360apps_DuplicateMatchingRecord": "Duplicate Records (cr02b_employee360apps_DuplicateMatchingRecord)",
+      "cr02b_employee360apps_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cr02b_employee360apps_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cr02b_employee360apps_ProcessSession": "Process Sessions",
+      "cr02b_employee360apps_SyncErrors": "Sync Errors",
+      "cr02b_employee360appsid": "Employee 360 Apps",
+      "cr02b_name": "Name",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Employee 360 Apps",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Employee 360 Apps (Views)",
+    "Name": "_cr02b_employee360apps_views",
+    "RelatedEntityName": "Employee 360 Apps",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "0b5a2563-76cc-420e-810f-4454944db22b": "Employee 360 Apps Lookup View",
+      "2462c87b-f47b-4b79-931d-ed632ee0138e": "Employee 360 Apps Advanced Find View",
+      "87edfdd3-8ebd-41c4-977e-b61f0e4aad0d": "Active Employee 360 Apps",
+      "a39f88d5-9acf-42b1-95b7-21db20d520fe": "Inactive Employee 360 Apps",
+      "dd0231ff-55e3-4b34-9d30-b4d9be9c4ac9": "Employee 360 Apps Associated View"
+    }
+  },
+  {
+    "DisplayName": "Status (Employee 360 Apps)",
+    "Name": "cr02b_employee360apps_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Employee 360 Apps"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Employee 360 Apps",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Employee 360 Apps)",
+    "Name": "cr02b_employee360apps_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Employee 360 Apps"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Employee 360 Apps",
+    "Type": "OptionSetInfo"
+  }
+]

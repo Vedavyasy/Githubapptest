@@ -1,0 +1,290 @@
+"'Customize columns' As CanvasComponent":
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =640
+    Width: =1000
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Container1_1 As groupContainer.verticalAutoLayoutContainer:
+        Height: =550
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =400
+        X: =447
+        Y: =40
+        ZIndex: =2
+
+        Label21_1 As label:
+            Align: =Align.Center
+            Text: ="Selected Columns"
+            Width: =400
+            ZIndex: =1
+
+        Container3_1 As groupContainer.horizontalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.Center
+            BorderColor: =RGBA(50, 86, 160, 1)
+            BorderThickness: =2
+            FillPortions: =0
+            Height: =30
+            LayoutGap: =5
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingLeft: =5
+            Width: =Parent.Width-10
+            ZIndex: =2
+
+            Icon21_1 As icon.Search:
+                Height: =Parent.Height
+                Icon: =Icon.Search
+                PaddingBottom: =3
+                PaddingLeft: =3
+                PaddingRight: =3
+                PaddingTop: =3
+                Width: =30
+                ZIndex: =1
+
+            TextInput15_1 As text:
+                BorderColor: =RGBA(255, 255, 255, 1)
+                BorderThickness: =0
+                Default: =""
+                Height: =Parent.Height
+                HintText: ="Filter by column name"
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverFill: =RGBA(241, 244, 249, 1)
+                PaddingLeft: =10
+                Width: =Parent.Width-Icon21_1.Width-10
+                ZIndex: =2
+
+        Rectangle2_1 As rectangle:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =5
+            Width: =Parent.Width
+            ZIndex: =3
+
+        Gallery33_1 As gallery.galleryVertical:
+            AlignInContainer: =AlignInContainer.Center
+            Height: =Parent.Height-Label21_1.Height-Container3_1.Height-Rectangle2_1.Height-10
+            Items: =Sort(Search(Filter(col_columns,Added=true),TextInput15_1.Text,"Name"),count)
+            Layout: =Layout.Vertical
+            LayoutMinHeight: =287
+            LayoutMinWidth: =320
+            TemplateSize: |-
+                =//If(Self.Layout = Layout.Horizontal, Min(280, Self.Width - 60), Min(280, Self.Height - 60))
+                40
+            Width: =Parent.Width-10
+            X: =40
+            Y: =40
+            ZIndex: =4
+
+            Rectangle3_1 As rectangle:
+                BorderThickness: =1
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =380
+                Y: =39
+                ZIndex: =3
+
+            Container5 As groupContainer.horizontalAutoLayoutContainer:
+                Height: =40
+                LayoutMode: =LayoutMode.Auto
+                Width: =380
+                ZIndex: =5
+
+                Icon23 As icon.ArrowUp:
+                    AlignInContainer: =AlignInContainer.Center
+                    Height: =25
+                    Icon: =Icon.ArrowUp
+                    OnSelect: |-
+                        =UpdateIf(col_columns,Name=ThisItem.Name,{count:ThisItem.count-1})
+                    Width: =25
+                    X: =7
+                    Y: =7
+                    ZIndex: =1
+
+                Icon24 As icon.ArrowDown:
+                    AlignInContainer: =AlignInContainer.Center
+                    Height: =25
+                    OnSelect: |-
+                        =UpdateIf(col_columns,Name=ThisItem.Name,{count:ThisItem.count+1})
+                    Width: =25
+                    ZIndex: =2
+
+                Label22_1 As label:
+                    AlignInContainer: =AlignInContainer.Center
+                    OnSelect: =
+                    Text: =ThisItem.Name
+                    Width: =300
+                    ZIndex: =3
+
+                Icon22 As icon.Cancel:
+                    AlignInContainer: =AlignInContainer.Center
+                    Height: =25
+                    Icon: =Icon.Cancel
+                    OnSelect: |-
+                        =//Select(Parent)
+                        Set(var_order,ThisItem.count);
+                        UpdateIf(col_columns,Name=ThisItem.Name,{Added:false,count:0});
+                        UpdateIf(col_columns,count>=var_order,{count:count-1});
+                    Width: =25
+                    X: =350
+                    Y: =7
+                    ZIndex: =4
+
+    Container1 As groupContainer.verticalAutoLayoutContainer:
+        Height: =550
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        Width: =400
+        X: =47
+        Y: =40
+        ZIndex: =3
+
+        Label21 As label:
+            Align: =Align.Center
+            Text: ="Available Columns"
+            Width: =400
+            ZIndex: =1
+
+        Container3 As groupContainer.horizontalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.Center
+            BorderColor: =RGBA(50, 86, 160, 1)
+            BorderThickness: =2
+            FillPortions: =0
+            Height: =30
+            LayoutGap: =5
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingLeft: =5
+            Width: =Parent.Width-10
+            ZIndex: =2
+
+            Icon21 As icon.Search:
+                Height: =Parent.Height
+                Icon: =Icon.Search
+                PaddingBottom: =3
+                PaddingLeft: =3
+                PaddingRight: =3
+                PaddingTop: =3
+                Width: =30
+                ZIndex: =1
+
+            TextInput15 As text:
+                BorderColor: =RGBA(255, 255, 255, 1)
+                BorderThickness: =0
+                Default: =""
+                Height: =Parent.Height
+                HintText: ="Filter by column name"
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverFill: =RGBA(241, 244, 249, 1)
+                PaddingLeft: =10
+                Width: =Parent.Width-Icon21.Width-10
+                ZIndex: =2
+
+        Rectangle2 As rectangle:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =5
+            Width: =Parent.Width
+            ZIndex: =3
+
+        Gallery33 As gallery.galleryVertical:
+            AlignInContainer: =AlignInContainer.Center
+            Height: =Parent.Height-Label21.Height-Container3.Height-Rectangle2.Height-10
+            Items: =Search(Filter(col_columns,Added=false ),TextInput15.Text,"Name")
+            Layout: =Layout.Vertical
+            LayoutMinHeight: =287
+            LayoutMinWidth: =320
+            TemplateSize: |-
+                =//If(Self.Layout = Layout.Horizontal, Min(280, Self.Width - 60), Min(280, Self.Height - 60))
+                40
+            Width: =Parent.Width-10
+            X: =40
+            Y: =40
+            ZIndex: =4
+
+            Label22 As label:
+                Height: =35
+                OnSelect: =Select(Parent)
+                Text: =ThisItem.Name
+                Width: =274
+                ZIndex: =1
+
+            Button52 As button:
+                Fill: =RGBA(39, 113, 194, 1)
+                Height: =28
+                OnSelect: |
+                    =//Select(Parent);
+                    UpdateIf(col_columns,Name=ThisItem.Name,{Added:true,count:CountRows(Filter(col_columns,Added=true))})
+                RadiusBottomLeft: =20
+                RadiusBottomRight: =20
+                RadiusTopLeft: =20
+                RadiusTopRight: =20
+                Text: ="Add"
+                Width: =80
+                X: =285
+                Y: =4
+                ZIndex: =2
+
+            Rectangle3 As rectangle:
+                BorderThickness: =1
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =381
+                X: =-1
+                Y: =35
+                ZIndex: =3
+
+    Label23 As label:
+        Text: ="Customize Columns"
+        Width: =215
+        X: =370
+        ZIndex: =4
+
+    Container6 As groupContainer.horizontalAutoLayoutContainer:
+        Height: =50
+        LayoutGap: =10
+        LayoutMode: =LayoutMode.Auto
+        PaddingTop: =5
+        Width: =415
+        X: =585
+        Y: =590
+        ZIndex: =5
+
+        Button54 As button:
+            OnSelect: |-
+                =ClearCollect(col_columns,Table({Name:"EmloyeeNumber",Added:false,count:0},{Name:"FirstName",Added:false,count:0},{Name:"MiddleName",Added:false,count:0},{Name:"LastName",Added:false,count:0},{Name:"FullName",Added:false,count:0},{Name:"Mail",Added:false,count:0},{Name:"ID",Added:false,count:0},{Name:"PhoneNumber",Added:false,count:0},{Name:"Landline",Added:false,count:0},{Name:"Job",Added:false,count:0},{Name:"Titile",Added:false,count:0},{Name:"Location",Added:false,count:0},{Name:"DoorNo",Added:false,count:0},{Name:"Street",Added:false,count:0},{Name:"Area",Added:false,count:0},{Name:"State",Added:false,count:0},{Name:"Country",Added:false,count:0},{Name:"PinCode",Added:false,count:0},{Name:"Tenure",Added:false,count:0},{Name:"Period",Added:false,count:0},{Name:"JoinDate",Added:false,count:0},{Name:"Salery",Added:false,count:0},{Name:"Skill",Added:false,count:0},{Name:"Certifications",Added:false,count:0},{Name:"Years",Added:false,count:0}))
+            RadiusBottomLeft: =25
+            RadiusBottomRight: =25
+            RadiusTopLeft: =25
+            RadiusTopRight: =25
+            Text: ="Reset"
+            Width: =130
+            X: =834
+            ZIndex: =1
+
+        Button57 As button:
+            RadiusBottomLeft: =25
+            RadiusBottomRight: =25
+            RadiusTopLeft: =25
+            RadiusTopRight: =25
+            Text: ="Cancel"
+            Width: =130
+            ZIndex: =2
+
+        Button58 As button:
+            RadiusBottomLeft: =25
+            RadiusBottomRight: =25
+            RadiusTopLeft: =25
+            RadiusTopRight: =25
+            Text: ="Update"
+            Width: =130
+            X: =765
+            Y: =520
+            ZIndex: =3
+

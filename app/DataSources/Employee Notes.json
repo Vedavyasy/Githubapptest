@@ -1,0 +1,169 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr02b_employeenoteses",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr02b_employeenotes",
+    "MaxGetRowsCount": 500,
+    "Name": "Employee Notes",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cr02b_category": "Category",
+      "cr02b_Employee": "Employee",
+      "cr02b_employeenotes_AsyncOperations": "System Jobs",
+      "cr02b_employeenotes_BulkDeleteFailures": "Bulk Delete Failures",
+      "cr02b_employeenotes_DuplicateBaseRecord": "Duplicate Records (cr02b_employeenotes_DuplicateBaseRecord)",
+      "cr02b_employeenotes_DuplicateMatchingRecord": "Duplicate Records (cr02b_employeenotes_DuplicateMatchingRecord)",
+      "cr02b_employeenotes_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cr02b_employeenotes_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cr02b_employeenotes_ProcessSession": "Process Sessions",
+      "cr02b_employeenotes_SyncErrors": "Sync Errors",
+      "cr02b_employeenotesid": "Employee Notes",
+      "cr02b_isprivate": "Is Private",
+      "cr02b_name": "NoteID",
+      "cr02b_note": "Note",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "mse360_cr02b_EmployeeNotes_mse360_NotesTag_mse36": "Notes Tags",
+      "mse360_subject": "Subject",
+      "mse360_tags": "Tags",
+      "mse360_viewableby": "Viewable By",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Employee Notes",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Employee Notes (Views)",
+    "Name": "_cr02b_employeenotes_views",
+    "RelatedEntityName": "Employee Notes",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "0719995c-e983-4ab5-b8bd-6b4f65ccf6cf": "Inactive Employee Notes",
+      "4567b20e-aa97-45fc-9d96-4eee96c74b39": "Active Employee Notes",
+      "70529254-ff66-48cb-b708-f2bff74ec047": "Employee Notes Associated View",
+      "7cdf3ca6-b018-40f7-887a-72ab86318595": "Employee Notes Lookup View",
+      "ad1748dd-b114-43fd-ade6-6492ebad673b": "Employee Notes Advanced Find View"
+    }
+  },
+  {
+    "DisplayName": "Is Private (Employee Notes)",
+    "Name": "cr02b_employeenotes_cr02b_isprivate",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cr02b_isprivate",
+        "OptionSetReferenceEntityName": "Employee Notes"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "cr02b_isprivate",
+    "RelatedEntityName": "Employee Notes",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (Employee Notes)",
+    "Name": "cr02b_employeenotes_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Employee Notes"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Employee Notes",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Employee Notes)",
+    "Name": "cr02b_employeenotes_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Employee Notes"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Employee Notes",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Note Category",
+    "Name": "cr02b_notecategory",
+    "OptionSetInfoNameMapping": {
+      "690200000": "Performance",
+      "690200001": "Wellbeing",
+      "690200002": "Promotion",
+      "690200003": "Incident",
+      "690200004": "Evaluation",
+      "690200005": "HR Request",
+      "690200006": "Other"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cr02b_category",
+        "OptionSetReferenceEntityName": "Employee Notes"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "cr02b_category",
+    "RelatedEntityName": "Employee Notes",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Viewable By (Employee Notes)",
+    "Name": "mse360_cr02b_employeenotes_mse360_viewableby",
+    "OptionSetInfoNameMapping": {
+      "941140000": "HR Only"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "mse360_viewableby",
+        "OptionSetReferenceEntityName": "Employee Notes"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "mse360_viewableby",
+    "RelatedEntityName": "Employee Notes",
+    "Type": "OptionSetInfo"
+  }
+]

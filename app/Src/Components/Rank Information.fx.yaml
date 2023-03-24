@@ -1,0 +1,279 @@
+"'Rank Information' As CanvasComponent":
+    Comparison: =teamInfo
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =420
+    RankHistory: =ReviewDetails
+    Ranks: =
+    Width: =385
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Label20 As label:
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =420
+        Text: =""
+        Width: =385
+        ZIndex: =1
+
+    Label80 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Text: ="Rank Information"
+        X: =21
+        Y: =17
+        ZIndex: =2
+
+    "Pivot1_2 As 'Fluent Pivot (1.0.19)'.pcfdataset":
+        DisplayMode: =DisplayMode.Edit
+        Height: =43
+        Items: |
+            =Table(
+              {
+                  ItemKey: "tabFile",
+                  ItemDisplayName: "History"
+              },
+              {
+                  ItemKey: "tabHome",
+                  ItemDisplayName: "Comparison"
+              }
+            )
+        OnChange: |
+            =Set(pivotRank,Pivot1_2.Selected.ItemDisplayName);
+        RenderSize: ='PowerCAT.Pivot.RenderSize'.Normal
+        RenderType: ="0"
+        Theme: =AppThemeJson
+        Width: =364
+        X: =21
+        Y: =57
+        ZIndex: =3
+
+    "Gallery20 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        Height: =262
+        Items: ='Rank Information'.Comparison
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplatePadding: =0
+        TemplateSize: =52
+        Visible: =If(pivotRank = "Comparison",true,false)
+        Width: =385
+        Y: =155
+        ZIndex: =17
+
+        Image37 As image:
+            Height: =34
+            Image: ='default-contact-96x96-2'
+            OnSelect: =Select(Parent)
+            Width: =24
+            X: =23
+            Y: =9
+            ZIndex: =1
+
+        Title22 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =36
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =10.5
+            Text: =ThisItem.First_Name & " " &ThisItem.'Legal_Name_-_Last_Name'
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - Image37.Width - 104
+            X: =61
+            Y: =16
+            ZIndex: =2
+
+        Separator11 As rectangle:
+            Fill: =RGBA(244, 244, 244, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =5
+
+        Image36_3 As image:
+            Height: =32
+            Image: ='Frame 1010109112'
+            Visible: =If(pivotRank = "Comparison",true,false)
+            Width: =32
+            X: =291
+            Y: =5
+            ZIndex: =6
+
+        Label84_3 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =20
+            Size: =10
+            Text: |-
+                =First(ForAll(Split(ThisItem.'Rating_-_Current'," "), {Result: ThisRecord.Value})).Result
+            Visible: =If(pivotRank = "Comparison",true,false)
+            Width: =16
+            X: =299
+            Y: =16
+            ZIndex: =7
+
+    Group2 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =17
+
+        Label80_1 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =10.5
+            Text: ="Change Date"
+            Visible: =If(pivotRank = "Comparison",false,true)
+            X: =21
+            Y: =115
+            ZIndex: =4
+
+        Label80_2 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =10.5
+            Text: ="Rank"
+            Visible: =If(pivotRank = "Comparison",false,true)
+            Width: =86
+            X: =286
+            Y: =115
+            ZIndex: =5
+
+        Label80_3 As label:
+            Font: =Font.'Segoe UI'
+            Size: =10.5
+            Text: =Year(Today())
+            Visible: =If(pivotRank = "Comparison",false,true)
+            X: =21
+            Y: =160
+            ZIndex: =6
+
+        Label80_4 As label:
+            Font: =Font.'Segoe UI'
+            Size: =10.5
+            Text: =Year(Today())-1
+            Visible: =If(pivotRank = "Comparison",false,true)
+            X: =21
+            Y: =210
+            ZIndex: =7
+
+        Label80_5 As label:
+            Font: =Font.'Segoe UI'
+            Size: =10.5
+            Text: =Year(Today())-2
+            Visible: =If(pivotRank = "Comparison",false,true)
+            X: =21
+            Y: =260
+            ZIndex: =8
+
+        Image36 As image:
+            Height: =32
+            Image: ='Frame 1010109112'
+            Visible: =If(pivotRank = "Comparison",false,true)
+            Width: =32
+            X: =290
+            Y: =164
+            ZIndex: =9
+
+        Image36_1 As image:
+            Height: =32
+            Image: ='Frame 1010109112'
+            Visible: =If(pivotRank = "Comparison",false,true)
+            Width: =32
+            X: =290
+            Y: =214
+            ZIndex: =10
+
+        Image36_2 As image:
+            Height: =32
+            Image: ='Frame 1010109112'
+            Visible: =If(pivotRank = "Comparison",false,true)
+            Width: =32
+            X: =290
+            Y: =264
+            ZIndex: =11
+
+        Label84 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =20
+            Size: =10
+            Text: |-
+                =//Split(LookUp(payByYear.Last_Review_Rating," ")).Result
+                First(ForAll(Split('Rank Information'.RankHistory.Last_Review_Rating," "), {Result: ThisRecord.Value})).Result
+            Visible: =If(pivotRank = "Comparison",false,true)
+            Width: =16
+            X: =297.5
+            Y: =175
+            ZIndex: =12
+
+        Label84_1 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =20
+            Size: =10
+            Text: |-
+                =First(ForAll(Split('Rank Information'.RankHistory.Rating_2_Years_Ago," "), {Result: ThisRecord.Value})).Result
+            Visible: =If(pivotRank = "Comparison",false,true)
+            Width: =16
+            X: =298
+            Y: =225
+            ZIndex: =13
+
+        Label84_2 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =20
+            Size: =10
+            Text: |-
+                =First(ForAll(Split('Rank Information'.RankHistory.Rating_3_Years_Ago," "), {Result: ThisRecord.Value})).Result
+            Visible: =If(pivotRank = "Comparison",false,true)
+            Width: =16
+            X: =298
+            Y: =275
+            ZIndex: =14
+
+        Rectangle14 As rectangle:
+            Fill: =RGBA(244, 244, 244, 1)
+            Height: =1
+            Visible: =If(pivotRank = "Comparison",false,true)
+            Width: =301
+            X: =21
+            Y: =200
+            ZIndex: =15
+
+        Rectangle14_1 As rectangle:
+            Fill: =RGBA(244, 244, 244, 1)
+            Height: =1
+            Visible: =If(pivotRank = "Comparison",false,true)
+            Width: =301
+            X: =21
+            Y: =260
+            ZIndex: =16
+
+    Label80_6 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Size: =10.5
+        Text: ="Teammates"
+        Visible: =If(pivotRank = "Comparison",true,false)
+        X: =21
+        Y: =112
+        ZIndex: =18
+
+    Label80_7 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Size: =10.5
+        Text: ="Rank"
+        Visible: =If(pivotRank = "Comparison",true,false)
+        Width: =86
+        X: =286
+        Y: =112
+        ZIndex: =19
+

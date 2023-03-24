@@ -1,0 +1,350 @@
+Search As CanvasComponent:
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =425
+    SearchStringLength: =Len(TextInput9.Text)
+    Width: =400
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Label72 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(0, 92, 144, 1)
+        Text: ="max"
+        Width: =400
+        ZIndex: =1
+
+    Label75 As label:
+        Color: =RGBA(97, 97, 97, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Segoe UI'
+        PaddingLeft: =16
+        PaddingTop: =8
+        Size: =9
+        Text: ="Top hits"
+        Visible: =If(Len(TextInput9.Text)>2,true,false)
+        Width: =390
+        X: =5
+        Y: =If(Len(TextInput9.Text)>2,35,-425)
+        ZIndex: =2
+
+    TextInput9 As text:
+        BorderThickness: =0
+        Default: =""
+        Fill: =RGBA(237, 237, 237, 1)
+        FocusedBorderColor: =
+        Height: =30
+        HintText: ="Search for people by name or ID"
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        OnChange: =
+        PressedBorderColor: =
+        RadiusBottomLeft: =1
+        RadiusBottomRight: =1
+        RadiusTopLeft: =1
+        RadiusTopRight: =1
+        Size: =10.5
+        Width: =390
+        X: =5
+        Y: =5
+        ZIndex: =3
+
+    "Gallery12 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        Height: =118
+        Items: |-
+            =FirstN(
+                Search(
+                    workerInfo,
+                    TextInput9.Text,
+                    "Full_Name",
+                    "Employee_ID"
+                ),
+                3
+            )
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplateFill: =Color.White
+        TemplatePadding: =0
+        TemplateSize: =37
+        Visible: =If(Len(TextInput9.Text)>2,true,false)
+        Width: =390
+        X: =5
+        Y: =If(Len(TextInput9.Text)>2,67,-425)
+        ZIndex: =4
+
+        Image28 As image:
+            Height: =30
+            Image: ='default-contact-96x96-2'
+            OnSelect: =Select(Parent)
+            RadiusBottomLeft: =30
+            RadiusBottomRight: =30
+            RadiusTopLeft: =30
+            RadiusTopRight: =30
+            Width: =30
+            X: =16
+            Y: =6
+            ZIndex: =1
+
+        Title15 As label:
+            Color: =RGBA(36, 36, 36, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =10.5
+            Text: =ThisItem.Full_Name
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - Image28.Width - 104
+            X: =54
+            Y: =6
+            ZIndex: =2
+
+        Subtitle6 As label:
+            Color: =RGBA(100, 100, 100, 1)
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =9
+            Text: |-
+                ="ID: " & ThisItem.Employee_ID & " | " & ThisItem.location & " | " & ThisItem.Job_Profile_Name
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Title15.Width
+            X: =Title15.X
+            Y: =23
+            ZIndex: =3
+
+        Button23 As button:
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =36
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: |
+                =Select(Parent);
+                Set(
+                    selectedEmployee,
+                    ThisItem
+                );
+                Reset(TextInput9);
+                Collect(
+                    recentSearches,
+                    ThisItem.Worker
+                );
+                Set(
+                    selectedDataverseEmployee,
+                    LookUp(
+                        Employees,
+                        EmpID = selectedEmployee.Employee_ID
+                    )
+                );
+                Reset('Notes V2_1');
+                Concurrent(
+                    ClearCollect(
+                        compData,
+                        WorkdayGetCompHistory.Run(selectedEmployee.Employee_ID_s_)
+                    ),
+                    ClearCollect(
+                        jobDetails,
+                        First(WorkdayGetJobDetails.Run(selectedEmployee.Employee_ID_s_).Report_Entry)
+                    ),
+                    Set(
+                        JobDev,
+                        First(WorkdayGetJobDevDetails.Run(selectedEmployee.Employee_ID_s_).Report_Entry)
+                    ),
+                    ClearCollect(
+                        payByYear,
+                        WorkdayGetPaybyYear.Run(selectedEmployee.Employee_ID_s_)
+                    ),
+                    ClearCollect(
+                        teamInfo,
+                        WorkdayGetDirects.Run(
+                            LookUp(
+                                workerInfo,
+                                Employee_ID = selectedEmployee.Manager_ID,
+                                Employee_ID_s_
+                            )
+                        )
+                    ),
+                    ClearCollect(
+                        directInfo,
+                        WorkdayGetDirects.Run(selectedEmployee.Employee_ID_s_)
+                    ),
+                    ClearCollect(
+                        workerHistory,
+                        AddColumns(
+                            WorkdayGetWorkerHistory.Run(selectedEmployee.Employee_ID_s_).data,
+                            "Category",
+                            RandBetween(
+                                1,
+                                6
+                            )
+                        )
+                    ),
+                    Set(
+                        ReviewDetails,
+                        First(WorkdayGetReviewHistoryDetails.Run(selectedEmployee.Employee_ID_s_).Report_Entry)
+                    )
+                );
+                ClearCollect(
+                    workerHistoryTimeline,
+                    AddColumns(
+                        Filter(
+                            workerHistory,
+                            !IsBlank(effective)
+                        ),
+                        "Year",
+                        Year(effective)
+                    )
+                );
+                ClearCollect(
+                    timeLineData,
+                    AddColumns(
+                        GroupBy(
+                            workerHistoryTimeline,
+                            "Year",
+                            "Event Year"
+                        ),
+                        "expandCollapse",
+                        true
+                    )
+                );
+                
+                Patch(
+                    timeLineData,
+                    First(timeLineData),
+                    {expandCollapse: true}
+                );
+                ClearCollect(
+                    notesTemp,
+                    AddColumns(
+                        Filter(
+                            selectedDataverseEmployee.'Employee Notes',
+                            !IsBlank(Note)
+                        ),
+                        "expandCollapse",
+                        false
+                    )
+                );
+                Clear(cat);
+                Navigate('Profile Screen');
+            Text: =""
+            Width: =390
+            ZIndex: =5
+
+    Label75_1 As label:
+        Color: =RGBA(0, 120, 212, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Segoe UI'
+        Height: =35
+        PaddingBottom: =8
+        PaddingLeft: =20
+        PaddingRight: =15
+        PaddingTop: =13
+        Size: =9
+        Text: ="View More"
+        Visible: =If(Len(TextInput9.Text)>2,true,false)
+        Width: =390
+        X: =5
+        Y: =If(Len(TextInput9.Text)>2,67 + (CountRows(Gallery12.AllItems)*37),-425)
+        ZIndex: =5
+
+    Button23_1 As button:
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =30
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        OnSelect: |-
+            =Set(
+                searchString,
+                TextInput9.Text
+            );
+            Collect(
+                recentSearches,
+                TextInput9.Text
+            );
+            Navigate('Search Results');
+            Reset(TextInput9)
+        Text: =""
+        Visible: =If(Len(TextInput9.Text)>2,true,false) && CountRows(recentSearches)>0
+        Width: =103
+        X: =28
+        Y: =If(Len(TextInput9.Text)>2,73 + (CountRows(Gallery12.AllItems)*37))
+        ZIndex: =6
+
+    Label75_2 As label:
+        Color: =RGBA(97, 97, 97, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Segoe UI'
+        Height: =25
+        PaddingBottom: =10
+        PaddingLeft: =16
+        PaddingTop: =8
+        Size: =9
+        Text: ="Recent Searches"
+        Visible: =If(Len(TextInput9.Text)>2,true,false) && CountRows(recentSearches)>0
+        Width: =390
+        X: =5
+        Y: =If(Len(TextInput9.Text)>2,72 + (CountRows(Gallery12.AllItems)*37)+25)
+        ZIndex: =7
+
+    "Gallery12_1 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+        Height: =101
+        Items: =LastN(recentSearches,3)
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplateFill: =Color.White
+        TemplatePadding: =0
+        TemplateSize: =27
+        Visible: =If(Len(TextInput9.Text)>2,true,false) && CountRows(recentSearches)>0
+        Width: =390
+        X: =5
+        Y: =If(Len(TextInput9.Text)>2,72 + (CountRows(Gallery12.AllItems)*37)+50)
+        ZIndex: =8
+
+        Title20 As label:
+            Color: =RGBA(36, 36, 36, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =10.5
+            Text: =ThisItem.Value
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 104
+            X: =42
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =1
+
+        Image34 As image:
+            Height: =12
+            Image: ='Shape (53)'
+            OnSelect: =Select(Parent)
+            Width: =12
+            X: =16
+            Y: =4
+            ZIndex: =2
+
+    Icon13 As icon.Cancel:
+        Color: =RGBA(0, 0, 0, 1)
+        Height: =18
+        Icon: =Icon.Cancel
+        OnSelect: =Reset(TextInput9)
+        Visible: =If(Len(TextInput9.Text)>2,true,false)
+        Width: =18
+        X: =367
+        Y: =If(Len(TextInput9.Text)>2,11,-425)
+        ZIndex: =9
+

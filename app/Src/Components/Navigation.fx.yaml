@@ -1,0 +1,173 @@
+Navigation As CanvasComponent:
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =1366
+    NavItems: |-
+        =Table(
+            {
+                Value: "Home",
+                Image: 'Shape (30)',
+                Screen: App.ActiveScreen,
+                Expandable: false,
+                Options: [],
+                ExpandCollapse: false
+            },
+            {
+                Value: "Program Development",
+                Image: 'Shape (31)',
+                Screen: App.ActiveScreen,
+                Expandable: true,
+                Options: [
+                    "Leadership Program",
+                    "Technical Talent Development",
+                    "Diversity and Inclusion Program",
+                    "Future Leaders Program"
+                ],
+                ExpandCollapse: false
+            },
+            {
+                Value: "Team",
+                Image: 'Shape (32)',
+                Screen: App.ActiveScreen,
+                Expandable: false,
+                Options: [],
+                ExpandCollapse: false
+            },
+            {
+                Value: "Navigation Item",
+                Image: 'Shape (33)',
+                Screen: App.ActiveScreen,
+                Expandable: false,
+                Options: [],
+                ExpandCollapse: false
+            },
+            {
+                Value: "Navigation Item",
+                Image: 'Shape (34)',
+                Screen: App.ActiveScreen,
+                Expandable: false,
+                Options: [],
+                ExpandCollapse: false
+            }
+        )
+    Width: =If(nav = true,225,35)
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Label7 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(244, 245, 246, 1)
+        Height: =1366
+        Text: =""
+        Width: |-
+            =If(nav = true,212
+            ,48)
+        ZIndex: =1
+
+    Gallery11 As gallery.variableTemplateHeightGallery:
+        Items: =If(nav = true,currentNav,Navigation.NavItems)
+        Layout: =Layout.Vertical
+        TemplateSize: =41
+        Width: =If(nav = true,290,48)
+        Y: =40
+        ZIndex: =2
+
+        Image26 As image:
+            Height: =15
+            Image: =ThisItem.Image
+            OnSelect: =Select(Parent)
+            Width: =15
+            X: =12
+            Y: =8
+            ZIndex: =1
+
+        Label5 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            Height: =35
+            OnSelect: =Select(Parent)
+            Size: =10.5
+            Text: =ThisItem.Value
+            Width: =250
+            X: =32
+            ZIndex: =2
+
+        Icon2 As icon.ChevronDown:
+            Color: =RGBA(23, 23, 23, 1)
+            Height: =10
+            Icon: =Icon.ChevronDown
+            OnSelect: |-
+                =Patch(currentNav,ThisItem,{ExpandCollapse:true})
+            Visible: =ThisItem.Expandable && !ThisItem.ExpandCollapse
+            Width: =10
+            X: =190
+            Y: =12
+            ZIndex: =3
+
+        Icon2_1 As icon.ChevronDown:
+            Color: =RGBA(23, 23, 23, 1)
+            Height: =10
+            Icon: =Icon.ChevronUp
+            OnSelect: |-
+                =Patch(currentNav,ThisItem,{ExpandCollapse:false})
+            Visible: =ThisItem.Expandable && ThisItem.ExpandCollapse
+            Width: =10
+            X: =190
+            Y: =12
+            ZIndex: =4
+
+        Label6 As label:
+            Height: =If(ThisItem.ExpandCollapse=true,60,0)
+            OnSelect: =Select(Parent)
+            Size: =10.5
+            Text: =
+            Width: =55
+            Y: =40
+            ZIndex: =5
+
+        "Gallery1 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+            Height: =80
+            Items: =ThisItem.Options
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =Min(96, Self.Height - 60)
+            Visible: =If(ThisItem.ExpandCollapse = true,true,false)
+            Width: =250
+            Y: =42
+            ZIndex: =6
+
+            Title17 As label:
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Normal
+                Height: =15
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =9
+                Text: =ThisItem.Value
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Parent.TemplateWidth - 104
+                X: =32
+                ZIndex: =1
+
+    Image27 As image:
+        Height: =15
+        Image: ='Shape (29)'
+        Width: =15
+        X: =16
+        Y: =11
+        ZIndex: =3
+
+    Button19 As button:
+        Fill: =RGBA(0, 0, 0, 0)
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        OnSelect: =Set(nav,!nav);ClearCollect(currentNav,Navigation.NavItems)
+        Text: =""
+        Width: =52
+        X: =3
+        ZIndex: =4
+

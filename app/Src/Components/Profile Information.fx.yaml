@@ -1,0 +1,1347 @@
+"'Profile Information' As CanvasComponent":
+    Fill: =
+    Height: =730
+    Width: =1366
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    promotionPopBackground_8 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(23, 23,23, .65)
+        Height: =730
+        Text: =""
+        Width: =1366
+        ZIndex: =1
+
+    Label78 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =730
+        Text: =""
+        Width: =600
+        X: =766
+        ZIndex: =2
+
+    "Pivot2 As 'Fluent Pivot (1.0.19)'.pcfdataset":
+        DisplayMode: =DisplayMode.Edit
+        Height: =67
+        Items: |-
+            =Table(
+                {
+                    ItemKey: "tabFile",
+                    ItemDisplayName: "Overview"
+                },
+                {
+                    ItemKey: "tabHome",
+                    ItemDisplayName: "Organization"
+                },
+                {
+                    ItemKey: "tabHome",
+                    ItemDisplayName: "Career"
+                }
+            )
+        Theme: =AppThemeJson
+        Width: =386
+        X: =777
+        Y: =61
+        ZIndex: =3
+
+    Label79_1 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        PaddingLeft: =57
+        PaddingTop: =18
+        Size: =10.5
+        Text: ="Business Contact"
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+        Width: =222
+        X: =766
+        Y: =371
+        ZIndex: =4
+
+    grpEmail_21 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =6
+
+        Label19_66 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Work Phone"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =787
+            Y: =421
+            ZIndex: =5
+
+        Label19_67 As label:
+            Color: =RGBA(0, 100, 191, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="+91 (234) 8712 7426"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Wrap: =false
+            X: =787
+            Y: =438
+            ZIndex: =6
+
+    grpEmail_22 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =10
+
+        Label19_68 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Work Email"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =968
+            Y: =421
+            ZIndex: =7
+
+        Label19_69 As label:
+            Color: =RGBA(0, 100, 191, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: =First(Filter(workerData,descriptor=selectedEmployee.Worker)).primaryWorkEmail
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Wrap: =false
+            X: =968
+            Y: =438
+            ZIndex: =8
+
+    grpEmail_23 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =14
+
+        Label19_70 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Message"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =1150
+            Y: =421
+            ZIndex: =9
+
+        Label19_71 As label:
+            Color: =RGBA(0, 100, 191, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="Send message"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =1150
+            Y: =438
+            ZIndex: =10
+
+    Rectangle13_2 As rectangle:
+        Fill: =RGBA(240, 240, 240, 1)
+        Height: =1
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career",false,true)
+        Width: =580
+        X: =777
+        Y: =371
+        ZIndex: =17
+
+    Label79_2 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        PaddingLeft: =57
+        PaddingTop: =18
+        Size: =10.5
+        Text: ="Work Profile"
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+        Width: =214
+        X: =766
+        Y: =107
+        ZIndex: =18
+
+    grpEmail_24 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =18
+
+        Label19_72 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Address"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =787
+            Y: =473
+            ZIndex: =11
+
+        Label19_73 As label:
+            Color: =RGBA(0, 100, 191, 1)
+            Font: =Font.'Segoe UI'
+            Height: =68
+            PaddingLeft: =12
+            Size: =10.5
+            Text: =selectedEmployee.City
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Width: =160
+            X: =787
+            Y: =490
+            ZIndex: =12
+
+    grpEmail_25 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =22
+
+        Label19_74 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Office"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =968
+            Y: =473
+            ZIndex: =13
+
+        Label19_75 As label:
+            Color: =RGBA(0, 100, 191, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: =selectedEmployee.location
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Wrap: =false
+            X: =968
+            Y: =490
+            ZIndex: =14
+
+    grpEmail_26 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =26
+
+        Label19_76 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Time Zone"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =1150
+            Y: =473
+            ZIndex: =15
+
+        Label19_77 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="Same timezone as you"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Width: =170
+            Wrap: =false
+            X: =1150
+            Y: =490
+            ZIndex: =16
+
+    Rectangle13_3 As rectangle:
+        Fill: =RGBA(240, 240, 240, 1)
+        Height: =1
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career",false,true)
+        Width: =580
+        X: =777
+        Y: =579
+        ZIndex: =31
+
+    grpEmail_27 As group:
+        Height: =5
+        Width: =5
+        X: =9
+        Y: =20
+        ZIndex: =32
+
+        Label19_78 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Preferred Name"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =792
+            Y: =157
+            ZIndex: =19
+
+        Label19_79 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: =selectedEmployee.Full_Name
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Width: =190
+            Wrap: =false
+            X: =792
+            Y: =174
+            ZIndex: =20
+
+    grpEmail_28 As group:
+        Height: =5
+        Width: =5
+        X: =9
+        Y: =20
+        ZIndex: =36
+
+        Label19_80 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Legal First"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =973
+            Y: =157
+            ZIndex: =21
+
+        Label19_81 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: |-
+                =First(ForAll(Split(selectedEmployee.Full_Name, " "), {Result: ThisRecord.Value})).Result
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Width: =170
+            Wrap: =false
+            X: =973
+            Y: =174
+            ZIndex: =22
+
+    grpEmail_29 As group:
+        Height: =5
+        Width: =5
+        X: =9
+        Y: =20
+        ZIndex: =40
+
+        Label19_82 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Legal Last"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =1155
+            Y: =157
+            ZIndex: =23
+
+        Label19_83 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: |-
+                =Last(ForAll(Split(selectedEmployee.Full_Name, " "), {Result: ThisRecord.Value})).Result
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Width: =180
+            Wrap: =false
+            X: =1155
+            Y: =174
+            ZIndex: =24
+
+    Icon5 As icon.Cancel:
+        Color: =RGBA(0, 0, 0, 1)
+        Height: =19
+        Icon: =Icon.Cancel
+        OnSelect: =Set(profileInfo,false)
+        Width: =19
+        X: =1326
+        Y: =14
+        ZIndex: =43
+
+    Rectangle13_10 As rectangle:
+        Fill: =RGBA(229, 229, 229, 1)
+        Height: =24
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization",true,false)
+        Width: =1
+        X: =1060
+        Y: =202
+        ZIndex: =44
+
+    grpEmail_30 As group:
+        Height: =5
+        Width: =5
+        X: =9
+        Y: =20
+        ZIndex: =44
+
+        Label19_84 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Job Description"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =792
+            Y: =209
+            ZIndex: =25
+
+        Label19_85 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: =selectedEmployee.Job_Profile_Name
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Width: =170
+            Wrap: =false
+            X: =792
+            Y: =226
+            ZIndex: =26
+
+    Button31_1 As button:
+        BorderColor: =RGBA(198, 198, 198, 1)
+        BorderThickness: =1
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =74
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        RadiusBottomLeft: =3
+        RadiusBottomRight: =3
+        RadiusTopLeft: =3
+        RadiusTopRight: =3
+        Text: =""
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization",true,false)
+        Width: =201
+        X: =962
+        Y: =128
+        ZIndex: =45
+
+    Button31_2 As button:
+        BorderColor: =RGBA(0, 92, 144, 1)
+        BorderThickness: =1
+        Fill: =RGBA(185, 232, 254, 0.15)
+        Height: =74
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        RadiusBottomLeft: =3
+        RadiusBottomRight: =3
+        RadiusTopLeft: =3
+        RadiusTopRight: =3
+        Text: =""
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization",true,false)
+        Width: =261
+        X: =932
+        Y: =226
+        ZIndex: =46
+
+    Image8_52 As image:
+        Height: =45
+        Image: ='default-contact-96x96-2'
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization",true,false)
+        Width: =45
+        X: =970
+        Y: =144
+        ZIndex: =47
+
+    Label19_104 As label:
+        Color: =RGBA(23, 23, 23, 1)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =22
+        PaddingLeft: =12
+        Size: =10.5
+        Text: =selectedEmployee.Manager_Name
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization",true,false)
+        Width: =149
+        Wrap: =false
+        X: =1014
+        Y: =144
+        ZIndex: =48
+
+    grpEmail_31 As group:
+        Height: =5
+        Width: =5
+        X: =9
+        Y: =20
+        ZIndex: =48
+
+        Label19_86 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Job Description"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =973
+            Y: =209
+            ZIndex: =27
+
+        Label19_87 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: =selectedEmployee.Job_Profile_Name
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Width: =170
+            Wrap: =false
+            X: =973
+            Y: =226
+            ZIndex: =28
+
+    Label19_105 As label:
+        Color: =RGBA(100, 100, 100, 1)
+        Font: =Font.'Segoe UI'
+        Height: =16
+        PaddingLeft: =12
+        PaddingTop: =0
+        Size: =9
+        Text: =First(Filter(workerInfo,Employee_ID=selectedEmployee.Manager_ID)).Job_Profile_Name
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization",true,false)
+        Width: =149
+        X: =1014
+        Y: =165
+        ZIndex: =49
+
+    Image8_53 As image:
+        Height: =45
+        Image: ='default-contact-96x96-2'
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization",true,false)
+        Width: =45
+        X: =945
+        Y: =237
+        ZIndex: =50
+
+    Label19_106 As label:
+        Color: =RGBA(23, 23, 23, 1)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =20
+        PaddingLeft: =12
+        Size: =10.5
+        Text: =selectedEmployee.Full_Name
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization",true,false)
+        Width: =200
+        Wrap: =false
+        X: =989
+        Y: =237
+        ZIndex: =51
+
+    Label19_107 As label:
+        Color: =RGBA(100, 100, 100, 1)
+        Font: =Font.'Segoe UI'
+        Height: =16
+        PaddingLeft: =12
+        PaddingTop: =0
+        Size: =9
+        Text: =selectedEmployee.Job
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization",true,false)
+        Width: =200
+        X: =989
+        Y: =258
+        ZIndex: =52
+
+    grpEmail_32 As group:
+        Height: =5
+        Width: =5
+        X: =9
+        Y: =20
+        ZIndex: =52
+
+        Label19_88 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Time in role"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =1155
+            Y: =209
+            ZIndex: =29
+
+        Label19_89 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="8 months"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Width: =100
+            Wrap: =false
+            X: =1155
+            Y: =226
+            ZIndex: =30
+
+    Rectangle13_13 As rectangle:
+        Fill: =RGBA(240, 240, 240, 1)
+        Height: =1
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization",true,false)
+        Width: =552
+        X: =797
+        Y: =324
+        ZIndex: =53
+
+    Label69 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =16
+        PaddingLeft: =0
+        PaddingTop: =0
+        Size: =10.5
+        Text: ="Reporting to " & selectedEmployee.Full_Name
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization",true,false)
+        Width: =450
+        X: =797
+        Y: =348
+        ZIndex: =54
+
+    Image24_4 As image:
+        Height: =17
+        Image: ='Shape (38)'
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization",true,false)
+        Width: =15
+        X: =1263
+        Y: =347
+        ZIndex: =55
+
+    Label20_9 As label:
+        Align: =Align.Right
+        Color: =RGBA(100, 100, 100, 1)
+        Font: =Font.'Segoe UI'
+        Height: =16
+        PaddingLeft: =0
+        Size: =10.5
+        Text: =CountRows(directInfo) &" Directs"
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization",true,false)
+        Width: =79
+        X: =1270
+        Y: =348
+        ZIndex: =56
+
+    grpEmail_33 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =57
+
+        Label19_90 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Anniversary"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =792
+            Y: =257
+            ZIndex: =32
+
+        Label19_91 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="1/2/2012"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Width: =100
+            X: =792
+            Y: =274
+            ZIndex: =33
+
+    Label79_3 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =36
+        PaddingLeft: =57
+        PaddingTop: =18
+        Size: =10.5
+        Text: ="Personal Contact"
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+        Width: =196
+        X: =766
+        Y: =580
+        ZIndex: =60
+
+    Label19_110 As label:
+        Color: =RGBA(50, 49, 48, 1)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =21
+        PaddingLeft: =12
+        Size: =9
+        Text: ="Address"
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career",false,true)
+        X: =1158
+        Y: =627
+        ZIndex: =61
+
+    grpEmail_34 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =61
+
+        Label19_92 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Work Phone"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =973
+            Y: =257
+            ZIndex: =34
+
+        Label19_93 As label:
+            Color: =RGBA(91, 95, 199, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="+91 (234) 8712 7426"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Width: =170
+            X: =973
+            Y: =274
+            ZIndex: =35
+
+    Label19_111 As label:
+        Color: =RGBA(0, 100, 191, 1)
+        Font: =Font.'Segoe UI'
+        Height: =61
+        PaddingLeft: =12
+        PaddingTop: =0
+        Size: =10.5
+        Text: =selectedEmployee.City
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+        Width: =168
+        X: =1158
+        Y: =644
+        ZIndex: =62
+
+    Label79_6 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        PaddingLeft: =18
+        PaddingTop: =18
+        Size: =10.5
+        Text: ="Profile"
+        Width: =214
+        X: =766
+        ZIndex: =63
+
+    Image39 As image:
+        Height: =12.75
+        Image: ='Shape (54)'
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+        Width: =15
+        X: =797
+        Y: =128
+        ZIndex: =64
+
+    Image39_1 As image:
+        Height: =12.75
+        Image: ='Shape (55)'
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+        Width: =15
+        X: =797
+        Y: =390
+        ZIndex: =65
+
+    grpEmail_35 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =65
+
+        Label19_94 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Work email"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =1155
+            Y: =257
+            ZIndex: =36
+
+        Label19_95 As label:
+            Color: =RGBA(91, 95, 199, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: =Left(selectedEmployee.Worker,1) & Right(selectedEmployee.Worker,7) & "@work.com"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Width: =170
+            Wrap: =false
+            X: =1155
+            Y: =274
+            ZIndex: =37
+
+    Image39_2 As image:
+        Height: =12.75
+        Image: ='Shape (56)'
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+        Width: =15
+        X: =797
+        Y: =597
+        ZIndex: =66
+
+    Label79_9 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        PaddingLeft: =30
+        PaddingTop: =18
+        Size: =10.5
+        Text: ="About"
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Career",true,false)
+        Width: =234
+        X: =766
+        Y: =107
+        ZIndex: =67
+
+    Label79_10 As label:
+        AutoHeight: =true
+        Font: =Font.'Segoe UI'
+        PaddingLeft: =30
+        PaddingRight: =40
+        PaddingTop: =12
+        Size: =10.5
+        Text: =JobDev.Talent_Statement_Text
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Career",true,false)
+        Width: =600
+        X: =766
+        Y: =141
+        ZIndex: =68
+
+    Label79_11 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        PaddingLeft: =30
+        PaddingTop: =18
+        Size: =10.5
+        Text: ="Skills"
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Career",true,false)
+        Width: =234
+        X: =766
+        Y: =Label79_10.Y+Label79_10.Height
+        ZIndex: =69
+
+    grpEmail_36 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =69
+
+        Label19_96 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Division"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =792
+            Y: =309
+            ZIndex: =38
+
+        Label19_97 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            Height: =35
+            PaddingLeft: =12
+            Size: =10.5
+            Text: =selectedEmployee.'Cost_Center_-_Name'
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Width: =170
+            X: =792
+            Y: =326
+            ZIndex: =39
+
+    "Gallery19 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        Height: =CountRows(skillsGrouped)*32
+        Items: =skillsGrouped
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplatePadding: =0
+        TemplateSize: =32
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Career",true,false)
+        Width: =569
+        X: =796
+        Y: =Label79_11.Y+Label79_11.Height
+        ZIndex: =70
+
+        "AutoWidthLabel10 As 'Auto Width Label (1.0.19)'":
+            BorderColor: |-
+                ="#CFCFCD"
+            BorderRadius: =3
+            BorderThickness: =1
+            DisabledFontColor: |-
+                ="#323130"
+            DisplayMode: =DisplayMode.Edit
+            FillColor: ="rgba(235, 252, 255, 0.35)"
+            FontColor: |-
+                ="#323130"
+            FontSize: =7.5
+            Height: =25
+            PaddingBottom: =3
+            PaddingLeft: =3
+            PaddingRight: =3
+            PaddingTop: =3
+            Text: =Index(ThisItem.groups,1).Result
+            Visible: =If(IsBlank(Index(ThisItem.groups,1).Result),false,true)
+            Width: =200
+            X: =0
+            Y: =0
+            ZIndex: =6
+
+        "AutoWidthLabel10_1 As 'Auto Width Label (1.0.19)'":
+            BorderColor: |-
+                ="#CFCFCD"
+            BorderRadius: =3
+            BorderThickness: =1
+            DisplayMode: =DisplayMode.Edit
+            FillColor: ="rgba(250, 244, 255, 0.5)"
+            FontColor: |-
+                ="#323130"
+            FontSize: =8
+            Height: =25
+            PaddingBottom: =3
+            PaddingLeft: =3
+            PaddingRight: =3
+            PaddingTop: =3
+            Text: =Index(ThisItem.groups,2).Result
+            Visible: =If(IsBlank(Index(ThisItem.groups,2).Result),false,true)
+            Width: =200
+            X: =AutoWidthLabel10.X+AutoWidthLabel10.AutoWidth+6
+            Y: =0
+            ZIndex: =7
+
+        "AutoWidthLabel10_2 As 'Auto Width Label (1.0.19)'":
+            BorderColor: |-
+                ="#CFCFCD"
+            BorderRadius: =3
+            BorderThickness: =1
+            DisplayMode: =DisplayMode.Edit
+            FillColor: ="rgba(235, 252, 255, 0.35)"
+            FontColor: |-
+                ="#323130"
+            FontSize: =8
+            Height: =25
+            PaddingBottom: =3
+            PaddingLeft: =3
+            PaddingRight: =3
+            PaddingTop: =3
+            Text: =Index(ThisItem.groups,3).Result
+            Visible: =If(IsBlank(Index(ThisItem.groups,3).Result),false,true)
+            Width: =200
+            X: =AutoWidthLabel10_1.X+AutoWidthLabel10_1.AutoWidth+6
+            Y: =0
+            ZIndex: =8
+
+        "AutoWidthLabel10_3 As 'Auto Width Label (1.0.19)'":
+            BorderColor: |-
+                ="#CFCFCD"
+            BorderRadius: =3
+            BorderThickness: =1
+            DisplayMode: =DisplayMode.Edit
+            FillColor: ="rgba(250, 244, 255, 0.5)"
+            FontColor: |-
+                ="#323130"
+            FontSize: =8
+            Height: =25
+            PaddingBottom: =3
+            PaddingLeft: =3
+            PaddingRight: =3
+            PaddingTop: =3
+            Text: =Index(ThisItem.groups,4).Result
+            Visible: =If(IsBlank(Index(ThisItem.groups,4).Result),false,true)
+            Width: =200
+            X: =AutoWidthLabel10_2.X+AutoWidthLabel10_2.AutoWidth+6
+            Y: =0
+            ZIndex: =9
+
+    Label79_12 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        PaddingLeft: =30
+        PaddingTop: =18
+        Size: =10.5
+        Text: ="Languages"
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Career",true,false)
+        Width: =234
+        X: |
+            =766
+        Y: |
+            =Gallery19.Y+Gallery19.Height-7
+        ZIndex: =71
+
+    Gallery28 As gallery.galleryHorizontal:
+        Height: =53
+        Items: |-
+            =ForAll(Split(JobDev.Languages,";"), {Result: ThisRecord.Value})
+        TemplateSize: =176
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Career",true,false)
+        Width: =531
+        X: =792
+        Y: =Label79_12.Y+Label79_12.Height
+        ZIndex: =72
+
+        Label105 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =20
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =9
+            Text: =ThisItem.Result
+            Width: =121
+            ZIndex: =1
+
+        Label105_1 As label:
+            Color: =RGBA(96, 94, 92, 1)
+            Font: =Font.'Segoe UI'
+            Height: =34
+            OnSelect: =Select(Parent)
+            PaddingLeft: =0
+            PaddingTop: =0
+            Size: =9
+            Text: ="Full professional proficiency"
+            Width: =176
+            Y: =14
+            ZIndex: =2
+
+    Label79_13 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        PaddingLeft: =30
+        PaddingTop: =18
+        Size: =10.5
+        Text: ="Education"
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Career",true,false)
+        Width: =234
+        X: =766
+        Y: =Gallery28.Y+Gallery28.Height-7
+        ZIndex: =73
+
+    grpEmail_37 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =73
+
+        Label19_98 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Business Unit"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =973
+            Y: =309
+            ZIndex: =58
+
+        Label19_99 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="Technology"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Width: =100
+            Wrap: =false
+            X: =973
+            Y: =326
+            ZIndex: =59
+
+    "Gallery4 As gallery.'BrowseLayout_Vertical_ThreeTextOneImageVariant_ver4.0'":
+        Height: =If(CountRows(educationSummary)*57>171,171,CountRows(educationSummary)*57)
+        Items: =educationSummary
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =57
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Career",true,false)
+        Width: =543
+        X: =796
+        Y: =Label79_13.Y+Label79_13.Height
+        ZIndex: =74
+
+        Image48 As image:
+            Height: =24
+            Image: ='Hat Graduation'
+            OnSelect: =Select(Parent)
+            Width: =24
+            Y: =16
+            ZIndex: =1
+
+        Title25 As label:
+            Font: =Font.'Segoe UI'
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =10.5
+            Text: =ThisItem.Result
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - Image48.Width - 104
+            X: =36
+            Y: =12.5
+            ZIndex: =2
+
+        Subtitle10 As label:
+            Font: =Font.'Segoe UI'
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =9
+            Text: =ThisItem.Degree & " " & ThisItem.Field
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Title25.Width
+            X: =Title25.X
+            Y: =Title25.Y + Title25.Height 
+            ZIndex: =3
+
+    "Gallery25 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        BorderColor: =RGBA(229, 229, 229, 1)
+        BorderThickness: =1
+        Height: =327
+        Items: =directInfo
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =54
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization",true,false)
+        Width: =552
+        WrapCount: =2
+        X: =797
+        Y: =378
+        ZIndex: =75
+
+        Image49 As image:
+            Height: =32
+            Image: ='default-contact-96x96-2'
+            OnSelect: =Select(Parent)
+            Width: =32
+            X: =15
+            Y: =4
+            ZIndex: =1
+
+        Title26 As label:
+            Font: =Font.'Segoe UI'
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =10.5
+            Text: =ThisItem.First_Name & " " & ThisItem.'Legal_Name_-_Last_Name'
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - Image49.Width - 104
+            X: =61
+            Y: =5
+            ZIndex: =2
+
+        Subtitle11 As label:
+            Font: =Font.'Segoe UI'
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =9
+            Text: =LookUp(workerInfo,Full_Name=Concatenate(ThisItem.First_Name," ",ThisItem.'Legal_Name_-_Last_Name'),Job)
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Title26.Width
+            X: =61
+            Y: =22
+            ZIndex: =3
+
+    Label79_14 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        PaddingLeft: =30
+        PaddingTop: =18
+        Size: =10.5
+        Text: ="Professional Affiliations"
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Career",true,false)
+        Width: =234
+        X: =766
+        Y: =Gallery4.Y+Gallery4.Height-7
+        ZIndex: =76
+
+    Label19_108 As label:
+        Color: =RGBA(100, 100, 100, 1)
+        Font: =Font.'Segoe UI'
+        Height: =16
+        PaddingLeft: =12
+        PaddingTop: =0
+        Size: =9
+        Text: =First(Filter(workerInfo,Employee_ID=selectedEmployee.Manager_ID)).Employee_ID
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization",true,false)
+        Width: =149
+        X: =1014
+        Y: =179
+        ZIndex: =77
+
+    Label19_109 As label:
+        Color: =RGBA(100, 100, 100, 1)
+        Font: =Font.'Segoe UI'
+        Height: =16
+        PaddingLeft: =12
+        PaddingTop: =0
+        Size: =9
+        Text: =selectedEmployee.Employee_ID
+        Visible: =If(Pivot2.Selected.ItemDisplayName="Organization",true,false)
+        Width: =149
+        X: =989
+        Y: =272
+        ZIndex: =78
+
+    grpEmail_38 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =78
+
+        Label19_100 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Home Phone"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =792
+            Y: =627
+            ZIndex: =40
+
+        Label19_101 As label:
+            Color: =RGBA(0, 100, 191, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="+1 425 321 3452"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Width: =130
+            X: =792
+            Y: =644
+            ZIndex: =41
+
+    grpEmail_39 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =82
+
+        Label19_102 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =9
+            Text: ="Personal Email"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            X: =979
+            Y: =627
+            ZIndex: =42
+
+        Label19_103 As label:
+            Color: =RGBA(0, 100, 191, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: =Left(selectedEmployee.Worker,1) & Right(selectedEmployee.Worker,7) & "@outlook.com"
+            Visible: =If(Pivot2.Selected.ItemDisplayName="Organization" || Pivot2.Selected.ItemDisplayName="Career" ,false,true)
+            Width: =170
+            X: =979
+            Y: =644
+            ZIndex: =57
+

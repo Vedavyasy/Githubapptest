@@ -1,0 +1,101 @@
+<application xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:service="https://unitedstates-002.azure-apim.net/apim/logicflows" xmlns:siena="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11" siena:serviceId="WorkdayGetJobDevDetails" xmlns="http://wadl.dev.java.net/2009/02">
+  <doc title="Workday Get Job Dev Details" />
+  <grammars>
+    <jsonTypes targetNamespace="https://unitedstates-002.azure-apim.net/apim/logicflows" xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+      <string dtype="hyperlink" name="ManualTriggerInput_HTTP_URI_def" />
+      <object name="ManualTriggerInput">
+        <property name="HTTP_URI" type="string" dtype="hyperlink" />
+      </object>
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Active_Projects_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Degree_Level_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Competency_Proficiency_Range_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Number_of_Direct_Reports__Employees__def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Photo_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Phone_Number_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Competency_Skills_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Languages_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_All_Skills_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Potential_-_Completed_Rating_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Retention_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Assessed_Rating_for_Competency_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Team_Member_-_Between_0-2_Years_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Education_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Team_Member_-_Between_3-5_Years_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Worker_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Team_Member_-___5_Years_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Degrees_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Number_of_Direct_Reports_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Job_History_-_Skills_and_Experience_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_All_Positions_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Number_of_Direct_Reports__Contingent_Workers__def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Fields_of_Study_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Talent_Statement_Text_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Management_Level_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Loss_Impact_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Goals_def" />
+      <string name="ResponseActionOutput_Report_Entry_def_items_def_Job_History_def" />
+      <object name="ResponseActionOutput_Report_Entry_def_items_def">
+        <property name="Active_Projects" type="string" />
+        <property name="Degree_Level" type="string" />
+        <property name="Competency_Proficiency_Range" type="string" />
+        <property name="Number_of_Direct_Reports__Employees_" type="string" />
+        <property name="Photo" type="string" />
+        <property name="Phone_Number" type="string" />
+        <property name="Competency_Skills" type="string" />
+        <property name="Languages" type="string" />
+        <property name="All_Skills" type="string" />
+        <property name="Potential_-_Completed_Rating" type="string" />
+        <property name="Retention" type="string" />
+        <property name="Assessed_Rating_for_Competency" type="string" />
+        <property name="Team_Member_-_Between_0-2_Years" type="string" />
+        <property name="Education" type="string" />
+        <property name="Team_Member_-_Between_3-5_Years" type="string" />
+        <property name="Worker" type="string" />
+        <property name="Team_Member_-___5_Years" type="string" />
+        <property name="Degrees" type="string" />
+        <property name="Number_of_Direct_Reports" type="string" />
+        <property name="Job_History_-_Skills_and_Experience" type="string" />
+        <property name="All_Positions" type="string" />
+        <property name="Number_of_Direct_Reports__Contingent_Workers_" type="string" />
+        <property name="Fields_of_Study" type="string" />
+        <property name="Talent_Statement_Text" type="string" />
+        <property name="Management_Level" type="string" />
+        <property name="Loss_Impact" type="string" />
+        <property name="Goals" type="string" />
+        <property name="Job_History" type="string" />
+      </object>
+      <array typeRef="ResponseActionOutput_Report_Entry_def_items_def" name="ResponseActionOutput_Report_Entry_def" />
+      <object name="ResponseActionOutput">
+        <property name="Report_Entry" typeRef="ResponseActionOutput_Report_Entry_def" />
+      </object>
+      <object name="Run_responses_default_def" />
+    </jsonTypes>
+  </grammars>
+  <resources siena:authenticationProviderHref="#PowerAppAuth" base="https://unitedstates-002.azure-apim.net/apim/logicflows">
+    <resource path="/{connectionId}/triggers/manual/run">
+      <param style="template" name="connectionId" type="xs:string" required="true" />
+      <method siena:requiresAuthentication="true" name="POST" id="Run">
+        <doc title="Runs a logic flow trigger." />
+        <request>
+          <param style="query" name="api-version" type="xs:string" required="true" fixed="2015-02-01-preview">
+            <doc title="The api version" />
+          </param>
+          <representation mediaType="application/json">
+            <param style="plain" name="HTTP_URI" path="/HTTP_URI" type="xs:anyURI" siena:dtype="hyperlink" required="true" />
+          </representation>
+        </request>
+        <response>
+          <representation mediaType="application/json" element="service:ResponseActionOutput" />
+        </response>
+      </method>
+    </resource>
+  </resources>
+  <authenticationProviders xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+    <connectionProvider id="PowerAppAuth" siena:connectionProviderId="logicflows" />
+  </authenticationProviders>
+  <template xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+    <variable name="connectionId">
+      <modifyParams style="template" name="connectionId" attribute="fixed" />
+    </variable>
+  </template>
+</application>

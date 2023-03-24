@@ -1,0 +1,345 @@
+Notes As CanvasComponent:
+    addNote: =false
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =1000
+    Width: =640
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Label45_2 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =1000
+        Text: =""
+        Width: =450
+        X: =190
+        ZIndex: =1
+
+    Label46_2 As label:
+        Fill: =RGBA(230, 230, 230, 1)
+        Height: =81
+        Text: =""
+        Width: =450
+        X: =190
+        ZIndex: =2
+
+    Label59 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        PaddingLeft: =0
+        Text: ="Notes"
+        X: =204
+        Y: =20
+        ZIndex: =3
+
+    grpAddNote As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =11
+
+        ComboBox2 As combobox:
+            BorderColor: =RGBA(230, 230, 230, 1)
+            ChevronBackground: =RGBA(230, 230, 230, 1)
+            DisplayFields: =["cr02b_fullname"]
+            Font: =Font.'Segoe UI'
+            Height: =23
+            HoverFill: =RGBA(245, 245, 245, 1)
+            Items: =Employees
+            Reset: =true
+            SearchFields: =["cr02b_fullname"]
+            SearchItems: =Search(Employees,ComboBox2.SearchText,"cr02b_fullname")
+            Size: =11
+            Visible: =If(addNote=true,true,false)
+            Width: =364
+            X: =204
+            Y: =117
+            ZIndex: =4
+
+        Label60 As label:
+            Font: =Font.'Segoe UI'
+            Height: =20
+            Size: =11
+            Text: ="Employee(s)"
+            Visible: =If(addNote=true,true,false)
+            X: =204
+            Y: =94
+            ZIndex: =5
+
+        Label60_1 As label:
+            Font: =Font.'Segoe UI'
+            Height: =20
+            Size: =11
+            Text: ="Tags"
+            Visible: =If(addNote=true,true,false)
+            X: =204
+            Y: =149
+            ZIndex: =6
+
+        ComboBox2_1 As combobox:
+            BorderColor: =RGBA(230, 230, 230, 1)
+            ChevronBackground: =RGBA(230, 230, 230, 1)
+            DisplayFields: =["Value"]
+            Font: =Font.'Segoe UI'
+            Height: =23
+            HoverFill: =RGBA(245, 245, 245, 1)
+            IsSearchable: =false
+            Items: =Choices('Employee Notes'.Category)
+            Reset: =true
+            SearchFields: =["Value"]
+            SearchItems: =[]
+            Size: =11
+            Visible: =If(addNote=true,true,false)
+            Width: =225
+            X: =204
+            Y: =172
+            ZIndex: =7
+
+        TextInput8 As text:
+            BorderColor: =RGBA(230, 230, 230, 1)
+            Default: =""
+            Height: =289
+            Mode: =TextMode.MultiLine
+            Reset: =true
+            Size: =11
+            Visible: =If(addNote=true,true,false)
+            Width: =364
+            X: =204
+            Y: =234
+            ZIndex: =8
+
+        Label60_2 As label:
+            Font: =Font.'Segoe UI'
+            Height: =20
+            Size: =11
+            Text: ="Note"
+            Visible: =If(addNote=true,true,false)
+            X: =204
+            Y: =207
+            ZIndex: =9
+
+        Button17 As button:
+            Fill: =RGBA(0, 120, 212, 1)
+            Height: =34
+            OnSelect: |-
+                =Set(
+                    addNote,
+                    false
+                );
+                ForAll(
+                    ComboBox2.SelectedItems,
+                    Patch(
+                        [@'Employee Notes'],
+                        Defaults([@'Employee Notes']),
+                        {
+                            Employee: ThisRecord,
+                            Note: TextInput8.Text,
+                            Category: First(ComboBox2_1.SelectedItems)
+                        }
+                    )
+                )
+            RadiusBottomLeft: =2
+            RadiusBottomRight: =2
+            RadiusTopLeft: =2
+            RadiusTopRight: =2
+            Text: ="submit"
+            Visible: =If(addNote=true,true,false)
+            Width: =83
+            X: =204
+            Y: =544
+            ZIndex: =10
+
+    Button18 As button:
+        Fill: =RGBA(0, 0, 0, 0)
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        OnSelect: =Set(addNote,true);Reset(ComboBox2);Reset(ComboBox2_1);Reset(TextInput8)
+        Text: =""
+        Visible: =If(Notes.addNote = false,true,false)
+        X: =199
+        Y: =81
+        ZIndex: =17
+
+    viewNotes As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =17
+
+        Icon9_2 As icon.Add:
+            Color: =RGBA(34, 102, 227, 1)
+            Height: =23
+            Icon: =Icon.Add
+            Visible: =If(addNote = false,true,false)
+            Width: =24
+            X: =208
+            Y: =96
+            ZIndex: =11
+
+        Label55_2 As label:
+            Color: =RGBA(34, 102, 227, 1)
+            Font: =Font.'Segoe UI'
+            Size: =11
+            Text: ="Add Note"
+            Visible: =If(addNote = false,true,false)
+            Width: =158
+            X: =233
+            Y: =88
+            ZIndex: =12
+
+        TextInput7_2 As text:
+            BorderColor: =RGBA(138, 136, 134, 1)
+            BorderThickness: =1
+            Default: =""
+            Font: =Font.'Segoe UI'
+            Height: =28
+            HintText: ="Search"
+            Size: =11
+            Visible: =If(addNote = false,true,false)
+            Width: =407
+            X: =206
+            Y: =213
+            ZIndex: =13
+
+        ComboBox2_2 As combobox:
+            BorderColor: =RGBA(230, 230, 230, 1)
+            ChevronBackground: =RGBA(230, 230, 230, 1)
+            DefaultSelectedItems: =Filter(Employees,'Full Name'="Ajay Mokashi")
+            DisplayFields: =["cr02b_fullname"]
+            Font: =Font.'Segoe UI'
+            Height: =29
+            HoverFill: =RGBA(245, 245, 245, 1)
+            IsSearchable: =false
+            Items: =Employees
+            Reset: =true
+            SearchFields: =["cr02b_fullname"]
+            SearchItems: =[]
+            SelectMultiple: =false
+            Size: =11
+            Template: =ListItemTemplate.Person
+            Visible: =If(addNote = false,true,false)
+            Width: =364
+            X: =206
+            Y: =162
+            ZIndex: =14
+
+        Label60_3 As label:
+            Font: =Font.'Segoe UI'
+            Height: =20
+            Size: =11
+            Text: ="Employee(s)"
+            Visible: =If(addNote = false,true,false)
+            X: =204
+            Y: =136
+            ZIndex: =15
+
+        "Gallery17_2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+            Height: =352
+            Items: =Search(Filter('Employee Notes',Employee.EmpID=First(ComboBox2_2.SelectedItems).EmpID),TextInput7_2.Text,"cr02b_note")
+            Layout: =Layout.Vertical
+            ShowScrollbar: =false
+            TemplateFill: |-
+                =If(
+                    Mod(Value(ThisItem.NoteID),2)=0,  
+                    RGBA(255, 255, 255, 1), 
+                    RGBA(230, 230, 230,1)
+                )
+            TemplatePadding: =0
+            TemplateSize: =134
+            Visible: =If(addNote = false,true,false)
+            Width: =410
+            X: =206
+            Y: =269
+            ZIndex: =16
+
+            Image17_2 As image:
+                Height: =40
+                Image: =Office365Users.UserPhotoV2(ThisItem.'Created By'.'Primary Email')
+                OnSelect: =Select(Parent)
+                RadiusBottomLeft: =40
+                RadiusBottomRight: =40
+                RadiusTopLeft: =40
+                RadiusTopRight: =40
+                Width: =40
+                X: =15
+                Y: =15
+                ZIndex: =1
+
+            Title11_2 As label:
+                Font: =Font.'Segoe UI'
+                Height: =Self.Size * 1.8
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: =ThisItem.'Created By'.'Full Name'
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Parent.TemplateWidth - Image17_2.Width - 104
+                X: =72
+                Y: =19
+                ZIndex: =2
+
+            Subtitle4_2 As label:
+                Align: =Align.Right
+                Color: =RGBA(23, 23, 23, 1)
+                Font: =Font.'Segoe UI'
+                Height: =35
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: =Text(DateValue(ThisItem.'Created On', "en"), "[$-en-GB]mm/dd/yyyy")
+                VerticalAlign: =VerticalAlign.Top
+                Width: =126
+                X: =284
+                Y: =26
+                ZIndex: =3
+
+            Separator1_2 As rectangle:
+                Fill: =RGBA(237, 237, 237, 1)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =Parent.TemplateWidth
+                Y: =Parent.TemplateHeight - 1
+                ZIndex: =5
+
+            Label57_2 As label:
+                Font: =Font.'Segoe UI'
+                Height: =67
+                OnSelect: =Select(Parent)
+                Size: =11
+                Text: =ThisItem.Note
+                Width: =395
+                X: =15
+                Y: =66
+                ZIndex: =6
+
+    Icon7_5 As icon.Cancel:
+        Color: =RGBA(0, 0, 0, 1)
+        Height: =17
+        Icon: =Icon.Cancel
+        OnSelect: =Set(notesComponent,false)
+        Width: =17
+        X: =613
+        Y: =14
+        ZIndex: =18
+
+    Icon7_6 As icon.Cancel:
+        Color: =RGBA(0, 0, 0, 1)
+        Height: =17
+        Icon: =Icon.Cancel
+        OnSelect: =Set(addNote,false)
+        Visible: =addNote
+        Width: =17
+        X: =613
+        Y: =89
+        ZIndex: =19
+

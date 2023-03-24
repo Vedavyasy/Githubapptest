@@ -1,0 +1,36 @@
+AutoWidthButtons As CanvasComponent:
+    ButtonMetadata: |-
+        =Table({Name:"Officer",TextColor:"#0299A3",BGColor:"#C7EEF1"},{Name:"Chairman's Club",TextColor:"#824F00",BGColor:"#F4EACA"},{Name:"Open ER Case",TextColor:"#5C1B86",BGColor:"#FDE7E9"})
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =640
+    Width: =640
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Gallery31 As gallery.galleryHorizontal:
+        DelayItemLoading: =true
+        Height: =Parent.Height
+        Items: =ButtonMetadata
+        LoadingSpinner: =LoadingSpinner.Data
+        TemplateSize: =If(Self.Layout = Layout.Horizontal, Min(320, Self.Width - 60), Min(320, Self.Height - 60))
+        Width: =Parent.Width
+        ZIndex: =1
+
+        Button47 As button:
+            BorderStyle: =BorderStyle.None
+            Color: =ColorValue(ThisItem.TextColor)
+            DisplayMode: =DisplayMode.View
+            Fill: =ColorValue(ThisItem.BGColor)
+            Font: =Font.'Segoe UI'
+            Height: =22
+            OnSelect: =Select(Parent)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Size: =10.5
+            Text: =ThisItem.Name
+            Width: =If(Len(ThisItem.Name)<9,55,Len(ThisItem.Name)*6.5)
+            ZIndex: =1
+

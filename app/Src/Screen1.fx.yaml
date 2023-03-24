@@ -1,0 +1,235 @@
+Screen1 As screen:
+    OnVisible: =
+
+    Gallery6 As gallery.galleryHorizontal:
+        Height: =159
+        Items: =["a","b","c"]
+        ShowScrollbar: =false
+        TemplateSize: =604
+        Width: =609
+        X: =139
+        Y: =370
+        ZIndex: =1
+
+        Button46 As button:
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.Value
+            Width: =
+            X: =40
+            Y: =32
+            ZIndex: =1
+
+    Label9 As label:
+        Text: =textdata
+        X: =552
+        Y: =90
+        ZIndex: =2
+
+    Group1 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =4
+
+        Button5 As button:
+            Height: =70
+            OnSelect: =Set(textdata,"Button...")
+            RadiusBottomLeft: =50
+            RadiusBottomRight: =50
+            RadiusTopLeft: =50
+            RadiusTopRight: =50
+            Text: =""
+            Width: =70
+            X: =120
+            Y: =210
+            ZIndex: =1
+
+        Icon3 As icon.Edit:
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =32
+            Icon: =Icon.Edit
+            OnSelect: =Set(textdata,"Icon.....")
+            Width: =32
+            X: =139
+            Y: =229
+            ZIndex: =3
+
+    Label10 As label:
+        Text: ="Text......."
+        X: =807
+        Y: =50
+        ZIndex: =7
+
+    Group3 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =7
+
+        Button13 As button:
+            Text: ="Button"
+            Width: =0
+            X: =butt
+            Y: =50
+            ZIndex: =4
+
+        Button13_1 As button:
+            Text: ="Button"
+            X: =Button13.Width+20
+            Y: =50
+            ZIndex: =5
+
+        Button13_2 As button:
+            Text: ="Button"
+            X: =323
+            Y: =50
+            ZIndex: =6
+
+    Button16 As button:
+        Text: ="Shrink"
+        X: =507
+        Y: =210
+        ZIndex: =8
+
+    Button29_1 As button:
+        BorderThickness: =0
+        Color: =RGBA(2,153,163,1)
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(199,238,241,1)
+        Font: =Font.'Segoe UI'
+        Height: =22
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Size: =8
+        Text: ="Officer"
+        Width: =If(Len(Self.Text)<9,60,Len(Self.Text)*6.5)
+        X: =111
+        Y: =634
+        ZIndex: =9
+
+    Button29_2 As button:
+        BorderThickness: =0
+        Color: =RGBA(130,79,0,1)
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(244,234,202,1)
+        Font: =Font.'Segoe UI'
+        Height: =22
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Size: =8
+        Text: ="Chairmain's Club"
+        Width: =If(Len(Self.Text)<9,60,Len(Self.Text)*5.5+20)
+        X: =Button
+        Y: =634
+        ZIndex: =10
+
+    Button29_3 As button:
+        BorderThickness: =0
+        Color: =RGBA(92,27,134,1)
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(253,231,233,1)
+        Font: =Font.'Segoe UI'
+        Height: =22
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Size: =8
+        Text: ="Open ER Case"
+        Width: =If(Len(Self.Text)<9,60,Len(Self.Text)*5.5+20)
+        X: =305
+        Y: =634
+        ZIndex: =11
+
+    Form1 As form:
+        X: =40
+        Y: =40
+        ZIndex: =13
+
+    Gallery9 As gallery.galleryHorizontal:
+        DelayItemLoading: =true
+        DisplayMode: =DisplayMode.View
+        Height: =79
+        Items: =ButtonTiles
+        LoadingSpinner: =LoadingSpinner.Data
+        TemplatePadding: =10
+        TemplateSize: =1
+        Width: =513
+        X: =113
+        Y: =486
+        ZIndex: =14
+
+        Button45 As button:
+            Color: =ColorValue(ThisItem.TextColor)
+            DisplayMode: =DisplayMode.View
+            Fill: =ColorValue(ThisItem.BGColor)
+            Font: =Font.'Segoe UI'
+            Height: =25
+            OnSelect: =Select(Parent)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Size: =8
+            Text: =ThisItem.Name
+            Width: =If(Len(ThisItem.Name)<9,55,Len(ThisItem.Name)*6.5)
+            X: =Sum(Filter(ButtonTiles,Order<ThisItem.Order),If(Len(Name)<9,55,(Len(Name)*6.5)))
+            Y: =40
+            ZIndex: =1
+
+    Button29_4 As button:
+        BorderThickness: =0
+        Color: =RGBA(2,153,163,1)
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(199,238,241,1)
+        Font: =Font.'Segoe UI'
+        Height: =22
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Size: =8
+        Text: ="Officer"
+        Width: =If(Len(Self.Text)<9,60,Len(Self.Text)*6.5)
+        X: =492
+        Y: =634
+        ZIndex: =15
+
+    Button29_5 As button:
+        BorderThickness: =0
+        Color: =RGBA(2,153,163,1)
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(199,238,241,1)
+        Font: =Font.'Segoe UI'
+        Height: =22
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Size: =8
+        Text: ="Officer"
+        Width: =If(Len(Self.Text)<9,60,Len(Self.Text)*6.5)
+        X: =418
+        Y: =634
+        ZIndex: =16
+
+    AutoWidthButtons_1 As AutoWidthButtons:
+        Height: =25
+        X: =667
+        Y: =508
+        ZIndex: =17
+
+    Button48 As button:
+        OnSelect: |-
+            =Set(ButtonTiles,Table({Name:"Officer",TextColor:"#0299A3",BGColor:"#C7EEF1",Order:1},{Name:"Chairman's Club",TextColor:"#824F00",BGColor:"#F4EACA",Order:2},{Name:"Open ER Case",TextColor:"#5C1B86",BGColor:"#FDE7E9",Order:3}))
+        Text: ="Button"
+        X: =1107
+        Y: =159
+        ZIndex: =18
+

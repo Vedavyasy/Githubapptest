@@ -1,0 +1,100 @@
+Header As CanvasComponent:
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =42
+    Width: =1366
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Label12 As label:
+        Fill: =RGBA(0, 92, 144, 1)
+        Text: =""
+        Width: =1366
+        ZIndex: =1
+
+    Label15 As label:
+        Color: =RGBA(185, 232, 254, 1)
+        Font: =Font.'Segoe UI'
+        Height: =38
+        Size: =12
+        Text: ="Morgan Stanley"
+        Width: =122
+        X: =50
+        Y: =2
+        ZIndex: =2
+
+    Circle4 As circle:
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =3
+        Width: =3
+        X: =175
+        Y: =20
+        ZIndex: =3
+
+    Label15_1 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Segoe UI'
+        Size: =12
+        Text: ="Employee 360"
+        Width: =122
+        X: =182
+        ZIndex: =4
+
+    Image5 As image:
+        Height: =33
+        Image: ='Frame 1010108908 (1)'
+        Width: =33
+        X: =1255
+        Y: =3
+        ZIndex: =5
+
+    Image5_1 As image:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        Height: =27
+        Image: =Office365Users.UserPhoto(User().Email)
+        RadiusBottomLeft: =27
+        RadiusBottomRight: =27
+        RadiusTopLeft: =27
+        RadiusTopRight: =27
+        Width: =27
+        X: =1304
+        Y: =6
+        ZIndex: =6
+
+    Label66 As label:
+        Fill: =RGBA(24, 122, 186, 1)
+        Text: =""
+        Width: =36
+        ZIndex: =7
+
+    Image2 As image:
+        Height: =14
+        Image: =''
+        OnSelect: =Set(apps,!apps)
+        Width: =13.25
+        X: =11.5
+        Y: =13
+        ZIndex: =8
+
+    Button34 As button:
+        Fill: =RGBA(0, 0, 0, 0)
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        OnSelect: =Set(notesPopUp,true)
+        Text: =""
+        Width: =33
+        X: =1255
+        ZIndex: =9
+
+    Button21 As button:
+        Fill: =RGBA(0, 0, 0, 0)
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        OnSelect: =Set(apps,!apps)
+        Text: =""
+        Width: =39
+        X: =3
+        ZIndex: =10
+

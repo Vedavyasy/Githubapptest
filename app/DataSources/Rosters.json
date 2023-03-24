@@ -1,0 +1,99 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr02b_rosters",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr02b_roster",
+    "MaxGetRowsCount": 500,
+    "Name": "Rosters",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cr02b_cr02b_rosteremployees_Roster_cr02b_roster": "Roster Employees",
+      "cr02b_description": "Description",
+      "cr02b_name": "Name",
+      "cr02b_roster_AsyncOperations": "System Jobs",
+      "cr02b_roster_BulkDeleteFailures": "Bulk Delete Failures",
+      "cr02b_roster_DuplicateBaseRecord": "Duplicate Records (cr02b_roster_DuplicateBaseRecord)",
+      "cr02b_roster_DuplicateMatchingRecord": "Duplicate Records (cr02b_roster_DuplicateMatchingRecord)",
+      "cr02b_roster_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cr02b_roster_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cr02b_roster_ProcessSession": "Process Sessions",
+      "cr02b_roster_SyncErrors": "Sync Errors",
+      "cr02b_rosterid": "RosterID",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Rosters",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Rosters (Views)",
+    "Name": "_cr02b_roster_views",
+    "RelatedEntityName": "Rosters",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "0c57199b-801e-44c7-a334-342b80eba8f8": "Roster Advanced Find View",
+      "0e7b5d18-5579-40d8-bede-3c0cd63d7e1b": "Inactive Rosters",
+      "349dbe0d-9c0a-4556-ae1b-f233d42458e0": "Active Rosters",
+      "846f748e-9762-4fc2-b053-bc21df461411": "Roster Associated View",
+      "88dcecec-5a9e-4731-af21-d2000f8e8f23": "Roster Lookup View"
+    }
+  },
+  {
+    "DisplayName": "Status (Rosters)",
+    "Name": "cr02b_roster_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Rosters"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Rosters",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Rosters)",
+    "Name": "cr02b_roster_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Rosters"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Rosters",
+    "Type": "OptionSetInfo"
+  }
+]

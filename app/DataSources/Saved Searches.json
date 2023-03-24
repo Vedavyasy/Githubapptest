@@ -1,0 +1,105 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr02b_savedsearcheses",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr02b_savedsearches",
+    "MaxGetRowsCount": 500,
+    "Name": "Saved Searches",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cr02b_countryselections": "Country Selections",
+      "cr02b_departmentselections": "Department Selections",
+      "cr02b_ethnicityselections": "Ethnicity Selections",
+      "cr02b_genderselections": "Gender Selections",
+      "cr02b_levelselections": "Level Selections",
+      "cr02b_rankselections": "Rank Selections",
+      "cr02b_savedsearches_AsyncOperations": "System Jobs",
+      "cr02b_savedsearches_BulkDeleteFailures": "Bulk Delete Failures",
+      "cr02b_savedsearches_DuplicateBaseRecord": "Duplicate Records (cr02b_savedsearches_DuplicateBaseRecord)",
+      "cr02b_savedsearches_DuplicateMatchingRecord": "Duplicate Records (cr02b_savedsearches_DuplicateMatchingRecord)",
+      "cr02b_savedsearches_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cr02b_savedsearches_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cr02b_savedsearches_ProcessSession": "Process Sessions",
+      "cr02b_savedsearches_SyncErrors": "Sync Errors",
+      "cr02b_savedsearchesid": "Saved Searches",
+      "cr02b_searchname": "Search Name",
+      "cr02b_yearsselections": "Years Selections",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "mse360_description": "Description",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Saved Searches",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Saved Searches (Views)",
+    "Name": "_cr02b_savedsearches_views",
+    "RelatedEntityName": "Saved Searches",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "2b38b391-95f1-48a6-93eb-387debdfc6b0": "Active Saved Searches",
+      "94ffc5d6-ec0d-4729-9d1a-0e17cc76c559": "Saved Searches Associated View",
+      "ce5231a2-ed2f-4e2c-a38c-4b6f2dab13be": "Inactive Saved Searches",
+      "d44cd840-98c1-4883-991e-28f36ec44104": "Saved Searches Advanced Find View",
+      "e89e76b3-6acb-4e62-b509-cc717ede2b47": "Saved Searches Lookup View"
+    }
+  },
+  {
+    "DisplayName": "Status (Saved Searches)",
+    "Name": "cr02b_savedsearches_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Saved Searches"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Saved Searches",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Saved Searches)",
+    "Name": "cr02b_savedsearches_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Saved Searches"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Saved Searches",
+    "Type": "OptionSetInfo"
+  }
+]

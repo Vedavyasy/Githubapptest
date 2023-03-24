@@ -1,0 +1,97 @@
+<application xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:service="https://unitedstates-002.azure-apim.net/apim/logicflows" xmlns:siena="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11" siena:serviceId="WorkdayGetAllEmployeeDetails" xmlns="http://wadl.dev.java.net/2009/02">
+  <doc title="Workday Get All Employee Details" />
+  <grammars>
+    <jsonTypes targetNamespace="https://unitedstates-002.azure-apim.net/apim/logicflows" xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+      <object name="ManualTriggerInput" />
+      <string name="ResponseActionOutput_items_def_Rating_String_def" />
+      <string name="ResponseActionOutput_items_def_Supervisory_Organization_Name_def" />
+      <string name="ResponseActionOutput_items_def_Job_Profile_Name_def" />
+      <string name="ResponseActionOutput_items_def_Cost_Center_def" />
+      <string name="ResponseActionOutput_items_def_Manager_ID_def" />
+      <string name="ResponseActionOutput_items_def_Rating_def" />
+      <string name="ResponseActionOutput_items_def_Employee_ID_def" />
+      <string name="ResponseActionOutput_items_def_Gender_def" />
+      <string name="ResponseActionOutput_items_def_Manager_def" />
+      <string name="ResponseActionOutput_items_def_Time_in_Compensation_Grade_Range_def" />
+      <string name="ResponseActionOutput_items_def_Full_Name_def" />
+      <string name="ResponseActionOutput_items_def_Cost_Center_-_Name_def" />
+      <string name="ResponseActionOutput_items_def_Worker_def" />
+      <string name="ResponseActionOutput_items_def_Job_def" />
+      <string name="ResponseActionOutput_items_def_Employee_ID_s__def" />
+      <string name="ResponseActionOutput_items_def_Race_Ethnicity_def" />
+      <string name="ResponseActionOutput_items_def_Supervisory_Organization_def" />
+      <string name="ResponseActionOutput_items_def_Compa-Ratio_def" />
+      <string name="ResponseActionOutput_items_def_City_def" />
+      <string name="ResponseActionOutput_items_def_is_high_potential_def" />
+      <string name="ResponseActionOutput_items_def_Region_-_Name_def" />
+      <string name="ResponseActionOutput_items_def_Manager_Name_def" />
+      <string name="ResponseActionOutput_items_def_Rating_Numeric_def" />
+      <string name="ResponseActionOutput_items_def_Management_Level_def" />
+      <string name="ResponseActionOutput_items_def_Location_-_Name_def" />
+      <string name="ResponseActionOutput_items_def_Hiring_Source_String_def" />
+      <string name="ResponseActionOutput_items_def_Region_def" />
+      <string name="ResponseActionOutput_items_def_Country_def" />
+      <string name="ResponseActionOutput_items_def_location_def" />
+      <string name="ResponseActionOutput_items_def_Hiring_Source_def" />
+      <object name="ResponseActionOutput_items_def">
+        <property name="Rating_String" type="string" />
+        <property name="Supervisory_Organization_Name" type="string" />
+        <property name="Job_Profile_Name" type="string" />
+        <property name="Cost_Center" type="string" />
+        <property name="Manager_ID" type="string" />
+        <property name="Rating" type="string" />
+        <property name="Employee_ID" type="string" />
+        <property name="Gender" type="string" />
+        <property name="Manager" type="string" />
+        <property name="Time_in_Compensation_Grade_Range" type="string" />
+        <property name="Full_Name" type="string" />
+        <property name="Cost_Center_-_Name" type="string" />
+        <property name="Worker" type="string" />
+        <property name="Job" type="string" />
+        <property name="Employee_ID_s_" type="string" />
+        <property name="Race_Ethnicity" type="string" />
+        <property name="Supervisory_Organization" type="string" />
+        <property name="Compa-Ratio" type="string" />
+        <property name="City" type="string" />
+        <property name="is_high_potential" type="string" />
+        <property name="Region_-_Name" type="string" />
+        <property name="Manager_Name" type="string" />
+        <property name="Rating_Numeric" type="string" />
+        <property name="Management_Level" type="string" />
+        <property name="Location_-_Name" type="string" />
+        <property name="Hiring_Source_String" type="string" />
+        <property name="Region" type="string" />
+        <property name="Country" type="string" />
+        <property name="location" type="string" />
+        <property name="Hiring_Source" type="string" />
+      </object>
+      <array typeRef="ResponseActionOutput_items_def" name="ResponseActionOutput" />
+      <object name="Run_responses_default_def" />
+    </jsonTypes>
+  </grammars>
+  <resources siena:authenticationProviderHref="#PowerAppAuth" base="https://unitedstates-002.azure-apim.net/apim/logicflows">
+    <resource path="/{connectionId}/triggers/manual/run">
+      <param style="template" name="connectionId" type="xs:string" required="true" />
+      <method siena:requiresAuthentication="true" name="POST" id="Run">
+        <doc title="Runs a logic flow trigger." />
+        <request>
+          <param style="query" name="api-version" type="xs:string" required="true" fixed="2015-02-01-preview">
+            <doc title="The api version" />
+          </param>
+          <representation mediaType="application/json" />
+        </request>
+        <response>
+          <representation mediaType="application/json" element="service:ResponseActionOutput" />
+        </response>
+      </method>
+    </resource>
+  </resources>
+  <authenticationProviders xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+    <connectionProvider id="PowerAppAuth" siena:connectionProviderId="logicflows" />
+  </authenticationProviders>
+  <template xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+    <variable name="connectionId">
+      <modifyParams style="template" name="connectionId" attribute="fixed" />
+    </variable>
+  </template>
+</application>

@@ -1,0 +1,189 @@
+"'Roster Add' As CanvasComponent":
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =730
+    OnReset: =Reset(TextInput13);Clear(addToRoster)
+    Width: =1366
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    promotionPopBackground_15 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(23, 23,23, .65)
+        Height: =730
+        Text: =""
+        Width: =1366
+        ZIndex: =1
+
+    Label78_9 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =730
+        Text: =""
+        Width: =500
+        X: =866
+        ZIndex: =2
+
+    Icon5_6 As icon.Cancel:
+        Color: =RGBA(0, 0, 0, 1)
+        Height: =19
+        Icon: =Icon.Cancel
+        OnSelect: =Set(rosterAdd,false);Reset(TextInput13);Clear(addToRoster)
+        Width: =19
+        X: =1326
+        Y: =14
+        ZIndex: =3
+
+    Label110 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        Height: =61
+        PaddingLeft: =18
+        PaddingTop: =36
+        Size: =15.75
+        Text: ="People Search"
+        Width: =213
+        X: =866
+        ZIndex: =4
+
+    TextInput13 As text:
+        BorderColor: =RGBA(138, 136, 134, 1)
+        BorderThickness: =1
+        Color: =RGBA(96, 94, 92, 1)
+        Default: =""
+        Font: =Font.'Segoe UI'
+        Height: =24
+        HintText: ="Search People"
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =10.5
+        Width: =464
+        X: =884
+        Y: =110
+        ZIndex: =5
+
+    Image53 As image:
+        Height: =17
+        Image: ='People Team Add'
+        Width: =17
+        X: =1239
+        Y: =71
+        ZIndex: =6
+
+    Label111 As label:
+        Align: =Align.Right
+        Font: =Font.'Segoe UI'
+        PaddingLeft: =0
+        PaddingRight: =18
+        Size: =10.5
+        Text: ="Add to roster"
+        X: =1216
+        Y: =59
+        ZIndex: =7
+
+    Button44 As button:
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =29
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        OnSelect: |-
+            =Set(rosterAdd,false);Reset(TextInput13);Set(
+                addedToRoster,
+                true
+            );
+            Collect(
+                workerInfoTemp,
+                addToRoster
+            );
+            ForAll(
+                addToRoster,
+                Patch(
+                    'Roster Employees',
+                    Defaults('Roster Employees'),
+                    {
+                        Roster: selectedRoster,
+                        Employee: LookUp(
+                            Contacts,
+                            EmpID = addToRoster[@Employee_ID]
+                        )
+                    }
+                )
+            );Clear(addToRoster)
+        Text: =""
+        Width: =109
+        X: =1239
+        Y: =65
+        ZIndex: =8
+
+    "Gallery29 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        Height: =567
+        Items: =Search(workerInfo,TextInput13.Text,"Full_Name")
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplatePadding: =0
+        TemplateSize: =64
+        Width: =464
+        X: =884
+        Y: =161
+        ZIndex: =9
+
+        Image55 As image:
+            Height: =40
+            Image: ='default-contact-96x96-2'
+            OnSelect: =Select(Parent)
+            Width: =40
+            X: =25
+            Y: =4
+            ZIndex: =1
+
+        Label113 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =25
+            OnSelect: =Select(Parent)
+            PaddingLeft: =7.5
+            Size: =10.5
+            Text: =ThisItem.Full_Name
+            X: =70
+            Y: =1
+            ZIndex: =2
+
+        Label113_1 As label:
+            Color: =RGBA(100, 100, 100, 1)
+            Font: =Font.'Segoe UI'
+            Height: =25
+            OnSelect: =Select(Parent)
+            PaddingLeft: =7.5
+            Size: =9
+            Text: =ThisItem.Job
+            Width: =250
+            X: =70
+            Y: =19
+            ZIndex: =3
+
+        Checkbox1_4 As checkbox:
+            BorderColor: =
+            CheckboxBackgroundFill: =If(ThisItem in addToRoster,RGBA(0, 120, 212, 1),Color.White)
+            CheckboxBorderColor: =RGBA(0, 0, 0, 1)
+            CheckboxSize: =15
+            CheckmarkFill: =RGBA(255, 255, 255, 1)
+            Default: =ThisItem in addToRoster
+            DisabledBorderColor: =
+            FocusedBorderColor: =
+            FocusedBorderThickness: =
+            Height: =49
+            HoverBorderColor: =
+            OnCheck: =Collect(addToRoster,ThisItem)
+            OnSelect: =Select(Parent)
+            OnUncheck: =Remove(addToRoster,ThisItem)
+            PressedBorderColor: =Color.White
+            PressedFill: =
+            Text: =""
+            Visible: =If(currentRoster = "My Org",false,true)
+            Width: =38
+            ZIndex: =4
+

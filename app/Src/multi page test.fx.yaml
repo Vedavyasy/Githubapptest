@@ -1,0 +1,14 @@
+"'multi page test' As screen":
+
+    Button60 As button:
+        OnSelect: |-
+            =ClearCollect(col_navpages,Table({ScreenName:"Roster",ID:First(workerInfoTemp),IsActive:true,Display:"Roster Page"}))
+        Text: ="Button"
+        X: =1192
+        Y: =4
+        ZIndex: =1
+
+    Pages_1 As Pages:
+        Y: =44
+        ZIndex: =2
+

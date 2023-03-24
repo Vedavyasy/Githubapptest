@@ -1,0 +1,319 @@
+"'Time Range' As CanvasComponent":
+    DefaultRange: ="This Quarter"
+    EndDate: =EDate
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =350
+    SelectedRange: ="Text"
+    StartDate: =SDate
+    Width: =270
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    drpTimeRange As dropdown:
+        BorderColor: =RGBA(116, 116, 116, 1)
+        BorderThickness: =1
+        ChevronBackground: =RGBA(255, 255, 255, 1)
+        ChevronFill: =RGBA(116, 116, 116, 1)
+        ChevronHoverBackground: =
+        ChevronHoverFill: =
+        Color: =RGBA(96, 94, 92, 1)
+        Default: ='Time Range'.DefaultRange
+        Font: =Font.'Segoe UI'
+        Height: =32
+        HoverFill: =RGBA(215, 223, 240, 1)
+        Items: =["Today","Yesterday","This Week","Last Week","This Month","Last Month","Month To Date","This Quarter","Last Quarter","Custom Time Frame"]
+        OnChange: |-
+            =If(
+                drpTimeRange.Selected.Value = "Today",
+                Set(SDate, Today());
+                Set(EDate, Today()),
+                If(
+                    drpTimeRange.Selected.Value = "Yesterday",
+                    Set(SDate, DateAdd(
+                        Today(),
+                        -1
+                    ));
+                    Set(EDate, DateAdd(
+                        Today(),
+                        -1
+                    )),
+                    If(
+                        drpTimeRange.Selected.Value = "This Week",
+                        Set(SDate, Today() - (Weekday(
+                            Today(),
+                            StartOfWeek.Sunday
+                        )) + 1);
+                        Set(EDate, DateAdd(
+                            Today(),
+                            (7 - Weekday(
+                                Today(),
+                                StartOfWeek.Sunday
+                            )),
+                            TimeUnit.Days
+                        )),
+                        If(
+                            drpTimeRange.Selected.Value = "Last Week",
+                            Set(SDate, Today() - (Weekday(
+                                Today(),
+                                StartOfWeek.Sunday
+                            )) - 6);
+                            Set(EDate, DateAdd(
+                                Today(),
+                                (7 - Weekday(
+                                    Today(),
+                                    StartOfWeek.Sunday
+                                )) - 7,
+                                TimeUnit.Days
+                            )),
+                            If(
+                                drpTimeRange.Selected.Value = "This Month",
+                                Set(SDate, Date(
+                                    Year(Today()),
+                                    Month(Today()),
+                                    1
+                                ));
+                                Set(EDate, Date(
+                                    Year(Today()),
+                                    Month(Today()) + 1,
+                                    1
+                                ) - 1),
+                                If(
+                                    drpTimeRange.Selected.Value = "Last Month",
+                                    Set(SDate, Date(
+                                        Year(Today()),
+                                        Month(Today()) - 1,
+                                        1
+                                    ));
+                                    Set(EDate, Date(
+                                        Year(Today()),
+                                        Month(Today()),
+                                        1
+                                    ) - 1),
+                                    If(
+                                        drpTimeRange.Selected.Value = "Month To Date",
+                                        Set(SDate, Date(
+                                            Year(Today()),
+                                            Month(Today()),
+                                            1
+                                        ));
+                                        Set(EDate, Today()),
+                                        If(
+                                            drpTimeRange.Selected.Value = "This Quarter",
+                                            Set(SDate, Date(
+                                                Year(Today()),
+                                                Month(Today()) - If(
+                                                    Mod(
+                                                        Month(Today()) - 1,
+                                                        3
+                                                    ) = 0,
+                                                    0,
+                                                    Mod(
+                                                        Month(Today()) - 1,
+                                                        3
+                                                    )
+                                                ),
+                                                1
+                                            ));
+                                            Set(EDate, Date(
+                                                Year(Today()),
+                                                Month(Today()) + 3 - Mod(
+                                                    Month(Today()) - 1,
+                                                    3
+                                                ),
+                                                1
+                                            ) - 1),
+                                            If(
+                                                drpTimeRange.Selected.Value = "Last Quarter",
+                                                Set(SDate, Date(
+                                                    Year(Today()),
+                                                    Month(Today()) - If(
+                                                        Mod(
+                                                            Month(Today()) - 1,
+                                                            3
+                                                        ) = 0,
+                                                        0,
+                                                        Mod(
+                                                            Month(Today()) - 1,
+                                                            3
+                                                        )
+                                                    ) - 3,
+                                                    1
+                                                ));
+                                                Set(EDate, Date(
+                                                    Year(Today()),
+                                                    Month(Today()) + 3 - Mod(
+                                                        Month(Today()) - 1,
+                                                        3
+                                                    ) - 3,
+                                                    1
+                                                ) - 1),
+                                                true
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+            If(drpTimeRange.Selected.Value="Custom Time Frame",Set(CustomTime,true),Set(CustomTime,false))
+        Size: =10.5
+        Width: =215
+        X: =14
+        Y: =14
+        ZIndex: =2
+
+    "'Time Frame' As group":
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =13
+
+        htmlMidShadow_35 As htmlViewer:
+            Height: =275
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_35.Width - 20 & "px;
+                    height: " & htmlMidShadow_35.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 4px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =CustomTime
+            Width: =237
+            X: =2
+            Y: =44
+            ZIndex: =1
+
+        Label18 As label:
+            Align: =Align.Center
+            Color: =RGBA(54, 54, 54, 1)
+            DisplayMode: =DisplayMode.View
+            Font: =Font.'Segoe UI'
+            Height: =27
+            Size: =10.5
+            Text: ="Custom Time Frame"
+            Visible: =CustomTime
+            Width: =199
+            X: =15
+            Y: =59
+            ZIndex: =5
+
+        Rectangle13_15 As rectangle:
+            Fill: =RGBA(149, 149, 149, 1)
+            Height: =2
+            Visible: =CustomTime
+            Width: =217
+            X: =15
+            Y: =90
+            ZIndex: =6
+
+        Label18_1 As label:
+            Color: =RGBA(54, 54, 54, 1)
+            DisplayMode: =DisplayMode.View
+            Font: =Font.'Segoe UI'
+            Height: =27
+            Size: =10.5
+            Text: ="Start Date"
+            Visible: =CustomTime
+            Width: =199
+            X: =22
+            Y: =99
+            ZIndex: =7
+
+        Label18_2 As label:
+            Color: =RGBA(54, 54, 54, 1)
+            DisplayMode: =DisplayMode.View
+            Font: =Font.'Segoe UI'
+            Height: =27
+            Size: =10.5
+            Text: ="End Date"
+            Visible: =CustomTime
+            Width: =199
+            X: =22
+            Y: =172
+            ZIndex: =8
+
+        drpStartDate As datepicker:
+            BorderColor: =RGBA(116, 116, 116, 1)
+            BorderThickness: =1
+            DisabledColor: =RGBA(0, 0, 0, 1)
+            FocusedBorderThickness: =0
+            Height: =30
+            IconBackground: =RGBA(255, 255, 255, 0)
+            IconFill: =RGBA(116, 116, 116, 1)
+            PaddingLeft: =15
+            Size: =10.5
+            Visible: =CustomTime
+            Width: =200
+            X: =24
+            Y: =132
+            ZIndex: =9
+
+        drpEndDate As datepicker:
+            BorderColor: =RGBA(116, 116, 116, 1)
+            BorderThickness: =1
+            FocusedBorderThickness: =1
+            Height: =30
+            IconBackground: =RGBA(255, 255, 255, 0)
+            IconFill: =RGBA(116, 116, 116, 1)
+            PaddingLeft: =15
+            Size: =10.5
+            Visible: =CustomTime
+            Width: =200
+            X: =24
+            Y: =205
+            ZIndex: =10
+
+        Button49 As button:
+            BorderColor: =RGBA(0, 121, 187, 1)
+            Fill: =RGBA(0, 121, 187, 1)
+            Font: =Font.'Segoe UI'
+            Height: =30
+            HoverBorderColor: =
+            HoverFill: =
+            OnSelect: |-
+                =Set(SDate,drpStartDate.SelectedDate);Set(EDate,drpEndDate.SelectedDate);
+                Set(CustomTime,false)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Size: =10.5
+            Text: ="Apply"
+            Visible: =CustomTime
+            Width: =70
+            X: =74
+            Y: =255
+            ZIndex: =11
+
+        Button49_1 As button:
+            BorderColor: =Self.Color
+            Color: =RGBA(0, 121, 187, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            Height: =30
+            HoverBorderColor: =
+            HoverColor: =RGBA(0, 121, 187, 1)
+            HoverFill: =
+            OnSelect: =Set(CustomTime,false)
+            PressedColor: =Self.Color
+            PressedFill: =Self.Fill
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Size: =10.5
+            Text: ="Cancel"
+            Visible: =CustomTime
+            Width: =70
+            X: =154
+            Y: =255
+            ZIndex: =12
+

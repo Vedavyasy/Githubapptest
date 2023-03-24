@@ -1,0 +1,98 @@
+"'App Links' As CanvasComponent":
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =728
+    Width: =1366
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    promotionPopBackground_7 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(23, 23,23, .65)
+        Height: =730
+        Text: =""
+        Width: =1366
+        ZIndex: =1
+
+    Label45 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =517
+        Text: =""
+        Width: =285
+        ZIndex: =2
+
+    Label17 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        Size: =16.5
+        Text: ="Apps"
+        X: =20
+        Y: =22
+        ZIndex: =3
+
+    TextInput1 As text:
+        BorderThickness: =0
+        Default: =""
+        Fill: =RGBA(237, 237, 237, 1)
+        Font: =Font.'Segoe UI'
+        Height: =24
+        HintText: ="Find an app"
+        Size: =10.5
+        Width: =261
+        X: =12
+        Y: =74
+        ZIndex: =4
+
+    "Gallery5 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        Height: =371
+        Items: =Search('Employee 360 Apps',TextInput1.Text,"cr02b_name")
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =123
+        Width: =285
+        WrapCount: =3
+        Y: =135
+        ZIndex: =6
+
+        Button20 As button:
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(240, 240, 240, 1)
+            OnSelect: =Select(Parent)
+            Text: =""
+            Width: =40
+            X: =28
+            Y: =3
+            ZIndex: =1
+
+        Image29 As image:
+            Height: =18
+            Image: =ThisItem.'App Icon'
+            OnSelect: =Select(Parent)
+            Width: =18
+            X: =39
+            Y: =14
+            ZIndex: =2
+
+        Label36 As label:
+            Align: =Align.Center
+            Font: =Font.'Segoe UI'
+            OnSelect: =Select(Parent)
+            Size: =10.5
+            Text: =ThisItem.Name
+            Width: =95
+            Y: =46
+            ZIndex: =3
+
+        Button22 As button:
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =83
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Launch(ThisItem.'App Link')
+            Text: =""
+            Width: =95
+            Y: =3
+            ZIndex: =4
+

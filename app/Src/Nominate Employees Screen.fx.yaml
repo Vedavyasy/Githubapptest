@@ -1,0 +1,2922 @@
+"'Nominate Employees Screen' As screen":
+    OnVisible: |-
+        =Set(nave,false);Set(
+            drpdown,
+            [
+                "All Employees",
+                "System Recommendations"
+            ]
+        );
+        Set(
+            notes,
+            false
+        );
+        Set(
+            viewsTwo,
+            [
+                "Details",
+                "Notes"
+            ]
+        );
+        Set(
+            timerStart,
+            false
+        );
+        Set(
+            expandCollapse,
+            false
+        );
+        Set(
+            background,
+            false
+        );
+        ClearCollect(
+            test1,
+            AddColumns(
+                workerInfo,
+                "chart",
+                If(
+                    RoundDown(
+                        (LookUp(
+                            Employees,
+                            EmpID = Employee_ID,
+                            'Community Engagement Score'
+                        ) / 3) + ((LookUp(
+                            Employees,
+                            EmpID = Employee_ID,
+                            'Promotion Velocity'
+                        ) * 100) / 3) + ((Int(Rating_Numeric) * 5) / 3) + 20,
+                        0
+                    ) < 30,
+                    "0 - 30%",
+                    If(
+                        RoundDown(
+                            (LookUp(
+                                Employees,
+                                EmpID = Employee_ID,
+                                'Community Engagement Score'
+                            ) / 3) + ((LookUp(
+                                Employees,
+                                EmpID = Employee_ID,
+                                'Promotion Velocity'
+                            ) * 100) / 3) + ((Int(Rating_Numeric) * 5) / 3) + 20,
+                            0
+                        ) > 30 && RoundDown(
+                            (LookUp(
+                                Employees,
+                                EmpID = Employee_ID,
+                                'Community Engagement Score'
+                            ) / 3) + ((LookUp(
+                                Employees,
+                                EmpID = Employee_ID,
+                                'Promotion Velocity'
+                            ) * 100) / 3) + ((Int(Rating_Numeric) * 5) / 3) + 20,
+                            0
+                        ) < 40,
+                        "30 - 40%",
+                        If(
+                            RoundDown(
+                                (LookUp(
+                                    Employees,
+                                    EmpID = Employee_ID,
+                                    'Community Engagement Score'
+                                ) / 3) + ((LookUp(
+                                    Employees,
+                                    EmpID = Employee_ID,
+                                    'Promotion Velocity'
+                                ) * 100) / 3) + ((Int(Rating_Numeric) * 5) / 3) + 20,
+                                0
+                            ) > 40 && RoundDown(
+                                (LookUp(
+                                    Employees,
+                                    EmpID = Employee_ID,
+                                    'Community Engagement Score'
+                                ) / 3) + ((LookUp(
+                                    Employees,
+                                    EmpID = Employee_ID,
+                                    'Promotion Velocity'
+                                ) * 100) / 3) + ((Int(Rating_Numeric) * 5) / 3) + 20,
+                                0
+                            ) < 50,
+                            "50 - 60%",
+                            If(
+                                RoundDown(
+                                    (LookUp(
+                                        Employees,
+                                        EmpID = Employee_ID,
+                                        'Community Engagement Score'
+                                    ) / 3) + ((LookUp(
+                                        Employees,
+                                        EmpID = Employee_ID,
+                                        'Promotion Velocity'
+                                    ) * 100) / 3) + ((Int(Rating_Numeric) * 5) / 3) + 20,
+                                    0
+                                ) > 50 && RoundDown(
+                                    (LookUp(
+                                        Employees,
+                                        EmpID = Employee_ID,
+                                        'Community Engagement Score'
+                                    ) / 3) + ((LookUp(
+                                        Employees,
+                                        EmpID = Employee_ID,
+                                        'Promotion Velocity'
+                                    ) * 100) / 3) + ((Int(Rating_Numeric) * 5) / 3) + 20,
+                                    0
+                                ) < 60,
+                                "60 - 70%",
+                                If(
+                                    RoundDown(
+                                        (LookUp(
+                                            Employees,
+                                            EmpID = Employee_ID,
+                                            'Community Engagement Score'
+                                        ) / 3) + ((LookUp(
+                                            Employees,
+                                            EmpID = Employee_ID,
+                                            'Promotion Velocity'
+                                        ) * 100) / 3) + ((Int(Rating_Numeric) * 5) / 3) + 20,
+                                        0
+                                    ) > 70 && RoundDown(
+                                        (LookUp(
+                                            Employees,
+                                            EmpID = Employee_ID,
+                                            'Community Engagement Score'
+                                        ) / 3) + ((LookUp(
+                                            Employees,
+                                            EmpID = Employee_ID,
+                                            'Promotion Velocity'
+                                        ) * 100) / 3) + ((Int(Rating_Numeric) * 5) / 3) + 20,
+                                        0
+                                    ) < 80,
+                                    "70 - 80%",
+                                    If(
+                                        RoundDown(
+                                            (LookUp(
+                                                Employees,
+                                                EmpID = Employee_ID,
+                                                'Community Engagement Score'
+                                            ) / 3) + ((LookUp(
+                                                Employees,
+                                                EmpID = Employee_ID,
+                                                'Promotion Velocity'
+                                            ) * 100) / 3) + ((Int(Rating_Numeric) * 5) / 3) + 20,
+                                            0
+                                        ) > 80 && RoundDown(
+                                            (LookUp(
+                                                Employees,
+                                                EmpID = Employee_ID,
+                                                'Community Engagement Score'
+                                            ) / 3) + ((LookUp(
+                                                Employees,
+                                                EmpID = Employee_ID,
+                                                'Promotion Velocity'
+                                            ) * 100) / 3) + ((Int(Rating_Numeric) * 5) / 3) + 20,
+                                            0
+                                        ) < 90,
+                                        "80 - 90%",
+                                        "90 - 100%"
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        );
+        ClearCollect(
+            test2,
+            AddColumns(
+                test1,
+                "recScore",
+                RoundDown(
+                    (LookUp(
+                        Employees,
+                        EmpID = Employee_ID,
+                        'Community Engagement Score'
+                    ) / 3) + ((LookUp(
+                        Employees,
+                        EmpID = Employee_ID,
+                        'Promotion Velocity'
+                    ) * 100) / 3) + ((Int(Rating_Numeric) * 5) / 3) + 20,
+                    0
+                )
+            )
+        );
+        Set(
+            compare,
+            false
+        );
+        Set(
+            nominate,
+            false
+        );
+        Set(
+            complete,
+            false
+        )
+
+    Rectangle8_3 As rectangle:
+        Fill: =RGBA(104, 104, 104, 1)
+        Height: =10
+        Width: =1
+        X: =1158
+        Y: =307
+        ZIndex: =12
+
+    lblNotesScorePop As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =723
+        Text: =""
+        Visible: =expandCollapse || notes
+        Width: =450
+        X: =916
+        Y: =45
+        ZIndex: =58
+
+    AnimationTimer_1 As timer:
+        Duration: =500
+        OnTimerEnd: =Set(startTimer,false)
+        Start: =startTimer
+        Visible: =false
+        X: =377
+        Y: =57
+        ZIndex: =61
+
+    promotionPopBackground_2 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(23, 23,23, .65)
+        Height: =729
+        Text: =""
+        Visible: =expandCollapse || compare || nominate || complete || notes
+        Width: =916
+        Y: =39
+        ZIndex: =85
+
+    Button6_2 As button:
+        Fill: =RGBA(0, 0, 0, 0)
+        HoverFill: =
+        OnSelect: =Navigate('Home Screen')
+        Size: =12
+        Text: =""
+        Visible: =false
+        Width: =88
+        X: =41
+        Y: =48
+        ZIndex: =106
+
+    "Gallery17 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        Height: =468
+        Items: =Search(Filter('Employee Notes',Employee.EmpID=Gallery14.Selected.Employee_ID),TextInput7.Text,"cr02b_note")
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplateFill: |-
+            =If(
+                Mod(Value(ThisItem.NoteID),2)=0,  
+                RGBA(255, 255, 255, 1), 
+                RGBA(230, 230, 230,1)
+            )
+        TemplatePadding: =0
+        TemplateSize: =134
+        Visible: =notes
+        Width: =410
+        X: =940
+        Y: =277
+        ZIndex: =112
+
+        Image17 As image:
+            Height: =40
+            Image: =Office365Users.UserPhotoV2(ThisItem.'Created By'.'Primary Email')
+            OnSelect: =Select(Parent)
+            RadiusBottomLeft: =40
+            RadiusBottomRight: =40
+            RadiusTopLeft: =40
+            RadiusTopRight: =40
+            Width: =40
+            X: =15
+            Y: =15
+            ZIndex: =1
+
+        Title11 As label:
+            Font: =Font.'Segoe UI'
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =12
+            Text: =ThisItem.'Created By'.'Full Name'
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - Image17.Width - 104
+            X: =72
+            Y: =19
+            ZIndex: =2
+
+        Subtitle4 As label:
+            Align: =Align.Right
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            Height: =35
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =11
+            Text: =Text(DateValue(ThisItem.'Created On', "en"), "[$-en-GB]mm/dd/yyyy")
+            VerticalAlign: =VerticalAlign.Top
+            Width: =126
+            X: =284
+            Y: =26
+            ZIndex: =3
+
+        Separator1 As rectangle:
+            Fill: =RGBA(237, 237, 237, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =5
+
+        Label57 As label:
+            Font: =Font.'Segoe UI'
+            Height: =67
+            OnSelect: =Select(Parent)
+            Size: =11
+            Text: =ThisItem.Note
+            Width: =395
+            X: =15
+            Y: =66
+            ZIndex: =6
+
+    promotionPopBackground_6 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(23, 23,23, .65)
+        Height: =722
+        Text: =""
+        Visible: =notesComponent
+        Width: =956
+        Y: =46
+        ZIndex: =113
+
+    Notes_2 As Notes:
+        Height: =723
+        Visible: =notesComponent
+        Width: =631
+        X: =734
+        Y: =45
+        ZIndex: =115
+
+    "'programMetrics''' As group":
+        Height: =5
+        Width: =5
+        X: =100
+        Y: =100
+        ZIndex: =119
+
+        Label61 As label:
+            BorderColor: =RGBA(235, 235, 235, 1)
+            BorderThickness: =1
+            Height: =293
+            Text: =""
+            Width: =278
+            X: =1066
+            Y: =261
+            ZIndex: =9
+
+        Label61_1 As label:
+            BorderColor: =RGBA(235, 235, 235, 1)
+            BorderThickness: =1
+            Height: =172
+            Text: =""
+            Width: =283
+            X: =1066
+            Y: =577
+            ZIndex: =10
+
+        Label36_16 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Participation Metrics"
+            Width: =163
+            X: =1084
+            Y: =267
+            ZIndex: =11
+
+        Rectangle9_1 As rectangle:
+            Fill: =RGBA(235, 235, 235, 1)
+            Height: =1
+            OnSelect: =
+            Width: =237
+            X: =1089
+            Y: =394
+            ZIndex: =13
+
+        Rectangle9_2 As rectangle:
+            Fill: =RGBA(235, 235, 235, 1)
+            Height: =1
+            OnSelect: =
+            Width: =234
+            X: =1089
+            Y: =468
+            ZIndex: =15
+
+        Rectangle9_3 As rectangle:
+            Fill: =RGBA(235, 235, 235, 1)
+            Height: =1
+            OnSelect: =
+            Width: =234
+            X: =1089
+            Y: =545
+            ZIndex: =16
+
+        Label63 As label:
+            Color: =RGBA(104, 104, 104, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =0
+            Size: =9
+            Text: ="Regions"
+            Width: =61
+            X: =1084
+            Y: =292
+            ZIndex: =18
+
+        Label63_1 As label:
+            Color: =RGBA(104, 104, 104, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =9
+            Text: ="8/10"
+            Width: =44
+            X: =1129
+            Y: =292
+            ZIndex: =19
+
+        Label63_2 As label:
+            Color: =RGBA(104, 104, 104, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =0
+            Size: =9
+            Text: ="Organizations"
+            Width: =83
+            X: =1164
+            Y: =291
+            ZIndex: =20
+
+        Label63_3 As label:
+            Color: =RGBA(104, 104, 104, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =9
+            Text: ="5/12"
+            Width: =44
+            X: =1241
+            Y: =291
+            ZIndex: =21
+
+        Label64 As label:
+            Color: =RGBA(37, 36, 36, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =0
+            Size: =18
+            Text: ="36%"
+            X: =1088
+            Y: =332
+            ZIndex: =22
+
+        Label63_4 As label:
+            Color: =RGBA(37, 36, 36, 1)
+            Font: =Font.'Segoe UI'
+            Height: =34
+            PaddingLeft: =0
+            Size: =9
+            Text: ="Inclusion Index"
+            Width: =106
+            X: =1089
+            Y: =355
+            ZIndex: =23
+
+        Label63_5 As label:
+            Align: =Align.Right
+            Color: =RGBA(37, 36, 36, 1)
+            Font: =Font.'Segoe UI'
+            Height: =34
+            PaddingLeft: =0
+            Size: =9.5
+            Text: ="40 Participants"
+            Width: =106
+            X: =1217
+            Y: =336
+            ZIndex: =24
+
+        Label64_1 As label:
+            Color: =RGBA(37, 36, 36, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =0
+            Size: =18
+            Text: ="50.4%"
+            X: =1088
+            Y: =406
+            ZIndex: =25
+
+        Label63_6 As label:
+            Color: =RGBA(37, 36, 36, 1)
+            Font: =Font.'Segoe UI'
+            Height: =34
+            PaddingLeft: =0
+            Size: =9
+            Text: ="Women Participation"
+            Width: =140
+            X: =1089
+            Y: =429
+            ZIndex: =26
+
+        Label63_7 As label:
+            Align: =Align.Right
+            Color: =RGBA(37, 36, 36, 1)
+            Font: =Font.'Segoe UI'
+            Height: =34
+            PaddingLeft: =0
+            Size: =9.5
+            Text: ="17 Participants"
+            Width: =106
+            X: =1217
+            Y: =410
+            ZIndex: =27
+
+        Label64_2 As label:
+            Color: =RGBA(37, 36, 36, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =0
+            Size: =18
+            Text: ="2.6%"
+            X: =1088
+            Y: =480
+            ZIndex: =28
+
+        Label63_8 As label:
+            Color: =RGBA(37, 36, 36, 1)
+            Font: =Font.'Segoe UI'
+            Height: =34
+            PaddingLeft: =0
+            Size: =9
+            Text: ="U.S employees with diabilities"
+            Width: =126
+            X: =1088
+            Y: =509
+            ZIndex: =29
+
+        Label63_9 As label:
+            Align: =Align.Right
+            Color: =RGBA(37, 36, 36, 1)
+            Font: =Font.'Segoe UI'
+            Height: =34
+            PaddingLeft: =0
+            Size: =9.5
+            Text: ="4 Participants"
+            Width: =106
+            X: =1214
+            Y: =485
+            ZIndex: =30
+
+        Label36_17 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Program attrition"
+            Width: =163
+            X: =1084
+            Y: =583
+            ZIndex: =31
+
+        Label63_10 As label:
+            Color: =RGBA(98, 100, 167, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =7.5
+            Text: ="Today"
+            Width: =44
+            X: =1093
+            Y: =608
+            ZIndex: =32
+
+        Label63_11 As label:
+            Color: =RGBA(113, 112, 112, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =7.5
+            Text: ="30 days"
+            Width: =44
+            X: =1173
+            Y: =608
+            ZIndex: =33
+
+        Label63_12 As label:
+            Color: =RGBA(113, 112, 112, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =7.5
+            Text: ="90 days"
+            Width: =44
+            X: =1252
+            Y: =608
+            ZIndex: =34
+
+        Image20 As image:
+            Height: =73
+            Image: ='Group 91'
+            Width: =119
+            X: =1085
+            Y: =638
+            ZIndex: =35
+
+        Label36_18 As label:
+            Color: =RGBA(37, 36, 36, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =0
+            Size: =18
+            Text: ="-0.45%"
+            Width: =96
+            X: =1218
+            Y: =645
+            ZIndex: =36
+
+        Label36_19 As label:
+            Color: =RGBA(37, 36, 36, 1)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            PaddingLeft: =0
+            Size: =9
+            Text: ="Dropout rate"
+            Width: =96
+            X: =1222
+            Y: =678
+            ZIndex: =37
+
+        Label65 As label:
+            Color: =RGBA(98, 100, 167, 1)
+            Font: =Font.'Segoe UI'
+            Height: =22
+            PaddingLeft: =0
+            Size: =9
+            Text: ="View Details"
+            X: =1084
+            Y: =718
+            ZIndex: =38
+
+        Icon10 As icon.ArrowRight:
+            Color: =RGBA(98, 100, 167, 1)
+            Height: =17
+            Icon: =Icon.ArrowRight
+            Width: =17
+            X: =1154
+            Y: =720
+            ZIndex: =39
+
+    Header_2 As Header:
+        ZIndex: =159
+
+    grpAddNotesSearch As group:
+        Height: =5
+        Width: =5
+        X: =80
+        Y: =80
+        ZIndex: =159
+
+        Icon9 As icon.Add:
+            Color: =RGBA(34, 102, 227, 1)
+            Height: =23
+            Icon: =Icon.Add
+            Visible: =notes
+            Width: =24
+            X: =940
+            Y: =187
+            ZIndex: =109
+
+        Label55 As label:
+            Color: =RGBA(34, 102, 227, 1)
+            Font: =Font.'Segoe UI'
+            Size: =11
+            Text: ="Add Note"
+            Visible: =notes
+            Width: =158
+            X: =965
+            Y: =179
+            ZIndex: =110
+
+        TextInput7 As text:
+            BorderColor: =RGBA(138, 136, 134, 1)
+            BorderThickness: =1
+            Default: =""
+            Font: =Font.'Segoe UI'
+            Height: =28
+            HintText: ="Search"
+            Size: =11
+            Visible: =notes
+            Width: =407
+            X: =942
+            Y: =228
+            ZIndex: =111
+
+    grpScoreHeader As group:
+        Height: =5
+        Width: =5
+        X: =80
+        Y: =80
+        ZIndex: =159
+
+        htmlTopShadow_3 As htmlViewer:
+            Height: =137
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 0px;
+                    width: " & htmlTopShadow_3.Width & "px;
+                    height: " & htmlTopShadow_3.Height - 30 & "px;
+                    background: linear-gradient(180deg, #3E8EED 0%, rgba(114, 172, 241, 0) 100%);'>
+                </div>"
+            Visible: =expandCollapse || notes
+            Width: =460
+            X: =910
+            Y: =34
+            ZIndex: =59
+
+        Icon7 As icon.Cancel:
+            Color: =RGBA(0, 0, 0, 1)
+            Height: =17
+            Icon: =Icon.Cancel
+            OnSelect: =Set(expandCollapse,false);Set(notes,false)
+            Visible: =expandCollapse || notes
+            Width: =17
+            X: =1333
+            Y: =57
+            ZIndex: =62
+
+        Image13 As image:
+            Height: =42
+            Image: ='⚪️ C. Large (52X52)'
+            Visible: =expandCollapse || notes
+            Width: =42
+            X: =943
+            Y: =60
+            ZIndex: =63
+
+        Label47 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =16.5
+            Text: =Gallery14.Selected.Full_Name
+            Visible: =expandCollapse || notes
+            X: =999
+            Y: =53
+            ZIndex: =64
+
+        Label48 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =2
+            Size: =9
+            Text: =Gallery14.Selected.Job
+            Visible: =expandCollapse || notes
+            Width: =119
+            Wrap: =false
+            X: =1018
+            Y: =77
+            ZIndex: =66
+
+        Image21 As image:
+            Height: =9
+            Image: ='Shape (25)'
+            Visible: =expandCollapse
+            Width: =9
+            X: =1006
+            Y: =93
+            ZIndex: =120
+
+        Label48_2 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =2
+            Size: =9
+            Text: ="12"
+            Visible: =expandCollapse
+            Width: =146
+            X: =1154
+            Y: =77
+            ZIndex: =121
+
+        Image21_1 As image:
+            Height: =12
+            Image: ='People Community'
+            Visible: =expandCollapse
+            Width: =12
+            X: =1142
+            Y: =93
+            ZIndex: =122
+
+    grpScoreDetails As group:
+        Height: =5
+        Width: =5
+        X: =80
+        Y: =80
+        ZIndex: =159
+
+        Button8_6 As button:
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(250, 250, 250, 1)
+            Height: =91
+            Text: =""
+            Visible: =expandCollapse
+            Width: =200
+            X: =937
+            Y: =297
+            ZIndex: =60
+
+        Title1 As label:
+            Align: =Align.Center
+            Font: =Font.'Segoe UI'
+            Height: =16
+            Size: =12
+            Text: ="Recommendation Rank Distribution"
+            Visible: =expandCollapse
+            Width: =430
+            X: =847
+            Y: =492
+            ZIndex: =65
+
+        ColumnChart1 As barChart:
+            GridStyle: =GridStyle.None
+            Height: =244
+            ItemColorSet: =[RGBA(201, 2226, 255, 1),RGBA(203, 222, 242, 1),RGBA(134,187,247,1),RGBA(102,162,222,1),RGBA(67, 144, 222, 1), Color.DodgerBlue,Color.LightGray, RGBA(212,96,104,1), RGBA(148, 110, 176, 1), RGBA(118, 154, 204, 1), RGBA(96, 197, 234, 1)]
+            Items: =employeeDistribution
+            Visible: =expandCollapse
+            Width: =388
+            X: =926
+            XLabelAngle: =0
+            Y: =489
+            ZIndex: =67
+
+        Label49 As label:
+            Align: =Align.Center
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =9
+            Text: ="0-20%"
+            Visible: =expandCollapse
+            Width: =57
+            X: =985
+            Y: =728
+            ZIndex: =68
+
+        Label49_1 As label:
+            Align: =Align.Center
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =9
+            Text: ="20-40%"
+            Visible: =expandCollapse
+            Width: =55
+            X: =1051
+            Y: =728
+            ZIndex: =69
+
+        Label49_2 As label:
+            Align: =Align.Center
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =9
+            Text: ="40-60%"
+            Visible: =expandCollapse
+            Width: =70
+            X: =1110
+            Y: =728
+            ZIndex: =70
+
+        Label49_3 As label:
+            Align: =Align.Center
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =9
+            Text: ="60-80%"
+            Visible: =expandCollapse
+            Width: =61
+            X: =1180
+            Y: =728
+            ZIndex: =71
+
+        Label49_4 As label:
+            Align: =Align.Center
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =9
+            Text: ="80-100%"
+            Visible: =expandCollapse
+            Width: =79
+            X: =1241
+            Y: =728
+            ZIndex: =72
+
+        Label47_1 As label:
+            Align: =Align.Right
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =10.5
+            Text: ="Score Calculation"
+            Visible: =expandCollapse
+            Width: =142
+            X: =1203
+            Y: =237
+            ZIndex: =73
+
+        Label42_3 As label:
+            Align: =Align.Right
+            Color: =RGBA(67, 144, 222, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =73
+            OnSelect: =
+            Size: =55.5
+            Text: =RoundDown((LookUp(Employees,EmpID=Gallery14.Selected.Employee_ID,'Community Engagement Score')/3)+((LookUp(Employees,EmpID=Gallery14.Selected.Employee_ID,'Promotion Velocity')*100)/3) + ((Int(Gallery14.Selected.Rating_Numeric)*5)/3) + 20,0) & "%"
+            Visible: =expandCollapse
+            Width: =186
+            X: =1164
+            Y: =171
+            ZIndex: =74
+
+        Rectangle5_6 As rectangle:
+            Fill: =RGBA(92, 35, 145, 1)
+            Height: =72
+            Visible: =expandCollapse
+            Width: =2
+            X: =957
+            Y: =303
+            ZIndex: =75
+
+        Label37_12 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =28
+            OnSelect: =
+            PaddingTop: =2
+            Size: =10.4
+            Text: ="Talent Rank"
+            Visible: =expandCollapse
+            Width: =180
+            X: =963
+            Y: =301
+            ZIndex: =76
+
+        Label37_13 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            Height: =28
+            PaddingTop: =3
+            Size: =13.5
+            Text: ="0 - 5"
+            Visible: =expandCollapse
+            Width: =137
+            X: =963
+            Y: =321
+            ZIndex: =77
+
+        Label38_6 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =43
+            PaddingTop: =10
+            Size: =19.5
+            Text: =Gallery14.Selected.Rating_Numeric
+            Visible: =expandCollapse
+            Width: =137
+            X: =963
+            Y: =337
+            ZIndex: =79
+
+        Gallery2_4 As gallery.galleryHorizontal:
+            Height: =53
+            Items: =viewsTwo
+            OnSelect: |-
+                =If(
+                    Gallery2_4.Selected.Value = "Details",
+                    Set(
+                        notes,
+                        false
+                    );
+                    Set(
+                        expandCollapse,
+                        true
+                    ),
+                    Set(
+                        notes,
+                        true
+                    );
+                    Set(
+                        expandCollapse,
+                        false
+                    )
+                )
+            TemplateSize: =90
+            Visible: =expandCollapse || notes
+            Width: =450
+            X: =916
+            Y: =130
+            ZIndex: =108
+
+            Label8_4 As label:
+                Align: =Align.Center
+                Font: =Font.'Segoe UI'
+                FontWeight: =If(ThisItem.IsSelected,FontWeight.Semibold,FontWeight.Normal)
+                Height: =43
+                OnSelect: =Select(Parent)
+                PaddingLeft: =0
+                Size: =11
+                Text: =ThisItem.Value
+                Width: =120
+                ZIndex: =1
+
+            Rectangle1_4 As rectangle:
+                Fill: =RGBA(0, 120, 212, 1)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Visible: =ThisItem.IsSelected
+                Width: =60
+                X: =25
+                Y: =42
+                ZIndex: =2
+
+        Rectangle7 As rectangle:
+            Fill: =RGBA(198, 198, 198, 1)
+            Height: =1
+            Visible: =expandCollapse
+            Width: =416
+            X: =940
+            Y: =279
+            ZIndex: =116
+
+        Rectangle7_1 As rectangle:
+            Fill: =RGBA(198, 198, 198, 1)
+            Height: =1
+            Visible: =expandCollapse
+            Width: =416
+            X: =940
+            Y: =520
+            ZIndex: =117
+
+        Button8_7 As button:
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(250, 250, 250, 1)
+            Height: =91
+            Text: =""
+            Visible: =expandCollapse
+            Width: =200
+            X: =938
+            Y: =398
+            ZIndex: =123
+
+        Label37_9 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            Height: =28
+            PaddingTop: =3
+            Size: =13.5
+            Text: ="0 - 100"
+            Visible: =expandCollapse
+            Width: =137
+            X: =963
+            Y: =424
+            ZIndex: =124
+
+        Label38_4 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =43
+            PaddingTop: =10
+            Size: =19.5
+            Text: |
+                =LookUp(Employees,EmpID=Gallery14.Selected.Employee_ID,'Community Engagement Score')
+            Visible: =expandCollapse
+            Width: =137
+            X: =963
+            Y: =440
+            ZIndex: =125
+
+        Button8_8 As button:
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(250, 250, 250, 1)
+            Height: =91
+            Text: =""
+            Visible: =expandCollapse
+            Width: =200
+            X: =1154
+            Y: =297
+            ZIndex: =126
+
+        Rectangle5_5 As rectangle:
+            Fill: =RGBA(92, 35, 145, 1)
+            Height: =72
+            Visible: =expandCollapse
+            Width: =2
+            X: =1168
+            Y: =303
+            ZIndex: =127
+
+        Label37_10 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =28
+            OnSelect: =
+            PaddingTop: =2
+            Size: =10.5
+            Text: ="Promotion Velocity"
+            Visible: =expandCollapse
+            Width: =180
+            X: =1174
+            Y: =301
+            ZIndex: =128
+
+        Label37_11 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            Height: =26
+            PaddingTop: =3
+            Size: =13.5
+            Text: ="Promotions per Year"
+            Visible: =expandCollapse
+            Width: =175
+            X: =1174
+            Y: =321
+            ZIndex: =129
+
+        Label38_5 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =43
+            PaddingTop: =10
+            Size: =19.5
+            Text: |
+                =LookUp(Employees,EmpID=Gallery14.Selected.Employee_ID,'Promotion Velocity')
+            Visible: =expandCollapse
+            Width: =137
+            X: =1174
+            Y: =337
+            ZIndex: =130
+
+        Rectangle5_4 As rectangle:
+            Fill: =RGBA(92, 35, 145, 1)
+            Height: =72
+            Visible: =expandCollapse
+            Width: =2
+            X: =957
+            Y: =411
+            ZIndex: =157
+
+        Label37_8 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =28
+            OnSelect: =
+            PaddingTop: =2
+            Size: =10
+            Text: ="Community Engagement"
+            Visible: =expandCollapse
+            Width: =180
+            X: =963
+            Y: =406
+            ZIndex: =158
+
+    grpNominationHeader As group:
+        Height: =5
+        Width: =5
+        X: =80
+        Y: =80
+        ZIndex: =159
+
+        htmlTopShadow_2 As htmlViewer:
+            Height: =256
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 0px;
+                    width: " & htmlTopShadow_2.Width & "px;
+                    height: " & htmlTopShadow_2.Height - 30 & "px;
+                    background: linear-gradient(180deg, #3E8EED 0%, rgba(114, 172, 241, 0) 100%);'>
+                </div>"
+            Width: =1376
+            X: =-5
+            Y: =21
+            ZIndex: =41
+
+        Gallery15_1 As gallery.galleryHorizontal:
+            Height: =181
+            Items: ='MS Videos'
+            ShowScrollbar: =false
+            TemplateSize: =If(Self.Layout = Layout.Horizontal, Min(320, Self.Width - 60), Min(320, Self.Height - 60))
+            Width: =607
+            X: =750
+            Y: =42
+            ZIndex: =42
+
+            Video2_1 As videoPlayback:
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =171
+                Image: =ThisItem.'Link to item'
+                ShowControls: =false
+                Width: =296
+                X: =24
+                ZIndex: =1
+
+        Label44 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =102
+            Size: =24
+            Text: =Office365Users.MyProfile().GivenName & ", let's find the next group of leaders"
+            Width: =441
+            X: =248
+            Y: =88
+            ZIndex: =43
+
+        Image18 As image:
+            BorderColor: =RGBA(255, 255, 255, 1)
+            BorderThickness: =2
+            Height: =148
+            Image: =User().Image
+            RadiusBottomLeft: =148
+            RadiusBottomRight: =148
+            RadiusTopLeft: =148
+            RadiusTopRight: =148
+            Width: =148
+            X: =76
+            Y: =65
+            ZIndex: =44
+
+    grpElligableEmployees As group:
+        Height: =5
+        Width: =5
+        X: =80
+        Y: =80
+        ZIndex: =159
+
+        Label63_17 As label:
+            Color: =RGBA(104, 104, 104, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =0
+            Size: =9
+            Text: ="Season"
+            Width: =61
+            X: =285
+            Y: =264
+            ZIndex: =1
+
+        Rectangle8 As rectangle:
+            Fill: =RGBA(104, 104, 104, 1)
+            Height: =10
+            Width: =1
+            X: =118
+            Y: =280
+            ZIndex: =2
+
+        Rectangle8_1 As rectangle:
+            Fill: =RGBA(104, 104, 104, 1)
+            Height: =10
+            Width: =1
+            X: =276
+            Y: =280
+            ZIndex: =3
+
+        Label63_13 As label:
+            Color: =RGBA(104, 104, 104, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =0
+            Size: =9
+            Text: ="Total"
+            Width: =61
+            X: =56
+            Y: =266
+            ZIndex: =4
+
+        Label63_15 As label:
+            Color: =RGBA(104, 104, 104, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =0
+            Size: =9
+            Text: ="First time nominations"
+            Width: =127
+            X: =126
+            Y: =265
+            ZIndex: =5
+
+        Label63_16 As label:
+            Color: =RGBA(104, 104, 104, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =9
+            Text: ="64%"
+            Width: =44
+            X: =248
+            Y: =265
+            ZIndex: =6
+
+        Label63_18 As label:
+            Color: =RGBA(104, 104, 104, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =9
+            Text: ="Q1-Q3 2023"
+            Width: =81
+            X: =327
+            Y: =264
+            ZIndex: =7
+
+        Rectangle8_2 As rectangle:
+            Fill: =RGBA(104, 104, 104, 1)
+            Height: =10
+            Width: =1
+            X: =398
+            Y: =280
+            ZIndex: =8
+
+        Label36_3 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Elligable Employees"
+            Width: =168
+            X: =55
+            Y: =244
+            ZIndex: =118
+
+        Label63_14 As label:
+            Color: =RGBA(104, 104, 104, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =9
+            Text: =CountRows('Employee Program Nominations') & "/50"
+            Width: =44
+            X: =86
+            Y: =266
+            ZIndex: =119
+
+    grpNominationGallery As group:
+        Height: =5
+        Width: =5
+        X: =80
+        Y: =80
+        ZIndex: =159
+
+        Label36_15 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Notes"
+            Width: =123
+            X: =975
+            Y: =297
+            ZIndex: =17
+
+        Label36_14 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Score details"
+            Width: =123
+            X: =864
+            Y: =297
+            ZIndex: =40
+
+        Label36_10 As label:
+            Align: =Align.Right
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Rank Score"
+            Width: =123
+            X: =683
+            Y: =295
+            ZIndex: =47
+
+        Label36_9 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Status"
+            Width: =200
+            X: =562
+            Y: =295
+            ZIndex: =49
+
+        Label36_8 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Title"
+            Width: =200
+            X: =334
+            Y: =295
+            ZIndex: =51
+
+        Label36_2 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Nominee"
+            Width: =168
+            X: =112
+            Y: =297
+            ZIndex: =56
+
+        "Gallery14 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+            Height: =431
+            Items: =If(Dropdown2.Selected.Value="All Employees",FirstN(workerInfo,200),If(Dropdown2.Selected.Value="System Recommendations",Filter(workerInfo,RoundDown((LookUp(Employees,EmpID=Employee_ID,'Community Engagement Score')/3)+((LookUp(Employees,EmpID=Employee_ID,'Promotion Velocity')*100)/3) + ((Int(Rating_Numeric)*5)/3) + 20,0)>70)))
+            Layout: =Layout.Vertical
+            ShowScrollbar: =false
+            TemplatePadding: =0
+            TemplateSize: =68
+            Width: =990
+            X: =39
+            Y: =337
+            ZIndex: =57
+
+            Image6 As image:
+                Height: =40
+                Image: ='⚪️ C. Large (52X52)'
+                OnSelect: =Select(Parent)
+                Width: =32
+                X: =68
+                Y: =6
+                ZIndex: =1
+
+            Checkbox1 As checkbox:
+                CheckboxBorderColor: =RGBA(0, 0, 0, 1)
+                CheckboxSize: =20
+                Default: =ThisItem in compareList
+                DisabledBorderColor: =
+                FocusedBorderColor: =
+                Height: =45
+                HoverBorderColor: =
+                OnCheck: =Collect(compareList,ThisItem)
+                OnSelect: =Select(Parent)
+                OnUncheck: =Remove(compareList,ThisItem)
+                PressedBorderColor: =Color.White
+                PressedFill: =
+                Text: =""
+                Width: =37
+                X: =15
+                ZIndex: =6
+
+            Label41 As label:
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =ThisItem.Full_Name
+                Width: =187
+                X: =115
+                Y: =5
+                ZIndex: =7
+
+            Label42 As label:
+                Color: =
+                Font: =Font.'Segoe UI'
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =ThisItem.Job
+                Width: =222
+                X: =295
+                Y: =5
+                ZIndex: =8
+
+            Label42_1 As label:
+                Color: =
+                Font: =Font.'Segoe UI'
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =If(IsBlank(First(Filter('Employee Program Nominations',Program.Name=Gallery13.Selected.Name && Employee.EmpID = ThisItem.Employee_ID)).'Nomination Status'),"Not Nominated",First(Filter('Employee Program Nominations',Program.Name=Gallery13.Selected.Name && Employee.EmpID = ThisItem.Employee_ID)).'Nomination Status')
+                Width: =166
+                X: =517
+                Y: =5
+                ZIndex: =9
+
+            Label42_2 As label:
+                Align: =Align.Right
+                Color: =
+                Font: =Font.'Segoe UI'
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =RoundDown((LookUp(Employees,EmpID=ThisItem.Employee_ID,'Community Engagement Score')/3)+((LookUp(Employees,EmpID=ThisItem.Employee_ID,'Promotion Velocity')*100)/3) + ((Int(ThisItem.Rating_Numeric)*5)/3) + 20,0) & "%"
+                Width: =65
+                X: =708
+                Y: =5
+                ZIndex: =10
+
+            Image12 As image:
+                Height: =10
+                Image: =If(RoundDown((LookUp(Employees,EmpID=ThisItem.Employee_ID,'Community Engagement Score')/3)+((LookUp(Employees,EmpID=ThisItem.Employee_ID,'Promotion Velocity')*100)/3) + ((Int(ThisItem.Rating_Numeric)*5)/3) + 20,0)>70,Shape_2,If(RoundDown((LookUp(Employees,EmpID=ThisItem.Employee_ID,'Community Engagement Score')/3)+((LookUp(Employees,EmpID=ThisItem.Employee_ID,'Promotion Velocity')*100)/3) + ((Int(ThisItem.Rating_Numeric)*5)/3) + 20,0)>40 &&RoundDown((LookUp(Employees,EmpID=ThisItem.Employee_ID,'Community Engagement Score')/3)+((LookUp(Employees,EmpID=ThisItem.Employee_ID,'Promotion Velocity')*100)/3) + ((Int(ThisItem.Rating_Numeric)*5)/3) + 20,0)<70,Shape_1,Shape))
+                OnSelect: =Select(Parent)
+                Width: =20
+                X: =713
+                Y: =20
+                ZIndex: =11
+
+            Label43 As label:
+                Color: =RGBA(0, 120, 212, 1)
+                Font: =Font.'Segoe UI'
+                Height: =50
+                OnSelect: =Set(timerStart,true);Set(expandCollapse,false);Set(background,true)
+                Size: =10.5
+                Text: ="View"
+                Width: =95
+                X: =827
+                ZIndex: =12
+
+            Button7_1 As button:
+                Fill: =RGBA(0, 0, 0, 0)
+                HoverFill: =
+                OnSelect: |-
+                    =Set(expandCollapse,true);
+                    ClearCollect(employeesByChart,GroupBy(test2,"chart","recScore"));ClearCollect(employeeDistribution,AddColumns(employeesByChart,"distribution",CountRows(recScore)))
+                Text: =""
+                Width: =63
+                X: =827
+                Y: =4
+                ZIndex: =13
+
+            Label43_2 As label:
+                Color: =RGBA(0, 120, 212, 1)
+                Font: =Font.'Segoe UI'
+                Height: =50
+                OnSelect: =Set(timerStart,true);Set(expandCollapse,false);Set(background,true)
+                Size: =10.5
+                Text: ="View"
+                Width: =77
+                X: =935
+                ZIndex: =14
+
+            Rectangle9 As rectangle:
+                Fill: =RGBA(235, 235, 235, 1)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =1310
+                Y: =67
+                ZIndex: =15
+
+    grpComparePop As group:
+        Height: =5
+        Width: =5
+        X: =80
+        Y: =80
+        ZIndex: =159
+
+        Label50 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            Height: =722
+            Size: =12
+            Text: =""
+            Visible: =compare || nominate || complete
+            Width: =1176
+            X: =190
+            Y: =46
+            ZIndex: =86
+
+        htmlTopShadow_4 As htmlViewer:
+            Height: =166
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 0px;
+                    width: " & htmlTopShadow_4.Width & "px;
+                    height: " & htmlTopShadow_4.Height - 30 & "px;
+                    background: linear-gradient(180deg, #3E8EED 0%, rgba(114, 172, 241, 0) 100%);'>
+                </div>"
+            Visible: =compare || nominate || complete
+            Width: =1186
+            X: =185
+            Y: =39
+            ZIndex: =87
+
+        Icon7_1 As icon.Cancel:
+            Color: =RGBA(0, 0, 0, 1)
+            Height: =17
+            Icon: =Icon.Cancel
+            OnSelect: =Set(compare,false);Set(nominate,false)
+            Visible: =compare || nominate
+            Width: =17
+            X: =1333
+            Y: =60
+            ZIndex: =88
+
+        "Gallery16 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver4.0'":
+            Height: =627
+            Items: =compareList
+            TemplatePadding: =0
+            TemplateSize: =230
+            Visible: =compare
+            Width: =948
+            X: =398
+            Y: =136
+            ZIndex: =89
+
+            Image14 As image:
+                Height: =63
+                Image: ='⚪️ C. Large (52X52)'
+                OnSelect: =Select(Parent)
+                Width: =88
+                X: =(Parent.TemplateWidth / 2) - (Self.Width / 2)
+                Y: =36
+                ZIndex: =1
+
+            Title8 As label:
+                Align: =Align.Center
+                Color: =RGBA(23, 23, 23, 1)
+                Font: =Font.'Segoe UI'
+                Height: =Self.Size * 1.8
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10.5
+                Text: =ThisItem.Full_Name
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Parent.TemplateWidth - 64
+                X: =32
+                Y: =105
+                ZIndex: =2
+
+            Subtitle1 As label:
+                Align: =Align.Center
+                Color: =RGBA(100, 100, 100, 1)
+                Font: =Font.'Segoe UI'
+                Height: =Self.Size * 1.8
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =9
+                Text: =ThisItem.Job_Profile_Name
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Title8.Width
+                X: =Title8.X
+                Y: =125
+                ZIndex: =3
+
+            Button10 As button:
+                BorderColor: =RGBA(235, 235, 235, 1)
+                BorderThickness: =1
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =155
+                HoverColor: =
+                HoverFill: =
+                OnSelect: =Select(Parent)
+                Text: =""
+                Width: =182
+                X: =25
+                Y: =30
+                ZIndex: =4
+
+            Label56 As label:
+                Align: =Align.Center
+                Font: =Font.'Segoe UI'
+                OnSelect: =Select(Parent)
+                Size: =16.5
+                Text: =LookUp(test2,Employee_ID=ThisItem.Employee_ID,recScore)&"%"
+                Width: =230
+                Y: =187
+                ZIndex: =8
+
+            Label56_1 As label:
+                Align: =Align.Center
+                Font: =Font.'Segoe UI'
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =ThisItem.Rating_Numeric
+                Width: =230
+                Y: =250
+                ZIndex: =9
+
+            Label56_2 As label:
+                Align: =Align.Center
+                Font: =Font.'Segoe UI'
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =LookUp(Employees,EmpID=ThisItem.Employee_ID,'Community Engagement Score')
+                Width: =230
+                Y: =313
+                ZIndex: =10
+
+            Label56_3 As label:
+                Align: =Align.Center
+                Font: =Font.'Segoe UI'
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =LookUp(Employees,EmpID=ThisItem.Employee_ID,'Promotion Velocity')
+                Width: =230
+                Y: =376
+                ZIndex: =11
+
+            Label56_4 As label:
+                Align: =Align.Center
+                Font: =Font.'Segoe UI'
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =ThisItem.'Compa-Ratio'
+                Width: =230
+                Y: =434
+                ZIndex: =12
+
+            Label56_5 As label:
+                Align: =Align.Center
+                Font: =Font.'Segoe UI'
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =RandBetween(1,20) & " Years at Company"
+                Width: =230
+                Y: =492
+                ZIndex: =13
+
+            Subtitle1_1 As label:
+                Align: =Align.Center
+                Color: =RGBA(23, 23, 23, 1)
+                Font: =Font.'Segoe UI'
+                Height: =14
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =9
+                Text: =RandBetween(1,20) & "yrs"
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =compare
+                Width: =24
+                X: =58
+                Y: =148
+                ZIndex: =14
+
+            Checkbox2 As checkbox:
+                CheckboxBorderColor: =RGBA(0, 0, 0, 1)
+                CheckboxSize: =25
+                Default: =ThisItem in nominateList
+                Font: =Font.'Segoe UI'
+                OnCheck: =Collect(nominateList,ThisItem)
+                OnSelect: =Select(Parent)
+                OnUncheck: =Remove(nominateList,ThisItem)
+                Size: =10.5
+                Text: ="Nominate"
+                X: =53
+                Y: =562
+                ZIndex: =15
+
+            Image22 As image:
+                Height: =12
+                Image: ='Shape (26)'
+                OnSelect: =Select(Parent)
+                Visible: =compare
+                Width: =9
+                X: =46
+                Y: =149
+                ZIndex: =16
+
+            Subtitle1_8 As label:
+                Align: =Align.Center
+                Color: =RGBA(23, 23, 23, 1)
+                Font: =Font.'Segoe UI'
+                Height: =14
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =9
+                Text: =RandBetween(1,30)
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =compare
+                Width: =24
+                X: =107
+                Y: =148
+                ZIndex: =17
+
+            Image22_1 As image:
+                Height: =12
+                Image: ='People Community'
+                OnSelect: =Select(Parent)
+                Visible: =compare
+                Width: =12
+                X: =97
+                Y: =149
+                ZIndex: =18
+
+            Subtitle1_9 As label:
+                Align: =Align.Center
+                Color: =RGBA(65, 141, 237, 1)
+                Font: =Font.'Segoe UI'
+                Height: =14
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =9
+                Text: ="Profile"
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =compare
+                Width: =41
+                X: =157
+                Y: =148
+                ZIndex: =19
+
+            Image22_2 As image:
+                Height: =12
+                Image: ='Shape (27)'
+                OnSelect: =Select(Parent)
+                Visible: =compare
+                Width: =9
+                X: =145
+                Y: =149
+                ZIndex: =20
+
+            Rectangle11 As rectangle:
+                Fill: =RGBA(235, 235, 235, 1)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =230
+                Y: =240
+                ZIndex: =21
+
+            Rectangle11_1 As rectangle:
+                Fill: =RGBA(235, 235, 235, 1)
+                Height: =0
+                OnSelect: =Select(Parent)
+                Width: =230
+                Y: =295
+                ZIndex: =22
+
+            Rectangle11_2 As rectangle:
+                Fill: =RGBA(235, 235, 235, 1)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =230
+                Y: =363
+                ZIndex: =23
+
+            Rectangle11_3 As rectangle:
+                Fill: =RGBA(235, 235, 235, 1)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =230
+                Y: =429
+                ZIndex: =24
+
+            Rectangle11_4 As rectangle:
+                Fill: =RGBA(235, 235, 235, 1)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =230
+                Y: =487
+                ZIndex: =25
+
+            Rectangle11_5 As rectangle:
+                Fill: =RGBA(235, 235, 235, 1)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =230
+                Y: =550
+                ZIndex: =26
+
+            Rectangle11_6 As rectangle:
+                Fill: =RGBA(235, 235, 235, 1)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =230
+                Y: =304
+                ZIndex: =27
+
+            Icon12 As icon.CancelBadge:
+                Color: =RGBA(23, 23, 23, 1)
+                Height: =20
+                Icon: =Icon.CancelBadge
+                OnSelect: =Remove(compareList,ThisItem)
+                Width: =20
+                X: =196
+                Y: =22
+                ZIndex: =28
+
+        Label52 As label:
+            Align: =Align.Center
+            Font: =Font.'Segoe UI'
+            Size: =16.5
+            Text: ="Total Score"
+            Visible: =compare
+            Width: =242
+            X: =190
+            Y: =327
+            ZIndex: =90
+
+        Label52_1 As label:
+            Align: =Align.Center
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =10.5
+            Text: ="Talent Rank"
+            Visible: =compare
+            Width: =242
+            X: =190
+            Y: =390
+            ZIndex: =91
+
+        Label52_2 As label:
+            Align: =Align.Center
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =10.5
+            Text: ="Community Engagement"
+            Visible: =compare
+            Width: =242
+            X: =190
+            Y: =453
+            ZIndex: =92
+
+        Label52_3 As label:
+            Align: =Align.Center
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =10.5
+            Text: ="Promotion Velocity"
+            Visible: =compare
+            Width: =242
+            X: =190
+            Y: =516
+            ZIndex: =93
+
+        Label52_4 As label:
+            Align: =Align.Center
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =10.5
+            Text: ="Comp Ratio"
+            Visible: =compare
+            Width: =242
+            X: =190
+            Y: =574
+            ZIndex: =94
+
+        Label52_5 As label:
+            Align: =Align.Center
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =10.5
+            Text: ="Years at Company"
+            Visible: =compare
+            Width: =242
+            X: =190
+            Y: =632
+            ZIndex: =95
+
+        Button11 As button:
+            Fill: =RGBA(0, 120, 212, 1)
+            Height: =27
+            OnSelect: =Set(compare,false);Set(nominate,true)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =10.5
+            Text: ="Next"
+            Visible: =compare
+            Width: =59
+            X: =275
+            Y: =713
+            ZIndex: =96
+
+        Label40 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =18
+            Text: ="Compare talent"
+            Visible: =compare
+            Width: =188
+            X: =223
+            Y: =68
+            ZIndex: =131
+
+        Label46 As label:
+            Font: =Font.'Segoe UI'
+            Height: =21
+            Size: =10.5
+            Text: ="Use the following to help inform your decision as to whether or not to push someone forward in the process"
+            Visible: =compare
+            Width: =704
+            X: =223
+            Y: =105
+            ZIndex: =132
+
+    grpApprovePop As group:
+        Height: =5
+        Width: =5
+        X: =80
+        Y: =80
+        ZIndex: =159
+
+        Label53 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =18
+            Text: ="Approve for the leadership program"
+            Visible: =nominate
+            Width: =415
+            X: =246
+            Y: =68
+            ZIndex: =97
+
+        "Gallery16_1 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver4.0'":
+            Height: =176
+            Items: =nominateList
+            ShowScrollbar: =false
+            TemplateFill: =
+            TemplatePadding: =0
+            TemplateSize: =230
+            Visible: =nominate
+            Width: =948
+            X: =226
+            Y: =169
+            ZIndex: =98
+
+            Image14_1 As image:
+                BorderColor: =RGBA(255, 255, 255, 1)
+                BorderThickness: =1
+                Height: =63
+                Image: ='⚪️ C. Large (52X52)'
+                OnSelect: =Select(Parent)
+                Width: =88
+                X: =(Parent.TemplateWidth / 2) - (Self.Width / 2)
+                Y: =16
+                ZIndex: =1
+
+            Title8_1 As label:
+                Align: =Align.Center
+                Font: =Font.'Segoe UI'
+                Height: =Self.Size * 1.8
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =14
+                Text: =ThisItem.Full_Name
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Parent.TemplateWidth - 64
+                X: =32
+                Y: =80
+                ZIndex: =2
+
+            Button10_1 As button:
+                BorderColor: =If(ThisItem.IsSelected,RGBA(65,141,237,1),Color.LightGray)
+                BorderThickness: =1
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =155
+                HoverColor: =
+                HoverFill: =
+                OnSelect: =Select(Parent)
+                Text: =""
+                Width: =182
+                X: =24
+                Y: =5
+                ZIndex: =4
+
+            Subtitle1_2 As label:
+                Align: =Align.Center
+                Color: =RGBA(23, 23, 23, 1)
+                Font: =Font.'Segoe UI'
+                Height: =14
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =9
+                Text: =RandBetween(1,20) & "yrs"
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =nominate
+                Width: =24
+                X: =51
+                Y: =125
+                ZIndex: =5
+
+            Image22_3 As image:
+                Height: =12
+                Image: ='Shape (26)'
+                OnSelect: =Select(Parent)
+                Visible: =nominate
+                Width: =9
+                X: =39
+                Y: =126
+                ZIndex: =6
+
+            Subtitle1_10 As label:
+                Align: =Align.Center
+                Color: =RGBA(23, 23, 23, 1)
+                Font: =Font.'Segoe UI'
+                Height: =14
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =9
+                Text: =RandBetween(1,30)
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =nominate
+                Width: =24
+                X: =100
+                Y: =125
+                ZIndex: =7
+
+            Image22_4 As image:
+                Height: =12
+                Image: ='People Community'
+                OnSelect: =Select(Parent)
+                Visible: =nominate
+                Width: =12
+                X: =90
+                Y: =126
+                ZIndex: =8
+
+            Subtitle1_11 As label:
+                Align: =Align.Center
+                Color: =RGBA(65, 141, 237, 1)
+                Font: =Font.'Segoe UI'
+                Height: =14
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =9
+                Text: ="Profile"
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =nominate
+                Width: =41
+                X: =150
+                Y: =125
+                ZIndex: =9
+
+            Image22_5 As image:
+                Height: =12
+                Image: ='Shape (27)'
+                OnSelect: =Select(Parent)
+                Visible: =nominate
+                Width: =9
+                X: =138
+                Y: =126
+                ZIndex: =10
+
+            Subtitle1_3 As label:
+                Align: =Align.Center
+                Color: =RGBA(100, 100, 100, 1)
+                Font: =Font.'Segoe UI'
+                Height: =Self.Size * 1.8
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =9
+                Text: =ThisItem.Job_Profile_Name
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =nominate
+                Width: =Title8.Width
+                X: =32
+                Y: =105
+                ZIndex: =11
+
+        Label54 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Name"
+            Visible: =nominate
+            X: =246
+            Y: =409
+            ZIndex: =99
+
+        Icon8 As icon.ChevronLeft:
+            Color: =RGBA(0, 0, 0, 1)
+            Height: =18
+            Icon: =Icon.ChevronLeft
+            OnSelect: =Set(nominate,false);Set(compare,true)
+            Visible: =nominate
+            Width: =18
+            X: =206
+            Y: =60
+            ZIndex: =100
+
+        Label54_1 As label:
+            BorderColor: =RGBA(96, 94, 92, 1)
+            BorderThickness: =1
+            Font: =Font.'Segoe UI'
+            Height: =24
+            Size: =10.5
+            Text: =Gallery16_1.Selected.Full_Name
+            Visible: =nominate
+            Width: =255
+            X: =246
+            Y: =445
+            ZIndex: =101
+
+        Label54_2 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Nomination Justification"
+            Visible: =nominate
+            Width: =263
+            X: =246
+            Y: =472
+            ZIndex: =102
+
+        TextInput6 As text:
+            BorderColor: =RGBA(96, 94, 92, 1)
+            BorderThickness: =1
+            Color: =RGBA(96, 94, 92, 1)
+            Default: =""
+            Font: =Font.'Segoe UI'
+            Height: =118
+            HintText: ="Reasoning for nomination"
+            Mode: =TextMode.MultiLine
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =10.5
+            Visible: =nominate
+            Width: =829
+            X: =246
+            Y: =509
+            ZIndex: =103
+
+        Checkbox3 As checkbox:
+            CheckboxBorderColor: =RGBA(96, 94, 92, 1)
+            CheckboxSize: =15
+            Font: =Font.'Segoe UI'
+            Size: =10.5
+            Text: ="Apply to all canidates"
+            Visible: =nominate
+            Width: =166
+            X: =248
+            Y: =330
+            ZIndex: =104
+
+        Button11_1 As button:
+            Fill: =RGBA(0, 120, 212, 1)
+            Height: =27
+            OnSelect: |-
+                =ForAll(nominateList,Patch([@'Employee Program Nominations'],Defaults([@'Employee Program Nominations']),{'Nomination Date':Today(),Justification: TextInput6.Text, Employee:LookUp(Employees,EmpID=nominateList[@Employee_ID]),Program:LookUp('Leadership Programs',Name=Gallery13.Selected.Name)}));Set(nominate,false);Set(complete,true)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =10.5
+            Text: ="Submit"
+            Visible: =nominate
+            Width: =80
+            X: =239
+            Y: =733
+            ZIndex: =105
+
+        Label53_4 As label:
+            Font: =Font.'Segoe UI'
+            Height: =21
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="The following will be approved for the leadership program"
+            Visible: =nominate
+            Width: =682
+            X: =246
+            Y: =105
+            ZIndex: =133
+
+        Label54_13 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Nomination Date"
+            Visible: =nominate
+            X: =533
+            Y: =408
+            ZIndex: =134
+
+        Label54_14 As label:
+            BorderColor: =RGBA(96, 94, 92, 1)
+            BorderThickness: =1
+            Font: =Font.'Segoe UI'
+            Height: =24
+            Size: =10.5
+            Text: =Today()
+            Visible: =nominate
+            Width: =255
+            X: =533
+            Y: =444
+            ZIndex: =135
+
+        Label53_5 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =13.5
+            Text: ="Justification"
+            Visible: =nominate
+            Width: =415
+            X: =246
+            Y: =373
+            ZIndex: =136
+
+        Label62 As label:
+            Fill: =RGBA(250, 250, 250, 1)
+            Height: =68
+            Text: =""
+            Visible: =nominate
+            Width: =829
+            X: =246
+            Y: =643
+            ZIndex: =137
+
+        Label54_15 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =25
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="The following people will be notified"
+            Visible: =nominate
+            Width: =263
+            X: =264
+            Y: =644
+            ZIndex: =138
+
+        Button12 As button:
+            BorderColor: =RGBA(229, 229, 229, 1)
+            BorderThickness: =1
+            Color: =RGBA(23, 23, 23, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =25
+            PaddingLeft: =10
+            Size: =10.5
+            Text: ="Juna Alanis"
+            Visible: =nominate
+            X: =264
+            Y: =673
+            ZIndex: =139
+
+        Image23 As image:
+            Height: =27
+            Image: =image
+            RadiusBottomLeft: =27
+            RadiusBottomRight: =27
+            RadiusTopLeft: =27
+            RadiusTopRight: =27
+            Visible: =nominate
+            Width: =27
+            X: =264
+            Y: =672
+            ZIndex: =140
+
+        Button12_7 As button:
+            BorderColor: =RGBA(229, 229, 229, 1)
+            BorderThickness: =1
+            Color: =RGBA(23, 23, 23, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =25
+            PaddingLeft: =10
+            Size: =10.5
+            Text: ="Alanis Chakav"
+            Visible: =nominate
+            X: =448
+            Y: =673
+            ZIndex: =141
+
+        Image23_1 As image:
+            Height: =27
+            Image: ='image 353'
+            RadiusBottomLeft: =27
+            RadiusBottomRight: =27
+            RadiusTopLeft: =27
+            RadiusTopRight: =27
+            Visible: =nominate
+            Width: =27
+            X: =448
+            Y: =672
+            ZIndex: =142
+
+        Button12_8 As button:
+            BorderColor: =RGBA(229, 229, 229, 1)
+            BorderThickness: =1
+            Color: =RGBA(23, 23, 23, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =25
+            PaddingLeft: =10
+            Size: =10.5
+            Text: ="Mario Blach"
+            Visible: =nominate
+            X: =634
+            Y: =673
+            ZIndex: =143
+
+        Image23_2 As image:
+            Height: =27
+            Image: ='image 348'
+            RadiusBottomLeft: =27
+            RadiusBottomRight: =27
+            RadiusTopLeft: =27
+            RadiusTopRight: =27
+            Visible: =nominate
+            Width: =27
+            X: =634
+            Y: =672
+            ZIndex: =144
+
+        Button12_9 As button:
+            BorderColor: =RGBA(229, 229, 229, 1)
+            BorderThickness: =1
+            Color: =RGBA(23, 23, 23, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =25
+            PaddingLeft: =10
+            Size: =10.5
+            Text: ="Sarah Mhallo"
+            Visible: =nominate
+            X: =831
+            Y: =673
+            ZIndex: =145
+
+        Image23_3 As image:
+            Height: =27
+            Image: ='image 2'
+            RadiusBottomLeft: =27
+            RadiusBottomRight: =27
+            RadiusTopLeft: =27
+            RadiusTopRight: =27
+            Visible: =nominate
+            Width: =27
+            X: =831
+            Y: =672
+            ZIndex: =146
+
+    grpSuccessPop As group:
+        Height: =5
+        Width: =5
+        X: =80
+        Y: =80
+        ZIndex: =159
+
+        Button14 As button:
+            BorderThickness: =1
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            Height: =30
+            OnSelect: =Set(complete,false)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =10.5
+            Text: ="Close"
+            Visible: =complete
+            Width: =106
+            X: =234
+            Y: =714
+            ZIndex: =107
+
+        "Gallery16_4 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver4.0'":
+            Height: =176
+            Items: =nominateList
+            ShowScrollbar: =false
+            TemplateFill: =
+            TemplatePadding: =0
+            TemplateSize: =230
+            Visible: =complete
+            Width: =948
+            X: =214
+            Y: =212
+            ZIndex: =147
+
+            Image14_4 As image:
+                BorderColor: =RGBA(255, 255, 255, 1)
+                BorderThickness: =1
+                Height: =63
+                Image: ='⚪️ C. Large (52X52)'
+                OnSelect: =Select(Parent)
+                Visible: =complete
+                Width: =88
+                X: =(Parent.TemplateWidth / 2) - (Self.Width / 2)
+                Y: =16
+                ZIndex: =1
+
+            Title8_4 As label:
+                Align: =Align.Center
+                Font: =Font.'Segoe UI'
+                Height: =Self.Size * 1.8
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =14
+                Text: =ThisItem.Full_Name
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =complete
+                Width: =Parent.TemplateWidth - 64
+                X: =32
+                Y: =80
+                ZIndex: =2
+
+            Button10_4 As button:
+                BorderColor: =Color.LightGray
+                BorderThickness: =1
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =155
+                HoverColor: =
+                HoverFill: =
+                OnSelect: =Select(Parent)
+                Text: =""
+                Visible: =complete
+                Width: =182
+                X: =24
+                Y: =5
+                ZIndex: =4
+
+            Subtitle1_13 As label:
+                Align: =Align.Center
+                Color: =RGBA(23, 23, 23, 1)
+                Font: =Font.'Segoe UI'
+                Height: =14
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =9
+                Text: =RandBetween(1,20) & "yrs"
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =complete
+                Width: =24
+                X: =51
+                Y: =125
+                ZIndex: =5
+
+            Image22_6 As image:
+                Height: =12
+                Image: ='Shape (26)'
+                OnSelect: =Select(Parent)
+                Visible: =complete
+                Width: =9
+                X: =39
+                Y: =126
+                ZIndex: =6
+
+            Subtitle1_14 As label:
+                Align: =Align.Center
+                Color: =RGBA(23, 23, 23, 1)
+                Font: =Font.'Segoe UI'
+                Height: =14
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =9
+                Text: =RandBetween(1,30)
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =complete
+                Width: =24
+                X: =100
+                Y: =125
+                ZIndex: =7
+
+            Image22_7 As image:
+                Height: =12
+                Image: ='People Community'
+                OnSelect: =Select(Parent)
+                Visible: =complete
+                Width: =12
+                X: =90
+                Y: =126
+                ZIndex: =8
+
+            Subtitle1_15 As label:
+                Align: =Align.Center
+                Color: =RGBA(65, 141, 237, 1)
+                Font: =Font.'Segoe UI'
+                Height: =14
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =9
+                Text: ="Profile"
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =complete
+                Width: =41
+                X: =150
+                Y: =125
+                ZIndex: =9
+
+            Image22_8 As image:
+                Height: =12
+                Image: ='Shape (27)'
+                OnSelect: =Select(Parent)
+                Visible: =complete
+                Width: =9
+                X: =138
+                Y: =126
+                ZIndex: =10
+
+            Subtitle1_12 As label:
+                Align: =Align.Center
+                Color: =RGBA(100, 100, 100, 1)
+                Font: =Font.'Segoe UI'
+                Height: =Self.Size * 1.8
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =9
+                Text: =ThisItem.Job_Profile_Name
+                VerticalAlign: =VerticalAlign.Top
+                Visible: =complete
+                Width: =Title8.Width
+                X: =32
+                Y: =105
+                ZIndex: =11
+
+            Image16 As image:
+                Height: =18
+                Image: ='Shape (28)'
+                OnSelect: =Select(Parent)
+                Width: =18
+                X: =197
+                Y: |
+                    =0
+                ZIndex: =12
+
+        Label53_6 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =31
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="The following will be nominated for the leadership program"
+            Visible: =complete
+            Width: =761
+            X: =234
+            Y: =170
+            ZIndex: =148
+
+        Label53_7 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =31
+            PaddingLeft: =0
+            Size: =18
+            Text: ="Success"
+            Visible: =complete
+            Width: =761
+            X: =234
+            Y: =76
+            ZIndex: =149
+
+        Label53_8 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =31
+            PaddingLeft: =0
+            Size: =13.5
+            Text: ="Next Steps"
+            Visible: =complete
+            Width: =761
+            X: =234
+            Y: =402
+            ZIndex: =150
+
+        Label53_9 As label:
+            Font: =Font.'Segoe UI'
+            Height: =31
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Each nominees manager will be notified via email"
+            Visible: =complete
+            Width: =761
+            X: =254
+            Y: =435
+            ZIndex: =151
+
+        Label53_10 As label:
+            Font: =Font.'Segoe UI'
+            Height: =31
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Business Unit Leaders will be notified and asked to review nominations"
+            Visible: =complete
+            Width: =761
+            X: =254
+            Y: =460
+            ZIndex: =152
+
+        Label53_11 As label:
+            Font: =Font.'Segoe UI'
+            Height: =31
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="After being notified, Business Unit Leaders will approve or reject nominations within a week"
+            Visible: =complete
+            Width: =761
+            X: =254
+            Y: =485
+            ZIndex: =153
+
+        Circle3 As circle:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =5
+            Visible: =complete
+            Width: =5
+            X: =242
+            Y: =448
+            ZIndex: =154
+
+        Circle3_1 As circle:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =5
+            Visible: =complete
+            Width: =5
+            X: =242
+            Y: =473
+            ZIndex: =155
+
+        Circle3_2 As circle:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(0, 0, 0, 1)
+            Height: =5
+            Visible: =complete
+            Width: =5
+            X: =242
+            Y: =498
+            ZIndex: =156
+
+    grpGalOptions As group:
+        Height: =5
+        Width: =5
+        X: =80
+        Y: =80
+        ZIndex: =159
+
+        Dropdown2 As dropdown:
+            BorderColor: =RGBA(255, 255, 255, 1)
+            ChevronBackground: =RGBA(204, 204, 204, 1)
+            ChevronHoverBackground: =
+            Font: =Font.'Segoe UI'
+            Height: =22
+            HoverFill: =
+            Items: =drpdown
+            Size: =11
+            Width: =161
+            X: =890
+            Y: =261
+            ZIndex: =14
+
+        Image15 As image:
+            Height: =18
+            Image: =Vector_3
+            Width: =18
+            X: =660
+            Y: =265
+            ZIndex: =78
+
+        Label51 As label:
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =0
+            Size: =11
+            Text: ="Compare"
+            Width: =66
+            X: =684
+            Y: =254
+            ZIndex: =80
+
+        Button6 As button:
+            Fill: =RGBA(0, 0, 0, 0)
+            HoverFill: =
+            OnSelect: =Set(compare,true)
+            Text: =""
+            Width: =87
+            X: =673
+            Y: =261
+            ZIndex: =81
+
+        Label51_1 As label:
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =0
+            Size: =11
+            Text: ="Approve"
+            Width: =82
+            X: =795
+            Y: =254
+            ZIndex: =82
+
+        Icon6 As icon.Cancel:
+            Color: =RGBA(16, 124, 16, 1)
+            Height: =25
+            Icon: =Icon.Check
+            Width: =18
+            X: =769
+            Y: =263
+            ZIndex: =83
+
+        Button6_1 As button:
+            Fill: =RGBA(0, 0, 0, 0)
+            HoverFill: =
+            OnSelect: =Clear(compareList);Clear(nominateList)
+            Text: =""
+            Width: =87
+            X: =788
+            Y: =256
+            ZIndex: =84
+
+    "'Nav 2_1' As 'Nav 2'":
+        Height: =729
+        Width: =55
+        Y: =39
+        ZIndex: =160
+
+    "'App Links_1' As 'App Links'":
+        Height: =729
+        Visible: =apps
+        Y: =39
+        ZIndex: =161
+
+    ComboBox1_1 As combobox:
+        BorderThickness: =0
+        ChevronBackground: =RGBA(255, 255, 255, 1)
+        DisplayFields: =["Full_Name"]
+        Fill: =RGBA(236, 236, 236, 1)
+        Font: =Font.'Segoe UI'
+        Height: =29
+        InputTextPlaceholder: ="      " & "Search Employees"
+        Items: =workerInfo
+        NoSelectionText: ="      Search Empl0yees"
+        SearchFields: =["Full_Name"]
+        SearchItems: =Search(workerInfo,ComboBox1_1.SearchText,"Full_Name")
+        SelectMultiple: =false
+        Template: =ListItemTemplate.Person
+        Visible: =false
+        X: =519
+        Y: =5
+        ZIndex: =162
+

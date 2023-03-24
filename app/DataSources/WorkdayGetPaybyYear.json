@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "fb4ba3f5-476b-445d-8696-c231eef353c6",
+    "Name": "WorkdayGetPaybyYear",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": "320b1d88-1a09-ed11-82e4-000d3a9cc8d2"
+  }
+]

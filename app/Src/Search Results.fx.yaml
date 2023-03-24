@@ -1,0 +1,411 @@
+"'Search Results' As screen":
+
+    Header_3 As Header:
+
+    "'Nav 2_3' As 'Nav 2'":
+        Height: =726
+        Y: =42
+        ZIndex: =2
+
+    "Breadcrumb1_1 As 'Fluent Breadcrumb (1.0.19)'.pcfdataset":
+        DisplayMode: =DisplayMode.Edit
+        Height: =61
+        Items: |-
+            =Table(
+                {
+                    ItemKey: "1",
+                    ItemDisplayName: "Home",
+                    ItemClickable: true
+                },
+                {
+                    ItemKey: "2",
+                    ItemDisplayName: "People",
+                    ItemClickable: true
+                },
+                {
+                    ItemKey: "3",
+                    ItemDisplayName: searchString,
+                    ItemClickable: true
+                }
+            )
+        Theme: =breadcrumbTheme.palette.neutralLight
+        Width: =1135
+        X: =62
+        Y: =32
+        ZIndex: =3
+
+    "Pivot1_1 As 'Fluent Pivot (1.0.19)'.pcfdataset":
+        DisplayMode: =DisplayMode.Edit
+        Height: =43
+        Items: |
+            =Table(
+              {
+                  ItemKey: "tabFile",
+                  ItemDisplayName: "All"
+              },
+              {
+                  ItemKey: "tabHome",
+                  ItemDisplayName: "People"
+              },
+              {
+                  ItemKey: "tabView",
+                  ItemDisplayName: "Files"
+              },
+              {
+                  ItemKey: "tabAction",
+                  ItemDisplayName: "Images"
+              }
+            )
+        OnChange: |-
+            =Set(pivot,Pivot1_1.Selected.ItemDisplayName);
+            If(
+                pivot = "Compensation",
+                ClearCollect(
+                    bonusInfo,
+                    WorkdayGetEmployeeBonusInfo.Run(
+                        First(
+                            Filter(
+                                workerData,
+                                descriptor = galEmployees.Selected.Worker
+                            )
+                        ).id
+                    )
+                );
+                ClearCollect(
+                    stockInfo,
+                    WorkdayGetEmployeeStockInfo.Run(
+                        First(
+                            Filter(
+                                workerData,
+                                descriptor = galEmployees.Selected.Worker
+                            )
+                        ).id
+                    )
+                ),
+                If(
+                    pivot = "Talent Ranking",
+                    Set(
+                        ReviewDetails,
+                        First(
+                            WorkdayGetReviewHistoryDetails.Run(
+                                First(
+                                    Filter(
+                                        workerData,
+                                        descriptor = galEmployees.Selected.Worker
+                                    )
+                                ).id
+                            ).Report_Entry
+                        )
+                    );Refresh('Promotion Requests')
+                )
+            );Set(currentComp,Last(compData));Set(currentBonus,Last(bonusInfo));Set(currentStock,Last(stockInfo))
+        RenderSize: ='PowerCAT.Pivot.RenderSize'.Normal
+        RenderType: ='PowerCAT.Pivot.RenderType'.PivotLinks
+        Theme: =AppThemeJson
+        Width: =648
+        X: =62
+        Y: =88
+        ZIndex: =4
+
+    "Gallery18 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        Height: =593
+        Items: =Search(workerInfo,searchString,"Full_Name","Employee_ID")
+        Layout: =Layout.Vertical
+        OnSelect: |-
+            =Set(
+                selectedEmployee,
+                ThisItem
+            );
+            ClearCollect(
+                compData,
+                WorkdayGetCompHistory.Run(
+                    First(
+                        Filter(
+                            workerData,
+                            descriptor = ThisItem.Worker
+                        )
+                    ).id
+                )
+            );
+            ClearCollect(
+                feedbackData,
+                WorkdayGetWorkerFeedback.Run(
+                    First(
+                        Filter(
+                            workerData,
+                            descriptor = ThisItem.Worker
+                        )
+                    ).id
+                )
+            );
+            Set(
+                ReviwHistory,
+                First(
+                    WorkdayGetPaybyYear.Run(
+                        First(
+                            Filter(
+                                workerData,
+                                descriptor = ThisItem.Worker
+                            )
+                        ).id
+                    )
+                )
+            );
+            ClearCollect(
+                workerHistory,
+                WorkdayGetWorkerHistory.Run(
+                    First(
+                        Filter(
+                            workerData,
+                            descriptor = ThisItem.Worker
+                        )
+                    ).id
+                ).data
+            );
+            ClearCollect(
+                jobDetails,
+                First(
+                    WorkdayGetJobDetails.Run(
+                        First(
+                            Filter(
+                                workerData,
+                                descriptor = ThisItem.Worker
+                            )
+                        ).id
+                    ).Report_Entry
+                )
+            );
+            Set(
+                JobDev,
+                First(
+                    WorkdayGetJobDevDetails.Run(
+                        First(
+                            Filter(
+                                workerData,
+                                descriptor = galEmployees.Selected.Worker
+                            )
+                        ).id
+                    ).Report_Entry
+                )
+            );
+            Navigate('Profile Screen')
+        TemplatePadding: =0
+        TemplateSize: =125
+        Width: =670
+        X: =62
+        Y: =152
+        ZIndex: =5
+
+        Button25 As button:
+            BorderThickness: =0
+            Fill: =RGBA(250, 250, 250, 1)
+            Height: =115
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Select(Parent)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Text: =""
+            Width: =621
+            X: =10
+            Y: =10
+            ZIndex: =1
+
+        Image31 As image:
+            Height: =65
+            Image: ='default-contact-96x96-2'
+            OnSelect: =Select(Parent)
+            RadiusBottomLeft: =65
+            RadiusBottomRight: =65
+            RadiusTopLeft: =65
+            RadiusTopRight: =65
+            Width: =65
+            X: =28
+            Y: =28
+            ZIndex: =2
+
+        Title19 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =10.5
+            Text: =ThisItem.Full_Name
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - Image31.Width - 104
+            X: =111
+            Y: =33
+            ZIndex: =3
+
+        Subtitle7 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =10.5
+            Text: =ThisItem.Job
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Title19.Width
+            X: =Title19.X
+            Y: =54
+            ZIndex: =4
+
+        Image32 As image:
+            Height: =10
+            Image: ='Shape (51)'
+            OnSelect: =Select(Parent)
+            Width: =10
+            X: =111
+            Y: =80
+            ZIndex: =5
+
+        "AutoWidthLabel3 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: |-
+                ="#323130"
+            Height: =19.9
+            Text: =ThisItem.location
+            Width: =200
+            X: =128
+            Y: =75
+            ZIndex: =6
+
+        Image32_1 As image:
+            Height: =10
+            Image: ='Shape (45)'
+            OnSelect: =Select(Parent)
+            Width: =10
+            X: =AutoWidthLabel3.X+AutoWidthLabel3.AutoWidth +17
+            Y: =80
+            ZIndex: =7
+
+        "AutoWidthLabel3_1 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: |-
+                ="#323130"
+            Height: =18.9
+            Text: =ThisItem.Employee_ID
+            Width: =200
+            X: =Image32_1.X+17
+            Y: =75
+            ZIndex: =8
+
+        Image32_2 As image:
+            Height: =10
+            Image: ='Shape (46)'
+            OnSelect: =Select(Parent)
+            Width: =10
+            X: =AutoWidthLabel3_1.X + AutoWidthLabel3_1.AutoWidth+17
+            Y: =80
+            ZIndex: =9
+
+        "AutoWidthLabel3_2 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: |-
+                ="#323130"
+            Height: =18.9
+            Text: =ThisItem.Employee_ID
+            Width: =200
+            X: =Image32_2.X+17
+            Y: =75
+            ZIndex: =10
+
+        Image33 As image:
+            Height: =18
+            Image: ='Shape (8)'
+            OnSelect: =Select(Parent)
+            Width: =14
+            X: =406
+            Y: =33
+            ZIndex: =11
+
+        Image33_1 As image:
+            Height: =18
+            Image: ='Shape (52)'
+            OnSelect: =Select(Parent)
+            Width: =14
+            X: =406
+            Y: =54
+            ZIndex: =12
+
+        Image33_2 As image:
+            Height: =18
+            Image: ='Shape (12)'
+            OnSelect: =Select(Parent)
+            Width: =14
+            X: =406
+            Y: =75
+            ZIndex: =13
+
+        Title19_1 As label:
+            Color: =RGBA(0, 120, 212, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =10.5
+            Text: =First(Filter(workerData,descriptor=ThisItem.Worker)).primaryWorkEmail
+            VerticalAlign: =VerticalAlign.Top
+            Width: =200
+            Wrap: =false
+            X: =431
+            Y: =32
+            ZIndex: =14
+
+        Title19_2 As label:
+            Color: =RGBA(0, 120, 212, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =10.5
+            Text: =Left(ThisItem.Worker,1) & Right(ThisItem.Worker,7)
+            VerticalAlign: =VerticalAlign.Top
+            Width: =200
+            Wrap: =false
+            X: =431
+            Y: =53
+            ZIndex: =15
+
+        Title19_3 As label:
+            Color: =RGBA(0, 120, 212, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =10.5
+            Text: =First(Filter(workerData,descriptor=ThisItem.Worker)).primaryWorkPhone
+            VerticalAlign: =VerticalAlign.Top
+            Width: =200
+            Wrap: =false
+            X: =411
+            Y: =75
+            ZIndex: =16
+
+    Search_1 As Search:
+        X: =483
+        ZIndex: =6
+

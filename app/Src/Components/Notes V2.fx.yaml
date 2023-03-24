@@ -1,0 +1,1240 @@
+"'Notes V2' As CanvasComponent":
+    Employees: |-
+        =Filter(workerInfo,Full_Name="Ajay Mokashi")
+        //FirstN(workerInfo,10)
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =If(!noteScratch,768,400)
+    OnReset: =Reset(Gallery26)
+    Width: =1366
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    promotionPopBackground_12 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(23, 23,23, .65)
+        Height: =768
+        Text: =""
+        Visible: =If(compInfo || profileInfo,false,If(noteScratch = true,false,true))
+        Width: =1366
+        X: =If(!noteScratch,0,1366)
+        ZIndex: =1
+
+    Label78_4 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =730
+        Text: =""
+        Visible: =If(noteScratch = true,false,true)
+        Width: =410
+        X: =If(!noteScratch,956,1366)
+        Y: =38
+        ZIndex: =2
+
+    Image40_2 As image:
+        Height: =22
+        Image: ='1F3F7_FE0F_Label_1024px_01_01 1'
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,true))
+        Width: =15
+        X: =1192
+        Y: =714
+        ZIndex: =3
+
+    Label79_8 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        Height: =56
+        PaddingLeft: =18
+        PaddingTop: =27
+        Size: =19.5
+        Text: ="Notes"
+        Visible: =If(noteScratch = true,false,true)
+        Width: =214
+        X: =If(!noteScratch,956,1366)
+        Y: =38
+        ZIndex: =4
+
+    "Pivot2_1 As 'Fluent Pivot (1.0.19)'.pcfdataset":
+        DisplayMode: =DisplayMode.Edit
+        Height: =67
+        Items: |-
+            =Table(
+                {
+                    ItemKey: "tabFile",
+                    ItemDisplayName: "New Note"
+                },
+                {
+                    ItemKey: "tabHome",
+                    ItemDisplayName: "All Notes"
+                }
+            )
+        OnChange: =If(Pivot2_1.Selected.ItemDisplayName="All Notes",Set(notesLoadingState,true);ClearCollect(notesTemp,AddColumns(Filter(selectedDataverseEmployee.'Employee Notes',!IsBlank(Note)),"expandCollapse",false));ClearCollect(cats,Choices('Employee Notes'.Category)))
+        OnSelect: =false
+        RenderSize: ='PowerCAT.Pivot.RenderSize'.Normal
+        SelectedKey: =
+        Theme: =AppThemeJson
+        Visible: =If(noteScratch = true,false,If(CountRows('Notes V2'.Employees)>1,false,true))
+        Width: =199
+        X: =If(!noteScratch,963,1366)
+        Y: =96
+        ZIndex: =5
+
+    Image40 As image:
+        Height: =22
+        Image: ='1F512_Locked_1024px_01_01 1'
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,true))
+        Width: =15
+        X: =If(!noteScratch,970,1366)
+        Y: =If(CountRows('Notes V2'.Employees)>1,105,155)
+        ZIndex: =6
+
+    Label79 As label:
+        Font: =Font.'Segoe UI'
+        Size: =10.5
+        Text: =If(Toggle1.Value=true,"Private note","HR only note")
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,true))
+        Width: =120
+        X: =If(!noteScratch,985,1366)
+        Y: =If(CountRows('Notes V2'.Employees)>1,96,146)
+        ZIndex: =7
+
+    Icon11 As icon.Information:
+        Color: =RGBA(0, 100, 191, 1)
+        Height: =12
+        Icon: =Icon.Information
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,true))
+        Width: =12
+        X: =If(!noteScratch,If(Toggle1.Value=true,1070,1075),1366)
+        Y: =If(CountRows('Notes V2'.Employees)>1,112,162)
+        ZIndex: =8
+
+    Toggle1 As toggleSwitch:
+        Default: =true
+        Font: =Font.'Segoe UI'
+        Height: =18
+        Size: =10.5
+        TrueFill: =RGBA(25, 117, 255, 1)
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,true))
+        Width: =66
+        X: =If(!noteScratch,1286,1366)
+        Y: =If(CountRows('Notes V2'.Employees)>1,106,156)
+        ZIndex: =9
+
+    RichTextEditor2 As richTextEditor:
+        BorderColor: =RGBA(235, 235, 235, 1)
+        Default: =scratchPadDefault
+        Height: =If(CountRows('Notes V2'.Employees)>1,450,400)
+        Size: =10.5
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,true))
+        Width: =382
+        X: =If(!noteScratch,970,1366)
+        Y: =If(CountRows('Notes V2'.Employees)>1,148,198)
+        ZIndex: =10
+
+    Button32 As button:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(250, 250, 250, 1)
+        Height: =62
+        RadiusBottomLeft: =3
+        RadiusBottomRight: =3
+        RadiusTopLeft: =3
+        RadiusTopRight: =3
+        Text: =""
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,true))
+        Width: =382
+        X: =If(!noteScratch,970,1366)
+        Y: =620
+        ZIndex: =11
+
+    Label89 As label:
+        Font: =Font.'Segoe UI'
+        Height: =21
+        PaddingLeft: =6
+        PaddingTop: =6
+        Size: =9
+        Text: ="This note will be associated wih the following 360 profiles"
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,true))
+        Width: =382
+        X: =If(!noteScratch,970,1366)
+        Y: =623
+        ZIndex: =12
+
+    Gallery24 As gallery.galleryHorizontal:
+        Height: =38
+        Items: =FirstN('Notes V2'.Employees,10)
+        TemplateSize: =17
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,true))
+        Width: =396
+        X: =If(!noteScratch,962,1366)
+        Y: =641
+        ZIndex: =13
+
+        Image43 As image:
+            Height: =24
+            Image: ='default-contact-96x96-2'
+            OnSelect: =Select(Parent)
+            Width: =24
+            X: =8
+            Y: =2
+            ZIndex: =1
+
+    Circle6 As circle:
+        Fill: =RGBA(243, 242, 241, 1)
+        Height: =24
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,If(CountRows('Notes V2'.Employees)>10,true,false)))
+        Width: =24
+        X: =If(!noteScratch,1195,1366)
+        Y: =666
+        ZIndex: =14
+
+    Icon14_1 As icon.Add:
+        Color: =RGBA(50, 49, 48, 1)
+        Height: =8
+        Icon: =Icon.Add
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,If(CountRows('Notes V2'.Employees)>10,true,false)))
+        Width: =8
+        X: =If(!noteScratch,1199,1366)
+        Y: =673
+        ZIndex: =15
+
+    Label93 As label:
+        Height: =18
+        Size: =9
+        Text: =CountRows('Notes V2'.Employees)-10
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,If(CountRows('Notes V2'.Employees)>10,true,false)))
+        Width: =18
+        X: =If(!noteScratch,1202,1366)
+        Y: =668
+        ZIndex: =16
+
+    Button33 As button:
+        BorderThickness: =0
+        Fill: =RGBA(65, 141, 237, 1)
+        Font: =Font.'Segoe UI'
+        Height: =27
+        OnSelect: |-
+            =ForAll(
+                'Notes V2'.Employees,
+                Patch(
+                    [@'Employee Notes'],
+                    Defaults([@'Employee Notes']),
+                    {
+                        Employee: LookUp(
+                            Employees,
+                            EmpID = Employee_ID
+                        ),
+                        Note: RichTextEditor2.HtmlText,
+                        'Is Private': Toggle1.Value,
+                        Category: ComboBox3.Selected.Value
+                    }
+                )
+            );
+            Concurrent(
+                Reset(RichTextEditor2);
+                ,
+                Reset(ComboBox3);
+                ,
+                Set(
+                    notesLoadingState,
+                    true
+                );
+                ,
+                Set(
+                    noteAdded,
+                    true
+                );
+                
+            );
+            Refresh('Employee Notes')
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Size: =10.5
+        Text: ="Save"
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,true))
+        Width: =68
+        X: =If(!noteScratch,970,1366)
+        Y: =713
+        ZIndex: =17
+
+    Button33_1 As button:
+        BorderColor: =RGBA(209, 209, 209, 1)
+        BorderThickness: =1
+        Color: =RGBA(36, 36, 36, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Segoe UI'
+        Height: =27
+        OnSelect: =Set(notesPopUp,false);Reset(RichTextEditor2);Reset(ComboBox3)
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Size: =10.5
+        Text: ="Cancel"
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,true))
+        Width: =68
+        X: =If(!noteScratch,1047,1366)
+        Y: =713
+        ZIndex: =18
+
+    TextInput10 As text:
+        BorderColor: =RGBA(161, 159, 157, 1)
+        BorderThickness: =1
+        Default: =""
+        Height: =24
+        HintText: ="Keyword Search"
+        RadiusBottomLeft: =2
+        RadiusBottomRight: =2
+        RadiusTopLeft: =2
+        RadiusTopRight: =2
+        Size: =10.5
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",true,false))
+        Width: =275
+        X: =If(!noteScratch,970,1366)
+        Y: =150
+        ZIndex: =19
+
+    Image44 As image:
+        Height: =14
+        Image: ='1F3F7_FE0F_Label_1024px_01_01 1'
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",true,false))
+        Width: =12
+        X: =If(!noteScratch,1256,1366)
+        Y: =154.5
+        ZIndex: =20
+
+    Label94 As label:
+        Color: =RGBA(50, 49, 48, 1)
+        Size: =9
+        Text: =CountRows(notesTemp)
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",true,false))
+        Width: =50
+        X: =If(!noteScratch,1268,1366)
+        Y: =142
+        ZIndex: =21
+
+    Label89_1 As label:
+        Color: =RGBA(23, 23, 23, 1)
+        Font: =Font.'Segoe UI'
+        Height: =14
+        Size: =9
+        Text: =First('Notes V2'.Employees).Full_Name
+        Visible: =If(noteScratch = true,false,If(CountRows('Notes V2'.Employees)>1,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,true)))
+        Width: =300
+        X: =If(!noteScratch,1001,1366)
+        Y: =648
+        ZIndex: =22
+
+    Label89_2 As label:
+        Color: =RGBA(100, 100, 100, 1)
+        Font: =Font.'Segoe UI'
+        Height: =18
+        Size: =8
+        Text: =First('Notes V2'.Employees).Job
+        Visible: =If(noteScratch = true,false,If(CountRows('Notes V2'.Employees)>1,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,true)))
+        Width: =300
+        X: =If(!noteScratch,1001,1366)
+        Y: =658
+        ZIndex: =23
+
+    Gallery26 As gallery.variableTemplateHeightGallery:
+        Height: =581
+        Items: =SortByColumns(Search(notesTemp,TextInput10.Text,"cr02b_note"),"modifiedon",SortOrder.Descending)
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplateSize: =280
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",true,false))
+        Width: =410
+        X: =If(!noteScratch,956,1366)
+        Y: =186
+        ZIndex: =24
+
+        Subtitle11_1 As label:
+            AutoHeight: =true
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            Height: =60
+            OnSelect: =Select(Parent)
+            Overflow: =Overflow.Scroll
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =10.5
+            Text: =If(ThisItem.expandCollapse = false,If(Len(ThisItem.Note)>165,Left(ThisItem.Note,165) & "...",ThisItem.Note),ThisItem.Note)
+            VerticalAlign: =VerticalAlign.Top
+            Visible: =false
+            Width: =376
+            X: =13
+            Y: =49
+            ZIndex: =3
+
+        Separator9_1 As rectangle:
+            BorderColor: =RGBA(250, 250, 250, 1)
+            Fill: =RGBA(235, 235, 235, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =HtmlText1.Y+HtmlText1.Height+30
+            ZIndex: =4
+
+        Title25_5 As label:
+            Color: =RGBA(23, 46, 69, 0.6)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =18
+            PaddingTop: =0
+            Size: =9
+            Text: =ThisItem.'Modified On'
+            VerticalAlign: =VerticalAlign.Top
+            Width: =200
+            X: =13
+            Y: =11
+            ZIndex: =6
+
+        Label95 As label:
+            Color: =RGBA(0, 100, 191, 1)
+            Font: =Font.'Segoe UI'
+            Height: =15
+            OnSelect: =Select(Parent)
+            PaddingLeft: =0
+            Size: =10.5
+            Text: =If(ThisItem.expandCollapse = false,"Read more","Less")
+            Visible: |-
+                =//If(Len(ThisItem.Note)>165,true,false)
+                false
+            X: =13
+            Y: =HtmlText1.Y+HtmlText1.Height-7
+            ZIndex: =7
+
+        Image45 As image:
+            Height: =15
+            Image: =Office365Users.UserPhoto(ThisItem.'Created By'.'Primary Email')
+            OnSelect: =Select(Parent)
+            RadiusBottomLeft: =15
+            RadiusBottomRight: =15
+            RadiusTopLeft: =15
+            RadiusTopRight: =15
+            Width: =15
+            X: =13
+            Y: =HtmlText1.Y+HtmlText1.Height+2
+            ZIndex: =8
+
+        "AutoWidthLabel5 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: |-
+                ="#343740"
+            FontSize: =9
+            FontWeight: ="bold"
+            Height: =15
+            Text: =ThisItem.'Created By'.'Full Name'
+            Width: =200
+            X: =33
+            Y: =HtmlText1.Y+HtmlText1.Height-1
+            ZIndex: =9
+
+        Circle7 As circle:
+            Fill: =RGBA(23, 23, 23, 1)
+            Height: =4
+            OnSelect: =Select(Parent)
+            Width: =4
+            X: =AutoWidthLabel5.X+AutoWidthLabel5.AutoWidth+6
+            Y: =HtmlText1.Y+HtmlText1.Height+9
+            ZIndex: =10
+
+        "AutoWidthLabel5_1 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: |-
+                ="#171717"
+            FontSize: =9
+            Height: =15
+            Text: =ThisItem.Category
+            Width: =200
+            X: =Circle7.X+10
+            Y: =HtmlText1.Y+HtmlText1.Height-1
+            ZIndex: =11
+
+        Button35 As button:
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =15
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: |-
+                =If(ThisItem.expandCollapse = false,Patch(notesTemp,ThisItem,{expandCollapse:true}),Patch(notesTemp,ThisItem,{expandCollapse:false}))
+            Text: =""
+            Visible: |-
+                =//If(Len(ThisItem.Note)>165,true,false)
+                false
+            Width: =150
+            X: =13
+            Y: |-
+                =
+                HtmlText1.Y+HtmlText1.Height-7
+            ZIndex: =12
+
+        HtmlText1 As htmlViewer:
+            AutoHeight: =true
+            Height: =68
+            HtmlText: =If(ThisItem.expandCollapse = false,If(Len(ThisItem.Note)>145,Left(ThisItem.Note,145) & "...",ThisItem.Note),ThisItem.Note)
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =10.5
+            Width: =376
+            X: =13
+            Y: =28
+            ZIndex: =13
+
+        Image45_1 As image:
+            Height: =15
+            Image: ='1F512_Locked_1024px_01_01 1'
+            OnSelect: =Select(Parent)
+            Width: =12
+            X: =326
+            Y: =11
+            ZIndex: =14
+
+        Label96 As label:
+            Color: =RGBA(100, 100, 100, 1)
+            Height: =16.2
+            OnSelect: =Select(Parent)
+            Size: =9
+            Text: =If(ThisItem.'Is Private',"Private","HR only")
+            Width: =60
+            X: =338
+            Y: =11
+            ZIndex: =15
+
+        Button38 As button:
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =80
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Select(Parent);Set(noteDetails,true)
+            Text: =""
+            Width: =398
+            ZIndex: =16
+
+    Icon5_4 As icon.Cancel:
+        Color: =RGBA(0, 0, 0, 1)
+        Height: =19
+        Icon: =Icon.Cancel
+        OnSelect: =Set(notesPopUp,false)
+        Visible: =If(noteScratch = true,false,noteAdded)
+        Width: =19
+        X: =If(!noteScratch,1333,1366)
+        Y: =56
+        ZIndex: =25
+
+    ComboBox3 As combobox:
+        BorderColor: =RGBA(198, 198, 198, 1)
+        BorderThickness: =1
+        ChevronBackground: =RGBA(255, 255, 255, 1)
+        ChevronFill: =RGBA(96, 94, 92, 1)
+        Color: =RGBA(96, 94, 92, 1)
+        DefaultSelectedItems: =First(Choices('Employee Notes'.Category))
+        DisplayFields: =["Value"]
+        Height: =21
+        IsSearchable: =false
+        Items: =Choices('Employee Notes'.Category)
+        SearchFields: =["Value"]
+        SearchItems: =[]
+        SelectionColor: =RGBA(214, 223, 238, 1)
+        SelectionFill: =
+        SelectionTagColor: =
+        SelectionTagFill: =
+        SelectMultiple: =false
+        Size: =9
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,true))
+        Width: =136
+        X: =1216
+        Y: =715
+        ZIndex: =26
+
+    Label78_5 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =730
+        Text: =""
+        Visible: =If(noteScratch = true,false,noteAdded)
+        Width: =410
+        X: =If(!noteScratch,956,1355)
+        Y: =38
+        ZIndex: =27
+
+    Image41 As image:
+        Height: =87
+        Image: =Frame_1
+        Visible: =If(noteScratch = true,false,noteAdded)
+        Width: =107.77
+        X: =If(!noteScratch,1106,1366)
+        Y: =302
+        ZIndex: =28
+
+    Label97 As label:
+        Align: =Align.Center
+        Color: =RGBA(36, 36, 36, 1)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        Height: =29
+        Size: =18
+        Text: ="Your note has been added"
+        Visible: =If(noteScratch = true,false,noteAdded)
+        Width: =410
+        X: =If(!noteScratch,956,1366)
+        Y: =432
+        ZIndex: =29
+
+    Label97_1 As label:
+        Align: =Align.Center
+        Color: =RGBA(36, 36, 36, 1)
+        Font: =Font.'Segoe UI'
+        Height: =29
+        Size: =10.5
+        Text: ="Your note was added to the following E360 profiles"
+        Visible: =If(noteScratch = true,false,noteAdded)
+        Width: =410
+        X: =If(!noteScratch,956,1366)
+        Y: =457
+        ZIndex: =30
+
+    "Persona1 As 'Fluent Persona (1.0.19) Preview'":
+        DisplayMode: =DisplayMode.Edit
+        Height: =45
+        HidePersonaDetails: =false
+        PersonaInitialsColor: ='PowerCAT.Persona.PersonaInitialsColor'.CoolGray
+        PersonaSize: ='PowerCAT.Persona.PersonaSize'.Size40
+        SecondaryText: =First('Notes V2'.Employees).Job
+        Text: =First('Notes V2'.Employees).Full_Name
+        Theme: =
+        Visible: =If(noteScratch = true,false,noteAdded)
+        Width: =182
+        X: =If(!noteScratch,1073,1366)
+        Y: =504
+        ZIndex: =31
+
+    Button33_2 As button:
+        BorderColor: =RGBA(209, 209, 209, 1)
+        BorderThickness: =1
+        Color: =RGBA(36, 36, 36, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Segoe UI'
+        Height: =27
+        OnSelect: =Set(noteAdded,false);Set(scratchPadDefault,"");Reset(RichTextEditor2)
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Size: =10.5
+        Text: ="Return"
+        Visible: =If(noteScratch = true,false,noteAdded)
+        Width: =85
+        X: =If(!noteScratch,1122,1366)
+        Y: =596
+        ZIndex: =32
+
+    Icon5_5 As icon.Cancel:
+        Color: =RGBA(0, 0, 0, 1)
+        Height: =19
+        Icon: =Icon.Cancel
+        OnSelect: =Set(notesPopUp,false);Set(individual,false)
+        Visible: =If(noteScratch = true,false,true)
+        Width: =19
+        X: =If(!noteScratch,1333,1366)
+        Y: =56
+        ZIndex: =33
+
+    Label98 As label:
+        Align: =Align.Right
+        Color: =RGBA(96, 94, 92, 1)
+        Font: =Font.'Segoe UI'
+        Height: =24
+        PaddingRight: =14
+        Size: =10.5
+        Text: =If(IsBlank(First(selectedCats).Value),"All",First(selectedCats).Value)
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",true,false))
+        Width: =113
+        X: =If(!noteScratch,1120,1366)
+        Y: =150
+        ZIndex: =34
+
+    Icon15 As icon.ChevronDown:
+        Color: =RGBA(96, 94, 92, 1)
+        Height: =10
+        Icon: =Icon.ChevronDown
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",true,false))
+        Width: =10
+        X: =If(!noteScratch,1223,1366)
+        Y: =158
+        ZIndex: =35
+
+    Button36 As button:
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =24
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        OnSelect: =Set(notesCategory,!notesCategory)
+        Text: =
+        Visible: =If(noteScratch = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",true,false))
+        Width: =95
+        X: =If(!noteScratch,1149,1366)
+        Y: =150
+        ZIndex: =36
+
+    htmlMidShadow_22 As htmlViewer:
+        Height: =334
+        HtmlText: |-
+            =
+            "<div style='
+                margin: 8px;
+                width: " & htmlMidShadow_22.Width - 20 & "px;
+                height: " & htmlMidShadow_22.Height - 30 & "px;
+                box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                            0 1px 1px rgba(0, 0, 0, 0.20);
+                border-radius: 8px;
+                background: #ffffff;'>
+            </div>"
+        Visible: =If(noteScratch = true,false,notesCategory)
+        Width: =240
+        X: =If(!noteScratch,1015,1366)
+        Y: =162
+        ZIndex: =37
+
+    Label90_1 As label:
+        Color: =RGBA(23, 23, 23, 1)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =50
+        PaddingLeft: =12
+        Size: =12
+        Text: ="Category"
+        Visible: =If(noteScratch = true,false,notesCategory)
+        Width: =163
+        X: =If(!noteScratch,1030,1366)
+        Y: =178
+        ZIndex: =38
+
+    "Gallery23_1 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+        Height: =241
+        Items: =cats
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =34
+        Visible: =If(noteScratch = true,false,notesCategory)
+        Width: =221
+        X: =If(!noteScratch,1031,1366)
+        Y: =222
+        ZIndex: =39
+
+        Label91_1 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Height: =23
+            OnSelect: =Select(Parent)
+            Size: =10.5
+            Text: =ThisItem.Value
+            X: =35
+            Y: =6
+            ZIndex: =1
+
+        Checkbox5 As checkbox:
+            CheckboxSize: =20
+            Default: =ThisItem in selectedCats
+            Height: =23
+            OnCheck: =ClearCollect(selectedCats,ThisItem);Set(notesCategory,false)
+            OnSelect: =Select(Parent)
+            OnUncheck: =Clear(selectedCats);Set(notesCategory,false)
+            Text: =
+            Width: =100
+            X: =13
+            Y: =6
+            ZIndex: =2
+
+    Image24 As image:
+        Height: =14
+        Image: ='Vector (26)'
+        Visible: =If(noteScratch = true || noteAdded = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,true))
+        Width: =14
+        X: =If(!noteScratch,1324,1366)
+        Y: =If(CountRows('Notes V2'.Employees)>1,237,287)
+        ZIndex: =40
+
+    Button37 As button:
+        Fill: =RGBA(0, 0, 0, 0)
+        FocusedBorderColor: =
+        Height: =25
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        OnSelect: =Set(noteScratch,true)
+        Text: =""
+        Visible: =If(noteScratch = true || noteAdded = true,false,If(Pivot2_1.Selected.ItemDisplayName="All Notes",false,true))
+        Width: =30
+        X: =If(!noteScratch,1317,1366)
+        Y: =280
+        ZIndex: =41
+
+    "ResizableTextarea1 As 'Resizable Text Area (1.0.19)'":
+        AllowResize: ='PowerCAT.ResizableTextarea.AllowResize'.Vertical
+        BorderColor: ="rgba(157, 86, 0, 0.7)"
+        Default: =PlainText(RichTextEditor2.HtmlText)
+        DisabledFontColor: ="rgb(23,23,23)"
+        DisplayMode: =DisplayMode.Edit
+        FillColor: ="rgba(255, 250, 233, 1)"
+        FontColor: ="rgb(23,23,23)"
+        Height: =150
+        MaxHeight: =300
+        MinHeight: =100
+        PaddingTop: =16
+        Text: |-
+            ="testing the scartchpad righ now to see if the poput functionality works. adding onto the note in the pop out. as you can see i can resize and spellcheck. then i can come back into the note here and keep typing.
+            adding some bullets"
+        Visible: =If(noteScratch = true,true,false)
+        Width: =319
+        X: =0
+        Y: =0
+        ZIndex: =42
+
+    noteScratchImage As image:
+        Height: =14
+        Image: ='Vector (27)'
+        Visible: =If(noteScratch = false,false,true)
+        Width: =14
+        X: =291
+        Y: =12
+        ZIndex: =43
+
+    noteScratchButton As button:
+        Fill: =RGBA(0, 0, 0, 0)
+        FocusedBorderColor: =
+        Height: =25
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        OnSelect: =Set(noteScratch,false);Set(scratchPadDefault,ResizableTextarea1.Text)
+        Text: =""
+        Visible: =If(noteScratch = false,false,true)
+        Width: =30
+        X: =284
+        Y: =5
+        ZIndex: =44
+
+    Label78_6 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =730
+        Text: =""
+        Visible: =If(noteDetails = true,true,false)
+        Width: =410
+        X: =If(!noteScratch,956,1366)
+        Y: =38
+        ZIndex: =45
+
+    Icon16 As icon.ArrowLeft:
+        Color: =RGBA(23, 23, 23, 1)
+        Height: =16
+        Icon: =Icon.ArrowLeft
+        Visible: =noteDetails
+        Width: =16
+        X: =If(!noteScratch,974,1366)
+        Y: =57
+        ZIndex: =46
+
+    Label99 As label:
+        Color: =RGBA(23, 23, 23, 1)
+        Font: =Font.'Segoe UI'
+        Height: =21
+        PaddingLeft: =10
+        Size: =10.5
+        Text: ="Back"
+        Visible: =noteDetails
+        X: =If(!noteScratch,990,1366)
+        Y: =53.5
+        ZIndex: =47
+
+    Button39 As button:
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =24
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        OnSelect: =Set(noteDetails,false);Reset(Gallery26);Set(noteEdit,false)
+        Text: =""
+        Visible: =noteDetails
+        Width: =68
+        X: =If(!noteScratch,970,1366)
+        Y: =53
+        ZIndex: =48
+
+    Image40_1 As image:
+        Height: =22
+        Image: ='1F512_Locked_1024px_01_01 1'
+        Visible: =noteDetails
+        Width: =15
+        X: =If(!noteScratch,Circle8.X+12,1366)
+        Y: =156
+        ZIndex: =49
+
+    Icon11_1 As icon.Information:
+        Color: =RGBA(0, 100, 191, 1)
+        Height: =12
+        Icon: =Icon.Information
+        Visible: =noteDetails
+        Width: =12
+        X: =If(!noteScratch,AutoWidthLabel7_1.X+AutoWidthLabel7_1.AutoWidth+8,1366)
+        Y: =162.5
+        ZIndex: =50
+
+    RichTextEditor2_1 As richTextEditor:
+        BorderColor: =RGBA(235, 235, 235, 1)
+        Default: =Gallery26.Selected.Note
+        DisplayMode: =If(noteEdit = true,DisplayMode.Edit,DisplayMode.View)
+        Height: =If(!noteEdit,485,435)
+        Size: =10.5
+        Visible: =noteDetails
+        Width: =382
+        X: =If(!noteScratch,969,1366)
+        Y: =186
+        ZIndex: =51
+
+    "Persona1_1 As 'Fluent Persona (1.0.19) Preview'":
+        DisplayMode: =DisplayMode.Edit
+        Height: =41
+        HidePersonaDetails: =false
+        ImageUrl: =User().Image
+        PersonaInitialsColor: ='PowerCAT.Persona.PersonaInitialsColor'.CoolGray
+        PersonaSize: ='PowerCAT.Persona.PersonaSize'.Size40
+        SecondaryText: =Office365Users.UserProfile(User().Email).JobTitle
+        Text: =User().FullName
+        Theme: =AppThemeJson
+        Visible: =noteDetails
+        Width: =327
+        X: =If(!noteScratch,974,1366)
+        Y: =95
+        ZIndex: =52
+
+    "AutoWidthLabel7 As 'Auto Width Label (1.0.19)'":
+        DisplayMode: =DisplayMode.Edit
+        FontColor: |-
+            ="#646464"
+        FontSize: =9
+        Height: =33
+        Text: =Gallery26.Selected.Category
+        Visible: =noteDetails
+        Width: =100
+        X: =If(!noteScratch,1185,1366)
+        Y: =156
+        ZIndex: =53
+
+    Circle8 As circle:
+        Fill: =RGBA(52, 55, 64, 1)
+        Height: =4
+        Visible: =noteDetails
+        Width: =4
+        X: |
+            =If(!noteScratch,AutoWidthLabel7.X+AutoWidthLabel7.AutoWidth+8,1366)
+        Y: =166
+        ZIndex: =54
+
+    "AutoWidthLabel7_1 As 'Auto Width Label (1.0.19)'":
+        DisplayMode: =DisplayMode.Edit
+        FontColor: |-
+            ="#000000"
+        FontSize: =9
+        Height: =33
+        Text: =If(Gallery26.Selected.'Is Private',"Personal","HR Only")
+        Visible: =noteDetails
+        Width: =200
+        X: =If(!noteScratch,Image40_1.X+Image40_1.Width+6,1366)
+        Y: =157
+        ZIndex: =55
+
+    Button33_3 As button:
+        BorderColor: =RGBA(209, 209, 209, 1)
+        BorderThickness: =1
+        Color: =RGBA(36, 36, 36, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Segoe UI'
+        Height: =27
+        OnSelect: =Set(noteEdit,true)
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Size: =10.5
+        Text: ="Edit"
+        Visible: =noteDetails && !noteEdit
+        Width: =68
+        X: =If(!noteScratch,970,1366)
+        Y: =713
+        ZIndex: =56
+
+    Button33_4 As button:
+        BorderColor: =RGBA(209, 209, 209, 1)
+        BorderThickness: =1
+        Color: =RGBA(36, 36, 36, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Segoe UI'
+        Height: =27
+        OnSelect: =Set(noteEdit,false);
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Size: =10.5
+        Text: ="Cancel"
+        Visible: =noteDetails && noteEdit
+        Width: =68
+        X: =If(!noteScratch,1050,1366)
+        Y: =721
+        ZIndex: =57
+
+    Button33_5 As button:
+        BorderColor: =RGBA(209, 209, 209, 1)
+        BorderThickness: =0
+        Fill: =RGBA(65, 141, 237, 1)
+        Font: =Font.'Segoe UI'
+        Height: =27
+        OnSelect: |
+            =Patch(
+                'Employee Notes',
+                LookUp(
+                    'Employee Notes',
+                    NoteID = Gallery26.Selected.NoteID
+                ),
+                {Note: RichTextEditor2_1.HtmlText,Category:ComboBox3_1.Selected.Value}
+            );
+            Patch(notesTemp,LookUp(
+                    notesTemp,
+                    NoteID = Gallery26.Selected.NoteID
+                ),{cr02b_note:RichTextEditor2_1.HtmlText,cr02b_category:ComboBox3_1.Selected.Value});
+            Set(
+                noteEdit,
+                false
+            );
+            Set(
+                notesLoadingState,
+                true
+            );
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Size: =10.5
+        Text: ="Save"
+        Visible: =noteDetails && noteEdit
+        Width: =68
+        X: =If(!noteScratch,970,1366)
+        Y: =721
+        ZIndex: =58
+
+    Button32_1 As button:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(250, 250, 250, 1)
+        Height: =62
+        RadiusBottomLeft: =3
+        RadiusBottomRight: =3
+        RadiusTopLeft: =3
+        RadiusTopRight: =3
+        Text: =""
+        Visible: =noteDetails && noteEdit
+        Width: =382
+        X: =If(!noteScratch,969,1366)
+        Y: =633
+        ZIndex: =59
+
+    Label89_3 As label:
+        Font: =Font.'Segoe UI'
+        Height: =21
+        Size: =9
+        Text: ="This note will be associated wih the following 360 profiles"
+        Visible: =noteDetails && noteEdit
+        Width: =382
+        X: =If(!noteScratch,969,1366)
+        Y: =641
+        ZIndex: =60
+
+    Gallery24_1 As gallery.galleryHorizontal:
+        Height: =38
+        Items: =FirstN('Notes V2'.Employees,10)
+        TemplateSize: =17
+        Visible: =noteDetails && noteEdit
+        Width: =396
+        X: =If(!noteScratch,970,1366)
+        Y: =657
+        ZIndex: =61
+
+        Image43_1 As image:
+            Height: =24
+            Image: ='default-contact-96x96-2'
+            OnSelect: =Select(Parent)
+            Width: =24
+            Y: =2
+            ZIndex: =1
+
+    Label89_4 As label:
+        Color: =RGBA(23, 23, 23, 1)
+        Font: =Font.'Segoe UI'
+        Height: =14
+        Size: =9
+        Text: =First('Notes V2'.Employees).Full_Name
+        Visible: =If(!noteDetails || !noteEdit,false,If(CountRows('Notes V2'.Employees)>1,false,true))
+        Width: =300
+        X: =If(!noteScratch,1000,1366)
+        Y: =663
+        ZIndex: =62
+
+    Label89_5 As label:
+        Color: =RGBA(100, 100, 100, 1)
+        Font: =Font.'Segoe UI'
+        Height: =18
+        Size: =8
+        Text: =First('Notes V2'.Employees).Job
+        Visible: =If(!noteDetails || !noteEdit,false,If(CountRows('Notes V2'.Employees)>1,false,true))
+        Width: =300
+        X: =If(!noteScratch,1000,1366)
+        Y: =673
+        ZIndex: =63
+
+    Image42 As image:
+        Height: =10.5
+        Image: ='Shape (58)'
+        Visible: =noteDetails && !noteEdit
+        Width: =10
+        X: =If(!noteScratch,1290,1366)
+        Y: =722
+        ZIndex: =64
+
+    Button33_6 As button:
+        Align: =Align.Right
+        BorderColor: =RGBA(209, 209, 209, 1)
+        BorderThickness: =0
+        Color: =RGBA(36, 36, 36, 1)
+        Fill: =RGBA(0, 0, 0, 0)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Normal
+        Height: =27
+        OnSelect: |-
+            =Remove(
+                'Employee Notes',
+                LookUp(
+                    'Employee Notes',
+                    NoteID = Gallery26.Selected.NoteID
+                )
+            );
+            Remove(
+                notesTemp,
+                LookUp(
+                    notesTemp,
+                    NoteID = Gallery26.Selected.NoteID
+                )
+            );
+            Set(
+                notesLoadingState,
+                true
+            );
+            Set(
+                noteDetails,
+                false
+            )
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Size: =10.5
+        Text: ="Delete"
+        Visible: =noteDetails && !noteEdit
+        Width: =68
+        X: =If(!noteScratch,1282,1366)
+        Y: =713
+        ZIndex: =65
+
+    Label78_7 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =730
+        Text: =""
+        Visible: =notesLoadingState
+        Width: =410
+        X: =If(!noteScratch,956,1366)
+        Y: =38
+        ZIndex: =66
+
+    Label102 As label:
+        Align: =Align.Center
+        Color: =RGBA(23, 23, 23, 1)
+        Font: =Font.'Segoe UI'
+        PaddingLeft: =40
+        Size: =9
+        Text: ="Loading"
+        Visible: =notesLoadingState
+        Width: =410
+        X: =956
+        Y: =313
+        ZIndex: =67
+
+    "Spinner1 As 'Fluent Spinner (1.0.19) Preview'":
+        DisplayMode: =DisplayMode.Edit
+        Height: =30
+        Theme: =AppThemeJson
+        Visible: =notesLoadingState
+        Width: =30
+        X: =1124
+        Y: =318
+        ZIndex: =68
+
+    Timer5 As timer:
+        Duration: =2000
+        Height: =23
+        OnTimerEnd: =Set(notesLoadingState,false)
+        Start: =notesLoadingState
+        Visible: =false
+        Width: =15
+        X: =1350
+        Y: =34
+        ZIndex: =69
+
+    Image40_3 As image:
+        Height: =22
+        Image: ='1F3F7_FE0F_Label_1024px_01_01 1'
+        Visible: =noteDetails && noteEdit
+        Width: =15
+        X: =1191
+        Y: =723
+        ZIndex: =71
+
+    ComboBox3_1 As combobox:
+        BorderColor: =RGBA(198, 198, 198, 1)
+        BorderThickness: =1
+        ChevronBackground: =RGBA(255, 255, 255, 1)
+        ChevronFill: =RGBA(96, 94, 92, 1)
+        Color: =RGBA(96, 94, 92, 1)
+        Default: =First(Filter(Choices('Employee Notes'.Category),Value=Gallery26.Selected.cr02b_category))
+        DefaultSelectedItems: =Filter(Choices('Employee Notes'.Category),Value=Gallery26.Selected.cr02b_category)
+        DisplayFields: =["Value"]
+        Height: =21
+        IsSearchable: =false
+        Items: =Choices('Employee Notes'.Category)
+        SearchFields: =["Value"]
+        SearchItems: =[]
+        SelectionColor: =RGBA(214, 223, 238, 1)
+        SelectionFill: =
+        SelectionTagColor: =
+        SelectionTagFill: =
+        SelectMultiple: =false
+        Size: =9
+        Visible: =noteDetails && noteEdit
+        Width: =136
+        X: =1215
+        Y: =724
+        ZIndex: =72
+

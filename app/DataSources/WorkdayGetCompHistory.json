@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "cf093d24-62ad-41a2-9efb-6aac6c7bbcc7",
+    "Name": "WorkdayGetCompHistory",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": "0a26d881-1a09-ed11-82e4-000d3a9cc8d2"
+  }
+]

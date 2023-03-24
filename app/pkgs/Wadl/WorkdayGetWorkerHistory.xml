@@ -1,0 +1,77 @@
+<application xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:service="https://unitedstates-002.azure-apim.net/apim/logicflows" xmlns:siena="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11" siena:serviceId="WorkdayGetWorkerHistory" xmlns="http://wadl.dev.java.net/2009/02">
+  <doc title="Workday Get Worker History" />
+  <grammars>
+    <jsonTypes targetNamespace="https://unitedstates-002.azure-apim.net/apim/logicflows" xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+      <string dtype="hyperlink" name="ManualTriggerInput_HTTP_URI_def" />
+      <object name="ManualTriggerInput">
+        <property name="HTTP_URI" type="string" dtype="hyperlink" />
+      </object>
+      <integer name="ResponseActionOutput_total_def" />
+      <string name="ResponseActionOutput_data_def_items_def_id_def" />
+      <string name="ResponseActionOutput_data_def_items_def_descriptor_def" />
+      <string name="ResponseActionOutput_data_def_items_def_href_def" />
+      <string name="ResponseActionOutput_data_def_items_def_subject_def_descriptor_def" />
+      <string name="ResponseActionOutput_data_def_items_def_subject_def_id_def" />
+      <string name="ResponseActionOutput_data_def_items_def_subject_def_href_def" />
+      <object name="ResponseActionOutput_data_def_items_def_subject_def">
+        <property name="descriptor" type="string" />
+        <property name="id" type="string" />
+        <property name="href" type="string" />
+      </object>
+      <string name="ResponseActionOutput_data_def_items_def_due_def" />
+      <string name="ResponseActionOutput_data_def_items_def_effective_def" />
+      <string name="ResponseActionOutput_data_def_items_def_initiator_def_descriptor_def" />
+      <string name="ResponseActionOutput_data_def_items_def_initiator_def_id_def" />
+      <string name="ResponseActionOutput_data_def_items_def_initiator_def_href_def" />
+      <object name="ResponseActionOutput_data_def_items_def_initiator_def">
+        <property name="descriptor" type="string" />
+        <property name="id" type="string" />
+        <property name="href" type="string" />
+      </object>
+      <string name="ResponseActionOutput_data_def_items_def_initiated_def" />
+      <object name="ResponseActionOutput_data_def_items_def">
+        <property name="id" type="string" />
+        <property name="descriptor" type="string" />
+        <property name="href" type="string" />
+        <property name="subject" typeRef="ResponseActionOutput_data_def_items_def_subject_def" />
+        <property name="due" type="string" />
+        <property name="effective" type="string" />
+        <property name="initiator" typeRef="ResponseActionOutput_data_def_items_def_initiator_def" />
+        <property name="initiated" type="string" />
+      </object>
+      <array typeRef="ResponseActionOutput_data_def_items_def" name="ResponseActionOutput_data_def" />
+      <object name="ResponseActionOutput">
+        <property name="total" type="integer" />
+        <property name="data" typeRef="ResponseActionOutput_data_def" />
+      </object>
+      <object name="Run_responses_default_def" />
+    </jsonTypes>
+  </grammars>
+  <resources siena:authenticationProviderHref="#PowerAppAuth" base="https://unitedstates-002.azure-apim.net/apim/logicflows">
+    <resource path="/{connectionId}/triggers/manual/run">
+      <param style="template" name="connectionId" type="xs:string" required="true" />
+      <method siena:requiresAuthentication="true" name="POST" id="Run">
+        <doc title="Runs a logic flow trigger." />
+        <request>
+          <param style="query" name="api-version" type="xs:string" required="true" fixed="2015-02-01-preview">
+            <doc title="The api version" />
+          </param>
+          <representation mediaType="application/json">
+            <param style="plain" name="HTTP_URI" path="/HTTP_URI" type="xs:anyURI" siena:dtype="hyperlink" required="true" />
+          </representation>
+        </request>
+        <response>
+          <representation mediaType="application/json" element="service:ResponseActionOutput" />
+        </response>
+      </method>
+    </resource>
+  </resources>
+  <authenticationProviders xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+    <connectionProvider id="PowerAppAuth" siena:connectionProviderId="logicflows" />
+  </authenticationProviders>
+  <template xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+    <variable name="connectionId">
+      <modifyParams style="template" name="connectionId" attribute="fixed" />
+    </variable>
+  </template>
+</application>

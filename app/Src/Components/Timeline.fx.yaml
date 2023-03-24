@@ -1,0 +1,296 @@
+Timeline As CanvasComponent:
+    Categories: |-
+        =ForAll([{Value:0},{Value:1},{Value:2},{Value:3},{Value:4}], {Value: ThisRecord})
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =510
+    History: =timeLineData
+    Width: =385
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    "Gallery21 As gallery.'BrowseLayout_Flexible_SocialFeed_ver4.0'":
+        Height: =448
+        Items: =Timeline.History
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplatePadding: =4
+        TemplateSize: =340
+        Width: =385
+        ZIndex: =2
+
+        Rectangle16_2 As rectangle:
+            Fill: =RGBA(229, 229, 229, 1)
+            Height: =If(Gallery22.Height>0,23,0)
+            Visible: =If(Text(ThisItem.Year)=Text(Last(timeLineData).Year),false,true)
+            Width: =1
+            X: =32
+            ZIndex: =1
+
+        Rectangle16 As rectangle:
+            Fill: =RGBA(229, 229, 229, 1)
+            Height: =23
+            Visible: =If(Text(ThisItem.Year)=Text(Last(timeLineData).Year) && ThisItem.expandCollapse=false,false,true)
+            Width: =1
+            X: =32
+            Y: =21
+            ZIndex: =2
+
+        "Gallery22 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+            Height: =If(ThisItem.expandCollapse,100*CountRows(Gallery22.AllItems),0)
+            Items: =If(0 in cat,ThisItem.'Event Year',If(CountRows(cat)>0,Filter(ThisItem.'Event Year',Category in cat),ThisItem.'Event Year'))
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =100
+            Width: =377
+            Y: =44
+            ZIndex: =3
+
+            Button29 As button:
+                BorderThickness: =0
+                Color: =If(ThisItem.Category=1,RGBA(130,79,0,1),If(ThisItem.Category=2,RGBA(224,24,26,1),If(ThisItem.Category=3,RGBA(92,27,134,1),If(ThisItem.Category=4,RGBA(0,43,117,1),If(ThisItem.Category=5,RGBA(2,153,163,1),If(ThisItem.Category=6,RGBA(16,124,16,1)))))))
+                DisplayMode: =DisplayMode.View
+                Fill: =If(ThisItem.Category=1,RGBA(244,234,202,1),If(ThisItem.Category=2,RGBA(253,231,233,1),If(ThisItem.Category=3,RGBA(241,230,249,1),If(ThisItem.Category=4,RGBA(215,235,255,1),If(ThisItem.Category=5,RGBA(199,238,241,1),If(ThisItem.Category=6,Color.LightGreen))))))
+                Font: =Font.'Segoe UI'
+                Height: =24
+                OnSelect: =Select(Parent)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =8
+                Text: =If(ThisItem.Category=1,"Development",If(ThisItem.Category=2,"Diciplinary",If(ThisItem.Category=3,"Mobility",If(ThisItem.Category=4,"Employement",If(ThisItem.Category=5,"Promotion",If(ThisItem.Category=6,"Reward"))))))
+                Width: =88
+                X: =289
+                Y: =9
+                ZIndex: =1
+
+            Subtitle9 As label:
+                Color: =RGBA(23, 23, 23, 1)
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =18
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10.5
+                Text: |-
+                    =//Text(DateValue(ThisItem.effective), DateTimeFormat.ShortDate)
+                    First(LastN(ForAll(Split(Text(DateValue(ThisItem.effective), DateTimeFormat.LongDate),","), {Result: ThisRecord.Value}),2)).Result & "," & Last(ForAll(Split(Text(DateValue(ThisItem.effective), DateTimeFormat.LongDate),","), {Result: ThisRecord.Value})).Result
+                VerticalAlign: =VerticalAlign.Top
+                Width: =270
+                X: =42
+                Y: =9
+                ZIndex: =2
+
+            Rectangle16_1 As rectangle:
+                Fill: =RGBA(229, 229, 229, 1)
+                Width: =1
+                X: =32
+                ZIndex: =3
+
+            Circle5 As circle:
+                BorderColor: =RGBA(0, 120, 212, 1)
+                BorderThickness: =1
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =7
+                OnSelect: =Select(Parent)
+                Width: =7
+                X: =29
+                Y: =14
+                ZIndex: =4
+
+            Button27_1 As button:
+                BorderColor: =RGBA(229, 229, 229, 1)
+                BorderThickness: =1
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =54
+                HoverBorderColor: =
+                HoverColor: =
+                HoverFill: =
+                OnSelect: =Select(Parent)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Text: =""
+                Width: =334
+                X: =42
+                Y: =39
+                ZIndex: =5
+
+            Label83 As label:
+                Color: =RGBA(23, 23, 23, 1)
+                Fill: =RGBA(255, 255, 255, 1)
+                Font: =Font.'Segoe UI'
+                Height: =49
+                OnSelect: =Select(Parent)
+                PaddingLeft: =0
+                Size: =9
+                Text: =ThisItem.descriptor
+                Width: =320
+                X: =51
+                Y: =40
+                ZIndex: =6
+
+        Button27 As button:
+            BorderColor: =RGBA(229, 229, 229, 1)
+            BorderThickness: =If(Gallery22.Height>0,1,0)
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =30
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Select(Parent)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Text: =""
+            Width: =If(ThisItem.expandCollapse,65,377)
+            X: =1
+            ZIndex: =4
+
+        Title23 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            Height: =30
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =12
+            Text: =ThisItem.Year
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 112
+            X: =16
+            ZIndex: =5
+
+        Rectangle16_3 As rectangle:
+            Fill: =RGBA(229, 229, 229, 1)
+            Height: =If(ThisItem.expandCollapse=false,25,0)
+            Visible: =If(Text(ThisItem.Year)=Text(Last(timeLineData).Year),false,true)
+            Width: =1
+            X: =32
+            Y: =21
+            ZIndex: =6
+
+        Label68 As label:
+            Align: =Align.Right
+            Color: =RGBA(100, 100, 100, 1)
+            Font: =Font.'Segoe UI'
+            Height: =15
+            Size: =9
+            Text: =If(0 in cat || CountRows(cat)=0,Concatenate(CountRows(ThisItem.'Event Year')," Events"),If(CountRows(cat)>0,Concatenate(CountRows(Filter(ThisItem.'Event Year',Category in cat)), " Events")))
+            Visible: =If(ThisItem.expandCollapse=false,true,false)
+            X: =218
+            Y: =3
+            ZIndex: =7
+
+        Button27_2 As button:
+            BorderColor: =RGBA(229, 229, 229, 1)
+            BorderThickness: =1
+            DisabledBorderColor: =Self.BorderColor
+            DisabledFill: =RGBA(0,0,0,0)
+            DisplayMode: =If(CountRows(If(0 in cat,ThisItem.'Event Year',If(CountRows(cat)>0,Filter(ThisItem.'Event Year',Category in cat),ThisItem.'Event Year')))>0,DisplayMode.Edit,DisplayMode.Disabled)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =30
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: |-
+                =Patch(timeLineData,ThisItem,{expandCollapse:!ThisItem.expandCollapse});
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Text: =""
+            Width: =If(ThisItem.expandCollapse,65,377)
+            X: =1
+            ZIndex: =8
+
+        Gallery32 As gallery.galleryHorizontal:
+            DelayItemLoading: =true
+            Height: =32
+            Items: |-
+                =FirstN(Filter(Table({Category:1,Name:"Development",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=1))},{Category:2,Name:"Diciplinary",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=2))},{Category:3,Name:"Mobility",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=3))},{Category:4,Name:"Employement",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=4))},{Category:5,Name:"Promotion",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=5))},{Category:6,Name:"Reward",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=6))}),Count>0),3)
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplateSize: =82
+            Visible: =!ThisItem.expandCollapse
+            Width: =274
+            X: =103
+            ZIndex: =9
+
+            Label14 As label:
+                Align: =Align.Center
+                Color: =If(ThisItem.Category=1,RGBA(130,79,0,1),If(ThisItem.Category=2,RGBA(224,24,26,1),If(ThisItem.Category=3,RGBA(92,27,134,1),If(ThisItem.Category=4,RGBA(0,43,117,1),If(ThisItem.Category=5,RGBA(2,153,163,1),If(ThisItem.Category=6,RGBA(16,124,16,1)))))))
+                Fill: |-
+                    =//RGBA(0, 0, 0, 0)
+                    If(ThisItem.Category=1,RGBA(244,234,202,1),If(ThisItem.Category=2,RGBA(253,231,233,1),If(ThisItem.Category=3,RGBA(241,230,249,1),If(ThisItem.Category=4,RGBA(215,235,255,1),If(ThisItem.Category=5,RGBA(199,238,241,1),If(ThisItem.Category=6,Color.LightGreen))))))
+                Height: =21
+                OnSelect: =Select(Parent)
+                Size: =7
+                Text: =Concatenate(ThisItem.Name,"(",CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=ThisItem.Category)),")")
+                Visible: =false
+                Width: |-
+                    =82
+                    //If(CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=ThisItem.Category))>0,82,0)
+                ZIndex: =1
+
+            Button51 As button:
+                BorderColor: |-
+                    =//ColorFade(Self.Fill, -15%)
+                    Self.Fill
+                Color: =If(ThisItem.Category=1,RGBA(130,79,0,1),If(ThisItem.Category=2,RGBA(224,24,26,1),If(ThisItem.Category=3,RGBA(92,27,134,1),If(ThisItem.Category=4,RGBA(0,43,117,1),If(ThisItem.Category=5,RGBA(2,153,163,1),If(ThisItem.Category=6,RGBA(16,124,16,1)))))))
+                Fill: |-
+                    =//RGBA(0, 0, 0, 0)
+                    If(ThisItem.Category=1,RGBA(244,234,202,1),If(ThisItem.Category=2,RGBA(253,231,233,1),If(ThisItem.Category=3,RGBA(241,230,249,1),If(ThisItem.Category=4,RGBA(215,235,255,1),If(ThisItem.Category=5,RGBA(199,238,241,1),If(ThisItem.Category=6,Color.LightGreen))))))
+                Height: =22
+                HoverColor: =If(ThisItem.Category=1,RGBA(130,79,0,1),If(ThisItem.Category=2,RGBA(224,24,26,1),If(ThisItem.Category=3,RGBA(92,27,134,1),If(ThisItem.Category=4,RGBA(0,43,117,1),If(ThisItem.Category=5,RGBA(2,153,163,1),If(ThisItem.Category=6,RGBA(16,124,16,1)))))))
+                HoverFill: |-
+                    =//ColorFade(RGBA(56, 96, 178, 1), -20%)
+                    //RGBA(0, 0, 0, 0)
+                    If(ThisItem.Category=1,RGBA(244,234,202,1),If(ThisItem.Category=2,RGBA(253,231,233,1),If(ThisItem.Category=3,RGBA(241,230,249,1),If(ThisItem.Category=4,RGBA(215,235,255,1),If(ThisItem.Category=5,RGBA(199,238,241,1),If(ThisItem.Category=6,Color.LightGreen))))))
+                OnSelect: =Select(Parent)
+                PressedColor: =Self.Color
+                PressedFill: =Self.Fill
+                Size: =7
+                Text: =Concatenate(ThisItem.Name,"(",CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=ThisItem.Category)),")")
+                Width: =84
+                ZIndex: =2
+
+        Button55 As button:
+            BorderColor: |-
+                =//ColorFade(Self.Fill, -15%)
+                Self.Fill
+            Color: =RGBA(168, 0, 0, 1)
+            Fill: =RGBA(102, 182, 227, 1)
+            Height: =21
+            HoverBorderColor: |
+                =ColorFade(Self.Fill, -20%)
+            HoverColor: =RGBA(168, 0, 0, 1)
+            HoverFill: =ColorFade(RGBA(102, 182, 227, 1), -20%)
+            OnSelect: |-
+                =/*If(var_dis=false,Set(var_dis,true),Set(var_dis,false));
+                Set(var_cat_text,
+                Concat(LastN(Filter(Table({Category:1,Name:"Development",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=1))},{Category:2,Name:"Diciplinary",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=2))},{Category:3,Name:"Mobility",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=3))},{Category:4,Name:"Employement",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=4))},{Category:5,Name:"Promotion",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=5))},{Category:6,Name:"Reward",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=6))}),Count>0),CountRows((Filter(Table({Category:1,Name:"Development",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=1))},{Category:2,Name:"Diciplinary",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=2))},{Category:3,Name:"Mobility",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=3))},{Category:4,Name:"Employement",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=4))},{Category:5,Name:"Promotion",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=5))},{Category:6,Name:"Reward",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=6))}),Count>0)))-2),Name&"("&Count&") "));
+                Set(var_x,Text(Self.Y));
+                */
+            PressedColor: =Self.Color
+            PressedFill: =Self.Fill
+            Size: =7
+            Text: ="More"
+            Tooltip: |-
+                =//var_cat_text
+                
+                Concat(LastN(Filter(Table({Category:1,Name:"Development",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=1))},{Category:2,Name:"Diciplinary",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=2))},{Category:3,Name:"Mobility",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=3))},{Category:4,Name:"Employement",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=4))},{Category:5,Name:"Promotion",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=5))},{Category:6,Name:"Reward",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=6))}),Count>0),CountRows((Filter(Table({Category:1,Name:"Development",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=1))},{Category:2,Name:"Diciplinary",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=2))},{Category:3,Name:"Mobility",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=3))},{Category:4,Name:"Employement",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=4))},{Category:5,Name:"Promotion",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=5))},{Category:6,Name:"Reward",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=6))}),Count>0)))-2),Name&"("&Count&") ")
+            Visible: |-
+                =!ThisItem.expandCollapse And If(CountRows(Filter(Table({Category:1,Name:"Development",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=1))},{Category:2,Name:"Diciplinary",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=2))},{Category:3,Name:"Mobility",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=3))},{Category:4,Name:"Employement",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=4))},{Category:5,Name:"Promotion",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=5))},{Category:6,Name:"Reward",Count:CountRows(Filter(First(Filter(timeLineData,Text(Year) = Title23.Text)).'Event Year',Category=6))}),Count>0))>3,true)
+            Width: =84
+            X: =284
+            Y: =4
+            ZIndex: =10
+

@@ -1,0 +1,153 @@
+Pages As CanvasComponent:
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =40
+    Width: =1366
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Gallery34 As gallery.galleryHorizontal:
+        DelayItemLoading: =true
+        Height: =36
+        Items: =col_navpages
+        LoadingSpinner: =LoadingSpinner.Data
+        TemplateSize: =155
+        Width: =1366
+        ZIndex: =1
+
+        Label25 As label:
+            Height: =25
+            OnSelect: =
+            Text: =ThisItem.Display
+            Width: =123
+            ZIndex: =1
+
+        Icon26 As icon.CancelBadge:
+            Height: =25
+            Icon: =Icon.CancelBadge
+            OnSelect: |-
+                =//Select(Parent)
+                Remove(col_navpages,ThisItem);
+                Navigate('Roster Management');
+            Width: =20
+            X: =126
+            ZIndex: =2
+
+        Button61 As button:
+            Height: =25
+            OnSelect: |-
+                =//Select(Parent)
+                UpdateIf(col_navpages,true,{IsActive:false});
+                Update(col_navpages,First(Filter( col_navpages,Display=ThisItem.Display)),{ScreenName:ThisItem.ScreenName,ID:ThisItem.ID,IsActive:true,Display:ThisItem.Display});
+                If(ThisItem.ScreenName="Profile Screen",
+                Set(
+                    selectedEmployee,
+                    ThisItem.ID
+                );
+                Collect(
+                    recentSearches,
+                    selectedEmployee.Worker
+                );
+                Set(
+                    selectedDataverseEmployee,
+                    LookUp(
+                        Employees,
+                        EmpID = selectedEmployee.Employee_ID
+                    )
+                );
+                Set(url,selectedEmployee.Employee_ID_s_);
+                Reset('Notes V2_1');
+                Concurrent(
+                    ClearCollect(
+                        compData,
+                        WorkdayGetCompHistory.Run(url)
+                    ),
+                    ClearCollect(
+                        jobDetails,
+                        First(WorkdayGetJobDetails.Run(selectedEmployee.Employee_ID_s_).Report_Entry)
+                    ),
+                    Set(
+                        JobDev,
+                        First(WorkdayGetJobDevDetails.Run(selectedEmployee.Employee_ID_s_).Report_Entry)
+                    ),
+                    ClearCollect(
+                        payByYear,
+                        WorkdayGetPaybyYear.Run(selectedEmployee.Employee_ID_s_)
+                    ),
+                    ClearCollect(
+                        teamInfo,
+                        WorkdayGetDirects.Run(
+                            LookUp(
+                                workerInfo,
+                                Employee_ID = selectedEmployee.Manager_ID,
+                                Employee_ID_s_
+                            )
+                        )
+                    ),
+                    ClearCollect(
+                        directInfo,
+                        WorkdayGetDirects.Run(selectedEmployee.Employee_ID_s_)
+                    ),
+                    ClearCollect(
+                        workerHistory,
+                        AddColumns(
+                            WorkdayGetWorkerHistory.Run(selectedEmployee.Employee_ID_s_).data,
+                            "Category",
+                            RandBetween(
+                                1,
+                                6
+                            )
+                        )
+                    ),
+                    Set(
+                        ReviewDetails,
+                        First(WorkdayGetReviewHistoryDetails.Run(selectedEmployee.Employee_ID_s_).Report_Entry)
+                    )
+                );
+                ClearCollect(
+                    workerHistoryTimeline,
+                    AddColumns(
+                        Filter(
+                            workerHistory,
+                            !IsBlank(effective)
+                        ),
+                        "Year",
+                        Year(effective)
+                    )
+                );
+                ClearCollect(
+                    timeLineData,
+                    AddColumns(
+                        GroupBy(
+                            workerHistoryTimeline,
+                            "Year",
+                            "Event Year"
+                        ),
+                        "expandCollapse",
+                        true
+                    )
+                );
+                
+                Patch(
+                    timeLineData,
+                    First(timeLineData),
+                    {expandCollapse: true}
+                );
+                ClearCollect(
+                    notesTemp,
+                    AddColumns(
+                        Filter(
+                            selectedDataverseEmployee.'Employee Notes',
+                            !IsBlank(Note)
+                        ),
+                        "expandCollapse",
+                        false
+                    )
+                );
+                Clear(cat);
+                Navigate('Profile Screen');,Navigate('Roster Management'))
+            Size: =12
+            Text: =ThisItem.Display
+            Width: =123
+            ZIndex: =3
+

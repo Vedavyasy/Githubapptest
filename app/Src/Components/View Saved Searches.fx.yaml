@@ -1,0 +1,313 @@
+"'View Saved Searches' As CanvasComponent":
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =730
+    Width: =1366
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    promotionPopBackground_17 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(23, 23,23, .65)
+        Height: =730
+        Text: =""
+        Width: =1366
+        ZIndex: =1
+
+    Label78_10 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =730
+        Text: =""
+        Width: =500
+        X: =866
+        ZIndex: =2
+
+    Icon5_7 As icon.Cancel:
+        Color: =RGBA(0, 0, 0, 1)
+        Height: =19
+        Icon: =Icon.Cancel
+        OnSelect: =Set(viewSavedSearches,false)
+        Width: =19
+        X: =1326
+        Y: =14
+        ZIndex: =3
+
+    Label8 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        PaddingBottom: =0
+        PaddingLeft: =18
+        PaddingRight: =0
+        PaddingTop: =19.6
+        Size: =19.5
+        Text: ="Saved Searches"
+        Width: =230
+        X: =866
+        ZIndex: =4
+
+    "Gallery2 As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
+        Items: ='Saved Searches'
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =68
+        Width: =464
+        X: =884
+        Y: =91
+        ZIndex: =5
+
+        Title3 As label:
+            Color: =RGBA(36, 36, 36, 1)
+            Font: =Font.'Segoe UI'
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =10.5
+            Text: =ThisItem.'Search Name'
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 104
+            Y: =16
+            ZIndex: =1
+
+        Subtitle3 As label:
+            Color: =RGBA(100, 100, 100, 1)
+            Font: =Font.'Segoe UI'
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =9
+            Text: =ThisItem.'Modified On'
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 104
+            Y: =34
+            ZIndex: =2
+
+        Separator3 As rectangle:
+            Fill: =RGBA(204, 204, 204, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =4
+
+        Button3 As button:
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =68
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: |-
+                =Set(viewSavedSearches,false);Clear(rankFilter);Clear(genderFilter);Clear(levelFilter);Clear(departmentFilter);Clear(departmentFilter);Clear(countryFilter);Clear(yearFilter);Clear(ethnicityFilter);
+                Set(
+                    rosterLoading,
+                    true
+                );
+                Clear(rosterItems);Clear(tempEmployees);
+                Set(
+                    rosterDrop,
+                    false
+                );
+                Set(
+                    selectedRoster,
+                    LookUp(Rosters,Name="My Org")
+                );
+                Set(
+                    currentRoster,
+                    "My Org - " & ThisItem.'Search Name'
+                );
+                Clear(rankFilter);
+                Clear(genderFilter);
+                Clear(levelFilter);
+                Clear(departmentFilter);
+                Clear(countryFilter);
+                Clear(yearFilter);
+                Clear(ethnicityFilter);
+                Set(
+                    rankSelected,
+                    false
+                );
+                Set(
+                    countrySelected,
+                    false
+                );
+                Set(
+                    countrySelected,
+                    false
+                );
+                Set(
+                    levelsSelected,
+                    false
+                );
+                Set(
+                    genderSelected,
+                    false
+                );
+                Set(
+                    levelSelected,
+                    false
+                );
+                Set(
+                    yearsSelected,
+                    false
+                );
+                Set(
+                    ethnicitySelected,
+                    false
+                );
+                Clear(multipleEmployees);Reset(TextInput14);
+                Collect(rankFilter,ForAll(Split(ThisItem.'Rank Selections',","), {Result: ThisRecord.Value}));Collect(genderFilter,ForAll(Split(ThisItem.'Gender Selections',","), {Result: ThisRecord.Value}));Collect(levelFilter,ForAll(Split(ThisItem.'Level Selections',","), {Result: ThisRecord.Value}));Collect(departmentFilter,ForAll(Split(ThisItem.'Department Selections',","), {Result: ThisRecord.Value}));Collect(countryFilter,ForAll(Split(ThisItem.'Country Selections',","), {Result: ThisRecord.Value}));Collect(yearFilter,ForAll(Split(ThisItem.'Years Selections',","), {Result: ThisRecord.Value}));Collect(ethnicityFilter,ForAll(Split(ThisItem.'Ethnicity Selections',","), {Result: ThisRecord.Value}))
+            Text: =""
+            Width: =392
+            ZIndex: =5
+
+        Image8 As image:
+            Height: =15.5
+            Image: =Shape_9
+            OnSelect: =Select(Parent)
+            Width: =10
+            X: =438
+            Y: =18
+            ZIndex: =6
+
+        Button2 As button:
+            Fill: =RGBA(0, 0, 0, 0)
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Select(Parent);Set(renameSearch,true)
+            Text: =""
+            Width: =26
+            X: =430
+            Y: =5
+            ZIndex: =7
+
+    promotionPopBackground_18 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(23, 23,23, .65)
+        Height: =730
+        Text: =""
+        Visible: =renameSearch
+        Width: =500
+        X: =866
+        ZIndex: =6
+
+    htmlMidShadow_34 As htmlViewer:
+        Height: =246
+        HtmlText: |-
+            =
+            "<div style='
+                margin: 8px;
+                width: " & htmlMidShadow_34.Width - 20 & "px;
+                height: " & htmlMidShadow_34.Height - 30 & "px;
+                box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                            0 1px 1px rgba(0, 0, 0, 0.20);
+                border-radius: 1px;
+                background: #ffffff;'>
+            </div>"
+        Visible: =renameSearch
+        Width: =405
+        X: =913
+        Y: =155
+        ZIndex: =7
+
+    Label104_6 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =39
+        PaddingLeft: =18
+        PaddingTop: =18
+        Size: =15
+        Text: ="Rename Search"
+        Visible: =renameSearch
+        Width: =208
+        X: =927
+        Y: =169
+        ZIndex: =8
+
+    Label104_7 As label:
+        Color: =RGBA(0, 0, 0, .8965)
+        Font: =Font.'Segoe UI'
+        Height: =22
+        PaddingLeft: =19
+        PaddingTop: =0
+        Size: =9
+        Text: ="Update the saved search name"
+        Visible: =renameSearch
+        Width: =388
+        X: =927
+        Y: =217
+        ZIndex: =9
+
+    TextInput11_5 As text:
+        BorderColor: =RGBA(96, 94, 92, 1)
+        BorderThickness: =1
+        Default: =Gallery2.Selected.'Search Name'
+        Font: =Font.'Segoe UI'
+        Height: =63
+        HintText: ="Update search name"
+        RadiusBottomLeft: =2
+        RadiusBottomRight: =2
+        RadiusTopLeft: =2
+        RadiusTopRight: =2
+        Size: =10.5
+        Visible: =renameSearch
+        Width: =345
+        X: =945
+        Y: =246
+        ZIndex: =10
+
+    Button43_6 As button:
+        BorderThickness: =0
+        Fill: =RGBA(0, 120, 212, 1)
+        Font: =Font.'Segoe UI'
+        Height: =24
+        OnSelect: |-
+            =Patch('Saved Searches',Gallery2.Selected,{'Search Name':TextInput11_5.Text});Set(renameSearch,false)
+        RadiusBottomLeft: =2
+        RadiusBottomRight: =2
+        RadiusTopLeft: =2
+        RadiusTopRight: =2
+        Size: =10.5
+        Text: ="Rename"
+        Visible: =renameSearch
+        Width: =63
+        X: =945
+        Y: =347
+        ZIndex: =12
+
+    Button43_7 As button:
+        BorderColor: =
+        BorderThickness: =1
+        Color: =RGBA(50, 49, 48, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Segoe UI'
+        Height: =24
+        OnSelect: =Set(renameSearch,false)
+        RadiusBottomLeft: =2
+        RadiusBottomRight: =2
+        RadiusTopLeft: =2
+        RadiusTopRight: =2
+        Size: =10.5
+        Text: ="Cancel"
+        Visible: =renameSearch
+        Width: =63
+        X: =1015
+        Y: =347
+        ZIndex: =13
+
+    Image19 As image:
+        Height: =11
+        Image: ='Shape (58)'
+        OnSelect: =Remove('Saved Searches',Gallery2.Selected)
+        Visible: =renameSearch
+        Width: =11
+        X: =1279
+        Y: =355
+        ZIndex: =14
+

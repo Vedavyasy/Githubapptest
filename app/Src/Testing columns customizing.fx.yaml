@@ -1,0 +1,15 @@
+"'Testing columns customizing' As screen":
+
+    "'Customize columns_1' As 'Customize columns'":
+        Visible: =true
+        Width: =1008
+        X: =358
+        Y: =12
+
+    "'Add Search Criteria_1' As 'Add Search Criteria'":
+        Visible: =false
+        Width: =631
+        X: =180
+        Y: =32
+        ZIndex: =2
+

@@ -1,0 +1,133 @@
+"'Profile Team Details' As CanvasComponent":
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =22
+    TeamDetails: |-
+        ={Manager:"Johnathan Lee",CoManager:"Michelle Anna Turner",TeamSize:"14 (10 FTE)",TeamSpan:"38 (28 FTE)"}
+    Width: =800
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    grpTeamDetails_2 As group:
+        Height: =5
+        Width: =5
+        X: =-80
+        Y: =-249
+        ZIndex: =12
+
+        "ManagerValue_2 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: ="Black"
+            Height: =23
+            Text: =If(IsBlank('Profile Team Details'.TeamDetails.Manager),"",'Profile Team Details'.TeamDetails.Manager)
+            Width: =98
+            X: =ManagerLabel_2.AutoWidth+ManagerLabel_2.X+5
+            Y: =ManagerLabel_2.Y
+            ZIndex: =1
+
+        ManagerDot_2 As circle:
+            Fill: =RGBA(100, 100, 100, 1)
+            Height: =3
+            Visible: =If(IsBlank('Profile Team Details'.TeamDetails.CoManager),false,true)
+            Width: =3
+            X: =ManagerValue_2.AutoWidth+ManagerValue_2.X+If(IsBlank('Profile Team Details'.TeamDetails.CoManager),0,10)
+            Y: =ManagerLabel_2.Y+9
+            ZIndex: =2
+
+        "CoManagerValue_2 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: ="Black"
+            Height: =23
+            Text: =If(IsBlank('Profile Team Details'.TeamDetails.CoManager),"",'Profile Team Details'.TeamDetails.CoManager)
+            Width: =146
+            X: =CoManagerLabel_2.AutoWidth+CoManagerLabel_2.X+If(IsBlank('Profile Team Details'.TeamDetails.CoManager),0,5)
+            Y: =ManagerLabel_2.Y
+            ZIndex: =3
+
+        CoManagerDot_2 As circle:
+            Fill: =RGBA(100, 100, 100, 1)
+            Height: =3
+            Tooltip: =
+            Visible: =If(IsBlank('Profile Team Details'.TeamDetails.TeamSize),false,true)
+            Width: =3
+            X: =CoManagerValue_2.X+CoManagerValue_2.AutoWidth+If(IsBlank('Profile Team Details'.TeamDetails.TeamSize),0,10)
+            Y: =ManagerLabel_2.Y+9
+            ZIndex: =4
+
+        "TeamSizeValue_2 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: ="Black"
+            Height: =23
+            Text: =If(IsBlank('Profile Team Details'.TeamDetails.TeamSize),"",'Profile Team Details'.TeamDetails.TeamSize)
+            Width: =146
+            X: =TeamSizeLabel_2.X+TeamSizeLabel_2.AutoWidth+If(IsBlank('Profile Team Details'.TeamDetails.TeamSize),0,5)
+            Y: =ManagerLabel_2.Y
+            ZIndex: =5
+
+        "ManagerLabel_2 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: ="Gray"
+            Height: =20
+            Text: |-
+                ="Manager :"
+            Width: =68
+            X: =0
+            Y: =0
+            ZIndex: =6
+
+        "CoManagerLabel_2 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: ="Gray"
+            Height: =23
+            Text: |-
+                =If(IsBlank('Profile Team Details'.TeamDetails.CoManager),"","Co-Manager :")
+            Visible: =true
+            Width: =68
+            X: =ManagerDot_2.X+ManagerDot_2.Width+If(IsBlank('Profile Team Details'.TeamDetails.CoManager),0,10)
+            Y: =0
+            ZIndex: =7
+
+        "TeamSizeLabel_2 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: ="Gray"
+            Height: =23
+            Text: |-
+                =If(IsBlank('Profile Team Details'.TeamDetails.TeamSize),"","Team Size (Directs) :")
+            Visible: =true
+            Width: =68
+            X: =CoManagerDot_2.X+CoManagerDot_2.Width+If(IsBlank('Profile Team Details'.TeamDetails.TeamSpan),0,10)
+            Y: =0
+            ZIndex: =8
+
+        "TeamSpanValue_2 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: ="Black"
+            Height: =23
+            Text: =If(IsBlank('Profile Team Details'.TeamDetails.TeamSpan),"",'Profile Team Details'.TeamDetails.TeamSpan)
+            Width: =146
+            X: =TeamSpanLabel_2.AutoWidth+TeamSpanLabel_2.X+If(IsBlank('Profile Team Details'.TeamDetails.TeamSpan),0,5)
+            Y: =0
+            ZIndex: =9
+
+        "TeamSpanLabel_2 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: ="Gray"
+            Height: =23
+            Text: |-
+                =If(IsBlank('Profile Team Details'.TeamDetails.TeamSpan),"","Team Span :")
+            Visible: =true
+            Width: =68
+            X: =TeamSizeDot_2.X+TeamSizeDot_2.Width+If(IsBlank('Profile Team Details'.TeamDetails.TeamSpan),0,10)
+            Y: =0
+            ZIndex: =10
+
+        TeamSizeDot_2 As circle:
+            Fill: =RGBA(100, 100, 100, 1)
+            Height: =3
+            Tooltip: =
+            Visible: =If(IsBlank('Profile Team Details'.TeamDetails.TeamSpan),false,true)
+            Width: =3
+            X: =TeamSizeValue_2.X+TeamSizeValue_2.AutoWidth+If(IsBlank('Profile Team Details'.TeamDetails.TeamSize),0,10)
+            Y: =9
+            ZIndex: =11
+

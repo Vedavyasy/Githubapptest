@@ -1,0 +1,281 @@
+Screen4 As screen:
+
+    "Gallery14_4 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        Height: =273
+        Items: =NotesData
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplatePadding: =0
+        TemplateSize: =100
+        Visible: =If(pivot="Digital Notebook",true,false)
+        Width: =1330
+        X: =36
+        Y: =495
+        ZIndex: =1
+
+        Label41_11 As label:
+            Font: =Font.'Segoe UI'
+            Height: =62
+            OnSelect: =Select(Parent)
+            Size: =10.5
+            Text: =ThisItem.'Created On'
+            Width: =167
+            X: =84
+            Y: =3
+            ZIndex: =7
+
+        Label42_26 As label:
+            Color: =
+            Font: =Font.'Segoe UI'
+            Height: =63
+            OnSelect: =Select(Parent)
+            Size: =10.5
+            Text: =ThisItem.'Created By'.'Full Name'
+            Width: =174
+            X: =251
+            Y: =2
+            ZIndex: =8
+
+        Label42_28 As label:
+            Color: =
+            Font: =Font.'Segoe UI'
+            Height: =62
+            OnSelect: =Select(Parent)
+            Size: =10.5
+            Text: =ThisItem.'Is Private'
+            Width: =113
+            X: =446
+            Y: =3
+            ZIndex: =9
+
+        Rectangle9_18 As rectangle:
+            Fill: =RGBA(235, 235, 235, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =1327
+            Y: =99
+            ZIndex: =15
+
+        Label42_27 As label:
+            Color: =
+            Font: =Font.'Segoe UI'
+            Height: =62
+            OnSelect: =Select(Parent)
+            Size: =10.5
+            Text: =ThisItem.Category
+            Width: =113
+            X: =579
+            ZIndex: =16
+
+        Label42_29 As label:
+            Color: =
+            Font: =Font.'Segoe UI'
+            Height: =60
+            OnSelect: =Select(Parent)
+            Size: =10.5
+            Text: =ThisItem.Category
+            Width: =213
+            X: =837
+            Y: =4
+            ZIndex: =17
+
+        Label42_30 As label:
+            Color: =
+            Font: =Font.'Segoe UI'
+            Height: =60
+            OnSelect: =Select(Parent)
+            Size: =10.5
+            Text: =Left(PlainText(ThisItem.Note),50)
+            Width: =277
+            X: =1050
+            Y: =4
+            ZIndex: =18
+
+        Icon23_2 As icon.ChevronRight:
+            Height: =15
+            Icon: =Icon.ChevronRight
+            OnSelect: |-
+                =Select(Parent);
+                Patch(NotesData,Gallery14_4.Selected,{expand:!ThisItem.expand})
+            Width: =15
+            X: =20
+            Y: =30
+            ZIndex: =19
+
+        Icon24_2 As icon.Edit:
+            Color: =RGBA(39, 67, 125, 0.8)
+            Height: =20
+            Icon: =Icon.Edit
+            OnSelect: =Select(Parent)
+            Width: =20
+            X: =45
+            Y: =27
+            ZIndex: =20
+
+        Label42_31 As label:
+            Color: =
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            OnSelect: =Select(Parent)
+            Size: =10.5
+            Text: ="Full Note"
+            Visible: =ThisItem.expand
+            Width: =113
+            X: =84
+            Y: =45
+            ZIndex: =21
+
+        Label42_32 As label:
+            AutoHeight: =true
+            Color: =
+            Font: =Font.'Segoe UI'
+            Height: =29
+            OnSelect: =Select(Parent)
+            Size: =10.5
+            Text: =PlainText(ThisItem.Note)
+            Visible: =ThisItem.expand
+            Width: =1183
+            X: =86
+            Y: =70
+            ZIndex: =22
+
+    Button50 As button:
+        OnSelect: |-
+            ={Manager:"Johnathan Lee",CoManager:"Michelle Anna Turner",TeamSize:"14 (10 FTE)",TeamSpan:"38 (28 FTE)"}
+        Text: |-
+            ="""Team Size (Directs) : "" &"
+        X: =708
+        Y: =122
+        ZIndex: =3
+
+    grpTeamDetails As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =14
+
+        "ManagerValue As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: ="Black"
+            Height: =23
+            Text: =If(IsBlank(TeamDetails.Manager),"",TeamDetails.Manager)
+            Width: =98
+            X: =ManagerLabel.AutoWidth+ManagerLabel.X+5
+            Y: =ManagerLabel.Y
+            ZIndex: =2
+
+        ManagerDot As circle:
+            Fill: =RGBA(100, 100, 100, 1)
+            Height: =3
+            Visible: =If(IsBlank(TeamDetails.CoManager),false,true)
+            Width: =3
+            X: =ManagerValue.AutoWidth+ManagerValue.X+If(IsBlank(TeamDetails.CoManager),0,10)
+            Y: =ManagerLabel.Y+9
+            ZIndex: =4
+
+        "CoManagerValue As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: ="Black"
+            Height: =23
+            Text: =If(IsBlank(TeamDetails.CoManager),"",TeamDetails.CoManager)
+            Width: =146
+            X: =CoManagerLabel.AutoWidth+CoManagerLabel.X+If(IsBlank(TeamDetails.CoManager),0,5)
+            Y: =ManagerLabel.Y
+            ZIndex: =5
+
+        CoManagerDot As circle:
+            Fill: =RGBA(100, 100, 100, 1)
+            Height: =3
+            Tooltip: =
+            Visible: =If(IsBlank(TeamDetails.TeamSize),false,true)
+            Width: =3
+            X: =CoManagerValue.X+CoManagerValue.AutoWidth+If(IsBlank(TeamDetails.TeamSize),0,10)
+            Y: =ManagerLabel.Y+9
+            ZIndex: =6
+
+        "TeamSizeValue As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: ="Black"
+            Height: =23
+            Text: =If(IsBlank(TeamDetails.TeamSize),"",TeamDetails.TeamSize)
+            Width: =146
+            X: =TeamSizeLabel.X+TeamSizeLabel.AutoWidth+If(IsBlank(TeamDetails.TeamSize),0,5)
+            Y: =ManagerLabel.Y
+            ZIndex: =7
+
+        "ManagerLabel As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: ="Gray"
+            Height: =20
+            Text: |-
+                ="Manager :"
+            Width: =68
+            X: =80
+            Y: =276
+            ZIndex: =8
+
+        "CoManagerLabel As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: ="Gray"
+            Height: =23
+            Text: |-
+                =If(IsBlank(TeamDetails.CoManager),"","Co-Manager :")
+            Visible: =true
+            Width: =68
+            X: =ManagerDot.X+ManagerDot.Width+If(IsBlank(TeamDetails.CoManager),0,10)
+            Y: =ManagerLabel.Y
+            ZIndex: =9
+
+        "TeamSizeLabel As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: ="Gray"
+            Height: =23
+            Text: |-
+                =If(IsBlank(TeamDetails.TeamSize),"","Team Size (Directs) :")
+            Visible: =true
+            Width: =68
+            X: =CoManagerDot.X+CoManagerDot.Width+If(IsBlank(TeamDetails.TeamSpan),0,10)
+            Y: =ManagerLabel.Y
+            ZIndex: =10
+
+        "TeamSpanValue As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: ="Black"
+            Height: =23
+            Text: =If(IsBlank(TeamDetails.TeamSpan),"",TeamDetails.TeamSpan)
+            Width: =146
+            X: =TeamSpanLabel.AutoWidth+TeamSpanLabel.X+If(IsBlank(TeamDetails.TeamSpan),0,5)
+            Y: =ManagerLabel.Y
+            ZIndex: =11
+
+        "TeamSpanLabel As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: ="Gray"
+            Height: =23
+            Text: |-
+                =If(IsBlank(TeamDetails.TeamSpan),"","Team Span :")
+            Visible: =true
+            Width: =68
+            X: =TeamSizeDot.X+TeamSizeDot.Width+If(IsBlank(TeamDetails.TeamSpan),0,10)
+            Y: =ManagerLabel.Y
+            ZIndex: =12
+
+        TeamSizeDot As circle:
+            Fill: =RGBA(100, 100, 100, 1)
+            Height: =3
+            Tooltip: =
+            Visible: =If(IsBlank(TeamDetails.TeamSpan),false,true)
+            Width: =3
+            X: =TeamSizeValue.X+TeamSizeValue.AutoWidth+If(IsBlank(TeamDetails.TeamSize),0,10)
+            Y: =ManagerLabel.Y+9
+            ZIndex: =13
+
+    "'Profile Team Details_2' As 'Profile Team Details'":
+        TeamDetails: |-
+            ={Manager:"Johnathan Lee",CoManager:"Michelle Anna Turner",TeamSize:"38 (28 FTE)",TeamSpan:"38 (28 FTE)"}
+        X: =3
+        Y: =43
+        ZIndex: =15
+

@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "f1f5ce89-1fe9-455c-8da5-4827b1a42718",
+    "Name": "WorkdayGetJobDetails",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": "200b1d88-1a09-ed11-82e4-000d3a9cc8d2"
+  }
+]

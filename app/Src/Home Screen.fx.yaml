@@ -1,0 +1,889 @@
+"'Home Screen' As screen":
+    OnVisible: |-
+        =Set(
+            nav,
+            false
+        );
+        Set(
+            views,
+            ["My Org"]
+        );
+        Set(
+            talentAvg,
+            Sum(
+                workerInfo,
+                Rating_Numeric
+            ) / CountRows(workerInfo)
+        );
+        Reset(ComboBox1);
+        Set(
+            compAvg,
+            Sum(
+                workerInfo,
+                'Compa-Ratio'
+            ) / CountRows(workerInfo)
+        );
+        Set(
+            highPotential,
+            Sum(
+                CountRows(
+                    Filter(
+                        workerInfo,
+                        is_high_potential = "0"
+                    )
+                )
+            ) / CountRows(workerInfo)
+        );
+        AddColumns(
+            workerInfo,
+            "ImagePerson",
+            'default-contact-96x96-2'
+        );
+        Reset(ComboBox1)
+
+    Label27 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(235, 235, 235, 1)
+        Height: =137
+        Text: =""
+        Width: =1366
+        Y: =46
+        ZIndex: =2
+
+    Label29 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        Height: =64
+        Size: =28
+        Text: ="Employee 360"
+        Width: =384
+        X: =54
+        Y: =58
+        ZIndex: =3
+
+    Label30 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =48
+        Size: =16
+        Text: ="Welcome to E360, " & User().FullName
+        Width: =477
+        X: =57
+        Y: =113
+        ZIndex: =5
+
+    Gallery2_3 As gallery.galleryHorizontal:
+        Height: =53
+        Items: =views
+        OnSelect: |-
+            =Set(
+                current,
+                ThisItem.Value
+            );
+            If(
+                ThisItem.Value = "Compensation",
+                ClearCollect(
+                    bonusInfo,
+                    WorkdayGetEmployeeBonusInfo.Run(
+                        First(
+                            Filter(
+                                workerData,
+                                descriptor = galEmployees.Selected.Worker
+                            )
+                        ).id
+                    )
+                );
+                ClearCollect(
+                    stockInfo,
+                    WorkdayGetEmployeeStockInfo.Run(
+                        First(
+                            Filter(
+                                workerData,
+                                descriptor = galEmployees.Selected.Worker
+                            )
+                        ).id
+                    )
+                ),
+                If(
+                    ThisItem.Value = "Talent",
+                    Set(
+                        ReviewDetails,
+                        First(
+                            WorkdayGetReviewHistoryDetails.Run(
+                                First(
+                                    Filter(
+                                        workerData,
+                                        descriptor = galEmployees.Selected.Worker
+                                    )
+                                ).id
+                            ).Report_Entry
+                        )
+                    );Refresh('Promotion Requests')
+                )
+            )
+        TemplateSize: =124
+        Width: =1264
+        X: =54
+        Y: =169
+        ZIndex: =6
+
+        Label8_3 As label:
+            Align: =Align.Center
+            Font: =Font.'Segoe UI'
+            FontWeight: =If(ThisItem.IsSelected,FontWeight.Semibold,FontWeight.Normal)
+            Height: =43
+            OnSelect: =Select(Parent)
+            PaddingLeft: =0
+            Size: =11
+            Text: =ThisItem.Value
+            Width: =120
+            ZIndex: =1
+
+        Rectangle1_3 As rectangle:
+            Fill: =RGBA(0, 120, 212, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Visible: =ThisItem.IsSelected
+            Width: =100
+            X: =10
+            Y: =42
+            ZIndex: =2
+
+    Button8 As button:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(230, 230, 230, 1)
+        Height: =174
+        Text: =""
+        Visible: =false
+        Width: =727
+        X: =42
+        Y: =308
+        ZIndex: =9
+
+    Button8_1 As button:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(230, 230, 230, 1)
+        Height: =447
+        Text: =""
+        Width: =730
+        X: =54
+        Y: =280
+        ZIndex: =10
+
+    Button8_2 As button:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(230, 230, 230, 1)
+        Height: =174
+        Text: =""
+        Width: =481
+        X: =839
+        Y: =280
+        ZIndex: =11
+
+    Button8_3 As button:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(230, 230, 230, 1)
+        Height: =246
+        Text: =""
+        Width: =483
+        X: =839
+        Y: =481
+        ZIndex: =12
+
+    "Gallery10 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+        Height: =427
+        Items: =Filter(workerInfo,Rating_Numeric="5")
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplatePadding: =0
+        TemplateSize: =53
+        Width: =694
+        X: =66
+        Y: =292
+        ZIndex: =13
+
+        Title9 As label:
+            Font: =Font.'Segoe UI'
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =13
+            Text: =ThisItem.Full_Name
+            VerticalAlign: =VerticalAlign.Top
+            Width: =146
+            X: =81
+            Y: =13
+            ZIndex: =1
+
+        NextArrow3 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            Height: =32
+            Icon: =Icon.ChevronRight
+            OnSelect: =Select(Parent)
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="View item details"
+            Width: =33
+            X: =681
+            Y: =7
+            ZIndex: =2
+
+        Title9_5 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =11
+            Text: =If(ThisItem.is_high_potential = "0", "High Potential","Low Potential")
+            VerticalAlign: =VerticalAlign.Top
+            Width: =167
+            X: =215
+            Y: =13
+            ZIndex: =3
+
+        Title9_6 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =23
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =11
+            Text: =ThisItem.Rating
+            VerticalAlign: =VerticalAlign.Top
+            Width: =193
+            X: =335
+            Y: =13
+            ZIndex: =4
+
+        Title9_7 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =23
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =11
+            Text: =ThisItem.location
+            VerticalAlign: =VerticalAlign.Top
+            Width: =140
+            X: =551
+            Y: =13
+            ZIndex: =5
+
+        Image9 As image:
+            Height: =32
+            Image: ='default-contact-96x96-2'
+            OnSelect: =Select(Parent)
+            Width: =57
+            X: =1
+            Y: =6
+            ZIndex: =6
+
+    "Gallery13 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+        Height: =234
+        Items: ='Leadership Programs'
+        Layout: =Layout.Vertical
+        OnSelect: =
+        ShowScrollbar: =false
+        TemplatePadding: =0
+        TemplateSize: =58
+        Width: =473
+        X: =839
+        Y: =482
+        ZIndex: =14
+
+        Title13 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =12
+            Text: =ThisItem.Name
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 104
+            X: =12
+            Y: =9
+            ZIndex: =2
+
+        htmlTopShadow As htmlViewer:
+            Fill: =RGBA(230, 230, 230, 1)
+            Height: =70
+            HtmlText: |-
+                ="<div style='
+                    margin: 8px;
+                    width: " & htmlTopShadow.Width - 20 & "px;
+                    height: " & htmlTopShadow.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 4px 4px rgba(0, 0, 0, 0.20);
+                    border-radius: 8px;
+                    background: #E6E6E6;'>
+                </div>"
+            OnSelect: =Select(Parent)
+            Width: =473
+            ZIndex: =3
+
+        Label33 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =28
+            OnSelect: =Select(Parent)
+            PaddingLeft: =10
+            Size: =10
+            Text: =ThisItem.Name
+            Width: =362
+            X: =12
+            Y: =9
+            ZIndex: =4
+
+        Label35 As label:
+            Height: =16
+            OnSelect: =Select(Parent)
+            Size: =9
+            Text: =Date(Year(ThisItem.'Program Start Date'),Month(ThisItem.'Program Start Date'),(Day(ThisItem.'Program Start Date'))) & " - " &  Date(Year(ThisItem.'Program End date'),Month(ThisItem.'Program End date'),(Day(ThisItem.'Program End date')))
+            Width: =170
+            X: =16
+            Y: =33
+            ZIndex: =5
+
+        Circle2_1 As circle:
+            Fill: =RGBA(65, 141, 237, 1)
+            Height: =20
+            Width: =20
+            X: =360
+            Y: =22
+            ZIndex: =6
+
+        Icon4_1 As icon.Add:
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =16
+            Icon: =Icon.Add
+            Width: =16
+            X: =362
+            Y: =24
+            ZIndex: =7
+
+        Label31_1 As label:
+            Align: =Align.Right
+            Font: =Font.'Segoe UI'
+            Height: =33
+            Size: =11
+            Text: ="Nominate"
+            X: =305
+            Y: =15
+            ZIndex: =8
+
+        Button7 As button:
+            Fill: =RGBA(0, 0, 0, 0)
+            HoverFill: =
+            OnSelect: =Select(Parent);Navigate('Nominate Employees Screen')
+            Text: =""
+            Width: =117
+            X: =338
+            Y: =8
+            ZIndex: =10
+
+    Rectangle5 As rectangle:
+        Fill: =RGBA(100, 100, 100, 1)
+        Height: =67
+        Width: =6
+        X: =870
+        Y: =292
+        ZIndex: =15
+
+    Rectangle5_1 As rectangle:
+        Fill: =RGBA(217, 217, 217, 1)
+        Height: =67
+        Width: =6
+        X: =870
+        Y: =377
+        ZIndex: =16
+
+    Rectangle5_2 As rectangle:
+        Fill: =RGBA(217, 217, 217, 1)
+        Height: =67
+        Width: =6
+        X: =1013
+        Y: =292
+        ZIndex: =17
+
+    Rectangle5_3 As rectangle:
+        Fill: =RGBA(100, 100, 100, 1)
+        Height: =67
+        Width: =6
+        X: =1013
+        Y: =372
+        ZIndex: =18
+
+    Label37 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =26
+        PaddingTop: =2
+        Size: =10
+        Text: ="Talent Rank"
+        Width: =137
+        X: =876
+        Y: =287
+        ZIndex: =19
+
+    Label37_1 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =26
+        PaddingTop: =2
+        Size: =10
+        Text: ="High Potential"
+        Width: =137
+        X: =876
+        Y: =372
+        ZIndex: =20
+
+    Label37_2 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =26
+        PaddingTop: =2
+        Size: =10
+        Text: ="Comp Ratio"
+        Width: =137
+        X: =1019
+        Y: =285
+        ZIndex: =21
+
+    Label37_3 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =26
+        PaddingTop: =2
+        Size: =10
+        Text: ="Org Size"
+        Width: =137
+        X: =1019
+        Y: =372
+        ZIndex: =22
+
+    Label37_4 As label:
+        Font: =Font.'Segoe UI'
+        Height: =26
+        PaddingTop: =3
+        Size: =10
+        Text: ="Avg"
+        Width: =137
+        X: =876
+        Y: =304
+        ZIndex: =23
+
+    Label37_5 As label:
+        Font: =Font.'Segoe UI'
+        Height: =26
+        PaddingTop: =3
+        Size: =10
+        Text: ="Avg"
+        Width: =137
+        X: =1019
+        Y: =304
+        ZIndex: =24
+
+    Label37_6 As label:
+        Font: =Font.'Segoe UI'
+        Height: =26
+        PaddingTop: =3
+        Size: =10
+        Text: ="Percentage"
+        Width: =137
+        X: =876
+        Y: =390
+        ZIndex: =25
+
+    Label37_7 As label:
+        Font: =Font.'Segoe UI'
+        Height: =26
+        PaddingTop: =3
+        Size: =10
+        Text: ="Total"
+        Width: =137
+        X: =1019
+        Y: =389
+        ZIndex: =26
+
+    Label38 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        PaddingTop: =10
+        Size: =15
+        Text: =Round(talentAvg,2)
+        Width: =137
+        X: =876
+        Y: =319
+        ZIndex: =27
+
+    Label38_1 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        PaddingTop: =10
+        Size: =15
+        Text: =Round(compAvg,2)
+        Width: =137
+        X: =1019
+        Y: =319
+        ZIndex: =28
+
+    Label38_2 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        PaddingTop: =10
+        Size: =15
+        Text: =Round(highPotential,2)*100 & "%"
+        Width: =137
+        X: =876
+        Y: =404
+        ZIndex: =29
+
+    Label38_3 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        PaddingTop: =10
+        Size: =15
+        Text: =CountRows(workerInfo)
+        Width: =137
+        X: =1019
+        Y: =404
+        ZIndex: =30
+
+    PowerBI3 As powerbi:
+        BorderThickness: =0
+        DashboardId: ="c478cf09-56a5-45ad-ba97-3c4cb700b72b"
+        Height: =174
+        TileUrl: |-
+            ="https://app.powerbi.com/embed?dashboardId=c478cf09-56a5-45ad-ba97-3c4cb700b72b&tileId=f1629845-dac1-4845-8f52-72f7331cb783&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLVdFU1QyLXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0IiwiZW1iZWRGZWF0dXJlcyI6eyJtb2Rlcm5FbWJlZCI6ZmFsc2V9fQ%3d%3d"
+        Width: =212
+        WorkspaceId: ="__my-workspace"
+        X: =1108
+        Y: =280
+        ZIndex: =31
+
+    Label32 As label:
+        Align: =Align.Center
+        Fill: =RGBA(230, 230, 230, 1)
+        FontWeight: =FontWeight.Semibold
+        Height: =42
+        Size: =12
+        Text: ="Org Talent Rank Target"
+        Width: =214
+        X: =1106
+        Y: =280
+        ZIndex: =32
+
+    Label39 As label:
+        Fill: =RGBA(230, 230, 230, 1)
+        Height: =18
+        Text: =""
+        Width: =213
+        X: =1107
+        Y: =436
+        ZIndex: =33
+
+    "Gallery13_1 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+        Height: =152
+        Items: ='Leadership Programs'
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplatePadding: =0
+        TemplateSize: =58
+        Visible: =false
+        Width: =730
+        X: =39
+        Y: =339
+        ZIndex: =34
+
+        Title13_1 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =12
+            Text: =ThisItem.Name
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 104
+            X: =12
+            Y: =9
+            ZIndex: =2
+
+        htmlTopShadow_1 As htmlViewer:
+            Fill: =RGBA(230, 230, 230, 1)
+            Height: =70
+            HtmlText: |-
+                ="<div style='
+                    margin: 8px;
+                    width: " & htmlTopShadow_1.Width - 20 & "px;
+                    height: " & htmlTopShadow_1.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 4px 4px rgba(0, 0, 0, 0.20);
+                    border-radius: 8px;
+                    background: #E6E6E6;'>
+                </div>"
+            OnSelect: =Select(Parent)
+            Width: =729
+            ZIndex: =3
+
+        Rectangle6 As rectangle:
+            Fill: =If(ThisItem.Color = 1,RGBA(2, 153, 163, 1), If(ThisItem.Color=2,RGBA(218, 113, 179, 1),If(ThisItem.Color=3,RGBA(186, 140, 0, 1),RGBA(125, 142, 223, 1))))
+            Height: =40
+            OnSelect: =Select(Parent)
+            Width: =7
+            X: =13
+            Y: =13
+            ZIndex: =4
+
+        Image11 As image:
+            Height: =17
+            Image: ='Shape (24)'
+            OnSelect: =Select(Parent)
+            Width: =19
+            X: =37
+            Y: =24
+            ZIndex: =5
+
+        Button9 As button:
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(205, 205, 205, 1)
+            Height: =9
+            OnSelect: =Select(Parent)
+            Text: =""
+            Width: =547
+            X: =155
+            Y: =28
+            ZIndex: =6
+
+        Button9_1 As button:
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(205, 205, 205, 1)
+            Height: =9
+            OnSelect: =Select(Parent)
+            Text: =""
+            Width: =40
+            X: =67
+            Y: =28
+            ZIndex: =7
+
+        Rectangle6_1 As rectangle:
+            Fill: =Color.Gray
+            Height: =30
+            OnSelect: =Select(Parent)
+            Width: =1
+            X: =127
+            Y: =20
+            ZIndex: =8
+
+    Button7_3 As button:
+        Fill: =RGBA(0, 0, 0, 0)
+        HoverFill: =
+        OnSelect: =Set(notesComponent,true);Set(addNotes,false)
+        Text: =""
+        Width: =35
+        X: =1253
+        Y: =6
+        ZIndex: =36
+
+    promotionPopBackground_5 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(23, 23,23, .65)
+        Height: =722
+        Text: =""
+        Visible: =notesComponent
+        Width: =925
+        Y: =46
+        ZIndex: =37
+
+    Notes_1 As Notes:
+        Height: =721
+        Visible: =notesComponent
+        Width: =631
+        X: =734
+        Y: =47
+        ZIndex: =38
+
+    grpHeader As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =38
+
+        Label24 As label:
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(152, 152, 152, 1)
+            Height: =46
+            Text: =""
+            Visible: =false
+            Width: =1366
+            ZIndex: =1
+
+        Image2_1 As image:
+            Height: =46
+            Image: ='Morgan Stanley'
+            Visible: =false
+            Width: =89
+            X: =35
+            ZIndex: =4
+
+        Image1 As image:
+            Height: =18
+            Image: ='Shape (23)'
+            Visible: =false
+            Width: =18
+            X: =1264
+            Y: =14
+            ZIndex: =7
+
+        Image1_1 As image:
+            Height: =18
+            Image: ='Shape (22)'
+            Visible: =false
+            Width: =18
+            X: =1305
+            Y: =14
+            ZIndex: =8
+
+        ComboBox1 As combobox:
+            BorderThickness: =0
+            ChevronBackground: =RGBA(255, 255, 255, 1)
+            DisplayFields: =["Full_Name"]
+            Fill: =RGBA(236, 236, 236, 1)
+            Font: =Font.'Segoe UI'
+            Height: =29
+            InputTextPlaceholder: ="      " & "Search Employees"
+            Items: =workerInfo
+            NoSelectionText: ="      Search Empl0yees"
+            OnChange: |-
+                =ClearCollect(
+                    compData,
+                    WorkdayGetCompHistory.Run(
+                        First(
+                            Filter(
+                                workerData,
+                                descriptor = ComboBox1.Selected.Full_Name
+                            )
+                        ).id
+                    )
+                );
+                ClearCollect(
+                    feedbackData,
+                    WorkdayGetWorkerFeedback.Run(
+                        First(
+                            Filter(
+                                workerData,
+                                descriptor = ComboBox1.Selected.Full_Name
+                            )
+                        ).id
+                    )
+                );
+                Set(
+                    ReviwHistory,
+                    First(
+                        WorkdayGetPaybyYear.Run(
+                            First(
+                                Filter(
+                                    workerData,
+                                    descriptor = ComboBox1.Selected.Full_Name
+                                )
+                            ).id
+                        )
+                    )
+                );
+                ClearCollect(
+                    workerHistory,
+                    WorkdayGetWorkerHistory.Run(
+                        First(
+                            Filter(
+                                workerData,
+                                descriptor = ComboBox1.Selected.Full_Name
+                            )
+                        ).id
+                    ).data
+                );
+                ClearCollect(
+                    jobDetails,
+                    First(
+                        WorkdayGetJobDetails.Run(
+                            First(
+                                Filter(
+                                    workerData,
+                                    descriptor = ComboBox1.Selected.Full_Name
+                                )
+                            ).id
+                        ).Report_Entry
+                    )
+                );
+                Set(
+                    JobDev,
+                    First(
+                        WorkdayGetJobDevDetails.Run(
+                            First(
+                                Filter(
+                                    workerData,
+                                    descriptor = ComboBox1.Selected.Full_Name
+                                )
+                            ).id
+                        ).Report_Entry
+                    )
+                );
+                Navigate('Profile Screen');
+                Set(
+                    searchedTwo,
+                    true
+                )
+            SearchFields: =["Full_Name"]
+            SearchItems: =Search(workerInfo,ComboBox1.SearchText,"Full_Name")
+            SelectMultiple: =false
+            Template: =ListItemTemplate.Person
+            Visible: =false
+            X: =519
+            Y: =8
+            ZIndex: =35
+
+    Label30_1 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =48
+        Text: ="Top Performers"
+        Width: =477
+        X: =57
+        Y: =235
+        ZIndex: =39
+
+    Navigation_1 As Navigation:
+        Height: =721
+        Y: =47
+        ZIndex: =40
+
+    Header_4 As Header:
+        ZIndex: =41
+
+    Search_2 As Search:
+        X: =483
+        ZIndex: =42
+

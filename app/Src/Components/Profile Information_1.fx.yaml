@@ -1,0 +1,45 @@
+"'Profile Information_1' As CanvasComponent":
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =730
+    Width: =1366
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    promotionPopBackground_9 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(23, 23,23, .65)
+        Height: =730
+        Text: =""
+        Width: =1366
+        ZIndex: =1
+
+    Label78_1 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =730
+        Text: =""
+        Width: =600
+        X: =766
+        ZIndex: =2
+
+    Label79_4 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        PaddingLeft: =18
+        PaddingTop: =18
+        Size: =13.5
+        Text: ="Profile"
+        X: =766
+        ZIndex: =3
+
+    Icon5_1 As icon.Cancel:
+        Color: =RGBA(0, 0, 0, 1)
+        Height: =19
+        Icon: =Icon.Cancel
+        OnSelect: =Set(profileInfo,false)
+        Width: =19
+        X: =1326
+        Y: =14
+        ZIndex: =86
+

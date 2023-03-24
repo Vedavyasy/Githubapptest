@@ -1,0 +1,105 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr02b_employees",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr02b_employee",
+    "MaxGetRowsCount": 500,
+    "Name": "Employees",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cr02b_communityengagementscore": "Community Engagement Score",
+      "cr02b_cr02b_employeenotes_Employee_cr02b_employ": "Employee Notes",
+      "cr02b_cr02b_promotionrequest_Employee_cr02b_emp": "Promotion Requests",
+      "cr02b_empid": "EmpID",
+      "cr02b_employee_AsyncOperations": "System Jobs",
+      "cr02b_employee_BulkDeleteFailures": "Bulk Delete Failures",
+      "cr02b_employee_DuplicateBaseRecord": "Duplicate Records (cr02b_employee_DuplicateBaseRecord)",
+      "cr02b_employee_DuplicateMatchingRecord": "Duplicate Records (cr02b_employee_DuplicateMatchingRecord)",
+      "cr02b_employee_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cr02b_employee_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cr02b_employee_ProcessSession": "Process Sessions",
+      "cr02b_employee_SyncErrors": "Sync Errors",
+      "cr02b_employeeid": "Employee",
+      "cr02b_firstname": "First Name",
+      "cr02b_fullname": "Full Name",
+      "cr02b_lastname": "Last Name",
+      "cr02b_promotionvelocity": "Promotion Velocity",
+      "cr1a0_cr1a0_employeeprogramnominations_Employee": "Employee Program Nominations",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Employees",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Employees (Views)",
+    "Name": "_cr02b_employee_views",
+    "RelatedEntityName": "Employees",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "4a38b4ce-53cd-40b2-8e32-52b6f600cf04": "Employee Lookup View",
+      "4b9d6fbb-fc3a-4018-a0c8-26146704e4fe": "Employee Advanced Find View",
+      "719e930b-5b1e-445d-a1e2-4be9b8c744c4": "Active Employees",
+      "7519dd24-874f-47c6-9313-aa605003e09b": "Employee Associated View",
+      "9ccbb07a-617b-4b13-bcc1-175fa48cee28": "Inactive Employees"
+    }
+  },
+  {
+    "DisplayName": "Status (Employees)",
+    "Name": "cr02b_employee_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Employees"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Employees",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Employees)",
+    "Name": "cr02b_employee_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Employees"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Employees",
+    "Type": "OptionSetInfo"
+  }
+]

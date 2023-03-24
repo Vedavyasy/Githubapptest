@@ -1,0 +1,623 @@
+"'Compensation Information' As CanvasComponent":
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =768
+    Width: =1366
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    "AutoWidthLabel4_1 As 'Auto Width Label (1.0.19)'":
+        DisplayMode: =DisplayMode.Edit
+        FontColor: ="white"
+        FontSize: =42
+        FontSizeUnits: ='PowerCAT.AutoWidthLabel.FontSizeUnits'.Px
+        FontWeight: =""
+        Height: =54
+        PaddingLeft: =18
+        Text: |-
+            =Text(RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars + First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Total_Bonus_in_Dollars,0),"[$-en-US]#,###","en-US")
+        Visible: =true
+        Width: =173
+        X: =956
+        Y: =123
+        ZIndex: =1
+
+    promotionPopBackground_10 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(23, 23,23, .65)
+        Height: =768
+        Text: =""
+        Width: =1366
+        ZIndex: =2
+
+    Label78_2 As label:
+        DisplayMode: =DisplayMode.View
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =730
+        Text: =""
+        Width: =410
+        X: =956
+        Y: =38
+        ZIndex: =3
+
+    Label67 As label:
+        BorderColor: =RGBA(235, 235, 235, 1)
+        Fill: =RGBA(250, 250, 250, 1)
+        Height: =192
+        Text: =""
+        Width: =409
+        X: =956
+        Y: =259
+        ZIndex: =4
+
+    Label70 As label:
+        Fill: =RGBA(0, 92, 144, 1)
+        Height: =179
+        Text: =""
+        Width: =410
+        X: =956
+        Y: =38
+        ZIndex: =5
+
+    Icon5_2 As icon.Cancel:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =19
+        Icon: =Icon.Cancel
+        OnSelect: =Set(compInfo,false)
+        Width: =19
+        X: =1326
+        Y: =52
+        ZIndex: =6
+
+    Label79_5 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =75
+        PaddingLeft: =18
+        PaddingTop: =36
+        Size: =19.5
+        Text: ="FY" & Year(Today())-2000 & " Total Compensation"
+        Width: =370
+        X: =956
+        Y: =38
+        ZIndex: =7
+
+    Label86_8 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =28
+        Size: =19.5
+        Text: ="USD"
+        Visible: =If(pivot="Overview",true,false)
+        X: =AutoWidthLabel4_1.X+AutoWidthLabel4_1.AutoWidth+8
+        Y: =143
+        ZIndex: =8
+
+    Label77_11 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Segoe UI'
+        Height: =18
+        PaddingLeft: =18
+        Size: =10.5
+        Text: ="Base pay + Bonus + Other"
+        Visible: =If(pivot="Overview",true,false)
+        Width: =300
+        X: =956
+        Y: =178
+        ZIndex: =9
+
+    Label86_9 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =54
+        PaddingLeft: =18
+        Size: =31.5
+        Text: |-
+            =Text(RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars + First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Total_Bonus_in_Dollars,0),"[$-en-US]#,###","en-US")
+        Visible: =If(pivot="Overview",true,false)
+        Width: =188
+        X: =956
+        Y: =123
+        ZIndex: =10
+
+    Label85_4 As label:
+        Color: =RGBA(100, 100, 100, 1)
+        Font: =Font.'Segoe UI'
+        Height: =27
+        PaddingLeft: =18
+        Size: =10.5
+        Text: ="Base pay"
+        Visible: =If(pivot="Overview",true,false)
+        X: =956
+        Y: =328
+        ZIndex: =11
+
+    Label85_5 As label:
+        Color: =RGBA(100, 100, 100, 1)
+        Font: =Font.'Segoe UI'
+        Height: =27
+        PaddingLeft: =18
+        Size: =10.5
+        Text: ="Bonus"
+        Visible: =If(pivot="Overview",true,false)
+        X: =956
+        Y: =359
+        ZIndex: =12
+
+    Label85_6 As label:
+        Color: =RGBA(100, 100, 100, 1)
+        Font: =Font.'Segoe UI'
+        Height: =26
+        PaddingLeft: =18
+        Size: =10.5
+        Text: ="Other"
+        Visible: =If(pivot="Overview",true,false)
+        X: =956
+        Y: =388
+        ZIndex: =13
+
+    Rectangle13_7 As rectangle:
+        Fill: =RGBA(235, 235, 235, 1)
+        Height: =1
+        Visible: =If(pivot="Overview",true,false)
+        Width: =374
+        X: =972
+        Y: =356
+        ZIndex: =14
+
+    Rectangle13_8 As rectangle:
+        Fill: =RGBA(235, 235, 235, 1)
+        Height: =1
+        Visible: =If(pivot="Overview",true,false)
+        Width: =374
+        X: =972
+        Y: =387
+        ZIndex: =15
+
+    Group4_3 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =21
+
+        Label86_10 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =28
+            Size: =10.5
+            Text: ="USD"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =45
+            X: =1311
+            Y: =326
+            ZIndex: =16
+
+        Label86_11 As label:
+            Align: =Align.Right
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =27
+            Size: =10.5
+            Text: |-
+                =Text(RoundDown(First(Filter(payByYear,Calendar_Year=Text(Dropdown5.Selected.Value))).Base_Pay_in_Dollars,0),"[$-en-US]#,###","en-US")
+            Visible: =If(pivot="Overview",true,false)
+            Width: =122
+            X: =1194
+            Y: =326
+            ZIndex: =17
+
+    Group4_4 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =22
+
+        Label86_12 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =28
+            Size: =10.5
+            Text: ="USD"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =45
+            X: =1311
+            Y: =358
+            ZIndex: =18
+
+        Label86_13 As label:
+            Align: =Align.Right
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =27
+            Size: =10.5
+            Text: |-
+                =Text(RoundDown(First(Filter(payByYear,Calendar_Year=Text(Dropdown5.Selected.Value))).Total_Bonus_in_Dollars,0),"[$-en-US]#,###","en-US")
+            Visible: =If(pivot="Overview",true,false)
+            Width: =122
+            X: =1194
+            Y: =358
+            ZIndex: =19
+
+    Group4_5 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =23
+
+        Label86_14 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =28
+            Size: =10.5
+            Text: ="USD"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =45
+            X: =1311
+            Y: =389
+            ZIndex: =20
+
+        Label86_15 As label:
+            Align: =Align.Right
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =27
+            Size: =10.5
+            Text: =0
+            Visible: =If(pivot="Overview",true,false)
+            Width: =122
+            X: =1194
+            Y: =389
+            ZIndex: =21
+
+    Label86_16 As label:
+        Align: =Align.Right
+        Color: =If((RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars,0)-First(SortByColumns(LastN(payByYear,CountRows(payByYear)-1),"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars)/RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars,0)>=0,RGBA(16,124,16,1),RGBA(224,24,26,1))
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =29
+        Size: =10.5
+        Text: =RoundDown((RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars,0)-First(SortByColumns(LastN(payByYear,CountRows(payByYear)-1),"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars)/RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars,0),0) & "%"
+        Visible: =If(pivot="Overview",true,false)
+        Width: =110
+        X: =1129
+        Y: =326
+        ZIndex: =25
+
+    Rectangle13_14 As rectangle:
+        Fill: =RGBA(235, 235, 235, 1)
+        Height: =1
+        Visible: =If(pivot="Overview",true,false)
+        Width: =374
+        X: =971
+        Y: =327
+        ZIndex: =26
+
+    Label86_17 As label:
+        Align: =Align.Right
+        Color: =If((RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars,0)-First(SortByColumns(LastN(payByYear,CountRows(payByYear)-1),"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars)/RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars,0)>=0,RGBA(16,124,16,1),RGBA(224,24,26,1))
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =29
+        Size: =10.5
+        Text: =RoundDown((RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Total_Bonus_in_Dollars,0)-First(SortByColumns(LastN(payByYear,CountRows(payByYear)-1),"Calendar_Year",SortOrder.Descending)).Total_Bonus_in_Dollars)/RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Total_Bonus_in_Dollars,0),0) & "%"
+        Visible: =If(pivot="Overview",true,false)
+        Width: =110
+        X: =1129
+        Y: =358
+        ZIndex: =27
+
+    Label86_18 As label:
+        Align: =Align.Right
+        Color: =If((RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars,0)-First(SortByColumns(LastN(payByYear,CountRows(payByYear)-1),"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars)/RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars,0)>=0,RGBA(16,124,16,1),RGBA(224,24,26,1))
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =28
+        Size: =10.5
+        Text: =RoundDown((RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars,0)-First(SortByColumns(LastN(payByYear,CountRows(payByYear)-1),"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars)/RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars,0),0) & "%"
+        Visible: =If(pivot="Overview",true,false)
+        Width: =110
+        X: =1129
+        Y: =389
+        ZIndex: =28
+
+    Label86_19 As label:
+        Align: =Align.Right
+        Color: =RGBA(23, 23, 23, 1)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =27
+        Size: =10.5
+        Text: ="Amount"
+        Visible: =If(pivot="Overview",true,false)
+        Width: =122
+        X: =1219
+        Y: =298
+        ZIndex: =29
+
+    Label86_20 As label:
+        Align: =Align.Right
+        Color: =RGBA(23, 23, 23, 1)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =27
+        Size: =10.5
+        Text: ="% Change from previous year"
+        Visible: =If(pivot="Overview",true,false)
+        Width: =200
+        X: =1047
+        Y: =298
+        ZIndex: =30
+
+    Dropdown5 As dropdown:
+        BorderColor: =RGBA(96, 94, 92, 1)
+        BorderThickness: =1
+        ChevronBackground: =RGBA(0, 0, 0, 0)
+        ChevronFill: =RGBA(96, 94, 92, 1)
+        Color: =RGBA(96, 94, 92, 1)
+        Default: =Text(Year(Today()))
+        Font: =Font.'Segoe UI'
+        Height: =24
+        Items: =[Year(Today()),Year(Today())-1,Year(Today())-2,Year(Today())-3,Year(Today())-4]
+        Size: =10.5
+        Width: =80
+        X: =1266
+        Y: =268
+        ZIndex: =31
+
+    Label85_7 As label:
+        Color: =RGBA(100, 100, 100, 1)
+        Font: =Font.'Segoe UI'
+        Height: =27
+        PaddingLeft: =18
+        Size: =10.5
+        Text: ="Deferred compensation"
+        Visible: =If(pivot="Overview",true,false)
+        Width: =200
+        X: =956
+        Y: =418
+        ZIndex: =32
+
+    Rectangle13_9 As rectangle:
+        Fill: =RGBA(235, 235, 235, 1)
+        Height: =1
+        Visible: =If(pivot="Overview",true,false)
+        Width: =374
+        X: =972
+        Y: =415
+        ZIndex: =33
+
+    Label86_21 As label:
+        Align: =Align.Right
+        Color: =RGBA(100, 100, 100, 1)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =29
+        Size: =10.5
+        Text: ="NA"
+        Visible: =If(pivot="Overview",true,false)
+        Width: =110
+        X: =1129
+        Y: =417
+        ZIndex: =36
+
+    Label85_8 As label:
+        Color: =RGBA(23, 23, 23, 1)
+        Font: =Font.'Segoe UI'
+        Height: =27
+        PaddingLeft: =18
+        Size: =10.5
+        Text: ="Eligible for overtime"
+        Visible: =If(pivot="Overview",true,false)
+        X: =956
+        Y: =224
+        ZIndex: =37
+
+    Label86_24 As label:
+        Align: =Align.Right
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =27
+        Size: =10.5
+        Text: ="Yes"
+        Visible: =If(pivot="Overview",true,false)
+        Width: =45
+        X: =1301
+        Y: =224
+        ZIndex: =38
+
+    CompositeLineChart1 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =38
+
+        LineChart1 As lineChart:
+            Color: =RGBA(96, 94, 92, 1)
+            Font: =Font.'Segoe UI'
+            Height: =256
+            ItemColorSet: =[RGBA(65, 141, 237, 1),RGBA(215,127,0, 1), RGBA(0,204,106,1), RGBA(246,199,144,1), RGBA(247,199,114,1), RGBA(247,180,91,1), RGBA(246,143,100,1), RGBA(212,96,104,1), RGBA(148, 110, 176, 1), RGBA(118, 154, 204, 1), RGBA(96, 197, 234, 1)]
+            Items: =LastN(compTimelineThree,5)
+            Markers: =false
+            NumberOfSeries: =3
+            Size: =9
+            Width: =392
+            X: =974
+            Y: =499
+            ZIndex: =22
+
+        Title21 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =24
+            PaddingLeft: =15
+            Size: =10.5
+            Text: ="Historical"
+            Width: =409
+            X: =956
+            Y: =475
+            ZIndex: =23
+
+        Legend1 As legend:
+            Font: =Font.'Segoe UI'
+            Height: =26
+            ItemColorSet: =LineChart1.ItemColorSet
+            Items: =LineChart1.SeriesLabels
+            Size: =8.25
+            Width: =180
+            X: =1144
+            Y: =507
+            ZIndex: =24
+
+    Rectangle13_11 As rectangle:
+        Fill: =RGBA(235, 235, 235, 1)
+        Height: =1
+        Visible: =If(pivot="Overview",true,false)
+        Width: =409
+        X: =956
+        Y: =258
+        ZIndex: =39
+
+    Rectangle13_12 As rectangle:
+        Fill: =RGBA(235, 235, 235, 1)
+        Height: =1
+        Visible: =If(pivot="Overview",true,false)
+        Width: =409
+        X: =957
+        Y: =449
+        ZIndex: =40
+
+    PowerBI6 As powerbi:
+        BorderThickness: =0
+        DashboardId: ="018dde5d-bc03-4b52-bc13-60b4ea1c94d3"
+        Height: =280
+        TileUrl: |-
+            ="https://app.powerbi.com/embed?dashboardId=018dde5d-bc03-4b52-bc13-60b4ea1c94d3&tileId=fb3a2e89-39c0-42be-9bfd-bbbaaba97a26&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLVdFU1QyLXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0IiwiZW1iZWRGZWF0dXJlcyI6eyJtb2Rlcm5FbWJlZCI6ZmFsc2V9fQ%3d%3d"
+        Visible: =If(selectedEmployee.Full_Name = "Maximilian Schneider",true,false)
+        Width: =387
+        WorkspaceId: ="__my-workspace"
+        X: =969
+        Y: =475
+        ZIndex: =41
+
+    Label88_1 As label:
+        Color: =RGBA(96, 94, 92, 1)
+        Fill: =RGBA(82, 24, 121, 1)
+        Font: =Font.'Segoe UI'
+        Height: =9
+        PaddingLeft: =18
+        Size: =9
+        Text: =
+        Visible: =If(selectedEmployee.Full_Name = "Maximilian Schneider",true,false)
+        Width: =9
+        X: =990
+        Y: =740
+        ZIndex: =42
+
+    Label88_2 As label:
+        Color: =RGBA(96, 94, 92, 1)
+        Font: =Font.'Segoe UI'
+        Height: =13
+        PaddingLeft: =14
+        Size: =9
+        Text: ="Annual"
+        Visible: =If(selectedEmployee.Full_Name = "Maximilian Schneider",true,false)
+        Width: =70
+        X: =991
+        Y: =738
+        ZIndex: =43
+
+    Group4_6 As group:
+        Height: =5
+        Width: =5
+        X: =10
+        Y: =20
+        ZIndex: =43
+
+        Label86_22 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =28
+            Size: =10.5
+            Text: ="USD"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =45
+            X: =1311
+            Y: =417
+            ZIndex: =34
+
+        Label86_23 As label:
+            Align: =Align.Right
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =27
+            Size: =10.5
+            Text: ="0"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =122
+            X: =1194
+            Y: =417
+            ZIndex: =35
+
+    Label88_3 As label:
+        Color: =RGBA(96, 94, 92, 1)
+        Fill: =RGBA(160, 112, 188, 1)
+        Font: =Font.'Segoe UI'
+        Height: =9
+        PaddingLeft: =18
+        Size: =9
+        Text: =
+        Visible: =If(selectedEmployee.Full_Name = "Maximilian Schneider",true,false)
+        Width: =9
+        X: =1050
+        Y: =740
+        ZIndex: =44
+
+    Label88_4 As label:
+        Color: =RGBA(96, 94, 92, 1)
+        Font: =Font.'Segoe UI'
+        Height: =13
+        PaddingLeft: =14
+        Size: =9
+        Text: ="Bonus"
+        Visible: =If(selectedEmployee.Full_Name = "Maximilian Schneider",true,false)
+        Width: =70
+        X: =1051
+        Y: =738
+        ZIndex: =45
+
+    Label71 As label:
+        Color: =RGBA(50, 49, 48, 1)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        PaddingLeft: =18
+        Size: =13.5
+        Text: ="Historical"
+        Visible: =If(selectedEmployee.Full_Name = "Maximilian Schneider",true,false)
+        X: =956
+        Y: =450
+        ZIndex: =46
+
+    Label88 As label:
+        Color: =RGBA(96, 94, 92, 1)
+        Font: =Font.'Segoe UI'
+        Height: =13
+        PaddingLeft: =18
+        Size: =9
+        Text: ="As of " & (Today())
+        Visible: =If(selectedEmployee.Full_Name = "Maximilian Schneider",true,false)
+        Width: =300
+        X: =956
+        Y: =490
+        ZIndex: =47
+

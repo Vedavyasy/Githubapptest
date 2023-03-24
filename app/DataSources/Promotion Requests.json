@@ -1,0 +1,122 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr02b_promotionrequests",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr02b_promotionrequest",
+    "MaxGetRowsCount": 500,
+    "Name": "Promotion Requests",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cr02b_approvaldate": "Approval Date",
+      "cr02b_Employee": "Employee",
+      "cr02b_justification": "Justification",
+      "cr02b_name": "RequestID",
+      "cr02b_promotionrequest_AsyncOperations": "System Jobs",
+      "cr02b_promotionrequest_BulkDeleteFailures": "Bulk Delete Failures",
+      "cr02b_promotionrequest_DuplicateBaseRecord": "Duplicate Records (cr02b_promotionrequest_DuplicateBaseRecord)",
+      "cr02b_promotionrequest_DuplicateMatchingRecord": "Duplicate Records (cr02b_promotionrequest_DuplicateMatchingRecord)",
+      "cr02b_promotionrequest_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cr02b_promotionrequest_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cr02b_promotionrequest_ProcessSession": "Process Sessions",
+      "cr02b_promotionrequest_SyncErrors": "Sync Errors",
+      "cr02b_promotionrequestid": "Promotion Request",
+      "cr02b_requeststatus": "Request Status",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Promotion Requests",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Promotion Requests (Views)",
+    "Name": "_cr02b_promotionrequest_views",
+    "RelatedEntityName": "Promotion Requests",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "165d699d-ce6b-4cb9-82a7-86c3668d125c": "Promotion Request Advanced Find View",
+      "399bf062-14b9-4944-a0c6-d0c6278db2c4": "Promotion Request Associated View",
+      "40faa7c0-7eda-488b-acab-55bc221ff823": "Promotion Request Lookup View",
+      "5e9a5629-1300-4138-88a3-8877cec6dfa5": "Active Promotion Requests",
+      "c48026f1-4972-4f52-9d89-891145b038c2": "Inactive Promotion Requests"
+    }
+  },
+  {
+    "DisplayName": "Status (Promotion Requests)",
+    "Name": "cr02b_promotionrequest_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Promotion Requests"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Promotion Requests",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Promotion Requests)",
+    "Name": "cr02b_promotionrequest_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Promotion Requests"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Promotion Requests",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Request Status",
+    "Name": "cr02b_requeststatus",
+    "OptionSetInfoNameMapping": {
+      "690200000": "Pending",
+      "690200001": "Approved",
+      "690200002": "Rejected"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cr02b_requeststatus",
+        "OptionSetReferenceEntityName": "Promotion Requests"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "cr02b_requeststatus",
+    "RelatedEntityName": "Promotion Requests",
+    "Type": "OptionSetInfo"
+  }
+]

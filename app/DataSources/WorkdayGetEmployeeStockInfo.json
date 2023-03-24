@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "80cf8759-152a-49f5-b4bf-060e68adae8f",
+    "Name": "WorkdayGetEmployeeStockInfo",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": "ea0a1d88-1a09-ed11-82e4-000d3a9cc8d2"
+  }
+]

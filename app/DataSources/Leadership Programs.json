@@ -1,0 +1,109 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr1a0_leadershipprograms",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr1a0_leadershipprogram",
+    "MaxGetRowsCount": 500,
+    "Name": "Leadership Programs",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "{Attachments}": "Attachments",
+      "cr1a0_color": "Color",
+      "cr1a0_cr1a0_employeeprogramnominations_Program_": "Employee Program Nominations",
+      "cr1a0_criteria2": "Criteria Two",
+      "cr1a0_criteriaone": "Criteria One",
+      "cr1a0_criteriathree": "Criteria Three",
+      "cr1a0_description": "Description",
+      "cr1a0_leadershipprogram_Annotations": "Notes",
+      "cr1a0_leadershipprogram_AsyncOperations": "System Jobs",
+      "cr1a0_leadershipprogram_BulkDeleteFailures": "Bulk Delete Failures",
+      "cr1a0_leadershipprogram_DuplicateBaseRecord": "Duplicate Records (cr1a0_leadershipprogram_DuplicateBaseRecord)",
+      "cr1a0_leadershipprogram_DuplicateMatchingRecord": "Duplicate Records (cr1a0_leadershipprogram_DuplicateMatchingRecord)",
+      "cr1a0_leadershipprogram_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cr1a0_leadershipprogram_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cr1a0_leadershipprogram_ProcessSession": "Process Sessions",
+      "cr1a0_leadershipprogram_SyncErrors": "Sync Errors",
+      "cr1a0_leadershipprogramid": "Leadership Program",
+      "cr1a0_maxemployees": "Max Employees",
+      "cr1a0_name": "Name",
+      "cr1a0_programenddate": "Program End date",
+      "cr1a0_programstartdate": "Program Start Date",
+      "cr1a0_uicount": "UI Count",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Leadership Programs",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Leadership Programs (Views)",
+    "Name": "_cr1a0_leadershipprogram_views",
+    "RelatedEntityName": "Leadership Programs",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "56db3d0b-b52a-4a66-ac95-c966be0e97d0": "Leadership Program Lookup View",
+      "7ca7b359-bfa5-43a9-a375-14b0e5ca28a0": "Leadership Program Advanced Find View",
+      "7e3f5e79-7595-47fc-8e4e-cecacd569f7d": "Leadership Program Associated View",
+      "c70d2a81-2615-4e1d-a4d8-47e4e1dfb7c0": "Active Leadership Programs",
+      "f145bf49-395f-4d43-bdc2-06a59da3f894": "Inactive Leadership Programs"
+    }
+  },
+  {
+    "DisplayName": "Status (Leadership Programs)",
+    "Name": "cr1a0_leadershipprogram_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Leadership Programs"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Leadership Programs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Leadership Programs)",
+    "Name": "cr1a0_leadershipprogram_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Leadership Programs"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Leadership Programs",
+    "Type": "OptionSetInfo"
+  }
+]

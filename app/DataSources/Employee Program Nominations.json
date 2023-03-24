@@ -1,0 +1,123 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cr1a0_employeeprogramnominationses",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cr1a0_employeeprogramnominations",
+    "MaxGetRowsCount": 500,
+    "Name": "Employee Program Nominations",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cr1a0_Employee": "Employee",
+      "cr1a0_employeeprogramnominations_AsyncOperations": "System Jobs",
+      "cr1a0_employeeprogramnominations_BulkDeleteFailures": "Bulk Delete Failures",
+      "cr1a0_employeeprogramnominations_DuplicateBaseRecord": "Duplicate Records (cr1a0_employeeprogramnominations_DuplicateBaseRecord)",
+      "cr1a0_employeeprogramnominations_DuplicateMatchingRecord": "Duplicate Records (cr1a0_employeeprogramnominations_DuplicateMatchingRecord)",
+      "cr1a0_employeeprogramnominations_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cr1a0_employeeprogramnominations_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cr1a0_employeeprogramnominations_ProcessSession": "Process Sessions",
+      "cr1a0_employeeprogramnominations_SyncErrors": "Sync Errors",
+      "cr1a0_employeeprogramnominationsid": "Employee Program Nominations",
+      "cr1a0_id": "ID",
+      "cr1a0_justification": "Justification",
+      "cr1a0_nominationdate": "Nomination Date",
+      "cr1a0_nominationstatus": "Nomination Status",
+      "cr1a0_Program": "Program",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Employee Program Nominations",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Employee Program Nominations (Views)",
+    "Name": "_cr1a0_employeeprogramnominations_views",
+    "RelatedEntityName": "Employee Program Nominations",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "0b0c1d85-be1e-41e7-b907-2ddb237bc455": "Inactive Employee Program Nominations",
+      "2c7b6586-b4d6-46b3-8bc4-7c8420673547": "Employee Program Nominations Advanced Find View",
+      "2ea1f785-bc70-4d94-ac66-bf9f29b08556": "Employee Program Nominations Lookup View",
+      "ac14dff8-0c1e-49e5-89e0-834cd48273ab": "Employee Program Nominations Associated View",
+      "db6bf0fd-99f5-47da-aa74-cd97411d34a0": "Active Employee Program Nominations"
+    }
+  },
+  {
+    "DisplayName": "Status (Employee Program Nominations)",
+    "Name": "cr1a0_employeeprogramnominations_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Employee Program Nominations"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Employee Program Nominations",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Employee Program Nominations)",
+    "Name": "cr1a0_employeeprogramnominations_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Employee Program Nominations"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Employee Program Nominations",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Nomination Status",
+    "Name": "cr1a0_nominationstatus",
+    "OptionSetInfoNameMapping": {
+      "924890000": "Pending",
+      "924890001": "Approved",
+      "924890002": "Rejected"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cr1a0_nominationstatus",
+        "OptionSetReferenceEntityName": "Employee Program Nominations"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "cr1a0_nominationstatus",
+    "RelatedEntityName": "Employee Program Nominations",
+    "Type": "OptionSetInfo"
+  }
+]

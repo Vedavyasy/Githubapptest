@@ -1,0 +1,62 @@
+"'Manager Pop' As CanvasComponent":
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =90
+    managerName: ="Jan 12,2012"
+    Width: =137
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Button40_1 As button:
+        Fill: =RGBA(51, 51, 51, 1)
+        Height: =83
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        RadiusBottomLeft: =8
+        RadiusBottomRight: =8
+        RadiusTopLeft: =8
+        RadiusTopRight: =8
+        Text: =""
+        Width: =137
+        Y: =7
+        ZIndex: =1
+
+    Label100_1 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Segoe UI'
+        PaddingLeft: =12
+        Size: =13.5
+        Text: ="Manager"
+        Width: =137
+        Y: =7
+        ZIndex: =2
+
+    Image46_1 As image:
+        Height: =14
+        Image: ='default-contact-96x96-2'
+        Width: =15
+        X: =14
+        Y: =52
+        ZIndex: =3
+
+    Label101_1 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Segoe UI'
+        Height: =19
+        PaddingLeft: =7.5
+        Size: =9
+        Text: ='Manager Pop'.managerName
+        Width: =108
+        Wrap: =false
+        X: =30
+        Y: =50
+        ZIndex: =4
+
+    Triangle2_1 As triangle:
+        Fill: =RGBA(51, 51, 51, 1)
+        Height: =7
+        Width: =13
+        X: =62
+        ZIndex: =5
+

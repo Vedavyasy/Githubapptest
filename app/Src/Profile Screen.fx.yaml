@@ -1,0 +1,2685 @@
+"'Profile Screen' As screen":
+    Fill: =RGBA(255, 255, 255, 1)
+    OnVisible: |-
+        =Set(
+            rankInfo,
+            false
+        );
+        Set(
+            timelineFilter,
+            false
+        );
+        Reset(Component3_1);
+        Set(
+            searchString,
+            ""
+        );
+        Set(
+            apps,
+            false
+        );
+        Set(
+            profileInfo,
+            false
+        );
+        Set(
+            AppTheme,
+            /* START THEME OBJECT */
+            {
+                palette: {
+                    themePrimary: "#0078d4",
+                    themeLighterAlt: "#eff6fc",
+                    themeLighter: "#deecf9",
+                    themeLight: "#c7e0f4",
+                    themeTertiary: "#71afe5",
+                    themeSecondary: "#2b88d8",
+                    themeDarkAlt: "#106ebe",
+                    themeDark: "#005a9e",
+                    themeDarker: "#004578",
+                    neutralLighterAlt: "#faf9f8",
+                    neutralLighter: "#f3f2f1",
+                    neutralLight: "#edebe9",
+                    neutralQuaternaryAlt: "#e1dfdd",
+                    neutralQuaternary: "#d0d0d0",
+                    neutralTertiaryAlt: "#c8c6c4",
+                    neutralTertiary: "#a19f9d",
+                    neutralSecondary: "#605e5c",
+                    neutralPrimaryAlt: "#3b3a39",
+                    neutralPrimary: "#323130",
+                    neutralDark: "#201f1e",
+                    black: "#000000",
+                    white: "#ffffff"
+                }
+            }
+            /* END THEME OBJECT */
+        );
+        Set(
+            AppThemeJson,
+            JSON(
+                AppTheme,
+                JSONFormat.IndentFour
+            )
+        );
+        Set(
+            pivot,
+            "Overview"
+        );
+        Set(
+            compInfo,
+            false
+        );
+        Set(
+            startDatePop,
+            false
+        );Set(managerPop,false);Set(orgHighlight,false);Set(notesPopUp,false);Set(notesLoadingState,false)
+
+    htmlTopShadow_9 As htmlViewer:
+        Height: =190
+        HtmlText: |-
+            =
+            "<div style='
+                margin: 0px;
+                width: " & htmlTopShadow_9.Width & "px;
+                height: " & htmlTopShadow_9.Height - 30 & "px;
+                background: linear-gradient(180deg, rgba(24, 122, 186, 0.2) 0%, rgba(240, 240, 240, 0) 100%);'>
+            </div>"
+        Width: =1371
+        Y: =32
+        ZIndex: =2
+
+    Header_1 As Header:
+        ZIndex: =8
+
+    "Breadcrumb1 As 'Fluent Breadcrumb (1.0.19)'.pcfdataset":
+        DisplayMode: =DisplayMode.Edit
+        Height: =78
+        Items: |-
+            =Table(
+                {
+                    ItemKey: "1",
+                    ItemDisplayName: "Home",
+                    ItemClickable: true
+                },
+                {
+                    ItemKey: "2",
+                    ItemDisplayName: "People",
+                    ItemClickable: true
+                },
+                {
+                    ItemKey: "3",
+                    ItemDisplayName: selectedEmployee.Worker,
+                    ItemClickable: true
+                }
+            )
+        Theme: =breadcrumbTheme.palette.neutralLight
+        Width: =1135
+        X: =59
+        Y: =59
+        ZIndex: =9
+
+    Image10 As image:
+        BorderColor: =RGBA(255, 255, 255, 1)
+        BorderThickness: =1
+        Height: =117
+        Image: =Office365Users.UserPhoto(Office365Users.MyProfile().Id)//If(selectedEmployee.Worker="Ajay Mokashi",'Demo profile',If(selectedEmployee.Worker="Maximilian Schneider",'profile-male-105','default-contact-96x96-2'))
+        RadiusBottomLeft: =105
+        RadiusBottomRight: =105
+        RadiusTopLeft: =105
+        RadiusTopRight: =105
+        Width: =125
+        X: =59
+        Y: =96
+        ZIndex: =10
+
+    "Pivot1 As 'Fluent Pivot (1.0.19)'.pcfdataset":
+        DisplayMode: =DisplayMode.Edit
+        Height: =43
+        Items: |
+            =Table(
+              {
+                  ItemKey: "tabFile",
+                  ItemDisplayName: "Overview"
+              },
+              {
+                  ItemKey: "tabDigital",
+                  ItemDisplayName: "Digital Notebook"
+              },
+              {
+                  ItemKey: "tabAskHr",
+                  ItemDisplayName: "Ask HR"
+              }
+            )
+        OnChange: |-
+            =Set(pivot,Pivot1.Selected.ItemDisplayName);
+            If(
+                pivot = "Compensation",
+                ClearCollect(
+                    bonusInfo,
+                    WorkdayGetEmployeeBonusInfo.Run(
+                        First(
+                            Filter(
+                                workerData,
+                                descriptor = galEmployees.Selected.Worker
+                            )
+                        ).id
+                    )
+                );
+                ClearCollect(
+                    stockInfo,
+                    WorkdayGetEmployeeStockInfo.Run(
+                        First(
+                            Filter(
+                                workerData,
+                                descriptor = galEmployees.Selected.Worker
+                            )
+                        ).id
+                    )
+                ),
+                If(
+                    pivot = "Talent Ranking",
+                    Set(
+                        ReviewDetails,
+                        First(
+                            WorkdayGetReviewHistoryDetails.Run(
+                                First(
+                                    Filter(
+                                        workerData,
+                                        descriptor = galEmployees.Selected.Worker
+                                    )
+                                ).id
+                            ).Report_Entry
+                        )
+                    );Refresh('Promotion Requests')
+                )
+            );Set(currentComp,Last(compData));Set(currentBonus,Last(bonusInfo));Set(currentStock,Last(stockInfo))
+        RenderSize: ='PowerCAT.Pivot.RenderSize'.Normal
+        RenderType: ="0"
+        SelectedKey: ="Overview"
+        Theme: =AppThemeJson
+        Visible: =true
+        Width: =648
+        X: =51
+        Y: =222
+        ZIndex: =11
+
+    htmlMidShadow_2 As htmlViewer:
+        Height: =264
+        HtmlText: |-
+            =
+            "<div style='
+                margin: 8px;
+                width: " & htmlMidShadow_2.Width - 20 & "px;
+                height: " & htmlMidShadow_2.Height - 30 & "px;
+                box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                            0 1px 1px rgba(0, 0, 0, 0.20);
+                border-radius: 4px;
+                background: #ffffff;'>
+            </div>"
+        Visible: =If(pivot="Overview",true,false)
+        Width: =463
+        X: =457
+        Y: =268
+        ZIndex: =14
+
+    "'Nav 2_2' As 'Nav 2'":
+        Height: =728
+        Y: =40
+        ZIndex: =17
+
+    Label58 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        Height: =51
+        Size: =31.5
+        Text: ="Talent Ranking"
+        Visible: =If(pivot = "Talent Ranking",true,false)
+        Width: =338
+        X: =60
+        Y: =317
+        ZIndex: =23
+
+    Label58_2 As label:
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        Height: =64
+        Size: =31.5
+        Text: ="History"
+        Visible: =If(pivot = "History",true,false)
+        Width: =338
+        X: =60
+        Y: =317
+        ZIndex: =29
+
+    grpTalentCards As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =35
+
+        htmlMidShadow_7 As htmlViewer:
+            Height: =368
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_7.Width - 20 & "px;
+                    height: " & htmlMidShadow_7.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 8px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =If(pivot="Talent Ranking",true,false)
+            Width: =If(!nav,582,466)
+            X: =735
+            Y: =265
+            ZIndex: =18
+
+        htmlMidShadow_8 As htmlViewer:
+            Height: =199
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_8.Width - 20 & "px;
+                    height: " & htmlMidShadow_8.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 8px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =If(pivot="Talent Ranking",true,false)
+            Width: =672
+            X: =63
+            Y: =434
+            ZIndex: =19
+
+        htmlMidShadow_9 As htmlViewer:
+            Height: =118
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_9.Width - 20 & "px;
+                    height: " & htmlMidShadow_9.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 8px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =If(pivot="Talent Ranking",true,false)
+            Width: =422
+            X: =63
+            Y: =620
+            ZIndex: =20
+
+        htmlMidShadow_10 As htmlViewer:
+            Height: =118
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_10.Width - 20 & "px;
+                    height: " & htmlMidShadow_10.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 8px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =If(pivot="Talent Ranking",true,false)
+            Width: =422
+            X: =477
+            Y: =620
+            ZIndex: =21
+
+        htmlMidShadow_11 As htmlViewer:
+            Height: =118
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_11.Width - 20 & "px;
+                    height: " & htmlMidShadow_11.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 8px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =If(pivot="Talent Ranking",true,false)
+            Width: =If(!nav,422,306)
+            X: =895
+            Y: =620
+            ZIndex: =22
+
+    grpHistoryCards As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =13
+        ZIndex: =42
+
+        htmlMidShadow_12 As htmlViewer:
+            Height: =368
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_12.Width - 20 & "px;
+                    height: " & htmlMidShadow_12.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 8px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =If(pivot="History",true,false)
+            Width: =If(!nav,582,466)
+            X: =733
+            Y: =277
+            ZIndex: =24
+
+        htmlMidShadow_13 As htmlViewer:
+            Height: =199
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_13.Width - 20 & "px;
+                    height: " & htmlMidShadow_13.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 8px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =If(pivot="History",true,false)
+            Width: =672
+            X: =61
+            Y: =446
+            ZIndex: =25
+
+        htmlMidShadow_14 As htmlViewer:
+            Height: =118
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_14.Width - 20 & "px;
+                    height: " & htmlMidShadow_14.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 8px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =If(pivot="History",true,false)
+            Width: =422
+            X: =61
+            Y: =632
+            ZIndex: =26
+
+        htmlMidShadow_15 As htmlViewer:
+            Height: =118
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_15.Width - 20 & "px;
+                    height: " & htmlMidShadow_15.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 8px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =If(pivot="History",true,false)
+            Width: =422
+            X: =475
+            Y: =632
+            ZIndex: =27
+
+        htmlMidShadow_16 As htmlViewer:
+            Height: =118
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_16.Width - 20 & "px;
+                    height: " & htmlMidShadow_16.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 8px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =If(pivot="History",true,false)
+            Width: =If(!nav,422,306)
+            X: =893
+            Y: =632
+            ZIndex: =28
+
+    "AutoWidthLabel1 As 'Auto Width Label (1.0.19)'":
+        DisplayMode: =DisplayMode.Edit
+        FontSize: =21
+        FontSizeUnits: ='PowerCAT.AutoWidthLabel.FontSizeUnits'.Pt
+        FontWeight: ="lighter"
+        Height: =32
+        Text: =selectedEmployee.Worker & " (" & selectedEmployee.Employee_ID & ")"
+        Width: =63
+        X: =193
+        Y: =96
+        ZIndex: =66
+
+    Label82 As label:
+        Text: =
+        Width: =315
+        X: =747
+        Y: =128
+        ZIndex: =87
+
+    grpContactComponents As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =89
+
+        htmlMidShadow_18 As htmlViewer:
+            Height: =234
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_18.Width - 20 & "px;
+                    height: " & htmlMidShadow_18.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 8px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =If(pivot="Contact",true,false)
+            Width: =404
+            X: =911
+            Y: =298
+            ZIndex: =30
+
+        htmlMidShadow_19 As htmlViewer:
+            Height: =234
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_19.Width - 20 & "px;
+                    height: " & htmlMidShadow_19.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 8px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =If(pivot="Contact",true,false)
+            Width: =404
+            X: =911
+            Y: =516
+            ZIndex: =31
+
+        Label73 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =10.5
+            Text: ="Label"
+            Visible: =If(pivot="Contact",true,false)
+            X: =89
+            Y: =291
+            ZIndex: =32
+
+        Label74 As label:
+            BorderColor: =RGBA(96, 94, 92, 1)
+            BorderThickness: =1
+            Color: =RGBA(96, 94, 92, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            Size: =10.5
+            Text: ="Helper text"
+            Visible: =If(pivot="Contact",true,false)
+            Width: =240
+            X: =93
+            Y: =325
+            ZIndex: =33
+
+        Label73_1 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =10.5
+            Text: ="Label"
+            Visible: =If(pivot="Contact",true,false)
+            X: =369
+            Y: =291
+            ZIndex: =34
+
+        Label74_1 As label:
+            BorderColor: =RGBA(96, 94, 92, 1)
+            BorderThickness: =1
+            Color: =RGBA(96, 94, 92, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            Size: =10.5
+            Text: ="Helper text"
+            Visible: =If(pivot="Contact",true,false)
+            Width: =240
+            X: =373
+            Y: =325
+            ZIndex: =35
+
+        Label73_2 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =10.5
+            Text: ="Label"
+            Visible: =If(pivot="Contact",true,false)
+            X: =89
+            Y: =357
+            ZIndex: =36
+
+        Label74_2 As label:
+            BorderColor: =RGBA(96, 94, 92, 1)
+            BorderThickness: =1
+            Color: =RGBA(96, 94, 92, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            Size: =10.5
+            Text: ="Helper text"
+            Visible: =If(pivot="Contact",true,false)
+            Width: =515
+            X: =93
+            Y: =391
+            ZIndex: =37
+
+        Label73_3 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =10.5
+            Text: ="Label"
+            Visible: =If(pivot="Contact",true,false)
+            X: =89
+            Y: =423
+            ZIndex: =38
+
+        Label74_3 As label:
+            BorderColor: =RGBA(96, 94, 92, 1)
+            BorderThickness: =1
+            Color: =RGBA(96, 94, 92, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            Size: =10.5
+            Text: ="Helper text"
+            Visible: =If(pivot="Contact",true,false)
+            Width: =240
+            X: =93
+            Y: =457
+            ZIndex: =39
+
+        Label73_4 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =10.5
+            Text: ="Label"
+            Visible: =If(pivot="Contact",true,false)
+            X: =89
+            Y: =489
+            ZIndex: =40
+
+        Label74_4 As label:
+            BorderColor: =RGBA(96, 94, 92, 1)
+            BorderThickness: =1
+            Color: =RGBA(96, 94, 92, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            Size: =10.5
+            Text: ="Helper text"
+            Visible: =If(pivot="Contact",true,false)
+            Width: =240
+            X: =93
+            Y: =523
+            ZIndex: =41
+
+        Label73_5 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =10.5
+            Text: ="Label"
+            Visible: =If(pivot="Contact",true,false)
+            X: =89
+            Y: =555
+            ZIndex: =42
+
+        Label74_5 As label:
+            BorderColor: =RGBA(96, 94, 92, 1)
+            BorderThickness: =1
+            Color: =RGBA(96, 94, 92, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            Size: =10.5
+            Text: ="Helper text"
+            Visible: =If(pivot="Contact",true,false)
+            Width: =240
+            X: =93
+            Y: =589
+            ZIndex: =43
+
+        Label73_6 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =13.5
+            Text: ="Section Heading"
+            Visible: =If(pivot="Contact",true,false)
+            Width: =250
+            X: =89
+            Y: =621
+            ZIndex: =44
+
+        Label73_7 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =10.5
+            Text: ="Label"
+            Visible: =If(pivot="Contact",true,false)
+            X: =89
+            Y: =663
+            ZIndex: =45
+
+        Label74_6 As label:
+            BorderColor: =RGBA(96, 94, 92, 1)
+            BorderThickness: =1
+            Color: =RGBA(96, 94, 92, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            Size: =10.5
+            Text: ="Helper text"
+            Visible: =If(pivot="Contact",true,false)
+            Width: =240
+            X: =93
+            Y: =697
+            ZIndex: =46
+
+        Label73_8 As label:
+            Color: =RGBA(50, 49, 48, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =10.5
+            Text: ="Label"
+            Visible: =If(pivot="Contact",true,false)
+            X: =369
+            Y: =663
+            ZIndex: =47
+
+        Label74_7 As label:
+            BorderColor: =RGBA(96, 94, 92, 1)
+            BorderThickness: =1
+            Color: =RGBA(96, 94, 92, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            Size: =10.5
+            Text: ="Helper text"
+            Visible: =If(pivot="Contact",true,false)
+            Width: =240
+            X: =373
+            Y: =697
+            ZIndex: =48
+
+    "Component3_2 As 'Profile Information'":
+        Visible: =profileInfo && If(pivot="Overview",true,false)
+        Y: =38
+        ZIndex: =122
+
+    "'Compensation Information_1' As 'Compensation Information'":
+        Visible: =compInfo
+        ZIndex: =123
+
+    "'Manager Pop_1' As 'Manager Pop'":
+        managerName: =selectedEmployee.Manager_Name
+        Visible: =managerPop
+        X: =421
+        Y: =216
+        ZIndex: =130
+
+    "'Start Date Pop_1' As 'Start Date Pop'":
+        startDate: =First(workerHistoryTimeline).effective
+        Visible: =startDatePop
+        X: =212
+        Y: =217
+        ZIndex: =132
+
+    Gallery9_1 As gallery.galleryHorizontal:
+        DelayItemLoading: =true
+        DisplayMode: =DisplayMode.View
+        Height: =79
+        Items: =ButtonTiles
+        LoadingSpinner: =LoadingSpinner.Data
+        TemplatePadding: =10
+        TemplateSize: =1
+        Width: =513
+        X: =182
+        Y: =97
+        ZIndex: =134
+
+        Button45_1 As button:
+            Color: =ColorValue(ThisItem.TextColor)
+            DisplayMode: =DisplayMode.View
+            Fill: =ColorValue(ThisItem.BGColor)
+            Font: =Font.'Segoe UI'
+            Height: =22
+            OnSelect: =Select(Parent)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Size: =8
+            Text: =ThisItem.Name
+            Width: =If(Len(ThisItem.Name)<9,55,Len(ThisItem.Name)*6.5)
+            X: =Sum(Filter(ButtonTiles,Order<ThisItem.Order),If(Len(Name)<9,55,(Len(Name)*6.5)))
+            Y: =34
+            ZIndex: =1
+
+    grpSubtitleDetails As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =135
+
+        "AutoWidthLabel2 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            Height: =27
+            Text: =selectedEmployee.Job
+            Width: =161
+            X: =196
+            Y: =167
+            ZIndex: =67
+
+        Circle5_2 As circle:
+            Fill: =RGBA(100, 100, 100, 1)
+            Height: =3
+            Visible: =If(IsBlank(selectedEmployee.'Cost_Center_-_Name'),false,true)
+            Width: =3
+            X: =AutoWidthLabel2.X+AutoWidthLabel2.AutoWidth+10
+            Y: =176
+            ZIndex: =68
+
+        "AutoWidthLabel2_1 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            Height: =27
+            Text: =selectedEmployee.'Cost_Center_-_Name'
+            Width: =127
+            X: =Circle5_2.X+Circle5_2.Width+If(IsBlank(selectedEmployee.'Cost_Center_-_Name'),0,10)
+            Y: =167
+            ZIndex: =69
+
+        Circle5_3 As circle:
+            Fill: =RGBA(100, 100, 100, 1)
+            Height: =3
+            Visible: =If(IsBlank(AutoWidthLabel2_2.Text),0,10)
+            Width: =3
+            X: =AutoWidthLabel2_1.X+AutoWidthLabel2_1.AutoWidth+If(IsBlank(AutoWidthLabel2_2.Text),0,10)
+            Y: =176
+            ZIndex: =70
+
+        "AutoWidthLabel2_2 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            Height: =27
+            Text: ="Wealth Managment Technology"
+            Width: =200
+            X: =Circle5_3.X+Circle5_3.Width+10
+            Y: =167
+            ZIndex: =71
+
+    "'Org Pop_1' As 'Org Pop'":
+        DirectReportCount: =CountRows(directInfo)
+        EmployeeCount: =CountRows(directInfo)*3
+        Visible: =orgHighlight
+        X: =167
+        Y: =218
+        ZIndex: =137
+
+    grpEmployeeHeaderRow2 As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =141
+
+        Image24_5 As image:
+            Height: =17
+            Image: ='Shape (36)'
+            Visible: =false
+            Width: =15
+            X: =196
+            Y: =198
+            ZIndex: =104
+
+        "AutoWidthLabel6 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: |-
+                ="#171717"
+            Height: =21
+            Text: =If(Year(Today())-Year(First(workerHistoryTimeline).effective)>0,Year(Today())-Year(First(workerHistoryTimeline).effective) & " Years & " & Month(Today())-Month(First(workerHistoryTimeline).effective) & " Months",Month(Today())-Month(First(workerHistoryTimeline).effective) & " Months")
+            Visible: =false
+            Width: =200
+            X: =216
+            Y: =196
+            ZIndex: =105
+
+        Circle5_4 As circle:
+            Fill: =RGBA(23, 23, 23, 1)
+            Height: =3
+            Visible: =false
+            Width: =3
+            X: =357
+            Y: =206
+            ZIndex: =106
+
+        Image24_6 As image:
+            Height: =17
+            Image: =Shape_3
+            Visible: =false
+            Width: =15
+            X: =365
+            Y: =198
+            ZIndex: =107
+
+        "AutoWidthLabel6_1 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: |-
+                ="#171717"
+            Height: =21
+            Text: ="Org"
+            Visible: =false
+            Width: =200
+            X: =381
+            Y: =196
+            ZIndex: =108
+
+        Circle5_5 As circle:
+            Fill: =RGBA(23, 23, 23, 1)
+            Height: =3
+            Visible: =false
+            Width: =3
+            X: =423
+            Y: =206
+            ZIndex: =109
+
+        Image24_7 As image:
+            Height: =17
+            Image: =Shape_4
+            Visible: =false
+            Width: =15
+            X: =431
+            Y: =198
+            ZIndex: =110
+
+        "AutoWidthLabel6_2 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: |-
+                ="#171717"
+            Height: =21
+            Text: =selectedEmployee.Manager_Name
+            Visible: =false
+            Width: =200
+            X: =452
+            Y: =196
+            ZIndex: =112
+
+        Button41 As button:
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =18
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(startDatePop,!startDatePop);Set(managerPop,false);Set(orgHighlight,false)
+            Text: =""
+            Visible: =false
+            Width: =AutoWidthLabel6.AutoWidth+18
+            X: =196
+            Y: =198
+            ZIndex: =115
+
+        Button41_1 As button:
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =18
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(managerPop,!managerPop);Set(startDatePop,false);Set(orgHighlight,false);
+            Text: =""
+            Visible: =false
+            Width: =108
+            X: =426
+            Y: =198
+            ZIndex: =116
+
+        Button41_2 As button:
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =17
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(managerPop,false);Set(startDatePop,false);Set(orgHighlight,!orgHighlight)
+            Text: =""
+            Visible: =false
+            Width: =55
+            X: =355
+            Y: =198
+            ZIndex: =117
+
+    grpEmptyCards As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =141
+
+        htmlMidShadow_21 As htmlViewer:
+            Height: =254
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_21.Width - 20 & "px;
+                    height: " & htmlMidShadow_21.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 4px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =210
+            X: =250
+            Y: =514
+            ZIndex: =3
+
+        Label77_5 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =36
+            PaddingLeft: =15
+            Size: =10.5
+            Text: ="HR Cases"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =132
+            X: =274
+            Y: =528
+            ZIndex: =4
+
+        htmlMidShadow_17 As htmlViewer:
+            Height: =252
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_17.Width - 20 & "px;
+                    height: " & htmlMidShadow_17.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 4px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =210
+            X: =51
+            Y: =516
+            ZIndex: =5
+
+        Label77_4 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =36
+            PaddingLeft: =15
+            Size: =10.5
+            Text: ="Interactions"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =132
+            X: =75
+            Y: =528
+            ZIndex: =6
+
+        htmlMidShadow_6 As htmlViewer:
+            Height: =254
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_6.Width - 20 & "px;
+                    height: " & htmlMidShadow_6.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 4px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =463
+            X: =457
+            Y: =514
+            ZIndex: =16
+
+        Label77_3 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =36
+            PaddingLeft: =15
+            Size: =10.5
+            Text: ="Organization"
+            Visible: =If(pivot="Overview",true,false)
+            X: =470
+            Y: =528
+            ZIndex: =51
+
+    grpTalentBadge As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =141
+
+        Image30 As image:
+            Height: =24
+            Image: ='Frame 1010109112'
+            Width: =24
+            X: =AutoWidthLabel1.AutoWidth + AutoWidthLabel1.X + 13
+            Y: =104
+            ZIndex: =136
+
+        Label81 As label:
+            Align: =Align.Center
+            Font: =Font.'Segoe UI'
+            Height: =12
+            Size: =7
+            Text: =selectedEmployee.Rating_Numeric
+            Width: =14
+            X: =AutoWidthLabel1.AutoWidth + AutoWidthLabel1.X + 17
+            Y: =113
+            ZIndex: =152
+
+        Button26 As button:
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =24
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(rankInfo,!rankInfo)
+            Text: =""
+            Width: =30
+            X: =AutoWidthLabel1.AutoWidth + AutoWidthLabel1.X + 10
+            Y: =104
+            ZIndex: =153
+
+    grpQuickActions As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =141
+
+        Label20_8 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Text: ="Quick Actions"
+            Width: =188
+            X: =1108
+            Y: =105
+            ZIndex: =12
+
+        Dropdown4 As dropdown:
+            BorderColor: =RGBA(250, 250, 250, 1)
+            BorderThickness: =1
+            ChevronBackground: =RGBA(255, 255, 255, 1)
+            ChevronFill: =RGBA(23, 23, 23, 1)
+            ChevronHoverBackground: =
+            ChevronHoverFill: =
+            Color: =RGBA(96, 94, 92, 1)
+            Font: =Font.'Segoe UI'
+            Height: =28
+            HoverFill: =
+            Items: =["Program 1 Nomination","Program 2 Nomination","Sample Item", "Sample Item 2"]
+            Size: =10.5
+            Width: =233
+            X: =1108
+            Y: =145
+            ZIndex: =13
+
+    grpRankInfo As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =141
+
+        Image38 As image:
+            Height: =22
+            Image: =Beak
+            Visible: =rankInfo
+            Width: =22
+            X: |
+                =AutoWidthLabel1.X + AutoWidthLabel1.AutoWidth + 35
+            Y: =110
+            ZIndex: =131
+
+        "'Rank Information_1' As 'Rank Information'":
+            Visible: =rankInfo
+            X: |
+                =AutoWidthLabel1.X + AutoWidthLabel1.AutoWidth + 50
+            Y: =52
+            ZIndex: =135
+
+    grpAlternateCompensationCard As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =141
+
+        Label86 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =26
+            Size: =19.5
+            Text: ="USD"
+            Visible: =If(pivot="Overview",true,false)
+            X: =AutoWidthLabel4.AutoWidth+AutoWidthLabel4.X+5
+            Y: =324
+            ZIndex: =72
+
+        Label77_9 As label:
+            Font: =Font.'Segoe UI'
+            Height: =17
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Base + incentive pay for last FY + last bonus"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =350
+            X: =490
+            Y: =367
+            ZIndex: =73
+
+        Label86_1 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =52
+            Size: =31.5
+            Text: |-
+                =Text(RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars + First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Total_Bonus_in_Dollars,0),"[$-en-US]#,###","en-US")
+            Visible: =false
+            Width: =180
+            X: =500
+            Y: =340
+            ZIndex: =74
+
+        Label85 As label:
+            Color: =RGBA(100, 100, 100, 1)
+            Font: =Font.'Segoe UI'
+            Height: =25
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Base Salary (" & Year(Today())-1 & ")"
+            Visible: =If(pivot="Overview",true,false)
+            X: =490
+            Y: =392
+            ZIndex: =75
+
+        Label85_1 As label:
+            Color: =RGBA(100, 100, 100, 1)
+            Font: =Font.'Segoe UI'
+            Height: =25
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Bonus ("& Year(Today())-1 & ")"
+            Visible: =If(pivot="Overview",true,false)
+            X: =490
+            Y: =417
+            ZIndex: =76
+
+        Label85_2 As label:
+            Color: =RGBA(100, 100, 100, 1)
+            Font: =Font.'Segoe UI'
+            Height: =25
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Other"
+            Visible: =If(pivot="Overview",true,false)
+            X: =490
+            Y: =441
+            ZIndex: =77
+
+        Label85_3 As label:
+            Color: =RGBA(91, 95, 199, 1)
+            Font: =Font.'Segoe UI'
+            Height: =25
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="View details"
+            Visible: =If(pivot="Overview",true,false)
+            X: =489
+            Y: =476
+            ZIndex: =78
+
+        Rectangle13_5 As rectangle:
+            Fill: =RGBA(240, 240, 240, 1)
+            Height: =1
+            Visible: =If(pivot="Overview",true,false)
+            Width: =400
+            X: =490
+            Y: =415
+            ZIndex: =79
+
+        Rectangle13_6 As rectangle:
+            Fill: =RGBA(240, 240, 240, 1)
+            Height: =1
+            Visible: =If(pivot="Overview",true,false)
+            Width: =400
+            X: =490
+            Y: =439
+            ZIndex: =80
+
+        Label86_2 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =26
+            Size: =10.5
+            Text: ="USD"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =45
+            X: =858
+            Y: =390
+            ZIndex: =81
+
+        Label86_3 As label:
+            Align: =Align.Right
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =25
+            Size: =10.5
+            Text: |-
+                =Text(RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars,0),"[$-en-US]#,###","en-US")
+            Visible: =If(pivot="Overview",true,false)
+            Width: =122
+            X: =741
+            Y: =390
+            ZIndex: =82
+
+        Label86_4 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =26
+            Size: =10.5
+            Text: ="USD"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =45
+            X: =858
+            Y: =416
+            ZIndex: =83
+
+        Label86_5 As label:
+            Align: =Align.Right
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =25
+            Size: =10.5
+            Text: |-
+                =Text(RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Total_Bonus_in_Dollars,0),"[$-en-US]#,###","en-US")
+            Visible: =If(pivot="Overview",true,false)
+            Width: =122
+            X: =741
+            Y: =416
+            ZIndex: =84
+
+        Label86_6 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =26
+            Size: =10.5
+            Text: ="USD"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =45
+            X: =858
+            Y: =441
+            ZIndex: =85
+
+        Label86_7 As label:
+            Align: =Align.Right
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =25
+            Size: =10.5
+            Text: |-
+                =//Text(RoundDown(First(SortByColumns(payByYear,"Calendar_Year",Descending)).Base_Pay_in_Dollars + First(SortByColumns(payByYear,"Calendar_Year",Descending)).Total_Bonus_in_Dollars,0),"[$-en-US]#,###","en-US")
+                
+                "0"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =122
+            X: =741
+            Y: =441
+            ZIndex: =86
+
+        "AutoWidthLabel4 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontColor: =FontWeight.Semibold
+            FontSize: =42
+            FontSizeUnits: ='PowerCAT.AutoWidthLabel.FontSizeUnits'.Px
+            FontWeight: ="Semibold"
+            Height: =52
+            Text: |-
+                =Text(RoundDown(First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Base_Pay_in_Dollars + First(SortByColumns(payByYear,"Calendar_Year",SortOrder.Descending)).Total_Bonus_in_Dollars,0),"[$-en-US]#,###","en-US")
+            Visible: =If(pivot="Overview",true,false)
+            Width: =116
+            X: =486
+            Y: =307
+            ZIndex: =133
+
+    grpProfileInformation As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =141
+
+        htmlMidShadow_4 As htmlViewer:
+            Height: =264
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_4.Width - 20 & "px;
+                    height: " & htmlMidShadow_4.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 4px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =408
+            X: =51
+            Y: =268
+            ZIndex: =15
+
+        Label77 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =39
+            PaddingLeft: =15
+            Size: =10.5
+            Text: ="Profile information"
+            Visible: =If(pivot="Overview",true,false)
+            X: =65
+            Y: =278
+            ZIndex: =49
+
+        Label19_48 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="Preferred Full"
+            Visible: =If(pivot="Overview",true,false)
+            X: =65
+            Y: =325
+            ZIndex: =52
+
+        Label19_49 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: =selectedEmployee.Full_Name
+            Visible: =If(pivot="Overview",true,false)
+            Width: =190
+            X: =65
+            Y: =342
+            ZIndex: =53
+
+        Label19_50 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="Employee ID"
+            Visible: =If(pivot="Overview",true,false)
+            X: =214
+            Y: =325
+            ZIndex: =54
+
+        Label19_51 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: =selectedEmployee.Employee_ID
+            Visible: =If(pivot="Overview",true,false)
+            Wrap: =false
+            X: =214
+            Y: =342
+            ZIndex: =55
+
+        Label19_56 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="Work Email"
+            Visible: =If(pivot="Overview",true,false)
+            X: =65
+            Y: =426
+            ZIndex: =56
+
+        Label19_57 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            OnSelect: |-
+                =Launch("mailto:" & If(IsBlank(First(Filter(workerData,descriptor=selectedEmployee.Worker)).primaryWorkEmail),"Msch@org.com",First(Filter(workerData,descriptor=selectedEmployee.Worker)).primaryWorkEmail))
+            PaddingLeft: =12
+            Size: =10.5
+            Text: =If(IsBlank(First(Filter(workerData,descriptor=selectedEmployee.Worker)).primaryWorkEmail),"Msch@org.com",First(Filter(workerData,descriptor=selectedEmployee.Worker)).primaryWorkEmail)
+            Visible: =If(pivot="Overview",true,false)
+            Width: =163
+            Wrap: =false
+            X: =66
+            Y: =448
+            ZIndex: =57
+
+        Label19_58 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="Email"
+            Visible: =If(pivot="Overview",true,false)
+            X: =214
+            Y: =426
+            ZIndex: =58
+
+        Label19_59 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: =Left(selectedEmployee.Worker,1) & Right(selectedEmployee.Worker,5) & "@outlook.com"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =120
+            Wrap: =false
+            X: =210
+            Y: =448
+            ZIndex: =59
+
+        Label19_60 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="Work Phone"
+            Visible: =If(pivot="Overview",true,false)
+            X: =65
+            Y: =374
+            ZIndex: =60
+
+        Label19_61 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: =If(IsBlank(First(Filter(workerData,descriptor=selectedEmployee.Worker)).primaryWorkPhone),"12324568729",First(Filter(workerData,descriptor=selectedEmployee.Worker)).primaryWorkPhone)
+            Visible: =If(pivot="Overview",true,false)
+            Width: =163
+            X: =65
+            Y: =391
+            ZIndex: =61
+
+        Label19_64 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="Business Address"
+            Visible: =If(pivot="Overview",true,false)
+            X: =214
+            Y: =376
+            ZIndex: =62
+
+        Label19_65 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: =selectedEmployee.'Location_-_Name'
+            Visible: =If(pivot="Overview",true,false)
+            Wrap: =false
+            X: =214
+            Y: =393
+            ZIndex: =63
+
+        Label76 As label:
+            Color: =RGBA(91, 95, 199, 1)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            PaddingLeft: =20
+            Size: =10.5
+            Text: ="See more"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =134
+            X: =65
+            Y: =474
+            ZIndex: =64
+
+        Button24 As button:
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =33
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: |-
+                =Set(
+                    profileInfo,
+                    true
+                );
+                Concurrent(
+                    ClearCollect(
+                        managementChain,
+                        WorkdayGetManagementChain.Run(selectedEmployee.Employee_ID_s_)
+                    ),
+                    Set(
+                        JobDev,
+                        First(WorkdayGetJobDevDetails.Run(selectedEmployee.Employee_ID_s_).Report_Entry)
+                    )
+                );
+                ClearCollect(
+                    skills,
+                    ForAll(Split(
+                        JobDev.All_Skills,
+                        ";"
+                    ), {Result: ThisRecord.Value})
+                );
+                Clear(SkillsIndexed);
+                ForAll(
+                    skills,
+                    Collect(
+                        SkillsIndexed,
+                        {
+                            Result: skills[@Result],
+                            Index: CountRows(SkillsIndexed) + 1
+                        }
+                    )
+                );
+                ClearCollect(
+                    skillsTemp,
+                    AddColumns(
+                        SkillsIndexed,
+                        "tempGroup",
+                        RoundUp(
+                            Index / 4,
+                            0
+                        )
+                    )
+                );
+                ClearCollect(
+                    skillsGrouped,
+                    GroupBy(
+                        skillsTemp,
+                        "tempGroup",
+                        "groups"
+                    )
+                );
+                Clear(SkillsIndexed);
+                Concurrent(
+                    ClearCollect(
+                        education,
+                        ForAll(Split(
+                            JobDev.Education,
+                            ";"
+                        ), {Result: ThisRecord.Value})
+                    ),
+                    ClearCollect(
+                        Degrees,
+                        ForAll(Split(
+                            JobDev.Degrees,
+                            ";"
+                        ), {Result: ThisRecord.Value})
+                    ),
+                    ClearCollect(
+                        field,
+                        ForAll(Split(
+                            JobDev.Fields_of_Study,
+                            ";"
+                        ), {Result: ThisRecord.Value})
+                    )
+                );
+                Concurrent(
+                    ForAll(
+                        education,
+                        Collect(
+                            educationIndexed,
+                            {
+                                Result: education[@Result],
+                                Index: CountRows(educationIndexed) + 1
+                            }
+                        )
+                    ),
+                    ForAll(
+                        Degrees,
+                        Collect(
+                            degreesIndexed,
+                            {
+                                Result: Degrees[@Result],
+                                Index: CountRows(degreesIndexed) + 1
+                            }
+                        )
+                    ),
+                    ForAll(
+                        field,
+                        Collect(
+                            fieldIndexed,
+                            {
+                                Result: field[@Result],
+                                Index: CountRows(fieldIndexed) + 1
+                            }
+                        )
+                    )
+                );
+                ClearCollect(
+                    educationSummary,
+                    AddColumns(
+                        educationIndexed,
+                        "Degree",
+                        LookUp(
+                            degreesIndexed,
+                            Index = educationIndexed[@Index],
+                            Result
+                        ),
+                        "Field",
+                        LookUp(
+                            fieldIndexed,
+                            Index = educationIndexed[@Index],
+                            Result
+                        )
+                    )
+                );
+                Clear(educationIndexed);
+                Clear(degreesIndexed);
+                Clear(fieldIndexed)
+            Text: =""
+            Visible: =If(pivot="Overview",true,false)
+            Width: =146
+            X: =65
+            Y: =476
+            ZIndex: =65
+
+        Label19_52 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="Hire Date"
+            Visible: =If(pivot="Overview",true,false)
+            X: =339
+            Y: =325
+            ZIndex: =99
+
+        Label19_53 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: =First(workerHistoryTimeline).effective
+            Visible: =If(pivot="Overview",true,false)
+            Wrap: =false
+            X: =339
+            Y: =342
+            ZIndex: =100
+
+        Label19_54 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="Department"
+            Visible: =If(pivot="Overview",true,false)
+            X: =338
+            Y: =376
+            ZIndex: =101
+
+        Label19_55 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="Public"
+            Visible: =If(pivot="Overview",true,false)
+            Wrap: =false
+            X: =338
+            Y: =393
+            ZIndex: =102
+
+        Label19_62 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =21
+            PaddingLeft: =12
+            Size: =10.5
+            Text: ="Employee ID"
+            Visible: =If(pivot="Overview",true,false)
+            X: =341
+            Y: =426
+            ZIndex: =103
+
+        Label19_63 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            PaddingLeft: =12
+            Size: =10.5
+            Text: =selectedEmployee.Manager_ID
+            Visible: =If(pivot="Overview",true,false)
+            Wrap: =false
+            X: =338
+            Y: =448
+            ZIndex: =111
+
+    grpCompensationCard As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =141
+
+        Button24_1 As button:
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =28
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =ClearCollect(compTimeline,ShowColumns(payByYear,"Base_Pay_in_Dollars","Total_Bonus_in_Dollars","Calendar_Year"));ClearCollect(compTimelineTwo,AddColumns(compTimeline,"Total",Base_Pay_in_Dollars+Total_Bonus_in_Dollars));ClearCollect(compTimelineThree,RenameColumns(compTimelineTwo,"Base_Pay_in_Dollars","Base","Total_Bonus_in_Dollars","Bonus"));Set(compInfo,true)
+            Text: =""
+            Visible: =If(pivot="Overview",true,false)
+            Width: =164
+            X: =471
+            Y: =472
+            ZIndex: =92
+
+        PowerBI1 As powerbi:
+            BorderThickness: =0
+            DashboardId: ="018dde5d-bc03-4b52-bc13-60b4ea1c94d3"
+            Height: =145
+            TileUrl: |-
+                ="https://app.powerbi.com/embed?dashboardId=018dde5d-bc03-4b52-bc13-60b4ea1c94d3&tileId=fb3a2e89-39c0-42be-9bfd-bbbaaba97a26&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVVTLVdFU1QyLXJlZGlyZWN0LmFuYWx5c2lzLndpbmRvd3MubmV0IiwiZW1iZWRGZWF0dXJlcyI6eyJtb2Rlcm5FbWJlZCI6ZmFsc2V9fQ%3d%3d"
+            Visible: =false
+            Width: =407
+            WorkspaceId: ="__my-workspace"
+            X: =483
+            Y: =362
+            ZIndex: =113
+
+        Label77_2 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =39
+            PaddingLeft: =15
+            Size: =10.5
+            Text: ="Compensation"
+            Visible: =If(pivot="Overview",true,false)
+            X: =476
+            Y: =278
+            ZIndex: =114
+
+        Label88_5 As label:
+            Color: =RGBA(96, 94, 92, 1)
+            Fill: =RGBA(82, 24, 121, 1)
+            Font: =Font.'Segoe UI'
+            Height: =9
+            PaddingLeft: =18
+            Size: =9
+            Text: =
+            Visible: =If(pivot="Overview",true,false)
+            Width: =9
+            X: =739
+            Y: =481
+            ZIndex: =118
+
+        Label88_6 As label:
+            Color: =RGBA(96, 94, 92, 1)
+            Font: =Font.'Segoe UI'
+            Height: =13
+            PaddingLeft: =14
+            Size: =9
+            Text: ="Annual"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =70
+            X: =744
+            Y: =479
+            ZIndex: =119
+
+        Label88_7 As label:
+            Color: =RGBA(96, 94, 92, 1)
+            Fill: =RGBA(160, 112, 188, 1)
+            Font: =Font.'Segoe UI'
+            Height: =9
+            PaddingLeft: =18
+            Size: =9
+            Text: =
+            Visible: =If(pivot="Overview",true,false)
+            Width: =9
+            X: =803
+            Y: =481
+            ZIndex: =120
+
+        Label88_8 As label:
+            Color: =RGBA(96, 94, 92, 1)
+            Font: =Font.'Segoe UI'
+            Height: =13
+            PaddingLeft: =14
+            Size: =9
+            Text: ="Bonus"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =70
+            X: =808
+            Y: =479
+            ZIndex: =121
+
+    grpTimeLineCard As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =141
+
+        htmlMidShadow_5 As htmlViewer:
+            Height: =503
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_5.Width - 20 & "px;
+                    height: " & htmlMidShadow_5.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 8px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =425
+            X: =921
+            Y: =265
+            ZIndex: =7
+
+        Label77_1 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =38
+            PaddingLeft: =15
+            Size: =10.5
+            Text: ="Timeline"
+            Visible: =If(pivot="Overview",true,false)
+            X: =930
+            Y: =287
+            ZIndex: =50
+
+        Rectangle13_4 As rectangle:
+            Fill: =RGBA(240, 240, 240, 1)
+            Height: =1
+            Visible: =If(pivot="Overview",true,false)
+            Width: =405
+            X: =936
+            Y: =326
+            ZIndex: =88
+
+        Timeline_1 As Timeline:
+            Categories: =
+            Height: =390
+            Visible: =If(pivot="Overview",true,false)
+            X: =936
+            Y: =342
+            ZIndex: =89
+
+        Label92 As label:
+            Fill: =RGBA(235, 235, 235, 1)
+            Height: =35
+            Text: =""
+            Visible: =timelineFilter
+            Width: =72
+            X: =1243
+            Y: =287
+            ZIndex: =90
+
+        Label77_10 As label:
+            Align: =Align.Right
+            Font: =Font.'Segoe UI'
+            Height: =38
+            PaddingLeft: =15
+            PaddingRight: =20
+            Size: =10.5
+            Text: ="Filter"
+            Visible: =If(pivot="Overview",true,false)
+            Width: =94
+            X: =1232
+            Y: =287
+            ZIndex: =91
+
+        Image35 As image:
+            Height: =17
+            Image: =Frame
+            Visible: =If(pivot="Overview",true,false)
+            Width: =18
+            X: =1252
+            Y: =297
+            ZIndex: =93
+
+        Button24_2 As button:
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =39
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(timelineFilter,!timelineFilter);
+            Text: =""
+            Visible: =If(pivot="Overview",true,false)
+            Width: =89
+            X: =1234
+            Y: =287
+            ZIndex: =94
+
+        htmlMidShadow_20 As htmlViewer:
+            Height: =319
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_20.Width - 20 & "px;
+                    height: " & htmlMidShadow_20.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 8px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =timelineFilter
+            Width: =244
+            X: =1082
+            Y: =314
+            ZIndex: =95
+
+        Label90 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =47
+            PaddingLeft: =12
+            Size: =12
+            Text: ="Category"
+            Visible: =timelineFilter
+            Width: =163
+            X: =1094
+            Y: =326
+            ZIndex: =96
+
+        "Gallery23 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+            Height: =238
+            Items: |-
+                =ForAll([{Value:0},{Value:1},{Value:2},{Value:3},{Value:4},{Value:5},{Value:6}], {Value: ThisRecord})
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =34
+            Visible: =timelineFilter
+            Width: =221
+            X: =1100
+            Y: =370
+            ZIndex: =97
+
+            Label91 As label:
+                Color: =RGBA(23, 23, 23, 1)
+                Height: =23
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =If(ThisItem.Value.Value = 0,"All",If(ThisItem.Value.Value = 1,"Development",If(ThisItem.Value.Value = 2,"Diciplinary",If(ThisItem.Value.Value = 3,"Mobility",If(ThisItem.Value.Value = 4,"Employment",If(ThisItem.Value.Value = 5,"Promotion",If(ThisItem.Value.Value = 6,"Reward")))))))
+                X: =35
+                Y: =6
+                ZIndex: =1
+
+            Checkbox6 As checkbox:
+                BorderColor: =
+                BorderStyle: =
+                CheckboxBackgroundFill: |-
+                    =If(ThisItem.Value in cat || {Value:0} in cat,RGBA(0, 120, 212, 1),Color.White)
+                CheckboxBorderColor: =RGBA(0, 0, 0, 1)
+                CheckboxSize: =16
+                CheckmarkFill: =RGBA(255, 255, 255, 1)
+                Default: |-
+                    =If({Value:0} in cat,true,false)
+                DisabledBorderColor: =
+                FocusedBorderColor: =
+                Height: =31
+                HoverBorderColor: =
+                HoverColor: =
+                OnCheck: =Collect(cat,ThisItem.Value)
+                OnSelect: =Select(Parent)
+                OnUncheck: =If(ThisItem.Value.Value = 0, Clear(cat));Remove(cat,ThisItem.Value)
+                PressedBorderColor: =
+                PressedColor: =
+                PressedFill: =
+                Text: =""
+                Width: =41
+                X: =20
+                ZIndex: =2
+
+        Toggle2 As toggleSwitch:
+            BorderColor: =
+            DisabledBorderColor: =
+            FalseText: ="Expand all"
+            FocusedBorderColor: =
+            Font: =Font.'Segoe UI'
+            Height: =17
+            HoverBorderColor: =
+            OnChange: |-
+                =ClearCollect(temp,timeLineData);If(Toggle2.Value = true,ForAll(temp,Patch(timeLineData,LookUp(timeLineData,Year=temp[@Year]),{expandCollapse:true})),ForAll(temp,Patch(timeLineData,LookUp(timeLineData,Year=temp[@Year]),{expandCollapse:false})))
+            PressedBorderColor: =
+            Size: =10.5
+            TrueText: ="Expand All"
+            Visible: =false
+            Width: =113
+            X: =1219
+            Y: =300
+            ZIndex: =98
+
+    NotesIcon As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =143
+
+        Button4 As button:
+            BorderColor: =Self.Fill
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =0
+            Height: =55
+            HoverBorderColor: =Self.Fill
+            HoverFill: =Self.Fill
+            OnSelect: =Set(notesPopUp,true)
+            PressedBorderColor: =
+            PressedColor: =
+            PressedFill: =
+            RadiusBottomLeft: =50
+            RadiusBottomRight: =50
+            RadiusTopLeft: =50
+            RadiusTopRight: =50
+            Text: =""
+            Width: =55
+            X: =1277
+            Y: =691
+            ZIndex: =151
+
+        Icon1 As icon.Edit:
+            BorderColor: =RGBA(56, 96, 178, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(56, 96, 178, 1)
+            Height: =24
+            HoverBorderColor: =Self.Fill
+            Icon: =Icon.Edit
+            OnSelect: =Set(notesPopUp,true)
+            Width: =24
+            X: =1292
+            Y: =708
+            ZIndex: =154
+
+    "'Notes V2_1' As 'Notes V2'":
+        Employees: =selectedEmployee
+        Visible: =notesPopUp
+        X: =If(!noteScratch,0,1047)
+        ZIndex: =155
+
+    "'App Links_2' As 'App Links'":
+        Height: =731
+        Visible: =apps
+        Y: =40
+        ZIndex: =156
+
+    Button28 As button:
+        BorderStyle: =BorderStyle.None
+        Fill: =RGBA(0, 92, 144, 1)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Normal
+        Height: =25
+        OnSelect: |-
+            =Launch(
+                    "https://teams.microsoft.com/l/chat/0/0?users="&LookUp(workerData,id=selectedEmployee.Employee_ID_s_,primaryWorkEmail)&"&topicName=&message=Hi!",
+                    {},
+                    LaunchTarget.New
+                )
+        PaddingLeft: =20
+        PaddingRight: =0
+        PressedColor: =Color.White
+        PressedFill: |-
+            =ColorValue("#005C90")
+        RadiusBottomLeft: =20
+        RadiusBottomRight: =20
+        RadiusTopLeft: =20
+        RadiusTopRight: =20
+        Size: =9
+        Text: ="Message"
+        Width: =95
+        X: =917
+        Y: =150
+        ZIndex: =157
+
+    Image7 As image:
+        Height: =18
+        Image: =MSTeamIcon
+        Width: =18
+        X: =928
+        Y: =153
+        ZIndex: =158
+
+    Button28_1 As button:
+        BorderStyle: =BorderStyle.None
+        Fill: =RGBA(0, 92, 144, 1)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Normal
+        Height: =25
+        OnSelect: |-
+            =Launch("mailto:" & If(IsBlank(First(Filter(workerData,descriptor=selectedEmployee.Worker)).primaryWorkEmail),"Msch@org.com",First(Filter(workerData,descriptor=selectedEmployee.Worker)).primaryWorkEmail))
+        PaddingLeft: =20
+        PaddingRight: =0
+        PressedColor: =Color.White
+        PressedFill: |-
+            =ColorValue("#005C90")
+        RadiusBottomLeft: =20
+        RadiusBottomRight: =20
+        RadiusTopLeft: =20
+        RadiusTopRight: =20
+        Size: =9
+        Text: ="Email"
+        Width: =80
+        X: =1020
+        Y: =150
+        ZIndex: =159
+
+    Image7_1 As image:
+        DisplayMode: =DisplayMode.View
+        Height: =17
+        Image: =emailIcon
+        Width: =17
+        X: =1034
+        Y: =154
+        ZIndex: =160
+
+    Group7 As group:
+        Height: =5
+        Width: =5
+        X: =80
+        Y: =80
+        ZIndex: =160
+
+        Rectangle1 As rectangle:
+            Fill: =RGBA(237, 237, 237, 0.77)
+            Height: =30
+            Visible: =If(pivot="Digital Notebook",true,false)
+            Width: =1290
+            X: =55
+            Y: =347
+            ZIndex: =1
+
+        Label36_33 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =24
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Subject"
+            Visible: =If(pivot="Digital Notebook",true,false)
+            X: =1127
+            Y: =352
+            ZIndex: =124
+
+        Label36_31 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =23
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Category"
+            Visible: =If(pivot="Digital Notebook",true,false)
+            X: =658
+            Y: =352
+            ZIndex: =125
+
+        Label36_29 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =23
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Viewable By"
+            Visible: =If(pivot="Digital Notebook",true,false)
+            Width: =100
+            X: =522
+            Y: =352
+            ZIndex: =126
+
+        Label36_27 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =23
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Creadted On"
+            Visible: =If(pivot="Digital Notebook",true,false)
+            Width: =129
+            X: =164
+            Y: =352
+            ZIndex: =127
+
+        Label36_28 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =24
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Creadted By"
+            Visible: =If(pivot="Digital Notebook",true,false)
+            Width: =130
+            X: =329
+            Y: =352
+            ZIndex: =128
+
+        Label36_34 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =22
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Tags"
+            Visible: =If(pivot="Digital Notebook",true,false)
+            X: =913
+            Y: =352
+            ZIndex: =129
+
+    "'Profile Team Details_1' As 'Profile Team Details'":
+        TeamDetails: |-
+            ={Manager:"Johnathan Lee",CoManager:"",TeamSize:"14 (10 FTE)",TeamSpan:"38 (28 FTE)"}
+        X: =196
+        Y: =194
+        ZIndex: =161
+
+    Component3_1 As Search:
+        Height: =If(Component3_1.SearchStringLength>2,331,42)
+        X: =855
+        ZIndex: =162
+
+    Pages_3 As Pages:
+        Height: =38
+        Width: =1330
+        X: =36
+        Y: =42
+        ZIndex: =163
+
+    Label28 As label:
+        Text: =TimeZoneOffset(Now()) & Now() & Office365Users.UserProfile(User().Email).City
+        Width: =188
+        X: =1135
+        Y: =70
+        ZIndex: =164
+
+    Group4 As group:
+        Height: =5
+        Width: =5
+        X: =80
+        Y: =80
+        ZIndex: =164
+
+        TextInput2 As text:
+            BorderColor: =RGBA(116, 116, 116, 1)
+            BorderThickness: =1
+            Color: =RGBA(116, 116, 116, 1)
+            Default: ="Enter Keyword"
+            Font: =Font.'Segoe UI'
+            Height: =32
+            PaddingLeft: =Icon25.Width+10
+            RadiusBottomLeft: =1
+            RadiusBottomRight: =1
+            RadiusTopLeft: =1
+            RadiusTopRight: =1
+            Size: =10.5
+            Visible: =If(pivot="Digital Notebook",true,false)
+            Width: =200
+            X: =62
+            Y: =305
+            ZIndex: =138
+
+        Icon25 As icon.Search:
+            Color: =RGBA(116, 116, 116, 1)
+            Height: =25
+            Icon: =Icon.Search
+            Visible: =If(pivot="Digital Notebook",true,false)
+            Width: =25
+            X: =65
+            Y: =310
+            ZIndex: =139
+
+        Label11 As label:
+            Color: =RGBA(116, 116, 116, 1)
+            Font: =Font.'Segoe UI'
+            Height: =23
+            Size: =10
+            Text: ="Filter by Keyword"
+            Visible: =If(pivot="Digital Notebook",true,false)
+            X: =60
+            Y: =278
+            ZIndex: =140
+
+        TextInput2_1 As text:
+            BorderColor: =RGBA(116, 116, 116, 1)
+            BorderThickness: =1
+            Color: =RGBA(116, 116, 116, 1)
+            Default: ="All"
+            Font: =Font.'Segoe UI'
+            Height: =32
+            PaddingLeft: =5
+            RadiusBottomLeft: =1
+            RadiusBottomRight: =1
+            RadiusTopLeft: =1
+            RadiusTopRight: =1
+            Size: =10.5
+            Visible: =If(pivot="Digital Notebook",true,false)
+            Width: =200
+            X: =289
+            Y: =305
+            ZIndex: =141
+
+        Label11_1 As label:
+            Color: =RGBA(116, 116, 116, 1)
+            Font: =Font.'Segoe UI'
+            Height: =23
+            Size: =10
+            Text: ="Filter by Creator"
+            Visible: =If(pivot="Digital Notebook",true,false)
+            X: =287
+            Y: =278
+            ZIndex: =142
+
+        TextInput2_2 As text:
+            BorderColor: =RGBA(116, 116, 116, 1)
+            BorderThickness: =1
+            Color: =RGBA(116, 116, 116, 1)
+            Default: ="All"
+            Font: =Font.'Segoe UI'
+            Height: =32
+            PaddingLeft: =5
+            RadiusBottomLeft: =1
+            RadiusBottomRight: =1
+            RadiusTopLeft: =1
+            RadiusTopRight: =1
+            Size: =10.5
+            Visible: =If(pivot="Digital Notebook",true,false)
+            Width: =200
+            X: =514
+            Y: =305
+            ZIndex: =143
+
+        Label11_2 As label:
+            Color: =RGBA(116, 116, 116, 1)
+            Font: =Font.'Segoe UI'
+            Height: =23
+            Size: =10
+            Text: ="Filter by Categories"
+            Visible: =If(pivot="Digital Notebook",true,false)
+            Width: =200
+            X: =512
+            Y: =278
+            ZIndex: =144
+
+        Label11_3 As label:
+            Color: =RGBA(116, 116, 116, 1)
+            Font: =Font.'Segoe UI'
+            Height: =23
+            Size: =10
+            Text: ="Filter by Date Range"
+            Visible: =If(pivot="Digital Notebook",true,false)
+            X: =965
+            Y: =278
+            ZIndex: =145
+
+        Gallery8_1 As gallery.variableTemplateHeightGallery:
+            Height: =386
+            Items: |-
+                =Sort(
+                    Filter(NotesData,Employee.'Full Name'= selectedEmployee.Full_Name),'Created On',SortOrder.Descending)
+            Layout: =Layout.Vertical
+            ShowScrollbar: =false
+            TemplatePadding: =3
+            TemplateSize: =98
+            Visible: =If(pivot="Digital Notebook",true,false)
+            Width: =1281
+            X: =50
+            Y: =374
+            ZIndex: =146
+
+            Label41_12 As label:
+                AutoHeight: =true
+                Font: =Font.'Segoe UI'
+                Height: =62
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =ThisItem.'Created On'
+                Width: =167
+                X: =105
+                Y: =10
+                ZIndex: =1
+
+            Label42_15 As label:
+                AutoHeight: =true
+                Color: =
+                Font: =Font.'Segoe UI'
+                Height: =63
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =ThisItem.'Created By'.'Full Name'
+                Width: =174
+                X: =272
+                Y: =10
+                ZIndex: =2
+
+            Label42_38 As label:
+                AutoHeight: =true
+                Color: =
+                Font: =Font.'Segoe UI'
+                Height: =62
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =ThisItem.'Is Private'
+                Width: =113
+                X: =467
+                Y: =10
+                ZIndex: =3
+
+            Rectangle9_19 As rectangle:
+                Fill: =RGBA(235, 235, 235, 1)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =1327
+                Y: =
+                ZIndex: =4
+
+            Label42_37 As label:
+                AutoHeight: =true
+                Color: =
+                Font: =Font.'Segoe UI'
+                Height: =62
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =ThisItem.Category
+                Width: =113
+                X: =600
+                Y: =10
+                ZIndex: =5
+
+            Label42_36 As label:
+                AutoHeight: =true
+                Color: =
+                Font: =Font.'Segoe UI'
+                Height: =60
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =ThisItem.Category
+                Width: =213
+                X: =858
+                Y: =10
+                ZIndex: =6
+
+            Label42_35 As label:
+                Color: =
+                Font: =Font.'Segoe UI'
+                Height: =27
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =Left(PlainText(ThisItem.Note),10)
+                Width: =204
+                X: =1071
+                Y: =10
+                ZIndex: =7
+
+            Icon23_3 As icon.ChevronRight:
+                Height: =40
+                Icon: =If(ThisItem.expand,Icon.ChevronDown,Icon.ChevronRight)
+                OnSelect: |-
+                    =Select(Parent);
+                    Patch(NotesData,ThisItem,{expand:!ThisItem.expand})
+                Width: =12
+                X: =26
+                Y: =5
+                ZIndex: =8
+
+            Icon24_3 As icon.Edit:
+                Color: =If(ThisItem.'Created By'.'Full Name'=User().FullName, RGBA(39, 67, 125, 0.8),Color.LightGray)
+                Height: =20
+                Icon: =Icon.Edit
+                OnSelect: =Select(Parent)
+                Width: =15
+                X: =61
+                Y: =15
+                ZIndex: =9
+
+            Label42_34 As label:
+                AutoHeight: =true
+                Color: =
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =5
+                OnSelect: =Select(Parent)
+                PaddingBottom: =2
+                Size: =10.5
+                Text: =If(ThisItem.expand,"Full Note","")
+                Visible: =ThisItem.expand
+                Width: =113
+                X: =108
+                Y: =Label41_12.Y+Label41_12.Height+3
+                ZIndex: =10
+
+            HtmlText2 As htmlViewer:
+                AutoHeight: =true
+                Font: =Font.'Segoe UI'
+                Height: =1
+                HtmlText: =If(ThisItem.expand,ThisItem.Note,"")
+                OnSelect: =Select(Parent)
+                PaddingTop: =3
+                Size: =10.5
+                Width: =600
+                Y: =41
+                ZIndex: =12
+
+        TextInput2_4 As text:
+            BorderColor: =RGBA(116, 116, 116, 1)
+            BorderThickness: =1
+            Color: =RGBA(116, 116, 116, 1)
+            Default: ="All"
+            Font: =Font.'Segoe UI'
+            Height: =32
+            PaddingLeft: =5
+            RadiusBottomLeft: =1
+            RadiusBottomRight: =1
+            RadiusTopLeft: =1
+            RadiusTopRight: =1
+            Size: =10.5
+            Visible: =If(pivot="Digital Notebook",true,false)
+            Width: =200
+            X: =740
+            Y: =305
+            ZIndex: =147
+
+        Label11_4 As label:
+            Color: =RGBA(116, 116, 116, 1)
+            Font: =Font.'Segoe UI'
+            Height: =23
+            Size: =10
+            Text: ="Filter by Tags"
+            Visible: =If(pivot="Digital Notebook",true,false)
+            Width: =200
+            X: =738
+            Y: =278
+            ZIndex: =148
+
+        Label13 As label:
+            Color: =RGBA(0, 92, 144, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =26
+            Size: =11
+            Text: ="Expand All"
+            Visible: =If(pivot="Digital Notebook",true,false)
+            Width: =110
+            X: =1256
+            Y: =308
+            ZIndex: =149
+
+        "'Time Range_1' As 'Time Range'":
+            Visible: =If(pivot="Digital Notebook",true,false)
+            X: =949
+            Y: =291
+            ZIndex: =150
+

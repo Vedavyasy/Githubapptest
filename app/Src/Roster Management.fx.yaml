@@ -1,0 +1,3230 @@
+"'Roster Management' As screen":
+    OnVisible: |-
+        =ClearCollect(
+            workerInfoTemp,
+            workerInfo
+        );
+        ClearCollect(
+            departments,
+            ForAll(Distinct(
+                Filter(
+                    workerInfo,
+                    !IsBlank(Supervisory_Organization)
+                ),
+                Supervisory_Organization
+            ), {Result: ThisRecord.Value})
+        );
+        ClearCollect(
+            rank,
+            ForAll(Distinct(
+                workerInfo,
+                Rating_Numeric
+            ), {Result: ThisRecord.Value})
+        );
+        ClearCollect(
+            country,
+            ForAll(Distinct(
+                Filter(
+                    workerInfo,
+                    !IsBlank(Country)
+                ),
+                Country
+            ), {Result: ThisRecord.Value})
+        );
+        ClearCollect(
+            gender,
+            ForAll(Distinct(
+                Filter(
+                    workerInfo,
+                    !IsBlank(Gender)
+                ),
+                Gender
+            ), {Result: ThisRecord.Value})
+        );
+        ClearCollect(
+            level,
+            ForAll(Distinct(
+                Filter(
+                    workerInfo,
+                    !IsBlank(Management_Level)
+                ),
+                Management_Level
+            ), {Result: ThisRecord.Value})
+        );
+        ClearCollect(
+            yearsDistinct,
+            ForAll(Distinct(
+                Filter(
+                    workerInfo,
+                    !IsBlank(Time_in_Compensation_Grade_Range)
+                ),
+                Time_in_Compensation_Grade_Range
+            ), {Result: ThisRecord.Value})
+        );
+        ClearCollect(
+            ethnicityDistinct,
+            ForAll(Distinct(
+                Filter(
+                    workerInfo,
+                    !IsBlank(Race_Ethnicity)
+                ),
+                Race_Ethnicity
+            ), {Result: ThisRecord.Value})
+        );
+        Set(
+            departmentSelected,
+            false
+        );
+        ClearCollect(
+            levels,
+            ForAll(Distinct(
+                Filter(
+                    workerInfo,
+                    !IsBlank(Management_Level)
+                ),
+                Management_Level
+            ), {Result: ThisRecord.Value})
+        );
+        Set(
+            rankSelected,
+            false
+        );
+        Set(
+            countrySelected,
+            false
+        );
+        Set(
+            countrySelected,
+            false
+        );
+        Set(
+            levelsSelected,
+            false
+        );
+        Set(
+            genderSelected,
+            false
+        );
+        Set(
+            levelSelected,
+            false
+        );
+        Set(
+            yearsSelected,
+            false
+        );
+        Set(
+            ethnicitySelected,
+            false
+        );
+        Set(
+            allRoster,
+            false
+        );
+        Set(
+            newRoster,
+            false
+        );
+        Set(
+            rosterDrop,
+            false
+        );
+        Set(
+            currentRoster,
+            "My Org"
+        );
+        Set(
+            rosterLoading,
+            false
+        );
+        Clear(rosterItems);
+        Clear(tempEmployees);
+        Set(
+            rosterAdd,
+            false
+        );
+        Set(
+            apps,
+            false
+        );
+        Set(
+            notesPopUp,
+            false
+        );
+        Set(
+            addedToRoster,
+            false
+        );
+        Set(
+            savedSearchPop,
+            false
+        );Set(viewSavedSearches,false);Set(renameSearch,false);
+        If("Roster" in col_navpages.ScreenName,true,Collect(col_navpages,Table({ScreenName:"Roster",ID:First(workerInfoTemp),IsActive:true,Display:"Roster Page"})));
+
+    grpEmployeeGallery As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =16
+
+        Label36_30 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =47
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Notes"
+            Width: =123
+            X: =1206
+            Y: =214
+            ZIndex: =27
+
+        Label36_26 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =34
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Title"
+            Width: =179
+            X: =248
+            Y: =227
+            ZIndex: =28
+
+        "Gallery14_2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+            Height: =508
+            Items: |-
+                =Search(
+                    Filter(
+                        workerInfoTemp,
+                        CountRows(rankFilter) = 0 Or Rating_Numeric in rankFilter,
+                        CountRows(countryFilter) = 0 Or Country in countryFilter,
+                        CountRows(departmentFilter) = 0 Or Supervisory_Organization in departmentFilter,
+                        CountRows(genderFilter) = 0 Or Gender in genderFilter,
+                        CountRows(levelFilter) = 0 Or Management_Level in levelFilter,
+                        CountRows(yearFilter) = 0 Or Time_in_Compensation_Grade_Range in yearFilter,
+                        CountRows(ethnicityFilter) = 0 Or Race_Ethnicity in ethnicityFilter
+                    ),
+                    TextInput14.Text,
+                    "Full_Name"
+                )
+            Layout: =Layout.Vertical
+            ShowScrollbar: =false
+            TemplateFill: =If(ThisItem in rosterItems,RGBA(235,235,235,1),RGBA(0, 0, 0, 0))
+            TemplatePadding: =0
+            TemplateSize: =57.5
+            Width: =1269
+            X: =66
+            Y: =258
+            ZIndex: =29
+
+            Checkbox1_2 As checkbox:
+                BorderColor: =
+                CheckboxBackgroundFill: |-
+                    =If(LookUp(
+                                Gallery30.AllItems,
+                                Employee.EmpID = ThisItem.Employee_ID
+                            ) in rosterItems || allRoster,RGBA(0, 120, 212, 1),Color.White)
+                CheckboxBorderColor: =RGBA(0, 0, 0, 1)
+                CheckboxSize: =15
+                CheckmarkFill: =RGBA(255, 255, 255, 1)
+                Default: |-
+                    =If(allRoster = true,true,If(LookUp(
+                                Gallery30.AllItems,
+                                Employee.EmpID = ThisItem.Employee_ID
+                            ) in rosterItems, true, false))
+                DisabledBorderColor: =
+                FocusedBorderColor: =
+                FocusedBorderThickness: =
+                Height: =57
+                HoverBorderColor: =
+                OnCheck: |-
+                    =Collect(
+                        rosterItems,
+                        LookUp(
+                            Gallery30.AllItems,
+                            Employee.EmpID = ThisItem.Employee_ID
+                        )
+                    );
+                    Collect(
+                        tempEmployees,
+                        ThisItem
+                    );
+                    Collect(multipleEmployees,ThisItem);
+                    Set(individual,false)
+                OnSelect: =Select(Parent)
+                OnUncheck: |
+                    =Remove(
+                        rosterItems,
+                        LookUp(
+                            Gallery30.AllItems,
+                            Employee.EmpID = ThisItem.Employee_ID
+                        )
+                    );
+                    Remove(
+                        tempEmployees,
+                        ThisItem
+                    );
+                    Remove(multipleEmployees,ThisItem)
+                PressedBorderColor: =Color.White
+                PressedFill: =
+                Text: =""
+                Visible: =If(StartsWith(currentRoster,"My Org"),false,true)
+                Width: =37
+                ZIndex: =6
+
+            Label41_2 As label:
+                Color: =RGBA(23, 23, 23, 1)
+                Font: =Font.'Segoe UI'
+                Height: =57
+                HoverFill: |-
+                    =//Self.Fill
+                    ColorFade(RGBA(186, 202, 226, 1),20%)
+                OnSelect: |
+                    =//Select(Parent)
+                    UpdateIf(col_navpages,true,{IsActive:false});
+                    Collect(col_navpages,Table({ScreenName:"Profile Screen",ID:ThisItem,IsActive:true,Display:ThisItem.Full_Name}));
+                    Select(Parent);
+                    Set(
+                        selectedEmployee,
+                        ThisItem
+                    );
+                    Collect(
+                        recentSearches,
+                        ThisItem.Worker
+                    );
+                    //Launch("https://apps.powerapps.com/play/e/62aca204-1f55-ea68-824f-70c1a381d81a/a/93ed2c7a-5f4d-4cc0-8b16-6907d1dd46a2?tenantId=1ca9e5eb-2ab7-4a30-9fdd-10166eee1592",{EmpId:selectedEmployee.Employee_ID,Screen:"prof"});
+                    Set(
+                        selectedDataverseEmployee,
+                        LookUp(
+                            Employees,
+                            EmpID = selectedEmployee.Employee_ID
+                        )
+                    );
+                    Reset('Notes V2_1');
+                    Concurrent(
+                        ClearCollect(
+                            compData,
+                            WorkdayGetCompHistory.Run(selectedEmployee.Employee_ID_s_)
+                        ),
+                        ClearCollect(
+                            jobDetails,
+                            First(WorkdayGetJobDetails.Run(selectedEmployee.Employee_ID_s_).Report_Entry)
+                        ),
+                        Set(
+                            JobDev,
+                            First(WorkdayGetJobDevDetails.Run(selectedEmployee.Employee_ID_s_).Report_Entry)
+                        ),
+                        ClearCollect(
+                            payByYear,
+                            WorkdayGetPaybyYear.Run(selectedEmployee.Employee_ID_s_)
+                        ),
+                        ClearCollect(
+                            teamInfo,
+                            WorkdayGetDirects.Run(
+                                LookUp(
+                                    workerInfo,
+                                    Employee_ID = selectedEmployee.Manager_ID,
+                                    Employee_ID_s_
+                                )
+                            )
+                        ),
+                        ClearCollect(
+                            directInfo,
+                            //WorkdayGetDirects.Run(selectedEmployee.Employee_ID_s_)
+                            LookUp(
+                                    workerInfo,
+                                    Employee_ID = selectedEmployee.Manager_ID,
+                                    Employee_ID_s_
+                                )
+                        ),
+                        ClearCollect(
+                            workerHistory,
+                            AddColumns(
+                                WorkdayGetWorkerHistory.Run(selectedEmployee.Employee_ID_s_).data,
+                                "Category",
+                                RandBetween(
+                                    1,
+                                    6
+                                )
+                            )
+                        ),
+                        Set(
+                            ReviewDetails,
+                            First(WorkdayGetReviewHistoryDetails.Run(selectedEmployee.Employee_ID_s_).Report_Entry)
+                        )
+                    );
+                    ClearCollect(
+                        workerHistoryTimeline,
+                        AddColumns(
+                            Filter(
+                                workerHistory,
+                                !IsBlank(effective)
+                            ),
+                            "Year",
+                            Year(effective)
+                        )
+                    );
+                    ClearCollect(
+                        timeLineData,
+                        AddColumns(
+                            GroupBy(
+                                workerHistoryTimeline,
+                                "Year",
+                                "Event Year"
+                            ),
+                            "expandCollapse",
+                            true
+                        )
+                    );
+                    
+                    Patch(
+                        timeLineData,
+                        First(timeLineData),
+                        {expandCollapse: true}
+                    );
+                    ClearCollect(
+                        notesTemp,
+                        AddColumns(
+                            Filter(
+                                selectedDataverseEmployee.'Employee Notes',
+                                !IsBlank(Note)
+                            ),
+                            "expandCollapse",
+                            false
+                        )
+                    );
+                    Clear(cat);
+                    Navigate('Profile Screen');
+                Size: =10.5
+                Text: =ThisItem.Full_Name
+                Width: =118
+                X: =25
+                ZIndex: =7
+
+            Label42_8 As label:
+                Color: =
+                Font: =Font.'Segoe UI'
+                Height: =56
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =ThisItem.Job
+                Tooltip: =ThisItem.Job
+                Width: =157
+                X: =179
+                ZIndex: =8
+
+            Label42_9 As label:
+                Align: =Align.Right
+                Color: =
+                Font: =Font.'Segoe UI'
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =ThisItem.Rating_Numeric
+                Width: =45
+                X: =336
+                Y: =5
+                ZIndex: =9
+
+            Label42_10 As label:
+                Align: =Align.Right
+                Color: =
+                Font: =Font.'Segoe UI'
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =
+                Width: =65
+                X: =708
+                Y: =5
+                ZIndex: =10
+
+            Rectangle9_8 As rectangle:
+                Fill: =RGBA(235, 235, 235, 1)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =1200
+                X: =30
+                Y: =56.6
+                ZIndex: =15
+
+            Label41_3 As label:
+                Color: =RGBA(23, 23, 23, 1)
+                Font: =Font.'Segoe UI'
+                Height: =57
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =ThisItem.Supervisory_Organization
+                Width: =136
+                X: =614
+                Y: =0.5
+                ZIndex: =16
+
+            Label41_4 As label:
+                Color: =RGBA(23, 23, 23, 1)
+                Font: =Font.'Segoe UI'
+                Height: =57
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =ThisItem.Country
+                Width: =103
+                X: =760
+                Y: =0.5
+                ZIndex: =17
+
+            Label42_11 As label:
+                Color: =
+                Font: =Font.'Segoe UI'
+                Height: =57
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =ThisItem.Management_Level
+                Width: =99
+                X: =497
+                ZIndex: =18
+
+            Label41_5 As label:
+                Align: =Align.Right
+                Color: =RGBA(23, 23, 23, 1)
+                Font: =Font.'Segoe UI'
+                Height: =57
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =ThisItem.Time_in_Compensation_Grade_Range
+                Width: =83
+                X: =883
+                Y: =0.5
+                ZIndex: =19
+
+            Label41_6 As label:
+                Color: =RGBA(23, 23, 23, 1)
+                Font: =Font.'Segoe UI'
+                Height: =57
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: |-
+                    =First(ForAll(Split(ThisItem.Race_Ethnicity,"("), {Result: ThisRecord.Value})).Result
+                Width: =126
+                X: =1008
+                Y: =0.5
+                ZIndex: =20
+
+            Label41_7 As label:
+                Color: =RGBA(23, 23, 23, 1)
+                Font: =Font.'Segoe UI'
+                Height: =57
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =ThisItem.Gender
+                Width: =82
+                X: =396
+                Y: =0.5
+                ZIndex: =21
+
+            Icon20 As icon.Notebook:
+                Color: =RGBA(65, 141, 237, 1)
+                Height: =18
+                Icon: =Icon.Notebook
+                OnSelect: =Set(notesPopUp,true);Set(selectedDataverseEmployee,LookUp(Employees,EmpID=ThisItem.Employee_ID));ClearCollect(selectedEmployees,ThisItem);Set(individual,true)
+                Width: =18
+                X: =1151
+                Y: =17
+                ZIndex: =22
+
+        Rectangle9_9 As rectangle:
+            Fill: =RGBA(235, 235, 235, 1)
+            Height: =1
+            OnSelect: =
+            Width: =1200
+            X: =89
+            Y: =261
+            ZIndex: =30
+
+    Rectangle9_15 As rectangle:
+        Fill: =RGBA(235, 235, 235, 1)
+        Height: =1
+        OnSelect: =
+        Width: =1328
+        X: =38
+        Y: =70
+        ZIndex: =19
+
+    Image3 As image:
+        Height: =20
+        Image: =savesearch
+        Width: =20
+        X: =1204
+        Y: =45
+        ZIndex: =20
+
+    grpDepartmentHeader As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =20
+
+        Button30_1 As button:
+            BorderThickness: =0
+            Fill: =If(!departmentSelected,RGBA(0, 0, 0, 0),RGBA(229,229,229,1))
+            Height: =34
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =AutoWidthLabel9.AutoWidth+50
+            X: =672
+            Y: =227
+            ZIndex: =24
+
+        Icon14 As icon.ChevronDown:
+            Color: =RGBA(50, 49, 48, 1)
+            Height: =10
+            Icon: =Icon.ChevronDown
+            Width: =10
+            X: =766
+            Y: =243
+            ZIndex: =33
+
+        "AutoWidthLabel9 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontWeight: ="600"
+            Height: =28
+            Text: ="Department"
+            Width: =200
+            X: =682
+            Y: =233
+            ZIndex: =34
+
+        Icon17 As icon.ArrowDown:
+            Height: =12
+            Icon: =Icon.FilterFlat
+            Visible: =If(CountRows(departmentFilter)>0,true,false)
+            Width: =7
+            X: =780
+            Y: =241
+            ZIndex: =35
+
+        Button30 As button:
+            BorderThickness: =0
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =34
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(departmentSelected,!departmentSelected);Set(rankSelected,false);Set(countrySelected,false);Set(genderSelected,false);Set(levelSelected,false);Set(yearsSelected,false);Set(ethnicitySelected,false)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =AutoWidthLabel9.AutoWidth+30
+            X: =682
+            Y: =227
+            ZIndex: =36
+
+    Label2 As label:
+        Font: =Font.'Segoe UI'
+        Height: =31
+        PaddingLeft: =20
+        Size: =10.5
+        Text: ="Saved Searches"
+        X: =1216
+        Y: =40
+        ZIndex: =21
+
+    Button1 As button:
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =31
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        OnSelect: =Set(viewSavedSearches,true)
+        Text: =""
+        X: =1184
+        Y: =38
+        ZIndex: =22
+
+    TextInput14 As text:
+        BorderColor: =RGBA(235, 235, 235, 1)
+        BorderThickness: =1
+        Color: =RGBA(96, 94, 92, 1)
+        Default: =""
+        FocusedBorderThickness: =1
+        Height: =24
+        HintText: ="Filter by name"
+        PressedBorderColor: =
+        RadiusBottomLeft: =2
+        RadiusBottomRight: =2
+        RadiusTopLeft: =2
+        RadiusTopRight: =2
+        Size: =10.5
+        Width: =145
+        X: =89
+        Y: =232
+        ZIndex: =23
+
+    Header_5 As Header:
+        ZIndex: =25
+
+    grpRankHeader As group:
+        Height: =5
+        Width: =5
+        X: =10
+        Y: =20
+        ZIndex: =25
+
+        Button30_2 As button:
+            BorderThickness: =0
+            Fill: =If(!rankSelected,RGBA(0, 0, 0, 0),RGBA(229,229,229,1))
+            Height: =34
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =AutoWidthLabel9_1.AutoWidth+50
+            X: =375
+            Y: =227
+            ZIndex: =37
+
+        Icon14_2 As icon.ChevronDown:
+            Color: =RGBA(50, 49, 48, 1)
+            Height: =10
+            Icon: =Icon.ChevronDown
+            Width: =10
+            X: =430
+            Y: =243
+            ZIndex: =38
+
+        "AutoWidthLabel9_1 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontWeight: ="600"
+            Height: =28
+            Text: ="Rank"
+            Width: =44
+            X: =385
+            Y: =233
+            ZIndex: =39
+
+        Icon17_1 As icon.ArrowDown:
+            Height: =12
+            Icon: =Icon.FilterFlat
+            Visible: =If(CountRows(rankFilter)>0,true,false)
+            Width: =7
+            X: =444
+            Y: =241
+            ZIndex: =40
+
+        Button30_3 As button:
+            BorderThickness: =0
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =34
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(rankSelected,!rankSelected);Set(departmentSelected,false);Set(countrySelected,false);Set(genderSelected,false);Set(levelSelected,false);Set(yearsSelected,false);Set(ethnicitySelected,false);Set(ethnicitySelected,false)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =AutoWidthLabel9_1.AutoWidth+30
+            X: =381
+            Y: =227
+            ZIndex: =41
+
+    "'Nav 2_4' As 'Nav 2'":
+        Height: =728
+        Width: =39
+        Y: =40
+        ZIndex: =26
+
+    grpRankFilter As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =27
+
+        htmlMidShadow_24 As htmlViewer:
+            Height: =282
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_24.Width - 20 & "px;
+                    height: " & htmlMidShadow_24.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 1px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =rankSelected
+            Width: =136
+            X: =362.5
+            Y: =249
+            ZIndex: =42
+
+        "Gallery23_3 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+            Height: =241
+            Items: =SortByColumns(rank,"Result",SortOrder.Descending)
+            Layout: =Layout.Vertical
+            ShowScrollbar: =false
+            TemplatePadding: =0
+            TemplateSize: =34
+            Visible: =rankSelected
+            Width: =67
+            X: =375
+            Y: =264
+            ZIndex: =43
+
+            Label91_3 As label:
+                Color: =RGBA(23, 23, 23, 1)
+                Height: =23
+                OnSelect: =Select(Parent)
+                Size: =8
+                Text: =ThisItem.Result
+                Tooltip: =ThisItem.Result
+                Width: =160
+                Wrap: =false
+                X: =29
+                Y: =6
+                ZIndex: =1
+
+            Checkbox6_2 As checkbox:
+                BorderColor: =
+                BorderStyle: =
+                CheckboxBackgroundFill: =If(ThisItem in rankFilter,RGBA(0, 120, 212, 1),Color.White)
+                CheckboxBorderColor: =RGBA(0, 0, 0, 1)
+                CheckboxSize: =16
+                CheckmarkFill: =RGBA(255, 255, 255, 1)
+                Default: =ThisItem in rankFilter
+                DisabledBorderColor: =
+                FocusedBorderColor: =
+                Height: =31
+                HoverBorderColor: =
+                HoverColor: =
+                OnCheck: =Collect(rankFilter,ThisItem)
+                OnSelect: =Select(Parent)
+                OnUncheck: =Remove(rankFilter,ThisItem)
+                PressedBorderColor: =
+                PressedColor: =
+                PressedFill: =
+                Text: =""
+                Width: =41
+                X: =10
+                ZIndex: =2
+
+    grpCountryHeader As group:
+        Height: =5
+        Width: =5
+        X: =10
+        Y: =20
+        ZIndex: =32
+
+        Button30_4 As button:
+            BorderThickness: =0
+            Fill: =If(!countrySelected,RGBA(0, 0, 0, 0),RGBA(229,229,229,1))
+            Height: =34
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =AutoWidthLabel9_2.AutoWidth+50
+            X: =823
+            Y: =227
+            ZIndex: =44
+
+        Icon14_3 As icon.ChevronDown:
+            Color: =RGBA(50, 49, 48, 1)
+            Height: =10
+            Icon: =Icon.ChevronDown
+            Width: =10
+            X: =890
+            Y: =243
+            ZIndex: =45
+
+        "AutoWidthLabel9_2 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontWeight: ="600"
+            Height: =28
+            Text: ="Country"
+            Width: =60
+            X: =830
+            Y: =233
+            ZIndex: =46
+
+        Icon17_2 As icon.ArrowDown:
+            Height: =12
+            Icon: =Icon.FilterFlat
+            Visible: =If(CountRows(countryFilter)>0,true,false)
+            Width: =7
+            X: =904
+            Y: =241
+            ZIndex: =47
+
+        Button30_5 As button:
+            BorderThickness: =0
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =34
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(countrySelected,!countrySelected);Set(rankSelected,false);Set(departmentSelected,false);Set(genderSelected,false);Set(levelSelected,false);Set(yearsSelected,false);Set(ethnicitySelected,false)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =AutoWidthLabel9_2.AutoWidth+30
+            X: =827
+            Y: =227
+            ZIndex: =48
+
+    grpLevelHeader As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =39
+
+        Button30_6 As button:
+            BorderThickness: =0
+            Fill: =If(!levelSelected,RGBA(0, 0, 0, 0),RGBA(229,229,229,1))
+            Height: =34
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =AutoWidthLabel9_3.AutoWidth+50
+            X: =559
+            Y: =227
+            ZIndex: =51
+
+        Icon14_4 As icon.ChevronDown:
+            Color: =RGBA(50, 49, 48, 1)
+            Height: =10
+            Icon: =Icon.ChevronDown
+            Width: =10
+            X: =614
+            Y: =243
+            ZIndex: =52
+
+        "AutoWidthLabel9_3 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontWeight: ="600"
+            Height: =28
+            Text: ="Level"
+            Width: =44
+            X: =569
+            Y: =233
+            ZIndex: =53
+
+        Icon17_3 As icon.ArrowDown:
+            Height: =12
+            Icon: =Icon.FilterFlat
+            Visible: =If(CountRows(levelFilter)>0,true,false)
+            Width: =7
+            X: =628
+            Y: =241
+            ZIndex: =54
+
+        Button30_7 As button:
+            BorderThickness: =0
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =34
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(levelSelected,!levelSelected);Set(departmentSelected,false);Set(countrySelected,false);Set(genderSelected,false);Set(rankSelected,false);Set(yearsSelected,false);Set(ethnicitySelected,false)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =AutoWidthLabel9_3.AutoWidth+30
+            X: =569
+            Y: =227
+            ZIndex: =55
+
+    grpYearsinLevelHeader As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =44
+
+        Button30_8 As button:
+            BorderThickness: =0
+            Fill: =If(!yearsSelected,RGBA(0, 0, 0, 0),RGBA(229,229,229,1))
+            Height: =34
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: |
+                =120
+            X: =936
+            Y: =228
+            ZIndex: =56
+
+        Icon14_5 As icon.ChevronDown:
+            Color: =RGBA(50, 49, 48, 1)
+            Height: =10
+            Icon: =Icon.ChevronDown
+            Width: =10
+            X: =1027
+            Y: =243
+            ZIndex: =57
+
+        "AutoWidthLabel9_4 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontWeight: ="600"
+            Height: =28
+            Text: ="Years in level"
+            Width: =60
+            X: =939
+            Y: =233
+            ZIndex: =58
+
+        Icon17_4 As icon.ArrowDown:
+            Height: =12
+            Icon: =Icon.FilterFlat
+            Visible: =If(CountRows(yearFilter)>0,true,false)
+            Width: =7
+            X: =1041
+            Y: =241
+            ZIndex: =59
+
+        Button30_9 As button:
+            BorderThickness: =0
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =34
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(yearsSelected,!yearsSelected);Set(rankSelected,false);Set(departmentSelected,false);Set(levelSelected,false);Set(genderSelected,false);Set(genderSelected,false);Set(countrySelected,false);Set(ethnicitySelected,false)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =AutoWidthLabel9_4.AutoWidth+30
+            X: =940
+            Y: =227
+            ZIndex: =60
+
+    grpEthnicityHeader As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =49
+
+        Button30_10 As button:
+            BorderThickness: =0
+            Fill: =If(!ethnicitySelected,RGBA(0, 0, 0, 0),RGBA(229,229,229,1))
+            Height: =34
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =AutoWidthLabel9_5.AutoWidth+50
+            X: =1073
+            Y: =228
+            ZIndex: =61
+
+        Icon14_6 As icon.ChevronDown:
+            Color: =RGBA(50, 49, 48, 1)
+            Height: =10
+            Icon: =Icon.ChevronDown
+            Width: =10
+            X: =1140
+            Y: =243
+            ZIndex: =62
+
+        "AutoWidthLabel9_5 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontWeight: ="600"
+            Height: =28
+            Text: ="Ethnicity"
+            Width: =60
+            X: =1080
+            Y: =233
+            ZIndex: =63
+
+        Icon17_5 As icon.ArrowDown:
+            Height: =12
+            Visible: =If(CountRows(ethnicityFilter)>0,true,false)
+            Width: =7
+            X: =1154
+            Y: =241
+            ZIndex: =64
+
+        Button30_11 As button:
+            BorderThickness: =0
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =34
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(ethnicitySelected,!ethnicitySelected);Set(rankSelected,false);Set(departmentSelected,false);Set(levelSelected,false);Set(genderSelected,false);Set(countrySelected,false);Set(yearsSelected,false)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =AutoWidthLabel9_5.AutoWidth+30
+            X: =1077
+            Y: =228
+            ZIndex: =65
+
+    grpGenderHeader As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =54
+
+        Button30_12 As button:
+            BorderThickness: =0
+            Fill: =If(!genderSelected,RGBA(0, 0, 0, 0),RGBA(229,229,229,1))
+            Height: =34
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =AutoWidthLabel9_6.AutoWidth+50
+            X: =468
+            Y: =228
+            ZIndex: =66
+
+        Icon14_7 As icon.ChevronDown:
+            Color: =RGBA(50, 49, 48, 1)
+            Height: =10
+            Icon: =Icon.ChevronDown
+            Width: =10
+            X: =535
+            Y: =243
+            ZIndex: =67
+
+        "AutoWidthLabel9_6 As 'Auto Width Label (1.0.19)'":
+            DisplayMode: =DisplayMode.Edit
+            FontWeight: ="600"
+            Height: =28
+            Text: ="Gender"
+            Width: =60
+            X: =475
+            Y: =233
+            ZIndex: =68
+
+        Icon17_6 As icon.ArrowDown:
+            Height: =12
+            Icon: =Icon.FilterFlat
+            Visible: =If(CountRows(genderFilter)>0,true,false)
+            Width: =7
+            X: =549
+            Y: =241
+            ZIndex: =69
+
+        Button30_13 As button:
+            BorderThickness: =0
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =34
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(genderSelected,!genderSelected);Set(rankSelected,false);Set(departmentSelected,false);Set(countrySelected,false);Set(levelSelected,false);Set(yearsSelected,false)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =AutoWidthLabel9_6.AutoWidth+30
+            X: =472
+            Y: =227
+            ZIndex: =70
+
+    grpGenderFilter As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =56
+
+        htmlMidShadow_26 As htmlViewer:
+            Height: =114
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_26.Width - 20 & "px;
+                    height: " & htmlMidShadow_26.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 1px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =genderSelected
+            Width: =136
+            X: =455
+            Y: =248
+            ZIndex: =71
+
+        "Gallery23_5 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+            Height: =241
+            Items: =SortByColumns(gender,"Result",SortOrder.Descending)
+            Layout: =Layout.Vertical
+            ShowScrollbar: =false
+            TemplatePadding: =0
+            TemplateSize: =34
+            Visible: =genderSelected
+            Width: =107
+            X: =469
+            Y: =263
+            ZIndex: =72
+
+            Label91_5 As label:
+                Color: =RGBA(23, 23, 23, 1)
+                Height: =23
+                OnSelect: =Select(Parent)
+                Size: =8
+                Text: =ThisItem.Result
+                Tooltip: =ThisItem.Result
+                Width: =67
+                Wrap: =false
+                X: =28
+                Y: =4
+                ZIndex: =1
+
+            Checkbox6_4 As checkbox:
+                BorderColor: =
+                BorderStyle: =
+                CheckboxBackgroundFill: =If(ThisItem in genderFilter,RGBA(0, 120, 212, 1),Color.White)
+                CheckboxBorderColor: =RGBA(0, 0, 0, 1)
+                CheckboxSize: =16
+                CheckmarkFill: =RGBA(255, 255, 255, 1)
+                Default: =ThisItem in genderFilter
+                DisabledBorderColor: =
+                FocusedBorderColor: =
+                Height: =31
+                HoverBorderColor: =
+                HoverColor: =
+                OnCheck: =Collect(genderFilter,ThisItem)
+                OnSelect: =Select(Parent)
+                OnUncheck: =Remove(genderFilter,ThisItem)
+                PressedBorderColor: =
+                PressedColor: =
+                PressedFill: =
+                Text: =""
+                Width: =41
+                X: =10
+                ZIndex: =2
+
+    grpDepartmentFilter_1 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =58
+
+        htmlMidShadow_27 As htmlViewer:
+            Height: =282
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_27.Width - 20 & "px;
+                    height: " & htmlMidShadow_27.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 1px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =levelSelected
+            Width: =221
+            X: =546
+            Y: =248
+            ZIndex: =73
+
+        "Gallery23_6 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+            Height: =241
+            Items: =levels
+            Layout: =Layout.Vertical
+            ShowScrollbar: =false
+            TemplatePadding: =0
+            TemplateSize: =34
+            Visible: =levelSelected
+            Width: =189
+            X: =559
+            Y: =263
+            ZIndex: =74
+
+            Label91_6 As label:
+                Color: =RGBA(23, 23, 23, 1)
+                Height: =23
+                OnSelect: =Select(Parent)
+                Size: =8
+                Text: =ThisItem.Result
+                Tooltip: =ThisItem.Result
+                Width: =160
+                Wrap: =false
+                X: =29
+                Y: =6
+                ZIndex: =1
+
+            Checkbox6_5 As checkbox:
+                BorderColor: =
+                BorderStyle: =
+                CheckboxBackgroundFill: =If(ThisItem in levelFilter,RGBA(0, 120, 212, 1),Color.White)
+                CheckboxBorderColor: =RGBA(0, 0, 0, 1)
+                CheckboxSize: =16
+                CheckmarkFill: =RGBA(255, 255, 255, 1)
+                Default: =ThisItem in levelFilter
+                DisabledBorderColor: =
+                FocusedBorderColor: =
+                Height: =31
+                HoverBorderColor: =
+                HoverColor: =
+                OnCheck: =Collect(levelFilter,ThisItem)
+                OnSelect: =Select(Parent)
+                OnUncheck: =Remove(levelFilter,ThisItem)
+                PressedBorderColor: =
+                PressedColor: =
+                PressedFill: =
+                Text: =""
+                Width: =41
+                X: =10
+                ZIndex: =2
+
+    grpRankFilter_1 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =60
+
+        htmlMidShadow_28 As htmlViewer:
+            Height: =282
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_28.Width - 20 & "px;
+                    height: " & htmlMidShadow_28.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 1px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =yearsSelected
+            Width: =141
+            X: =923
+            Y: =250
+            ZIndex: =75
+
+        "Gallery23_7 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+            Height: =241
+            Items: =yearsDistinct
+            Layout: =Layout.Vertical
+            ShowScrollbar: =false
+            TemplatePadding: =0
+            TemplateSize: =34
+            Visible: =yearsSelected
+            Width: =100
+            X: =937
+            Y: =265
+            ZIndex: =76
+
+            Label91_7 As label:
+                Color: =RGBA(23, 23, 23, 1)
+                Height: =23
+                OnSelect: =Select(Parent)
+                Size: =8
+                Text: =ThisItem.Result
+                Tooltip: =ThisItem.Result
+                Width: =77
+                Wrap: =false
+                X: =28
+                Y: =6
+                ZIndex: =1
+
+            Checkbox6_6 As checkbox:
+                BorderColor: =
+                BorderStyle: =
+                CheckboxBackgroundFill: =If(ThisItem in yearFilter,RGBA(0, 120, 212, 1),Color.White)
+                CheckboxBorderColor: =RGBA(0, 0, 0, 1)
+                CheckboxSize: =16
+                CheckmarkFill: =RGBA(255, 255, 255, 1)
+                Default: =ThisItem in yearFilter
+                DisabledBorderColor: =
+                FocusedBorderColor: =
+                Height: =31
+                HoverBorderColor: =
+                HoverColor: =
+                OnCheck: =Collect(yearFilter,ThisItem)
+                OnSelect: =Select(Parent)
+                OnUncheck: =Remove(yearFilter,ThisItem)
+                PressedBorderColor: =
+                PressedColor: =
+                PressedFill: =
+                Text: =""
+                Width: =41
+                X: =10
+                ZIndex: =2
+
+    grpAggregateInfo As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =78
+
+        Label103 As label:
+            Color: =RGBA(96, 94, 92, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Total in roster"
+            Width: =102
+            X: =68
+            Y: =120
+            ZIndex: =79
+
+        Label103_1 As label:
+            Color: =RGBA(96, 94, 92, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Countries represented"
+            Width: =143
+            X: =188
+            Y: =120
+            ZIndex: =80
+
+        Label103_2 As label:
+            Color: =RGBA(96, 94, 92, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Women"
+            Width: =55
+            X: =352
+            Y: =120
+            ZIndex: =81
+
+        Label103_3 As label:
+            Color: =RGBA(96, 94, 92, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="Ethnically Diverse"
+            Width: =118
+            X: =438
+            Y: =120
+            ZIndex: =82
+
+        Label103_4 As label:
+            Color: =RGBA(96, 94, 92, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="US Black"
+            Width: =118
+            X: =585
+            Y: =120
+            ZIndex: =83
+
+        Label103_5 As label:
+            Color: =RGBA(96, 94, 92, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =0
+            Size: =10.5
+            Text: ="US Hispanic"
+            Width: =118
+            X: =672
+            Y: =120
+            ZIndex: =84
+
+        Label106 As label:
+            Color: =RGBA(32, 31, 30, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =9
+            Text: =CountRows(Filter(workerInfoTemp,CountRows(rankFilter)=0 Or Rating_Numeric in rankFilter,CountRows(countryFilter)=0 Or Country in countryFilter,CountRows(departmentFilter)=0 Or Supervisory_Organization in departmentFilter,CountRows(genderFilter)=0 Or Gender in genderFilter,CountRows(levelFilter)=0 Or Management_Level in levelFilter,CountRows(yearFilter)=0 Or Time_in_Compensation_Grade_Range in yearFilter,CountRows(ethnicityFilter)=0 Or Race_Ethnicity in ethnicityFilter))
+            Width: =33
+            X: =155
+            Y: =121
+            ZIndex: =85
+
+        Label106_1 As label:
+            Color: =RGBA(32, 31, 30, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =9
+            Text: |-
+                =CountRows(ForAll(Distinct(Filter(workerInfoTemp,CountRows(rankFilter)=0 Or Rating_Numeric in rankFilter,CountRows(countryFilter)=0 Or Country in countryFilter,CountRows(departmentFilter)=0 Or Supervisory_Organization in departmentFilter,CountRows(genderFilter)=0 Or Gender in genderFilter,CountRows(levelFilter)=0 Or Management_Level in levelFilter,CountRows(yearFilter)=0 Or Time_in_Compensation_Grade_Range in yearFilter,CountRows(ethnicityFilter)=0 Or Race_Ethnicity in ethnicityFilter),Country), {Result: ThisRecord.Value}))
+            Width: =33
+            X: =325
+            Y: =121
+            ZIndex: =86
+
+        Label106_2 As label:
+            Color: =RGBA(32, 31, 30, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =9
+            Text: =CountRows(Filter(Filter(workerInfoTemp,CountRows(rankFilter)=0 Or Rating_Numeric in rankFilter,CountRows(countryFilter)=0 Or Country in countryFilter,CountRows(departmentFilter)=0 Or Supervisory_Organization in departmentFilter,CountRows(genderFilter)=0 Or Gender in genderFilter,CountRows(levelFilter)=0 Or Management_Level in levelFilter,CountRows(yearFilter)=0 Or Time_in_Compensation_Grade_Range in yearFilter,CountRows(ethnicityFilter)=0 Or Race_Ethnicity in ethnicityFilter),Gender="Female"))
+            Width: =33
+            X: =402
+            Y: =121
+            ZIndex: =87
+
+        Label106_3 As label:
+            Color: =RGBA(32, 31, 30, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =9
+            Text: =CountRows(Filter(Filter(workerInfoTemp,CountRows(rankFilter)=0 Or Rating_Numeric in rankFilter,CountRows(countryFilter)=0 Or Country in countryFilter,CountRows(departmentFilter)=0 Or Supervisory_Organization in departmentFilter,CountRows(genderFilter)=0 Or Gender in genderFilter,CountRows(levelFilter)=0 Or Management_Level in levelFilter,CountRows(yearFilter)=0 Or Time_in_Compensation_Grade_Range in yearFilter,CountRows(ethnicityFilter)=0 Or Race_Ethnicity in ethnicityFilter),StartsWith(Race_Ethnicity,"White")=false))
+            Width: =33
+            X: =550
+            Y: =121
+            ZIndex: =88
+
+        Label106_4 As label:
+            Color: =RGBA(32, 31, 30, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =6
+            Size: =9
+            Text: =CountRows(Filter(Filter(workerInfoTemp,CountRows(rankFilter)=0 Or Rating_Numeric in rankFilter,CountRows(countryFilter)=0 Or Country in countryFilter,CountRows(departmentFilter)=0 Or Supervisory_Organization in departmentFilter,CountRows(genderFilter)=0 Or Gender in genderFilter,CountRows(levelFilter)=0 Or Management_Level in levelFilter,CountRows(yearFilter)=0 Or Time_in_Compensation_Grade_Range in yearFilter,CountRows(ethnicityFilter)=0 Or Race_Ethnicity in ethnicityFilter),"Black" in Race_Ethnicity))
+            Width: =33
+            X: =640
+            Y: =121
+            ZIndex: =89
+
+        Label106_5 As label:
+            Color: =RGBA(32, 31, 30, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =9
+            Text: =CountRows(Filter(Filter(workerInfoTemp,CountRows(rankFilter)=0 Or Rating_Numeric in rankFilter,CountRows(countryFilter)=0 Or Country in countryFilter,CountRows(departmentFilter)=0 Or Supervisory_Organization in departmentFilter,CountRows(genderFilter)=0 Or Gender in genderFilter,CountRows(levelFilter)=0 Or Management_Level in levelFilter,CountRows(yearFilter)=0 Or Time_in_Compensation_Grade_Range in yearFilter,CountRows(ethnicityFilter)=0 Or Race_Ethnicity in ethnicityFilter),"Hispanic" in Race_Ethnicity))
+            Width: =33
+            X: =746
+            Y: =121
+            ZIndex: =90
+
+    grpDepartmentFilter As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =79
+
+        htmlMidShadow_23 As htmlViewer:
+            Height: =282
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_23.Width - 20 & "px;
+                    height: " & htmlMidShadow_23.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 1px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =departmentSelected
+            Width: =221
+            X: =660
+            Y: =248
+            ZIndex: =31
+
+        "Gallery23_2 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+            Height: =210
+            Items: =Search(departments,TextInput12.Text,"Result")
+            Layout: =Layout.Vertical
+            ShowScrollbar: =false
+            TemplatePadding: =0
+            TemplateSize: =34
+            Visible: =departmentSelected
+            Width: =189
+            X: =673
+            Y: =294
+            ZIndex: =32
+
+            Label91_2 As label:
+                Color: =RGBA(23, 23, 23, 1)
+                Height: =23
+                OnSelect: =Select(Parent)
+                Size: =8
+                Text: =ThisItem.Result
+                Tooltip: =ThisItem.Result
+                Width: =160
+                Wrap: =false
+                X: =29
+                Y: =6
+                ZIndex: =1
+
+            Checkbox6_1 As checkbox:
+                BorderColor: =
+                BorderStyle: =
+                CheckboxBackgroundFill: =If(ThisItem in departmentFilter,RGBA(0, 120, 212, 1),Color.White)
+                CheckboxBorderColor: =RGBA(0, 0, 0, 1)
+                CheckboxSize: =16
+                CheckmarkFill: =RGBA(255, 255, 255, 1)
+                Default: =ThisItem in departmentFilter
+                DisabledBorderColor: =
+                FocusedBorderColor: =
+                Height: =31
+                HoverBorderColor: =
+                HoverColor: =
+                OnCheck: =Collect(departmentFilter,ThisItem)
+                OnSelect: =Select(Parent)
+                OnUncheck: =Remove(departmentFilter,ThisItem)
+                PressedBorderColor: =
+                PressedColor: =
+                PressedFill: =
+                Text: =""
+                Width: =41
+                X: =10
+                ZIndex: =2
+
+        TextInput12 As text:
+            BorderColor: =RGBA(235, 235, 235, 1)
+            BorderThickness: =1
+            Default: =""
+            Font: =Font.'Segoe UI'
+            Height: =22
+            HintText: ="Search "
+            HoverBorderColor: =
+            RadiusBottomLeft: =2
+            RadiusBottomRight: =2
+            RadiusTopLeft: =2
+            RadiusTopRight: =2
+            Size: =9
+            Visible: =departmentSelected
+            Width: =180
+            X: =682
+            Y: =269
+            ZIndex: =92
+
+    grpCountryFilter As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =80
+
+        htmlMidShadow_25 As htmlViewer:
+            Height: =282
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_25.Width - 20 & "px;
+                    height: " & htmlMidShadow_25.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 1px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =countrySelected
+            Width: =221
+            X: =809
+            Y: =248
+            ZIndex: =49
+
+        "Gallery23_4 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+            Height: =210
+            Items: =Search(country,TextInput12_1.Text,"Result")
+            Layout: =Layout.Vertical
+            ShowScrollbar: =false
+            TemplatePadding: =0
+            TemplateSize: =34
+            Visible: =countrySelected
+            Width: =189
+            X: =823
+            Y: =294
+            ZIndex: =50
+
+            Label91_4 As label:
+                Color: =RGBA(23, 23, 23, 1)
+                Height: =23
+                OnSelect: =Select(Parent)
+                Size: =8
+                Text: =ThisItem.Result
+                Tooltip: =ThisItem.Result
+                Width: =160
+                Wrap: =false
+                X: =29
+                Y: =6
+                ZIndex: =1
+
+            Checkbox6_3 As checkbox:
+                BorderColor: =
+                BorderStyle: =
+                CheckboxBackgroundFill: =If(ThisItem in countryFilter,RGBA(0, 120, 212, 1),Color.White)
+                CheckboxBorderColor: =RGBA(0, 0, 0, 1)
+                CheckboxSize: =16
+                CheckmarkFill: =RGBA(255, 255, 255, 1)
+                Default: =ThisItem in countryFilter
+                DisabledBorderColor: =
+                FocusedBorderColor: =
+                Height: =31
+                HoverBorderColor: =
+                HoverColor: =
+                OnCheck: =Collect(countryFilter,ThisItem)
+                OnSelect: =Select(Parent)
+                OnUncheck: =Remove(countryFilter,ThisItem)
+                PressedBorderColor: =
+                PressedColor: =
+                PressedFill: =
+                Text: =""
+                Width: =41
+                X: =10
+                ZIndex: =2
+
+        TextInput12_1 As text:
+            BorderColor: =RGBA(235, 235, 235, 1)
+            BorderThickness: =1
+            Default: =""
+            Font: =Font.'Segoe UI'
+            Height: =22
+            HintText: ="Search "
+            HoverBorderColor: =
+            RadiusBottomLeft: =2
+            RadiusBottomRight: =2
+            RadiusTopLeft: =2
+            RadiusTopRight: =2
+            Size: =9
+            Visible: =countrySelected
+            Width: =180
+            X: =832
+            Y: =269
+            ZIndex: =93
+
+    grpEthnicityFilter As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =81
+
+        htmlMidShadow_29 As htmlViewer:
+            Height: =282
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_29.Width - 20 & "px;
+                    height: " & htmlMidShadow_29.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 1px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =ethnicitySelected
+            Width: =294
+            X: =1060
+            Y: =248
+            ZIndex: =77
+
+        "Gallery23_8 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+            Height: =213
+            Items: =Search(ethnicityDistinct,TextInput12_2.Text,"Result")
+            Layout: =Layout.Vertical
+            ShowScrollbar: =false
+            TemplatePadding: =0
+            TemplateSize: =34
+            Visible: =ethnicitySelected
+            Width: =267
+            X: =1076
+            Y: =294
+            ZIndex: =78
+
+            Label91_8 As label:
+                Color: =RGBA(23, 23, 23, 1)
+                Height: =23
+                OnSelect: =Select(Parent)
+                Size: =8
+                Text: =ThisItem.Result
+                Tooltip: =ThisItem.Result
+                Width: =230
+                Wrap: =false
+                X: =29
+                Y: =6
+                ZIndex: =1
+
+            Checkbox6_7 As checkbox:
+                BorderColor: =
+                BorderStyle: =
+                CheckboxBackgroundFill: =If(ThisItem in ethnicityFilter,RGBA(0, 120, 212, 1),Color.White)
+                CheckboxBorderColor: =RGBA(0, 0, 0, 1)
+                CheckboxSize: =16
+                CheckmarkFill: =RGBA(255, 255, 255, 1)
+                Default: =ThisItem in ethnicityFilter
+                DisabledBorderColor: =
+                FocusedBorderColor: =
+                Height: =31
+                HoverBorderColor: =
+                HoverColor: =
+                OnCheck: =Collect(ethnicityFilter,ThisItem)
+                OnSelect: =Select(Parent)
+                OnUncheck: =Remove(ethnicityFilter,ThisItem)
+                PressedBorderColor: =
+                PressedColor: =
+                PressedFill: =
+                Text: =""
+                Width: =41
+                X: =10
+                ZIndex: =2
+
+        TextInput12_2 As text:
+            BorderColor: =RGBA(235, 235, 235, 1)
+            BorderThickness: =1
+            Default: =""
+            Font: =Font.'Segoe UI'
+            Height: =22
+            HintText: ="Search "
+            HoverBorderColor: =
+            RadiusBottomLeft: =2
+            RadiusBottomRight: =2
+            RadiusTopLeft: =2
+            RadiusTopRight: =2
+            Size: =9
+            Visible: =ethnicitySelected
+            Width: =243
+            X: =1087
+            Y: =269
+            ZIndex: =94
+
+    Checkbox1_3 As checkbox:
+        BorderColor: =
+        CheckboxBackgroundFill: =If(allRoster,RGBA(0, 120, 212, 1),Color.White)
+        CheckboxBorderColor: =RGBA(0, 0, 0, 1)
+        CheckboxSize: =15
+        CheckmarkFill: =RGBA(255, 255, 255, 1)
+        Default: =allRoster
+        DisabledBorderColor: =
+        FocusedBorderColor: =
+        FocusedBorderThickness: =
+        Height: =44
+        HoverBorderColor: =
+        OnCheck: =Set(allRoster,true)
+        OnSelect: =
+        OnUncheck: =Set(allRoster,false)
+        PressedBorderColor: =Color.White
+        PressedFill: =
+        Text: =""
+        Visible: =If(StartsWith(currentRoster,"My Org"),false,true)
+        Width: =37
+        X: =66
+        Y: =222
+        ZIndex: =91
+
+    Button31_3 As button:
+        DisplayMode: =DisplayMode.View
+        Fill: =If(!rosterDrop,RGBA(0,0,0,0),RGBA(235,235,235,1))
+        Height: =49
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        OnSelect: =Set(rosterDrop,!rosterDrop)
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Text: =""
+        Width: |+
+            =AutoWidthLabel11.AutoWidth+40
+            
+        X: =61
+        Y: =71
+        ZIndex: =95
+
+    "AutoWidthLabel11 As 'Auto Width Label (1.0.19)'":
+        DisplayMode: =DisplayMode.Edit
+        FillColor: =If(!rosterDrop,"000000","EBEBEB")
+        FontSize: =26
+        FontSizeUnits: ='PowerCAT.AutoWidthLabel.FontSizeUnits'.Px
+        FontWeight: ="Bold"
+        Height: =45
+        HoverFillColor: =
+        Text: =If(Len(If(CountRows(rankFilter) + CountRows(genderFilter) + CountRows(departmentFilter) + CountRows(levelFilter) + CountRows(countryFilter) + CountRows(yearFilter) + CountRows(ethnicityFilter) = 0,currentRoster,If(CountRows(rankFilter) + CountRows(genderFilter) + CountRows(departmentFilter) + CountRows(levelFilter) + CountRows(countryFilter) + CountRows(yearFilter) + CountRows(ethnicityFilter) > 0, currentRoster & "*")))>40,Left(If(CountRows(rankFilter) + CountRows(genderFilter) + CountRows(departmentFilter) + CountRows(levelFilter) + CountRows(countryFilter) + CountRows(yearFilter) + CountRows(ethnicityFilter) = 0,currentRoster,If(CountRows(rankFilter) + CountRows(genderFilter) + CountRows(departmentFilter) + CountRows(levelFilter) + CountRows(countryFilter) + CountRows(yearFilter) + CountRows(ethnicityFilter) > 0, currentRoster & "*")),40) & "...",If(CountRows(rankFilter) + CountRows(genderFilter) + CountRows(departmentFilter) + CountRows(levelFilter) + CountRows(countryFilter) + CountRows(yearFilter) + CountRows(ethnicityFilter) = 0,currentRoster,If(CountRows(rankFilter) + CountRows(genderFilter) + CountRows(departmentFilter) + CountRows(levelFilter) + CountRows(countryFilter) + CountRows(yearFilter) + CountRows(ethnicityFilter) > 0, currentRoster & "*")))
+        Width: =200
+        X: =68
+        Y: =75
+        ZIndex: =96
+
+    grpRosterFilter As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =96
+
+        htmlMidShadow_30 As htmlViewer:
+            Height: =If(CountRows(Gallery27.AllItems)>=4,392,196+CountRows(Gallery27.AllItems)*49)
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_30.Width - 20 & "px;
+                    height: " & htmlMidShadow_30.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 1px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =rosterDrop
+            Width: =294
+            X: =48.5
+            Y: =105
+            ZIndex: =98
+
+        TextInput12_3 As text:
+            BorderColor: =RGBA(235, 235, 235, 1)
+            BorderThickness: =1
+            Default: =""
+            Font: =Font.'Segoe UI'
+            Height: =22
+            HintText: ="Search rosters"
+            HoverBorderColor: =
+            RadiusBottomLeft: =2
+            RadiusBottomRight: =2
+            RadiusTopLeft: =2
+            RadiusTopRight: =2
+            Size: =9
+            Visible: =rosterDrop
+            Width: =248
+            X: =73
+            Y: =132
+            ZIndex: =100
+
+        "Gallery27 As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
+            Height: =185
+            Items: =Search(Rosters,TextInput12_3.Text,"cr02b_name")
+            Layout: =Layout.Vertical
+            ShowScrollbar: =false
+            TemplateFill: =If(ThisItem.IsSelected,RGBA(235,235,235,.8))
+            TemplatePadding: =0
+            TemplateSize: =49
+            Visible: =rosterDrop
+            Width: =248
+            X: =73
+            Y: =168
+            ZIndex: =101
+
+            Title24 As label:
+                Color: =RGBA(23, 23, 23, 1)
+                Font: =Font.'Segoe UI'
+                Height: =22
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10.5
+                Text: =ThisItem.Name
+                VerticalAlign: =VerticalAlign.Top
+                Width: =205
+                ZIndex: =1
+
+            Subtitle12 As label:
+                Color: =RGBA(100, 100, 100, 1)
+                Font: =Font.'Segoe UI'
+                Height: =Self.Size * 1.8
+                OnSelect: =Select(Parent)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =9
+                Text: ="Created " & ThisItem.'Created On'
+                VerticalAlign: =VerticalAlign.Top
+                Width: =Parent.TemplateWidth - 104
+                X: =18
+                Y: =20
+                ZIndex: =2
+
+            Image50 As image:
+                Height: =14
+                Image: ='Frame 1511075974'
+                ImagePosition: =ImagePosition.Fill
+                OnSelect: =Select(Parent)
+                Width: =12
+                Y: =20
+                ZIndex: =3
+
+            Button42 As button:
+                BorderThickness: =0
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =49
+                HoverBorderColor: =
+                HoverColor: =
+                HoverFill: =
+                OnSelect: |-
+                    =Set(
+                        rosterLoading,
+                        true
+                    );
+                    Clear(rosterItems);Clear(tempEmployees);
+                    Set(
+                        rosterDrop,
+                        false
+                    );
+                    Set(
+                        selectedRoster,
+                        ThisItem
+                    );
+                    Set(
+                        currentRoster,
+                        ThisItem.Name
+                    );
+                    Clear(rankFilter);
+                    Clear(genderFilter);
+                    Clear(levelFilter);
+                    Clear(departmentFilter);
+                    Clear(countryFilter);
+                    Clear(yearFilter);
+                    Clear(ethnicityFilter);
+                    Set(
+                        rankSelected,
+                        false
+                    );
+                    Set(
+                        countrySelected,
+                        false
+                    );
+                    Set(
+                        countrySelected,
+                        false
+                    );
+                    Set(
+                        levelsSelected,
+                        false
+                    );
+                    Set(
+                        genderSelected,
+                        false
+                    );
+                    Set(
+                        levelSelected,
+                        false
+                    );
+                    Set(
+                        yearsSelected,
+                        false
+                    );
+                    Set(
+                        ethnicitySelected,
+                        false
+                    );
+                    Clear(multipleEmployees);Reset(TextInput14)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Text: =""
+                Width: =248
+                ZIndex: =4
+
+        Image47 As image:
+            Height: =10
+            Image: ='Shape (59)'
+            Visible: =rosterDrop
+            Width: =10
+            X: =74
+            Y: =If(CountRows(Gallery27.AllItems)<=4,Gallery27.Y + (CountRows(Gallery27.AllItems)*49)+5,Gallery27.Y + 4*49+5)
+            ZIndex: =102
+
+        Image47_1 As image:
+            Height: =10
+            Image: =Shape_8
+            Visible: =rosterDrop
+            Width: =10
+            X: =74
+            Y: =If(CountRows(Gallery27.AllItems)<=4,Gallery27.Y + (CountRows(Gallery27.AllItems)*49)+35,Gallery27.Y + 4*49+35)
+            ZIndex: =103
+
+        Image47_2 As image:
+            Height: =10
+            Image: =Edit
+            Visible: =rosterDrop
+            Width: =10
+            X: =74
+            Y: =If(CountRows(Gallery27.AllItems)<=4,Gallery27.Y + (CountRows(Gallery27.AllItems)*49)+65,Gallery27.Y + 4*49+65)
+            ZIndex: =104
+
+        Image47_3 As image:
+            Height: =10
+            Image: ='Shape (58)'
+            Visible: =rosterDrop
+            Width: =10
+            X: =74
+            Y: =If(CountRows(Gallery27.AllItems)<=4,Gallery27.Y + (CountRows(Gallery27.AllItems)*49)+95,Gallery27.Y + 4*49+95)
+            ZIndex: =105
+
+        Label87 As label:
+            Font: =Font.'Segoe UI'
+            Height: =15
+            PaddingLeft: =7.5
+            Size: =10.5
+            Text: ="Save as new roster"
+            Visible: =rosterDrop
+            X: =84
+            Y: =If(CountRows(Gallery27.AllItems)<=4,Gallery27.Y + (CountRows(Gallery27.AllItems)*49)+2,Gallery27.Y + 4*49+2)
+            ZIndex: =106
+
+        Label87_1 As label:
+            Font: =Font.'Segoe UI'
+            Height: =15
+            PaddingLeft: =7.5
+            Size: =10.5
+            Text: ="Edit description"
+            Visible: =rosterDrop
+            X: =83
+            Y: =If(CountRows(Gallery27.AllItems)<=4,Gallery27.Y + (CountRows(Gallery27.AllItems)*49)+62,Gallery27.Y + 4*49+62)
+            ZIndex: =107
+
+        Label87_2 As label:
+            Font: =Font.'Segoe UI'
+            Height: =15
+            PaddingLeft: =7.5
+            Size: =10.5
+            Text: ="Rename"
+            Visible: =rosterDrop
+            X: =83
+            Y: =If(CountRows(Gallery27.AllItems)<=4,Gallery27.Y + (CountRows(Gallery27.AllItems)*49)+32,Gallery27.Y + 4*49+32)
+            ZIndex: =108
+
+        Label87_3 As label:
+            Font: =Font.'Segoe UI'
+            Height: =15
+            PaddingLeft: =7.5
+            Size: =10.5
+            Text: ="Delete Roster"
+            Visible: =rosterDrop
+            X: =83
+            Y: |
+                =If(CountRows(Gallery27.AllItems)<=4,Gallery27.Y + (CountRows(Gallery27.AllItems)*49)+92,Gallery27.Y + 4*49+92)
+            ZIndex: =109
+
+        Rectangle9_10 As rectangle:
+            Fill: =RGBA(235, 235, 235, 1)
+            Height: =1
+            OnSelect: =
+            Visible: =rosterDrop
+            Width: =271.5
+            X: =61
+            Y: =If(CountRows(Gallery27.AllItems)<=4,Gallery27.Y + (CountRows(Gallery27.AllItems)*49)+-6,Gallery27.Y + 4*49-6)
+            ZIndex: =110
+
+        Rectangle9_11 As rectangle:
+            Fill: =RGBA(235, 235, 235, 1)
+            Height: =1
+            OnSelect: =
+            Visible: =rosterDrop
+            Width: =271.5
+            X: =61
+            Y: =If(CountRows(Gallery27.AllItems)<=4,Gallery27.Y + (CountRows(Gallery27.AllItems)*49)+26,Gallery27.Y + 4*49+26)
+            ZIndex: =111
+
+        Rectangle9_12 As rectangle:
+            Fill: =RGBA(235, 235, 235, 1)
+            Height: =1
+            OnSelect: =
+            Visible: =rosterDrop
+            Width: =271.5
+            X: =61
+            Y: =If(CountRows(Gallery27.AllItems)<=4,Gallery27.Y + (CountRows(Gallery27.AllItems)*49)+56,Gallery27.Y + 4*49+56)
+            ZIndex: =112
+
+        Rectangle9_13 As rectangle:
+            Fill: =RGBA(235, 235, 235, 1)
+            Height: =1
+            OnSelect: =
+            Visible: =rosterDrop
+            Width: =271.5
+            X: =61
+            Y: =If(CountRows(Gallery27.AllItems)<=4,Gallery27.Y + (CountRows(Gallery27.AllItems)*49)+86,Gallery27.Y + 4*49+86)
+            ZIndex: =113
+
+        Button42_1 As button:
+            BorderThickness: =0
+            DisabledFill: =RGBA(244, 244, 244, .5)
+            DisplayMode: =If(CountRows(rankFilter) + CountRows(genderFilter) + CountRows(departmentFilter) + CountRows(levelFilter) + CountRows(countryFilter) + CountRows(yearFilter) + CountRows(ethnicityFilter) > 0,DisplayMode.Edit,DisplayMode.Disabled)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =33
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(newRoster,true);Set(rosterDrop,false)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Visible: =rosterDrop
+            Width: =271
+            X: =61
+            Y: =If(CountRows(Gallery27.AllItems)<=4,Gallery27.Y + (CountRows(Gallery27.AllItems)*49)-6,Gallery27.Y + 4*49+-6)
+            ZIndex: =114
+
+        Button42_2 As button:
+            BorderThickness: =0
+            DisabledFill: =RGBA(244, 244, 244, .5)
+            DisplayMode: =If(StartsWith(currentRoster,"My Org"),DisplayMode.Disabled,DisplayMode.Edit)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =30
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(renameRoster,true)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Visible: =rosterDrop
+            Width: =271
+            X: =61
+            Y: =If(CountRows(Gallery27.AllItems)<=4,Gallery27.Y + (CountRows(Gallery27.AllItems)*49)+26,Gallery27.Y + 4*49+26)
+            ZIndex: =115
+
+        Button42_3 As button:
+            BorderThickness: =0
+            DisabledFill: =RGBA(244, 244, 244, .5)
+            DisplayMode: =If(StartsWith(currentRoster,"My Org"),DisplayMode.Disabled,DisplayMode.Edit)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =30
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Visible: =rosterDrop
+            Width: =271
+            X: =61
+            Y: =If(CountRows(Gallery27.AllItems)<=4,Gallery27.Y + (CountRows(Gallery27.AllItems)*49)+56,Gallery27.Y + 4*49+56)
+            ZIndex: =116
+
+        Button42_4 As button:
+            BorderThickness: =0
+            DisabledFill: =RGBA(244, 244, 244, .5)
+            DisplayMode: =If(StartsWith(currentRoster,"My Org"),DisplayMode.Disabled,DisplayMode.Edit)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =30
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Visible: =rosterDrop
+            Width: =271
+            X: =61
+            Y: =If(CountRows(Gallery27.AllItems)<=4,Gallery27.Y + (CountRows(Gallery27.AllItems)*49)+86,Gallery27.Y + 4*49+86)
+            ZIndex: =117
+
+    Button31 As button:
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =49
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        OnSelect: =Set(rosterDrop,!rosterDrop);Reset(TextInput12_3)
+        Text: =""
+        Tooltip: =currentRoster
+        Width: =AutoWidthLabel11.AutoWidth+22
+        X: =68
+        Y: =71
+        ZIndex: =97
+
+    Search_3 As Search:
+        Height: =If(Search_3.SearchStringLength>2,331,42)
+        X: =483
+        ZIndex: =99
+
+    grpRosterLoading As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =117
+
+        Label78_8 As label:
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =726
+            Text: =""
+            Visible: =rosterLoading || newRosterLoading
+            Width: =1327
+            X: =39
+            Y: =42
+            ZIndex: =146
+
+        "Spinner1_1 As 'Fluent Spinner (1.0.19) Preview'":
+            DisplayMode: =DisplayMode.Edit
+            Height: =29
+            Theme: =AppThemeJson
+            Visible: =rosterLoading || newRosterLoading
+            Width: =97
+            X: =683
+            Y: =318
+            ZIndex: =147
+
+        Label102_1 As label:
+            Align: =Align.Center
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            Height: =39
+            PaddingLeft: =20
+            Size: =9
+            Text: ="Loading"
+            Visible: =rosterLoading || newRosterLoading
+            Width: =1366
+            Y: =313
+            ZIndex: =148
+
+    Rectangle9_14 As rectangle:
+        Fill: =RGBA(235, 235, 235, 1)
+        Height: =1
+        OnSelect: =
+        Visible: =false
+        Width: =1328
+        X: =38
+        Y: =69
+        ZIndex: =118
+
+    Icon18 As icon.Add:
+        Color: =RGBA(16, 124, 16, 1)
+        Height: =15
+        Icon: =Icon.Add
+        Visible: =false
+        Width: =15
+        X: =48
+        Y: =47
+        ZIndex: =119
+
+    Label107 As label:
+        Color: =RGBA(23, 23, 23, 1)
+        Font: =Font.'Segoe UI'
+        Height: =39
+        PaddingLeft: =0
+        Size: =10.5
+        Text: ="New roster"
+        Visible: =false
+        X: =68
+        Y: =35
+        ZIndex: =120
+
+    grpRenameRoster As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =120
+
+        promotionPopBackground_13 As label:
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(23, 23,23, .65)
+            Height: =768
+            Text: =""
+            Visible: =renameRoster
+            Width: =1366
+            X: =If(!noteScratch,0,1366)
+            ZIndex: =138
+
+        htmlMidShadow_32 As htmlViewer:
+            Height: =246
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_32.Width - 20 & "px;
+                    height: " & htmlMidShadow_32.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 1px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =renameRoster
+            Width: =405
+            X: =480
+            Y: =271
+            ZIndex: =139
+
+        Label104_2 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =39
+            PaddingLeft: =18
+            PaddingTop: =18
+            Size: =15
+            Text: ="Rename roster"
+            Visible: =renameRoster
+            Width: =208
+            X: =494
+            Y: =285
+            ZIndex: =140
+
+        Label104_3 As label:
+            Color: =RGBA(0, 0, 0, .8965)
+            Font: =Font.'Segoe UI'
+            Height: =22
+            PaddingLeft: =19
+            PaddingTop: =0
+            Size: =9
+            Text: ="Update roster data and description below"
+            Visible: =renameRoster
+            Width: =388
+            X: =494
+            Y: =333
+            ZIndex: =141
+
+        TextInput11_2 As text:
+            BorderColor: =RGBA(96, 94, 92, 1)
+            BorderThickness: =1
+            Default: =currentRoster
+            Font: =Font.'Segoe UI'
+            Height: =25
+            HintText: ="Update the roster name"
+            RadiusBottomLeft: =2
+            RadiusBottomRight: =2
+            RadiusTopLeft: =2
+            RadiusTopRight: =2
+            Size: =10.5
+            Visible: =renameRoster
+            Width: =345
+            X: =512
+            Y: =362
+            ZIndex: =142
+
+        TextInput11_3 As text:
+            BorderColor: =RGBA(96, 94, 92, 1)
+            BorderThickness: =1
+            Default: =Gallery27.Selected.Description
+            Font: =Font.'Segoe UI'
+            Height: =56
+            HintText: ="Update the description of the roster"
+            Mode: =TextMode.MultiLine
+            RadiusBottomLeft: =2
+            RadiusBottomRight: =2
+            RadiusTopLeft: =2
+            RadiusTopRight: =2
+            Size: =10.5
+            Visible: =renameRoster
+            Width: =345
+            X: =512
+            Y: =396
+            ZIndex: =143
+
+        Button43_2 As button:
+            BorderThickness: =0
+            Fill: =RGBA(0, 120, 212, 1)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            OnSelect: |-
+                =Set(renameRoster,false);Set(currentRoster,TextInput11_2.Text);Patch(Rosters,createdRoster,{Name:TextInput11.Text,Description:TextInput11.Text})
+            RadiusBottomLeft: =2
+            RadiusBottomRight: =2
+            RadiusTopLeft: =2
+            RadiusTopRight: =2
+            Size: =10.5
+            Text: ="Rename"
+            Visible: =renameRoster
+            Width: =63
+            X: =512
+            Y: =463
+            ZIndex: =144
+
+        Button43_3 As button:
+            BorderColor: =
+            BorderThickness: =1
+            Color: =RGBA(50, 49, 48, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            OnSelect: =Set(newRoster,false);Set(renameRoster,false)
+            RadiusBottomLeft: =2
+            RadiusBottomRight: =2
+            RadiusTopLeft: =2
+            RadiusTopRight: =2
+            Size: =10.5
+            Text: ="Cancel"
+            Visible: =renameRoster
+            Width: =63
+            X: =582
+            Y: =463
+            ZIndex: =145
+
+    Timer6 As timer:
+        Duration: =5000
+        OnTimerEnd: =Set(rosterLoading,false);Set(newRosterLoading,false);Reset(Gallery30);Set(addedToRoster,false)
+        Start: =rosterLoading || newRosterLoading || addedToRoster
+        Visible: =false
+        X: =932
+        Y: =31
+        ZIndex: =121
+
+    grpNewRoster As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =121
+
+        promotionPopBackground_14 As label:
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(23, 23,23, .65)
+            Height: =768
+            Text: =""
+            Visible: =newRoster
+            Width: =1366
+            X: =If(!noteScratch,0,1366)
+            ZIndex: =130
+
+        htmlMidShadow_31 As htmlViewer:
+            Height: =246
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_31.Width - 20 & "px;
+                    height: " & htmlMidShadow_31.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 1px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =newRoster
+            Width: =405
+            X: =481
+            Y: =269
+            ZIndex: =131
+
+        Label104 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =39
+            PaddingLeft: =18
+            PaddingTop: =18
+            Size: =15
+            Text: ="Create new roster"
+            Visible: =newRoster
+            Width: =208
+            X: =495
+            Y: =283
+            ZIndex: =132
+
+        Label104_1 As label:
+            Color: =RGBA(0, 0, 0, .8965)
+            Font: =Font.'Segoe UI'
+            Height: =22
+            PaddingLeft: =19
+            PaddingTop: =0
+            Size: =9
+            Text: ="Your roster will be defaulted to your current list"
+            Visible: =newRoster
+            Width: =388
+            X: =495
+            Y: =331
+            ZIndex: =133
+
+        TextInput11 As text:
+            BorderColor: =RGBA(96, 94, 92, 1)
+            BorderThickness: =1
+            Default: =""
+            Font: =Font.'Segoe UI'
+            Height: =25
+            HintText: ="Type the roster name"
+            RadiusBottomLeft: =2
+            RadiusBottomRight: =2
+            RadiusTopLeft: =2
+            RadiusTopRight: =2
+            Size: =10.5
+            Visible: =newRoster
+            Width: =345
+            X: =513
+            Y: =360
+            ZIndex: =134
+
+        TextInput11_1 As text:
+            BorderColor: =RGBA(96, 94, 92, 1)
+            BorderThickness: =1
+            Default: =""
+            Font: =Font.'Segoe UI'
+            Height: =56
+            HintText: ="Type a description for the roster"
+            Mode: =TextMode.MultiLine
+            RadiusBottomLeft: =2
+            RadiusBottomRight: =2
+            RadiusTopLeft: =2
+            RadiusTopRight: =2
+            Size: =10.5
+            Visible: =newRoster
+            Width: =345
+            X: =513
+            Y: =394
+            ZIndex: =135
+
+        Button43 As button:
+            BorderThickness: =0
+            Fill: =RGBA(0, 120, 212, 1)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            OnSelect: |-
+                =Set(
+                    newRosterLoading,
+                    true
+                );
+                Set(
+                    newRoster,
+                    false
+                );
+                Set(
+                    currentRoster,
+                    TextInput11.Text
+                );
+                Reset(TextInput14);
+                ClearCollect(
+                    workerInfoTemp,
+                    Filter(
+                        workerInfoTemp,
+                        CountRows(rankFilter) = 0 Or Rating_Numeric in rankFilter,
+                        CountRows(countryFilter) = 0 Or Country in countryFilter,
+                        CountRows(departmentFilter) = 0 Or Supervisory_Organization in departmentFilter,
+                        CountRows(genderFilter) = 0 Or Gender in genderFilter,
+                        CountRows(levelFilter) = 0 Or Management_Level in levelFilter,
+                        CountRows(yearFilter) = 0 Or Time_in_Compensation_Grade_Range in yearFilter,
+                        CountRows(ethnicityFilter) = 0 Or Race_Ethnicity in ethnicityFilter
+                    )
+                );
+                Set(
+                    createdRoster,
+                    Patch(
+                        Rosters,
+                        Defaults(Rosters),
+                        {
+                            Name: TextInput11.Text,
+                            Description: TextInput11_1.Text
+                        }
+                    )
+                );
+                ForAll(
+                    workerInfoTemp,
+                    Patch(
+                        'Roster Employees',
+                        Defaults('Roster Employees'),
+                        {
+                            Employee: LookUp(
+                                Contacts,
+                                EmpID = workerInfoTemp[@Employee_ID]
+                            ),
+                            Roster: createdRoster
+                        }
+                    )
+                );
+                Clear(rankFilter);
+                Clear(genderFilter);
+                Clear(levelFilter);
+                Clear(departmentFilter);
+                Clear(countryFilter);
+                Clear(yearFilter);
+                Clear(ethnicityFilter);
+                Set(
+                    rankSelected,
+                    false
+                );
+                Set(
+                    countrySelected,
+                    false
+                );
+                Set(
+                    countrySelected,
+                    false
+                );
+                Set(
+                    levelsSelected,
+                    false
+                );
+                Set(
+                    genderSelected,
+                    false
+                );
+                Set(
+                    levelSelected,
+                    false
+                );
+                Set(
+                    yearsSelected,
+                    false
+                );
+                Set(
+                    ethnicitySelected,
+                    false
+                );
+                Reset(TextInput11);
+                Reset(TextInput11_1);
+                Clear(rosterItems);
+                Clear(tempEmployees)
+            RadiusBottomLeft: =2
+            RadiusBottomRight: =2
+            RadiusTopLeft: =2
+            RadiusTopRight: =2
+            Size: =10.5
+            Text: ="Create"
+            Visible: =newRoster
+            Width: =60.75
+            X: =513
+            Y: =461
+            ZIndex: =136
+
+        Button43_1 As button:
+            BorderColor: =
+            BorderThickness: =1
+            Color: =RGBA(50, 49, 48, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            OnSelect: =Set(newRoster,false)
+            RadiusBottomLeft: =2
+            RadiusBottomRight: =2
+            RadiusTopLeft: =2
+            RadiusTopRight: =2
+            Size: =10.5
+            Text: ="Cancel"
+            Visible: =newRoster
+            Width: =60.75
+            X: =583
+            Y: =461
+            ZIndex: =137
+
+    "Gallery30 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        Height: =62
+        Items: =selectedRoster.'Roster Employees'
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplatePadding: =0
+        TemplateSize: =Min(160, Self.Height - 60)
+        Visible: =false
+        X: =726
+        Y: =58
+        ZIndex: =122
+
+        Image52 As image:
+            Height: =128
+            OnSelect: =Select(Parent)
+            Width: =128
+            X: =16
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =1
+
+        Title27 As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.Employee.EmpID
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - Image52.Width - 104
+            X: =Image52.X + Image52.Width + 24
+            Y: =44
+            ZIndex: =2
+
+        Subtitle13 As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.Employee.'Full Name'
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Title27.Width
+            X: =Title27.X
+            Y: =Title27.Y + Title27.Height + 4
+            ZIndex: =3
+
+        NextArrow2 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            Height: =60
+            Icon: =Icon.ChevronRight
+            OnSelect: =Select(Parent)
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="View item details"
+            Width: =60
+            X: =Parent.TemplateWidth - Self.Width - 5
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =4
+
+        Separator9 As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =5
+
+    Timer8 As timer:
+        Duration: =2000
+        OnTimerEnd: =If(StartsWith(selectedRoster.Name, "My Org"),ClearCollect(workerInfoTemp,workerInfo);,ClearCollect(tempEmployees,ShowColumns(Gallery30.AllItems,"cr02b_Employee"));ForAll(tempEmployees,Collect(tempIDs,tempEmployees[@cr02b_Employee].EmpID));ClearCollect(workerInfoTemp,Filter(workerInfo,Employee_ID in ShowColumns(tempIDs,"Value")));Clear(tempIDs))
+        Start: =rosterLoading
+        Visible: =false
+        X: =1024
+        Y: =35
+        ZIndex: =123
+
+    Icon19 As icon.ChevronDown:
+        Color: =RGBA(23, 23, 23, 1)
+        Height: =15
+        Icon: =Icon.ChevronDown
+        Visible: =!rosterDrop
+        Width: =20
+        X: =AutoWidthLabel11.X+AutoWidthLabel11.AutoWidth+8
+        Y: =87
+        ZIndex: =124
+
+    Icon19_1 As icon.ChevronDown:
+        Color: =RGBA(23, 23, 23, 1)
+        Height: =15
+        Icon: =Icon.ChevronUp
+        Visible: =rosterDrop
+        Width: =20
+        X: =AutoWidthLabel11.X+AutoWidthLabel11.AutoWidth+8
+        Y: =87
+        ZIndex: =125
+
+    Label109 As label:
+        Text: =
+        X: =169
+        Y: =63
+        ZIndex: =126
+
+    "'App Links_3' As 'App Links'":
+        Visible: =apps
+        Y: =40
+        ZIndex: =127
+
+    "'Roster Add_1' As 'Roster Add'":
+        Visible: =rosterAdd
+        Y: =38
+        ZIndex: =128
+
+    "'Notes V2_2' As 'Notes V2'":
+        Employees: =If(individual,selectedEmployees,multipleEmployees)
+        Visible: =notesPopUp
+        ZIndex: =129
+
+    grpRosterCommandBar As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =150
+
+        Image51 As image:
+            Height: =24
+            Image: =Rocket
+            Width: =18
+            X: =825
+            Y: =182
+            ZIndex: =1
+
+        Image51_1 As image:
+            Height: =24
+            Image: ='Person Search'
+            Width: =18
+            X: =983
+            Y: =182
+            ZIndex: =2
+
+        Image51_2 As image:
+            Height: =24
+            Image: ='Person Delete'
+            Width: =18
+            X: =1052
+            Y: =182
+            ZIndex: =3
+
+        Image51_3 As image:
+            Height: =24
+            Image: ='Shape (59)'
+            ImagePosition: =ImagePosition.Center
+            Width: =18
+            X: =1143
+            Y: =182
+            ZIndex: =4
+
+        Label108 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =8
+            Size: =10.5
+            Text: ="Save as new Roster"
+            Width: =200
+            X: =1159
+            Y: =174
+            ZIndex: =5
+
+        Label108_1 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =8
+            Size: =10.5
+            Text: ="Remove"
+            Width: =72
+            X: =1069
+            Y: =174
+            ZIndex: =6
+
+        Label108_2 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =8
+            Size: =10.5
+            Text: ="Add"
+            Width: =47
+            X: =1001
+            Y: =174
+            ZIndex: =7
+
+        Label108_3 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =8
+            Size: =10.5
+            Text: ="Assign to workflow"
+            Width: =144
+            X: =842
+            Y: =174
+            ZIndex: =8
+
+        Button31_4 As button:
+            DisabledBorderColor: =
+            DisabledColor: =
+            DisabledFill: =RGBA(255, 255, 255, .5)
+            DisplayMode: =DisplayMode.Disabled
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =35
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =
+            Text: =""
+            Width: =149
+            X: =825
+            Y: =175
+            ZIndex: =9
+
+        Button31_5 As button:
+            DisabledBorderColor: =
+            DisabledColor: =
+            DisabledFill: =RGBA(255, 255, 255, .5)
+            DisplayMode: =If(StartsWith(currentRoster,"My Org"),DisplayMode.Disabled,DisplayMode.Edit)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =35
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Reset('Roster Add_1');Set(rosterAdd,true)
+            Text: =""
+            Width: =68
+            X: =984
+            Y: =175
+            ZIndex: =10
+
+        Button31_6 As button:
+            DisabledBorderColor: =
+            DisabledColor: =
+            DisabledFill: =RGBA(255, 255, 255, .5)
+            DisplayMode: =If(CountRows(rosterItems)=0,DisplayMode.Disabled,DisplayMode.Edit)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =35
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: |-
+                =Remove(workerInfoTemp,tempEmployees);
+                Remove('Roster Employees',rosterItems);
+                Clear(rosterItems)
+            Text: =""
+            Width: =88
+            X: =1053
+            Y: =175
+            ZIndex: =11
+
+        Button31_7 As button:
+            DisabledBorderColor: =
+            DisabledColor: =
+            DisabledFill: =RGBA(255, 255, 255, .5)
+            DisplayMode: =If(CountRows(rankFilter) + CountRows(genderFilter) + CountRows(departmentFilter) + CountRows(levelFilter) + CountRows(countryFilter) + CountRows(yearFilter) + CountRows(ethnicityFilter) > 0,DisplayMode.Edit,DisplayMode.Disabled)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =35
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Set(newRoster,true);Set(rosterDrop,false)
+            Text: =""
+            Width: =221
+            X: =1144
+            Y: =175
+            ZIndex: =12
+
+        Image51_4 As image:
+            Height: =24
+            Image: ='Shape (59)'
+            ImagePosition: =ImagePosition.Center
+            Width: =18
+            X: =670
+            Y: =182
+            ZIndex: =13
+
+        Label108_4 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =8
+            Size: =10.5
+            Text: ="Save as new Search"
+            Width: =200
+            X: =686
+            Y: =174
+            ZIndex: =14
+
+        Button31_8 As button:
+            DisabledBorderColor: =
+            DisabledColor: =
+            DisabledFill: =RGBA(255, 255, 255, .5)
+            DisplayMode: =If(CountRows(rankFilter) + CountRows(genderFilter) + CountRows(departmentFilter) + CountRows(levelFilter) + CountRows(countryFilter) + CountRows(yearFilter) + CountRows(ethnicityFilter) > 0 && currentRoster="My Org",DisplayMode.Edit,DisplayMode.Disabled)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =35
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Reset(TextInput11_4);Set(savedSearchPop,!savedSearchPop);
+            Text: =""
+            Width: =150
+            X: =671
+            Y: =175
+            ZIndex: =15
+
+        Image51_5 As image:
+            Height: =24
+            Image: =Frame
+            ImagePosition: =ImagePosition.Center
+            Width: =18
+            X: =600
+            Y: =182
+            ZIndex: =16
+
+        Label108_5 As label:
+            Color: =RGBA(23, 23, 23, 1)
+            Font: =Font.'Segoe UI'
+            PaddingLeft: =8
+            Size: =10.5
+            Text: ="Reset"
+            Width: =54
+            X: =616
+            Y: =174
+            ZIndex: =17
+
+        Button31_9 As button:
+            DisabledBorderColor: =
+            DisabledColor: =
+            DisabledFill: =RGBA(255, 255, 255, .5)
+            DisplayMode: =If(CountRows(rankFilter) + CountRows(genderFilter) + CountRows(departmentFilter) + CountRows(levelFilter) + CountRows(countryFilter) + CountRows(yearFilter) + CountRows(ethnicityFilter) > 0,DisplayMode.Edit,DisplayMode.Disabled)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =28
+            HoverBorderColor: =
+            HoverColor: =
+            HoverFill: =
+            OnSelect: =Clear(rankFilter);Clear(genderFilter);Clear(levelFilter);Clear(departmentFilter);Clear(departmentFilter);Clear(countryFilter);Clear(yearFilter);Clear(ethnicityFilter)
+            Text: =""
+            Width: =69
+            X: =601
+            Y: =182
+            ZIndex: =18
+
+    grpSaveSearch As group:
+        Height: =5
+        Width: =5
+        X: =-480
+        Y: =40
+        ZIndex: =150
+
+        promotionPopBackground_16 As label:
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(23, 23,23, .65)
+            Height: =768
+            Text: =""
+            Visible: =savedSearchPop
+            Width: =1366
+            X: =If(!noteScratch,0,1366)
+            ZIndex: =149
+
+        htmlMidShadow_33 As htmlViewer:
+            Height: =209
+            HtmlText: |-
+                =
+                "<div style='
+                    margin: 8px;
+                    width: " & htmlMidShadow_33.Width - 20 & "px;
+                    height: " & htmlMidShadow_33.Height - 30 & "px;
+                    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.20),
+                                0 1px 1px rgba(0, 0, 0, 0.20);
+                    border-radius: 1px;
+                    background: #ffffff;'>
+                </div>"
+            Visible: =savedSearchPop
+            Width: =405
+            X: =480
+            Y: =271
+            ZIndex: =150
+
+        Label104_4 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =39
+            PaddingLeft: =18
+            PaddingTop: =18
+            Size: =15
+            Text: ="Save Search"
+            Visible: =savedSearchPop
+            Width: =208
+            X: =492
+            Y: =284
+            ZIndex: =151
+
+        Label104_5 As label:
+            Color: =RGBA(0, 0, 0, .8965)
+            Font: =Font.'Segoe UI'
+            Height: =22
+            PaddingLeft: =19
+            PaddingTop: =0
+            Size: =9
+            Text: ="Name your search below"
+            Visible: =savedSearchPop
+            Width: =388
+            X: =492
+            Y: =332
+            ZIndex: =152
+
+        TextInput11_4 As text:
+            BorderColor: =RGBA(96, 94, 92, 1)
+            BorderThickness: =1
+            Default: =
+            Font: =Font.'Segoe UI'
+            Height: =54
+            HintText: ="Search name"
+            RadiusBottomLeft: =2
+            RadiusBottomRight: =2
+            RadiusTopLeft: =2
+            RadiusTopRight: =2
+            Size: =10.5
+            Visible: =savedSearchPop
+            Width: =345
+            X: =508
+            Y: =355
+            ZIndex: =153
+
+        Button43_4 As button:
+            BorderThickness: =0
+            Fill: =RGBA(0, 120, 212, 1)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            OnSelect: |-
+                =Patch('Saved Searches',Defaults('Saved Searches'),{'Search Name':TextInput11_4.Text,'Rank Selections':Concat(rankFilter,Result & ","),'Gender Selections':Concat(genderFilter,Result & ","),'Level Selections':Concat(levelFilter,Result & ","),'Department Selections':Concat(departmentFilter,Result & ","),'Country Selections':Concat(countryFilter,Result & ","),'Years Selections':Concat(yearFilter,Result & ","),'Ethnicity Selections':Concat(ethnicityFilter,Result & ",")});Set(savedSearchPop,false)
+            RadiusBottomLeft: =2
+            RadiusBottomRight: =2
+            RadiusTopLeft: =2
+            RadiusTopRight: =2
+            Size: =10.5
+            Text: ="Save"
+            Visible: =savedSearchPop
+            Width: =63
+            X: =506
+            Y: =424
+            ZIndex: =155
+
+        Button43_5 As button:
+            BorderColor: =
+            BorderThickness: =1
+            Color: =RGBA(50, 49, 48, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            OnSelect: =Set(savedSearchPop,false);Reset(TextInput11_4)
+            RadiusBottomLeft: =2
+            RadiusBottomRight: =2
+            RadiusTopLeft: =2
+            RadiusTopRight: =2
+            Size: =10.5
+            Text: ="Cancel"
+            Visible: =savedSearchPop
+            Width: =63
+            X: =576
+            Y: =424
+            ZIndex: =156
+
+    "'View Saved Searches_1' As 'View Saved Searches'":
+        Visible: =viewSavedSearches
+        Y: =38
+        ZIndex: =157
+
+    Pages_2 As Pages:
+        Width: =1328
+        X: =38
+        Y: =40
+        ZIndex: =158
+

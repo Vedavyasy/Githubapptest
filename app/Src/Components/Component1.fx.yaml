@@ -1,0 +1,33 @@
+Component1 As CanvasComponent:
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =70
+    Width: =200
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Circle2 As circle:
+        Fill: =RGBA(65, 141, 237, 1)
+        Height: =25
+        Width: =25
+        X: =20
+        Y: =20
+        ZIndex: =1
+
+    Icon4 As icon.Add:
+        Color: =RGBA(255, 255, 255, 1)
+        Height: =20
+        Icon: =Icon.Add
+        Width: =20
+        X: =22.5
+        Y: =22
+        ZIndex: =2
+
+    Label31 As label:
+        Font: =Font.'Segoe UI'
+        Size: =11
+        Text: ="Nominate"
+        X: =53
+        Y: =12
+        ZIndex: =3
+

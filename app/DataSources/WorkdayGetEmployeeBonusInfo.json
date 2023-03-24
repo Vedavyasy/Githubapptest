@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "1020fb59-89df-499d-b747-6b8e7c1c1268",
+    "Name": "WorkdayGetEmployeeBonusInfo",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": "0926d881-1a09-ed11-82e4-000d3a9cc8d2"
+  }
+]

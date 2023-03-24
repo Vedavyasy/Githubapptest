@@ -1,0 +1,2369 @@
+"'New details list test' As screen":
+
+    "FluentDetailsList1 As 'Fluent Details List (1.0.19)'.pcfdataset":
+        columns_Items: =Sort(DetailsOrderGrid,Order,SortOrder.Descending)
+        DisplayMode: =DisplayMode.Edit
+        Height: =318
+        Items: =workerInfoNotesDataGrid
+        Theme: =AppThemeJson
+        Width: =1125
+        X: =88
+        Y: =120
+        ZIndex: =1
+
+        City2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="City"
+            FieldName: ="City"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =1
+            ZIndex: =6
+
+        Cost_Center2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Cost_Center"
+            FieldName: ="Cost_Center"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =2
+            ZIndex: =7
+
+        "'Compa-Ratio2' As pcfDataField.textualColumn":
+            FieldDisplayName: ="Compa-Ratio"
+            FieldName: ="Compa-Ratio"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =3
+            ZIndex: =8
+
+        "'Cost_Center_-_Name2' As pcfDataField.textualColumn":
+            FieldDisplayName: ="Cost_Center_-_Name"
+            FieldName: ="Cost_Center_-_Name"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =4
+            ZIndex: =9
+
+        Country2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Country"
+            FieldName: ="Country"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =5
+            ZIndex: =10
+
+        cr02b_category2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="cr02b_category"
+            FieldName: ="cr02b_category"
+            FieldType: ="l"
+            FieldVariantName: ="textualColumn"
+            Order: =6
+            ZIndex: =11
+
+        cr02b_Employee2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="cr02b_Employee"
+            FieldName: ="cr02b_Employee"
+            FieldType: ="E"
+            FieldVariantName: ="textualColumn"
+            Order: =7
+            ZIndex: =12
+
+        cr02b_employeenotesid2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="cr02b_employeenotesid"
+            FieldName: ="cr02b_employeenotesid"
+            FieldType: ="g"
+            FieldVariantName: ="textualColumn"
+            Order: =8
+            ZIndex: =13
+
+        cr02b_isprivate2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="cr02b_isprivate"
+            FieldName: ="cr02b_isprivate"
+            FieldType: ="l"
+            FieldVariantName: ="textualColumn"
+            Order: =9
+            ZIndex: =14
+
+        cr02b_name2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="cr02b_name"
+            FieldName: ="cr02b_name"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =10
+            ZIndex: =15
+
+        cr02b_note2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="cr02b_note"
+            FieldName: ="cr02b_note"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =11
+            ZIndex: =16
+
+        createdby2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="createdby"
+            FieldName: ="createdby"
+            FieldType: ="E"
+            FieldVariantName: ="textualColumn"
+            Order: =12
+            ZIndex: =17
+
+        createdonbehalfby2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="createdonbehalfby"
+            FieldName: ="createdonbehalfby"
+            FieldType: ="E"
+            FieldVariantName: ="textualColumn"
+            Order: =13
+            ZIndex: =18
+
+        createdon2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="createdon"
+            FieldName: ="createdon"
+            FieldType: ="d"
+            FieldVariantName: ="textualColumn"
+            Order: =14
+            ZIndex: =19
+
+        D12 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D1"
+            FieldName: ="D1"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =15
+            ZIndex: =20
+
+        D102 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D10"
+            FieldName: ="D10"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =16
+            ZIndex: =21
+
+        D112 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D11"
+            FieldName: ="D11"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =17
+            ZIndex: =22
+
+        D122 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D12"
+            FieldName: ="D12"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =18
+            ZIndex: =23
+
+        D132 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D13"
+            FieldName: ="D13"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =19
+            ZIndex: =24
+
+        D142 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D14"
+            FieldName: ="D14"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =20
+            ZIndex: =25
+
+        D152 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D15"
+            FieldName: ="D15"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =21
+            ZIndex: =26
+
+        D162 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D16"
+            FieldName: ="D16"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =22
+            ZIndex: =27
+
+        D172 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D17"
+            FieldName: ="D17"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =23
+            ZIndex: =28
+
+        D182 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D18"
+            FieldName: ="D18"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =24
+            ZIndex: =29
+
+        D192 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D19"
+            FieldName: ="D19"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =25
+            ZIndex: =30
+
+        D22 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D2"
+            FieldName: ="D2"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =26
+            ZIndex: =31
+
+        D202 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D20"
+            FieldName: ="D20"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =27
+            ZIndex: =32
+
+        D212 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D21"
+            FieldName: ="D21"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =28
+            ZIndex: =33
+
+        D222 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D22"
+            FieldName: ="D22"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =29
+            ZIndex: =34
+
+        D232 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D23"
+            FieldName: ="D23"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =30
+            ZIndex: =35
+
+        D242 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D24"
+            FieldName: ="D24"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =31
+            ZIndex: =36
+
+        D252 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D25"
+            FieldName: ="D25"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =32
+            ZIndex: =37
+
+        D262 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D26"
+            FieldName: ="D26"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =33
+            ZIndex: =38
+
+        D272 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D27"
+            FieldName: ="D27"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =34
+            ZIndex: =39
+
+        D282 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D28"
+            FieldName: ="D28"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =35
+            ZIndex: =40
+
+        D292 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D29"
+            FieldName: ="D29"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =36
+            ZIndex: =41
+
+        D32 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D3"
+            FieldName: ="D3"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =37
+            ZIndex: =42
+
+        D302 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D30"
+            FieldName: ="D30"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =38
+            ZIndex: =43
+
+        D312 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D31"
+            FieldName: ="D31"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =39
+            ZIndex: =44
+
+        D322 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D32"
+            FieldName: ="D32"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =40
+            ZIndex: =45
+
+        D332 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D33"
+            FieldName: ="D33"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =41
+            ZIndex: =46
+
+        D342 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D34"
+            FieldName: ="D34"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =42
+            ZIndex: =47
+
+        D352 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D35"
+            FieldName: ="D35"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =43
+            ZIndex: =48
+
+        D362 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D36"
+            FieldName: ="D36"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =44
+            ZIndex: =49
+
+        D372 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D37"
+            FieldName: ="D37"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =45
+            ZIndex: =50
+
+        D382 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D38"
+            FieldName: ="D38"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =46
+            ZIndex: =51
+
+        D392 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D39"
+            FieldName: ="D39"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =47
+            ZIndex: =52
+
+        D42 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D4"
+            FieldName: ="D4"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =48
+            ZIndex: =53
+
+        D402 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D40"
+            FieldName: ="D40"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =49
+            ZIndex: =54
+
+        D412 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D41"
+            FieldName: ="D41"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =50
+            ZIndex: =55
+
+        D422 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D42"
+            FieldName: ="D42"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =51
+            ZIndex: =56
+
+        D432 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D43"
+            FieldName: ="D43"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =52
+            ZIndex: =57
+
+        D442 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D44"
+            FieldName: ="D44"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =53
+            ZIndex: =58
+
+        D452 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D45"
+            FieldName: ="D45"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =54
+            ZIndex: =59
+
+        D462 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D46"
+            FieldName: ="D46"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =55
+            ZIndex: =60
+
+        D472 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D47"
+            FieldName: ="D47"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =56
+            ZIndex: =61
+
+        D482 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D48"
+            FieldName: ="D48"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =57
+            ZIndex: =62
+
+        D492 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D49"
+            FieldName: ="D49"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =58
+            ZIndex: =63
+
+        D52 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D5"
+            FieldName: ="D5"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =59
+            ZIndex: =64
+
+        D502 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D50"
+            FieldName: ="D50"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =60
+            ZIndex: =65
+
+        D512 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D51"
+            FieldName: ="D51"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =61
+            ZIndex: =66
+
+        D522 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D52"
+            FieldName: ="D52"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =62
+            ZIndex: =67
+
+        D532 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D53"
+            FieldName: ="D53"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =63
+            ZIndex: =68
+
+        D542 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D54"
+            FieldName: ="D54"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =64
+            ZIndex: =69
+
+        D562 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D56"
+            FieldName: ="D56"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =65
+            ZIndex: =70
+
+        D552 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D55"
+            FieldName: ="D55"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =66
+            ZIndex: =71
+
+        D572 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D57"
+            FieldName: ="D57"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =67
+            ZIndex: =72
+
+        D582 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D58"
+            FieldName: ="D58"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =68
+            ZIndex: =73
+
+        D592 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D59"
+            FieldName: ="D59"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =69
+            ZIndex: =74
+
+        D62 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D6"
+            FieldName: ="D6"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =70
+            ZIndex: =75
+
+        D602 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D60"
+            FieldName: ="D60"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =71
+            ZIndex: =76
+
+        D72 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D7"
+            FieldName: ="D7"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =72
+            ZIndex: =77
+
+        D82 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D8"
+            FieldName: ="D8"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =73
+            ZIndex: =78
+
+        D92 As pcfDataField.textualColumn:
+            FieldDisplayName: ="D9"
+            FieldName: ="D9"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =74
+            ZIndex: =79
+
+        Employee_ID2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Employee_ID"
+            FieldName: ="Employee_ID"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =75
+            ZIndex: =80
+
+        Employee_ID_s_2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Employee_ID_s_"
+            FieldName: ="Employee_ID_s_"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =76
+            ZIndex: =81
+
+        expand2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="expand"
+            FieldName: ="expand"
+            FieldType: ="b"
+            FieldVariantName: ="textualColumn"
+            Order: =77
+            ZIndex: =82
+
+        Full_Name2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Full_Name"
+            FieldName: ="Full_Name"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =78
+            ZIndex: =83
+
+        Gender2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Gender"
+            FieldName: ="Gender"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =79
+            ZIndex: =84
+
+        Hiring_Source2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Hiring_Source"
+            FieldName: ="Hiring_Source"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =80
+            ZIndex: =85
+
+        Hiring_Source_String2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Hiring_Source_String"
+            FieldName: ="Hiring_Source_String"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =81
+            ZIndex: =86
+
+        importsequencenumber2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="importsequencenumber"
+            FieldName: ="importsequencenumber"
+            FieldType: ="n"
+            FieldVariantName: ="textualColumn"
+            Order: =82
+            ZIndex: =87
+
+        is_high_potential2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="is_high_potential"
+            FieldName: ="is_high_potential"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =83
+            ZIndex: =88
+
+        Job2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Job"
+            FieldName: ="Job"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =84
+            ZIndex: =89
+
+        Job_Profile_Name2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Job_Profile_Name"
+            FieldName: ="Job_Profile_Name"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =85
+            ZIndex: =90
+
+        location2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="location"
+            FieldName: ="location"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =86
+            ZIndex: =91
+
+        "'Location_-_Name2' As pcfDataField.textualColumn":
+            FieldDisplayName: ="Location_-_Name"
+            FieldName: ="Location_-_Name"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =87
+            ZIndex: =92
+
+        Management_Level2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Management_Level"
+            FieldName: ="Management_Level"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =88
+            ZIndex: =93
+
+        Manager2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Manager"
+            FieldName: ="Manager"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =89
+            ZIndex: =94
+
+        Manager_ID2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Manager_ID"
+            FieldName: ="Manager_ID"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =90
+            ZIndex: =95
+
+        Manager_Name2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Manager_Name"
+            FieldName: ="Manager_Name"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =91
+            ZIndex: =96
+
+        modifiedby2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="modifiedby"
+            FieldName: ="modifiedby"
+            FieldType: ="E"
+            FieldVariantName: ="textualColumn"
+            Order: =92
+            ZIndex: =97
+
+        modifiedon2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="modifiedon"
+            FieldName: ="modifiedon"
+            FieldType: ="d"
+            FieldVariantName: ="textualColumn"
+            Order: =93
+            ZIndex: =98
+
+        modifiedonbehalfby2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="modifiedonbehalfby"
+            FieldName: ="modifiedonbehalfby"
+            FieldType: ="E"
+            FieldVariantName: ="textualColumn"
+            Order: =94
+            ZIndex: =99
+
+        overriddencreatedon2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="overriddencreatedon"
+            FieldName: ="overriddencreatedon"
+            FieldType: ="d"
+            FieldVariantName: ="textualColumn"
+            Order: =95
+            ZIndex: =100
+
+        owningbusinessunit2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="owningbusinessunit"
+            FieldName: ="owningbusinessunit"
+            FieldType: ="E"
+            FieldVariantName: ="textualColumn"
+            Order: =96
+            ZIndex: =101
+
+        owningteam2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="owningteam"
+            FieldName: ="owningteam"
+            FieldType: ="E"
+            FieldVariantName: ="textualColumn"
+            Order: =97
+            ZIndex: =102
+
+        owninguser2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="owninguser"
+            FieldName: ="owninguser"
+            FieldType: ="E"
+            FieldVariantName: ="textualColumn"
+            Order: =98
+            ZIndex: =103
+
+        Race_Ethnicity2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Race_Ethnicity"
+            FieldName: ="Race_Ethnicity"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =99
+            ZIndex: =104
+
+        Rating2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Rating"
+            FieldName: ="Rating"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =100
+            ZIndex: =105
+
+        Rating_Numeric2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Rating_Numeric"
+            FieldName: ="Rating_Numeric"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =101
+            ZIndex: =106
+
+        Rating_String2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Rating_String"
+            FieldName: ="Rating_String"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =102
+            ZIndex: =107
+
+        Region2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Region"
+            FieldName: ="Region"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =103
+            ZIndex: =108
+
+        "'Region_-_Name2' As pcfDataField.textualColumn":
+            FieldDisplayName: ="Region_-_Name"
+            FieldName: ="Region_-_Name"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =104
+            ZIndex: =109
+
+        statecode2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="statecode"
+            FieldName: ="statecode"
+            FieldType: ="l"
+            FieldVariantName: ="textualColumn"
+            Order: =105
+            ZIndex: =110
+
+        statuscode2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="statuscode"
+            FieldName: ="statuscode"
+            FieldType: ="l"
+            FieldVariantName: ="textualColumn"
+            Order: =106
+            ZIndex: =111
+
+        Supervisory_Organization2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Supervisory_Organization"
+            FieldName: ="Supervisory_Organization"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =107
+            ZIndex: =112
+
+        Supervisory_Organization_Name2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Supervisory_Organization_Name"
+            FieldName: ="Supervisory_Organization_Name"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =108
+            ZIndex: =113
+
+        Time_in_Compensation_Grade_Range2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Time_in_Compensation_Grade_Range"
+            FieldName: ="Time_in_Compensation_Grade_Range"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =109
+            ZIndex: =114
+
+        timezoneruleversionnumber2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="timezoneruleversionnumber"
+            FieldName: ="timezoneruleversionnumber"
+            FieldType: ="n"
+            FieldVariantName: ="textualColumn"
+            Order: =110
+            ZIndex: =115
+
+        utcconversiontimezonecode2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="utcconversiontimezonecode"
+            FieldName: ="utcconversiontimezonecode"
+            FieldType: ="n"
+            FieldVariantName: ="textualColumn"
+            Order: =111
+            ZIndex: =116
+
+        versionnumber2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="versionnumber"
+            FieldName: ="versionnumber"
+            FieldType: ="n"
+            FieldVariantName: ="textualColumn"
+            Order: =112
+            ZIndex: =117
+
+        Worker2 As pcfDataField.textualColumn:
+            FieldDisplayName: ="Worker"
+            FieldName: ="Worker"
+            FieldType: ="s"
+            FieldVariantName: ="textualColumn"
+            Order: =113
+            ZIndex: =118
+
+    Button57_10 As button:
+        BorderColor: =ColorFade(Self.Color, -15%)
+        Color: =RGBA(0, 94, 146, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        OnSelect: |
+            =ClearCollect(
+                Totalcolumns,
+                Table(
+                    {
+                        Name: "City",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Compa-Ratio",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Cost_Center",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Cost_Center_-_Name",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Country",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Employee_ID_s_",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Gender",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Hiring_Source",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Hiring_Source_String",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Job",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Job_Profile_Name",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Location_-_Name",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Management_Level",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Manager",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Manager_ID",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Manager_Name",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Race_Ethnicity",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Rating",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Rating_Numeric",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Rating_String",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Region",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Region_Name",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Supervisory_Organization",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Supervisory_Organization_Name",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Time_in_Compensation_Grade_Range",
+                        Visibile: false
+                    },
+                    {
+                        Name: "Worker",
+                        Visibile: false
+                    },
+                    {
+                        Name: "is_high_potential",
+                        Visibile: false
+                    },
+                    {
+                        Name: "location",
+                        Visibile: true
+                    }
+                )
+            );
+            ClearCollect(
+                Visiblecolumns,
+                Table(
+                    {
+                        Name: "location",
+                        Order: 1
+                    }
+                )
+            );
+            //ClearCollect(DetailsOrderGridMain,Table({ColName:"Employee_ID",ColDisplayName:"Employee Id",ColCellType:"link",ColWidth:60,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:0},{ColName:"Full_Name",ColDisplayName:"Full Name",ColCellType:"link",ColWidth:150,ColSortable: true ,ColIsBold: true ,ColResizable: true ,Order:1},{ColName:"City",ColDisplayName:"City",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: true ,Order:2},{ColName:"Compa-Ratio",ColDisplayName:"Compensation Ratio",ColWidth:60,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:2},{ColName:"Cost_Center",ColDisplayName:"Cost Center",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Cost_Center_-_Name",ColDisplayName:"Cost Center Name",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Country",ColDisplayName:"Country",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Employee_ID_s_",ColDisplayName:"Employee_ID_s_",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Gender",ColDisplayName:"Gender",ColWidth:70,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Hiring_Source",ColDisplayName:"Hiring Source",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Hiring_Source_String",ColDisplayName:"Hiring Source String",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Job",ColDisplayName:"Job",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Job_Profile_Name",ColDisplayName:"Job Profile Name",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Location_-_Name",ColDisplayName:"Location Name",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Management_Level",ColDisplayName:"Management Level",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Manager",ColDisplayName:"Manager",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Manager_ID",ColDisplayName:"Manager ID",ColWidth:60,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Manager_Name",ColDisplayName:"Manager Name",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Race_Ethnicity",ColDisplayName:"Race Ethnicity",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Rating",ColDisplayName:"Rating",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Rating_Numeric",ColDisplayName:"Rating Numeric",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Rating_String",ColDisplayName:"Rating String",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Region",ColDisplayName:"Region",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Region_Name",ColDisplayName:"Region Name",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Supervisory Organization",ColDisplayName:"Supervisory Organization",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Supervisory_Organization_Name",ColDisplayName:"Supervisory Organization Name",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Time_in_Compensation_Grade_Range",ColDisplayName:"Time in Compensation Grade Range",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"Worker",ColDisplayName:"Worker",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"is_high_potential",ColDisplayName:"is high potential",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3},{ColName:"location",ColDisplayName:"Location",ColWidth:100,ColSortable: true ,ColIsBold: true ,ColResizable: false ,Order:3}));ClearCollect(DetailsOrderGrid,DetailsOrderGridMain);ClearCollect(DetailsGridNew,DetailsOrderGrid);Select(Button57_9);
+            ClearCollect(
+                DetailsOrderGridMain,
+                Table(
+                    {
+                        ColName: "Employee_ID",
+                        ColDisplayName: "Employee Id",
+                        ColCellType: "link",
+                        ColWidth: 60,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 0
+                    },
+                    {
+                        ColName: "Full_Name",
+                        ColDisplayName: "Full Name",
+                        ColCellType: "link",
+                        ColWidth: 150,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: true,
+                        Order: 1
+                    },
+                    {
+                        ColName: "City",
+                        ColDisplayName: "City",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: true,
+                        Order: 2
+                    },
+                    {
+                        ColName: "Compa-Ratio",
+                        ColDisplayName: "Compensation Ratio",
+                        ColWidth: 60,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 2
+                    },
+                    {
+                        ColName: "Cost_Center",
+                        ColDisplayName: "Cost Center",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Cost_Center_-_Name",
+                        ColDisplayName: "Cost Center Name",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Country",
+                        ColDisplayName: "Country",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Employee_ID_s_",
+                        ColDisplayName: "Employee_ID_s_",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Gender",
+                        ColDisplayName: "Gender",
+                        ColWidth: 70,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Hiring_Source",
+                        ColDisplayName: "Hiring Source",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Hiring_Source_String",
+                        ColDisplayName: "Hiring Source String",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Job",
+                        ColDisplayName: "Job",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Job_Profile_Name",
+                        ColDisplayName: "Job Profile Name",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Location_-_Name",
+                        ColDisplayName: "Location Name",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Management_Level",
+                        ColDisplayName: "Management Level",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Manager",
+                        ColDisplayName: "Manager",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Manager_ID",
+                        ColDisplayName: "Manager ID",
+                        ColWidth: 60,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Manager_Name",
+                        ColDisplayName: "Manager Name",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Race_Ethnicity",
+                        ColDisplayName: "Race Ethnicity",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Rating",
+                        ColDisplayName: "Rating",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Rating_Numeric",
+                        ColDisplayName: "Rating Numeric",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Rating_String",
+                        ColDisplayName: "Rating String",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Region",
+                        ColDisplayName: "Region",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Region_Name",
+                        ColDisplayName: "Region Name",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Supervisory Organization",
+                        ColDisplayName: "Supervisory Organization",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Supervisory_Organization_Name",
+                        ColDisplayName: "Supervisory Organization Name",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Time_in_Compensation_Grade_Range",
+                        ColDisplayName: "Time in Compensation Grade Range",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "Worker",
+                        ColDisplayName: "Worker",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "is_high_potential",
+                        ColDisplayName: "is high potential",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "location",
+                        ColDisplayName: "Location",
+                        ColWidth: 100,
+                        ColSortable: true,
+                        ColIsBold: true,
+                        ColResizable: false,
+                        Order: 3
+                    },
+                    {
+                        ColName: "D1",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D2",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D3",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D4",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D5",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D6",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D7",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D8",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D9",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D10",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D11",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D12",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D13",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D14",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D15",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D16",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D17",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D18",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D19",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D20",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D21",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D22",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D23",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D24",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D25",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D26",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D27",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D28",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D29",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D30",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D31",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D32",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D33",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D34",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D35",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D36",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D37",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D38",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D39",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D40",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D41",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D42",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D43",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D44",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D45",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D46",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D47",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D48",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D49",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D50",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D51",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D52",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D53",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D54",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D55",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D56",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D57",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D58",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D59",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    },
+                    {
+                        ColName: "D60",
+                        ColDisplayName: "Delete",
+                        ColCellType: "clickableimage",
+                        ColWidth: 50,
+                        Order: 0
+                    }
+                )
+            );
+            ClearCollect(
+                DetailsOrderGrid,
+                DetailsOrderGridMain
+            );
+            ClearCollect(
+                DetailsGridNew,
+                DetailsOrderGrid
+            );
+            Select(Button57_12);
+        Text: ="Load"
+        X: =250
+        Y: =40
+        ZIndex: =2
+
+    Button57_11 As button:
+        BorderColor: =ColorFade(Self.Color, -15%)
+        Color: =RGBA(0, 94, 146, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        OnSelect: |-
+            =UpdateContext({ctxSortCol:"Employee_ID"});
+            ClearCollect(workerInfoNotesDataGrid,workerInfo);
+            Collect(workerInfoNotesDataGrid,AddColumns(NotesData,"D1","icon:Delete","D2","icon:Delete","D3","icon:Delete","D4","icon:Delete","D5","icon:Delete","D6","icon:Delete","D7","icon:Delete","D8","icon:Delete","D9","icon:Delete","D10","icon:Delete","D11","icon:Delete","D12","icon:Delete","D13","icon:Delete","D14","icon:Delete","D15","icon:Delete","D16","icon:Delete","D17","icon:Delete","D18","icon:Delete","D19","icon:Delete","D20","icon:Delete","D21","icon:Delete","D22","icon:Delete","D23","icon:Delete","D24","icon:Delete","D25","icon:Delete","D26","icon:Delete","D27","icon:Delete","D28","icon:Delete","D29","icon:Delete","D30","icon:Delete","D31","icon:Delete","D32","icon:Delete","D33","icon:Delete","D34","icon:Delete","D35","icon:Delete","D36","icon:Delete","D37","icon:Delete","D38","icon:Delete","D39","icon:Delete","D40","icon:Delete","D41","icon:Delete","D42","icon:Delete","D43","icon:Delete","D44","icon:Delete","D45","icon:Delete","D46","icon:Delete","D47","icon:Delete","D48","icon:Delete","D49","icon:Delete","D50","icon:Delete","D51","icon:Delete","D52","icon:Delete","D53","icon:Delete","D54","icon:Delete","D55","icon:Delete","D56","icon:Delete","D57","icon:Delete","D58","icon:Delete","D59","icon:Delete","D60","icon:Delete"));
+        Text: ="Reset"
+        X: =67
+        Y: =40
+        ZIndex: =3
+
+    Gallery35_6 As gallery.galleryVertical:
+        Height: =303
+        Items: =Sort(Visiblecolumns,Order)
+        Layout: =Layout.Vertical
+        TemplateSize: =52
+        Width: =460
+        X: =581
+        Y: =465
+        ZIndex: =4
+
+        Icon21_6 As icon.ArrowUp:
+            Color: =If(ThisItem.Order=1,Color.LightGray,RGBA(0, 18, 107, 1))
+            DisplayMode: =If(ThisItem.Order=1,DisplayMode.View,DisplayMode.Edit)
+            Height: =20
+            Icon: =Icon.ArrowUp
+            OnSelect: |
+                =Set(Prevcolumn,LookUp(Visiblecolumns,Order = Gallery35_6.Selected.Order-1));
+                Patch(Visiblecolumns,Prevcolumn,{Order:Prevcolumn.Order+1});
+                Patch(Visiblecolumns,ThisItem,{Order:ThisItem.Order-1})
+            Width: =30
+            X: =20
+            Y: =15
+            ZIndex: =1
+
+        Icon22_6 As icon.ArrowDown:
+            Color: =If(ThisItem.Order=CountRows(Visiblecolumns),Color.LightGray,RGBA(0, 18, 107, 1))
+            DisplayMode: =If(ThisItem.Order=CountRows(Visiblecolumns),DisplayMode.View,DisplayMode.Edit)
+            Height: =20
+            OnSelect: |
+                =Set(Nextcolumn,LookUp(Visiblecolumns,Order = Gallery35_6.Selected.Order+1));
+                Patch(Visiblecolumns,Nextcolumn,{Order:Nextcolumn.Order-1});
+                Patch(Visiblecolumns,ThisItem,{Order:ThisItem.Order+1})
+            Width: =30
+            X: =55
+            Y: =15
+            ZIndex: =2
+
+        Label19_6 As label:
+            Height: =35
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.Name
+            Width: =255
+            X: =100
+            Y: =7
+            ZIndex: =3
+
+        Icon23_11 As icon.Cancel:
+            Height: =25
+            Icon: =Icon.Cancel
+            OnSelect: |-
+                =Select(Parent);
+                Patch(Totalcolumns,LookUp(Totalcolumns,ThisItem.Name=Name),{Visibile:false});
+                ForAll(Filter(Visiblecolumns,Order>ThisItem.Order),Patch(Visiblecolumns,ThisRecord,{Order:ThisRecord.Order-1}));
+                Remove(Visiblecolumns,ThisItem);
+            Width: =25
+            X: =400
+            Y: =15
+            ZIndex: =4
+
+        Label21_6 As label:
+            Fill: =RGBA(116, 116, 116, 1)
+            Height: =2
+            OnSelect: =Select(Parent)
+            Text: =
+            Width: =450
+            Y: =50
+            ZIndex: =5
+
+    Gallery32_6 As gallery.galleryVertical:
+        Height: =189
+        Items: =Filter(Totalcolumns,Visibile=false)
+        Layout: =Layout.Vertical
+        TemplateSize: =52
+        Width: =457
+        X: =40
+        Y: =478
+        ZIndex: =5
+
+        Label25_6 As label:
+            Font: =Font.'Segoe UI'
+            OnSelect: =Select(Parent)
+            Size: =12
+            Text: =ThisItem.Name
+            X: =20
+            Y: =6
+            ZIndex: =1
+
+        Label26_6 As label:
+            Fill: =RGBA(116, 116, 116, 1)
+            Height: =2
+            OnSelect: =Select(Parent)
+            Text: =
+            Width: =447
+            Y: =50
+            ZIndex: =2
+
+        Button52_6 As button:
+            Font: =Font.'Segoe UI'
+            Height: =30
+            OnSelect: |-
+                =Select(Parent);
+                Patch(Visiblecolumns,Defaults(Visiblecolumns),{Name:ThisItem.Name,Order:Last(Sort(Visiblecolumns,Order)).Order+1});
+                Patch(Totalcolumns,ThisItem,{Visibile:true});
+            RadiusBottomLeft: =20
+            RadiusBottomRight: =20
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
+            Size: =12
+            Text: ="Add"
+            Width: =80
+            X: =347
+            Y: =11
+            ZIndex: =3
+
+    Button57_12 As button:
+        BorderColor: =ColorFade(Self.Color, -15%)
+        Color: =RGBA(0, 94, 146, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        OnSelect: |-
+            =Clear(DetailsGridNew);
+            ForAll(
+                Visiblecolumns,
+                ForAll(
+                    DetailsOrderGridMain,
+                    If(
+                        Name = ColName,
+                        Collect(
+                            DetailsGridNew,
+                            ThisRecord
+                        )
+                    )
+                )
+            );
+            ForAll(
+                Visiblecolumns,
+                Patch(
+                    DetailsGridNew,
+                    LookUp(
+                        DetailsGridNew,
+                        Name = ColName
+                    ),
+                    {Order: Visiblecolumns[@Order]}
+                )
+            );
+            Collect(
+                DetailsGridNew,
+                {
+                    ColName: "Full_Name",
+                    ColDisplayName: "Full Name",
+                    ColCellType: "link",
+                    ColWidth: 150,
+                    ColSortable: true,
+                    ColIsBold: true,
+                    ColResizable: true,
+                    Order: 0
+                },
+                {
+                    ColName: "Employee_ID",
+                    ColDisplayName: "Employee Id",
+                    ColCellType: "link",
+                    ColWidth: 60,
+                    ColSortable: true,
+                    ColIsBold: true,
+                    ColResizable: false,
+                    Order: 0
+                },
+                {
+                    ColName: "D1",
+                    ColDisplayName: "Delete1",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D2",
+                    ColDisplayName: "Delete2",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D3",
+                    ColDisplayName: "Delete3",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D4",
+                    ColDisplayName: "Delete4",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D5",
+                    ColDisplayName: "Delete5",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D6",
+                    ColDisplayName: "Delete6",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D7",
+                    ColDisplayName: "Delete7",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D8",
+                    ColDisplayName: "Delete8",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D9",
+                    ColDisplayName: "Delete9",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D10",
+                    ColDisplayName: "Delete10",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D11",
+                    ColDisplayName: "Delete11",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D12",
+                    ColDisplayName: "Delete12",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D13",
+                    ColDisplayName: "Delete13",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D14",
+                    ColDisplayName: "Delete14",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D15",
+                    ColDisplayName: "Delete15",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D16",
+                    ColDisplayName: "Delete16",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D17",
+                    ColDisplayName: "Delete17",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D18",
+                    ColDisplayName: "Delete18",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D19",
+                    ColDisplayName: "Delete18",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D20",
+                    ColDisplayName: "Delete20",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D21",
+                    ColDisplayName: "Delete21",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D22",
+                    ColDisplayName: "Delete22",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D23",
+                    ColDisplayName: "Delete23",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D24",
+                    ColDisplayName: "Delete24",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D25",
+                    ColDisplayName: "Delete25",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D26",
+                    ColDisplayName: "Delete26",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D27",
+                    ColDisplayName: "Delete27",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D28",
+                    ColDisplayName: "Delete28",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D29",
+                    ColDisplayName: "Delete29",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D30",
+                    ColDisplayName: "Delete30",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D31",
+                    ColDisplayName: "Delete31",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D32",
+                    ColDisplayName: "Delete32",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D33",
+                    ColDisplayName: "Delete33",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D34",
+                    ColDisplayName: "Delete34",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D35",
+                    ColDisplayName: "Delete35",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D36",
+                    ColDisplayName: "Delete36",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D37",
+                    ColDisplayName: "Delete37",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D38",
+                    ColDisplayName: "Delete38",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D39",
+                    ColDisplayName: "Delete39",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D40",
+                    ColDisplayName: "Delete40",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D41",
+                    ColDisplayName: "Delete41",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D42",
+                    ColDisplayName: "Delete42",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D43",
+                    ColDisplayName: "Delete43",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D44",
+                    ColDisplayName: "Delete44",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D45",
+                    ColDisplayName: "Delete45",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D46",
+                    ColDisplayName: "Delete46",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D47",
+                    ColDisplayName: "Delete47",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D48",
+                    ColDisplayName: "Delete48",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D49",
+                    ColDisplayName: "Delete49",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D50",
+                    ColDisplayName: "Delete50",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D51",
+                    ColDisplayName: "Delete51",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D52",
+                    ColDisplayName: "Delete52",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D53",
+                    ColDisplayName: "Delete53",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D54",
+                    ColDisplayName: "Delete54",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D55",
+                    ColDisplayName: "Delete55",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D56",
+                    ColDisplayName: "Delete56",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D57",
+                    ColDisplayName: "Delete57",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D58",
+                    ColDisplayName: "Delete58",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D59",
+                    ColDisplayName: "Delete59",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                },
+                {
+                    ColName: "D60",
+                    ColDisplayName: "Delete60",
+                    ColCellType: "clickableimage",
+                    ColWidth: 50,
+                    Order: 0
+                }
+            );
+            ClearCollect(
+                DetailsOrderGrid,
+                DetailsGridNew
+            )
+        Text: ="Apply"
+        X: =1126
+        Y: =502
+        ZIndex: =6
+

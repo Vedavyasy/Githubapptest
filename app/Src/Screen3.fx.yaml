@@ -1,0 +1,19 @@
+Screen3 As screen:
+
+    ComboBox4 As combobox:
+        BorderColor: =RGBA(116, 116, 116, 1)
+        BorderThickness: =1
+        ChevronBackground: =RGBA(116, 116, 116, 1)
+        ChevronHoverBackground: =ColorFade(RGBA(116, 116, 116, 1), -20%)
+        Height: =43
+        HoverFill: =RGBA(202, 202, 202, 1)
+        InputTextPlaceholder: ="Add a tag"
+        Items: =ComboBoxSample
+        PressedFill: =RGBA(116, 116, 116, 1)
+        SearchItems: =Search(ComboBoxSample,ComboBox4.SearchText,"Value1")
+        SelectionFill: =RGBA(116, 116, 116, 1)
+        Width: =695
+        X: =102
+        Y: =240
+        ZIndex: =1
+

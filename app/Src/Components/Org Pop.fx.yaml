@@ -1,0 +1,102 @@
+"'Org Pop' As CanvasComponent":
+    DirectReportCount: =100
+    EmployeeCount: =100
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =90
+    Width: =450
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Button40_2 As button:
+        Fill: =RGBA(51, 51, 51, 1)
+        Height: =83
+        HoverBorderColor: =
+        HoverColor: =
+        HoverFill: =
+        RadiusBottomLeft: =8
+        RadiusBottomRight: =8
+        RadiusTopLeft: =8
+        RadiusTopRight: =8
+        Text: =""
+        Width: =450
+        Y: =7
+        ZIndex: =1
+
+    Label100_2 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.'Segoe UI'
+        PaddingLeft: =12
+        Size: =13.5
+        Text: ="Org Snapshot"
+        Width: =137
+        Y: =7
+        ZIndex: =2
+
+    Image46_2 As image:
+        Height: =14
+        Image: ='Shape (37)'
+        Width: =15
+        X: =14
+        Y: =52
+        ZIndex: =3
+
+    Triangle2_2 As triangle:
+        Fill: =RGBA(51, 51, 51, 1)
+        Height: =7
+        Width: =13
+        X: =219
+        ZIndex: =5
+
+    "AutoWidthLabel8 As 'Auto Width Label (1.0.19)'":
+        DisplayMode: =DisplayMode.Edit
+        FontColor: |-
+            ="#FFFFFF"
+        Height: =19
+        PaddingLeft: =7.5
+        Text: ='Org Pop'.DirectReportCount & " Direct reports"
+        Width: =108
+        X: =30
+        Y: =50
+        ZIndex: =6
+
+    Image46_3 As image:
+        Height: =14
+        Image: ='Shape (39)'
+        Width: =15
+        X: =AutoWidthLabel8.X+AutoWidthLabel8.AutoWidth+12
+        Y: =52
+        ZIndex: =7
+
+    "AutoWidthLabel8_1 As 'Auto Width Label (1.0.19)'":
+        DisplayMode: =DisplayMode.Edit
+        FontColor: |-
+            ="#FFFFFF"
+        Height: =19
+        PaddingLeft: =7.5
+        Text: ='Org Pop'.EmployeeCount & " Employees"
+        Width: =108
+        X: =Image46_3.X+16
+        Y: =50
+        ZIndex: =8
+
+    Image46_4 As image:
+        Height: =14
+        Image: =Shape_7
+        Width: =15
+        X: =AutoWidthLabel8_1.X+AutoWidthLabel8_1.AutoWidth+12
+        Y: =52
+        ZIndex: =9
+
+    "AutoWidthLabel8_2 As 'Auto Width Label (1.0.19)'":
+        DisplayMode: =DisplayMode.Edit
+        FontColor: |-
+            ="#FFFFFF"
+        Height: =19
+        PaddingLeft: =7.5
+        Text: ="12% more employees"
+        Width: =108
+        X: =Image46_4.X+16
+        Y: =50
+        ZIndex: =10
+
